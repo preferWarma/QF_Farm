@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: d769c9283388da042b264a55ba235a29
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 6fc2c93369695264baed5356a4ddb729, type: 3}
+  Settings:
+    TextureType: 8
+    TextureShape: 1
+    SpriteMode: 2
+    PixelsPerUnit: 100
+    MeshType: 1
+    ExtrudeEdges: 1
+    Pivot: 0
+    _pivot: {x: 0.5, y: 0.5}
+    GeneratePhysicsShape: 1
+    WrapMode: 1
+    FilterMode: 0
+    AnisoLevel: 1
+    InnerPadding: 0
