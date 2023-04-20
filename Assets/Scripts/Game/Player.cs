@@ -2,6 +2,7 @@ using Game.Data;
 using UnityEngine;
 using QFramework;
 using UnityEngine.Tilemaps;
+// ReSharper disable Unity.InefficientPropertyAccess
 
 namespace Game
 {
@@ -22,10 +23,41 @@ namespace Game
 
 				if (cellPos.x is < 10 and >= 0 && cellPos.y is >= 0 and < 10)
 				{
-					if (easyGrid[cellPos.x, cellPos.y] == null)
+					if (easyGrid[cellPos.x, cellPos.y] == null)	// 无耕地
 					{
+						// 开垦
 						tilemap.SetTile(cellPos, FindObjectOfType<GridController>().pen);
 						easyGrid[cellPos.x, cellPos.y] = new SoilData();
+					}
+					// 耕地已经开垦
+					else if (!easyGrid[cellPos.x, cellPos.y].HasPlant) // 当前没有种子, 则放种子
+					{
+						var tileWorldPos = grid.CellToWorld(cellPos);
+						tileWorldPos.x += grid.cellSize.x * 0.5f;
+						tileWorldPos.y += grid.cellSize.y * 0.5f;
+						
+						ResController.Instance.seedPrefab
+							.Instantiate()
+							.Position(tileWorldPos.x, tileWorldPos.y);
+						easyGrid[cellPos.x, cellPos.y].HasPlant = true;
+					}
+					
+				}
+			}
+
+			else if (Input.GetMouseButtonDown(1))
+			{
+				// 根据player的position值拿到tilemap的具体块
+				var cellPos = grid.WorldToCell(transform.position);
+				
+				var easyGrid = FindObjectOfType<GridController>().ShowGrid;
+
+				if (cellPos.x is < 10 and >= 0 && cellPos.y is >= 0 and < 10)
+				{
+					if (easyGrid[cellPos.x, cellPos.y] != null)
+					{
+						tilemap.SetTile(cellPos, null);
+						easyGrid[cellPos.x, cellPos.y] = null;
 					}
 				}
 			}
