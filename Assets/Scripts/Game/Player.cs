@@ -19,18 +19,51 @@ namespace Game
 		{
 			Global.Days.Register(day =>
 			{
+				var tileDatas = FindObjectOfType<GridController>().ShowGrid;
+				
+				var smallPlants = SceneManager.GetActiveScene().GetRootGameObjects()
+					.Where(obj => obj.name.StartsWith("SmallPlant"));
+				smallPlants.ForEach(smallPlant =>
+				{
+					var tilePos = grid.WorldToCell(smallPlant.transform.position);
+					var tileData = tileDatas[tilePos.x, tilePos.y];
+					if (tileData is not { Watered: true })	return;
+					
+					ResController.Instance.ripePrefab
+						.Instantiate()
+						.Position(smallPlant.transform.position);
+					smallPlant.DestroySelf();
+					
+					tileData.IsSmallPlant = false;
+					tileData.IsRipe = true;
+				});
+				
 				var seeds = SceneManager.GetActiveScene().GetRootGameObjects()
 					.Where(obj => obj.name.StartsWith("Seed"));
 				seeds.ForEach(seed =>
 				{
 					var tilePos = grid.WorldToCell(seed.transform.position);
-					var tileData = FindObjectOfType<GridController>().ShowGrid[tilePos.x, tilePos.y];
+					var tileData = tileDatas[tilePos.x, tilePos.y];
 					if (tileData is not { Watered: true })	return;
+					
 					ResController.Instance.smallPlantPrefab
 						.Instantiate()
 						.Position(seed.transform.position);
 					seed.DestroySelf();
+					
+					tileData.IsSmallPlant = true;
 				});
+				
+				tileDatas.ForEach(data =>
+				{
+					if (data is null)	return;
+					data.Watered = false;	// 过了一天，所有的土地都没有水
+				});
+
+				var waters = SceneManager.GetActiveScene().GetRootGameObjects()
+					.Where(obj => obj.name.StartsWith("Water"));
+				waters.ForEach(water => { water.DestroySelf(); });	// 过了一天，所有的水都消失了
+				
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 		}
 
