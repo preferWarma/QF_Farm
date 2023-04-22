@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 949551888860867232}
   - component: {fileID: 949551888860867233}
+  - component: {fileID: 3148389097044336759}
+  - component: {fileID: -5631153940666862188}
   m_Layer: 0
-  m_Name: SmallPlant
+  m_Name: Plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 1811014080, guid: dca22e73db9caa34f9e8435535228ce7, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: d8b331716a270174494468ee28320011, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,3 +86,39 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3148389097044336759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949551888860867234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81936539ae2d84665a86a2b3f531955f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Namespace: Game
+  ScriptName: Plant
+  ScriptsFolder: Assets/Scripts/Game
+  GeneratePrefab: 0
+  PrefabFolder: Assets/Art/Prefab
+--- !u!114 &-5631153940666862188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949551888860867234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7c22afcfb02a934cba4c55f7f3ea201, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Namespace: Game
+  ScriptName: Plant
+  ScriptsFolder: Assets/Scripts/Game
+  GeneratePrefab: 0
+  PrefabFolder: Assets/Art/Prefab
+  x: 0
+  y: 0

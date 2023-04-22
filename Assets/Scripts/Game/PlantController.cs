@@ -1,0 +1,22 @@
+using QFramework;
+
+namespace Game
+{
+	public enum PlantSates
+	{
+		Seed,	// 种子
+		Small,	// 幼苗
+		Ripe	// 成熟
+	}
+	
+	public partial class PlantController : ViewController, ISingleton
+	{
+		public static PlantController Instance => MonoSingletonProperty<PlantController>.Instance;
+
+		public EasyGrid<Plant> PlantGrid = new(10, 10);
+
+		public void OnSingletonInit()
+		{
+		}
+	}
+}

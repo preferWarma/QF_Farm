@@ -144,7 +144,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Soil_0
+      name: SmallPlant
       rect:
         serializedVersion: 2
         x: 0
@@ -179,7 +179,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Soil_0: 1811014080
+      SmallPlant: 1811014080
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

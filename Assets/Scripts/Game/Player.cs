@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Game.Data;
 using UnityEngine;
@@ -19,42 +18,28 @@ namespace Game
 		{
 			Global.Days.Register(day =>
 			{
-				var tileDatas = FindObjectOfType<GridController>().ShowGrid;
+				var soilDatas = FindObjectOfType<GridController>().ShowGrid;
 				
-				var smallPlants = SceneManager.GetActiveScene().GetRootGameObjects()
-					.Where(obj => obj.name.StartsWith("SmallPlant"));
-				smallPlants.ForEach(smallPlant =>
+				PlantController.Instance.PlantGrid.ForEach((x, y, plant) =>
 				{
-					var tilePos = grid.WorldToCell(smallPlant.transform.position);
-					var tileData = tileDatas[tilePos.x, tilePos.y];
-					if (tileData is not { Watered: true })	return;
-					
-					ResController.Instance.ripePrefab
-						.Instantiate()
-						.Position(smallPlant.transform.position);
-					smallPlant.DestroySelf();
-					
-					tileData.IsSmallPlant = false;
-					tileData.IsRipe = true;
+					if (plant is null)	return;
+					if (plant.Sate == PlantSates.Seed)	// 如果是种子
+					{
+						if (soilDatas[x, y].Watered)	// 如果已经浇水了, 切换为幼苗
+						{
+							plant.SetState(PlantSates.Small);
+						}
+					}
+					else if (plant.Sate == PlantSates.Small)	// 如果是幼苗
+					{
+						if (soilDatas[x, y].Watered)	// 如果已经浇水了, 切换为成熟
+						{
+							plant.SetState(PlantSates.Ripe);
+						}
+					}
 				});
-				
-				var seeds = SceneManager.GetActiveScene().GetRootGameObjects()
-					.Where(obj => obj.name.StartsWith("Seed"));
-				seeds.ForEach(seed =>
-				{
-					var tilePos = grid.WorldToCell(seed.transform.position);
-					var tileData = tileDatas[tilePos.x, tilePos.y];
-					if (tileData is not { Watered: true })	return;
-					
-					ResController.Instance.smallPlantPrefab
-						.Instantiate()
-						.Position(seed.transform.position);
-					seed.DestroySelf();
-					
-					tileData.IsSmallPlant = true;
-				});
-				
-				tileDatas.ForEach(data =>
+ 
+				soilDatas.ForEach(data =>
 				{
 					if (data is null)	return;
 					data.Watered = false;	// 过了一天，所有的土地都没有水
@@ -106,11 +91,16 @@ namespace Game
 						easyGrid[cellPos.x, cellPos.y] = new SoilData();
 					}
 					// 耕地已经开垦, 判断是否种植了
-					else if (!easyGrid[cellPos.x, cellPos.y].HasPlant) // 当前没有种子, 则放种子
+					else if (!easyGrid[cellPos.x, cellPos.y].HasPlant) // 当前土地没有种植则种植
 					{
-						ResController.Instance.seedPrefab
+						var plantObj = ResController.Instance.plantPrefab
 							.Instantiate()
 							.Position(tileWorldPos);
+						var plant = plantObj.GetComponent<Plant>();
+						plant.x = cellPos.x;
+						plant.y = cellPos.y;
+						
+						PlantController.Instance.PlantGrid[cellPos.x, cellPos.y] = plant;
 						easyGrid[cellPos.x, cellPos.y].HasPlant = true;
 					}
 					

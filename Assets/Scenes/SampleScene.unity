@@ -688,13 +688,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Namespace: Game
   ScriptName: ResController
-  ScriptsFolder: Assets/Art/Prefabs/Ripe.prefab
+  ScriptsFolder: Assets/Art/Sprites/Seed.png
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
-  seedPrefab: {fileID: 1981770279677435792, guid: f68cb14ce13bb384b8193bc01ffd1a91, type: 3}
   waterPrefab: {fileID: 5147751245669483221, guid: 37eef3ed04659c041919933ab558b23f, type: 3}
-  smallPlantPrefab: {fileID: 949551888860867234, guid: b29f17d25e8e400478aa5724973f9233, type: 3}
-  ripePrefab: {fileID: 1712998127452584992, guid: 16ffe781d5087514e8462bb4ea64ec42, type: 3}
+  plantPrefab: {fileID: 949551888860867234, guid: 7e73ee98cca26b8418d1780067c076cf, type: 3}
+  seedSprite: {fileID: 7482667652216324306, guid: d8b331716a270174494468ee28320011, type: 3}
+  smallPlantSprite: {fileID: 1811014080, guid: dca22e73db9caa34f9e8435535228ce7, type: 3}
+  ripeSprite: {fileID: 1811014080, guid: c4f27cb6b4a52ec488db6bd89f590ed9, type: 3}
 --- !u!4 &346271341
 Transform:
   m_ObjectHideFlags: 0
@@ -709,6 +710,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &458581597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 458581599}
+  - component: {fileID: 458581598}
+  m_Layer: 0
+  m_Name: PlantController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &458581598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458581597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719238edd69c3e94599f90dd46e22d1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Namespace: Game
+  ScriptName: PlantController
+  ScriptsFolder: Assets/Scripts/Game
+  GeneratePrefab: 0
+  PrefabFolder: Assets/Art/Prefab
+--- !u!4 &458581599
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458581597}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
