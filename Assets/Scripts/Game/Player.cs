@@ -1,6 +1,9 @@
+using System;
+using System.Linq;
 using Game.Data;
 using UnityEngine;
 using QFramework;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 // ReSharper disable Unity.InefficientPropertyAccess
 
@@ -11,9 +14,34 @@ namespace Game
 		[Header("Tilemap相关")]
 		public Grid grid;
 		public Tilemap tilemap;
-		
+
+		private void Start()
+		{
+			Global.Days.Register(day =>
+			{
+				var seeds = SceneManager.GetActiveScene().GetRootGameObjects()
+					.Where(obj => obj.name.StartsWith("Seed"));
+				seeds.ForEach(seed =>
+				{
+					var tilePos = grid.WorldToCell(seed.transform.position);
+					var tileData = FindObjectOfType<GridController>().ShowGrid[tilePos.x, tilePos.y];
+					if (tileData is not { Watered: true })	return;
+					ResController.Instance.smallPlantPrefab
+						.Instantiate()
+						.Position(seed.transform.position);
+					seed.DestroySelf();
+				});
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+		}
+
 		private void Update()
 		{
+
+			if (Input.GetKeyDown(KeyCode.Q))
+			{
+				Global.Days.Value++;
+			}
+			
 			// 根据player的position值拿到tilemap的具体块
 			var cellPos = grid.WorldToCell(transform.position);
 			var easyGrid = FindObjectOfType<GridController>().ShowGrid;
@@ -73,7 +101,7 @@ namespace Game
 				{
 					if (easyGrid[cellPos.x, cellPos.y] != null)
 					{
-						if (easyGrid[cellPos.x, cellPos.y].HasPlant && !easyGrid[cellPos.x, cellPos.y].Watered)
+						if (!easyGrid[cellPos.x, cellPos.y].Watered)
 						{
 							easyGrid[cellPos.x, cellPos.y].Watered = true;
 							ResController.Instance.waterPrefab
@@ -83,6 +111,15 @@ namespace Game
 					}
 				}
 			}
+		}
+
+		private void OnGUI()
+		{
+			IMGUIHelper.SetDesignResolution(640,360);
+			GUILayout.Space(10);
+			GUILayout.BeginHorizontal();
+			GUILayout.Label("  天数: " + Global.Days.Value);
+			GUILayout.EndHorizontal();
 		}
 	}
 }

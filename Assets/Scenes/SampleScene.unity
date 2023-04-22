@@ -693,6 +693,7 @@ MonoBehaviour:
   PrefabFolder: Assets/Art/Prefab
   seedPrefab: {fileID: 1981770279677435792, guid: f68cb14ce13bb384b8193bc01ffd1a91, type: 3}
   waterPrefab: {fileID: 5147751245669483221, guid: 37eef3ed04659c041919933ab558b23f, type: 3}
+  smallPlantPrefab: {fileID: 949551888860867234, guid: b29f17d25e8e400478aa5724973f9233, type: 3}
 --- !u!4 &346271341
 Transform:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ namespace Game
 	{
 		public GameObject seedPrefab;
 		public GameObject waterPrefab;
+		public GameObject smallPlantPrefab;
 
 		public static ResController Instance => MonoSingletonProperty<ResController>.Instance;
 
