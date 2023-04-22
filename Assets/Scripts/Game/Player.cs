@@ -26,7 +26,6 @@ namespace Game
 			{
 				TileSelectController.Instance.Position(cellPos);	// 显示当前板块
 				TileSelectController.Instance.Show();
-				Debug.Log("显示");
 			}
 			else
 			{
@@ -34,7 +33,7 @@ namespace Game
 			}
 			
 			
-			if (Input.GetMouseButtonDown(0))
+			if (Input.GetMouseButtonDown(0))	// 左键开垦和种植
 			{
 
 				if (cellPos.x is < 10 and >= 0 && cellPos.y is >= 0 and < 10)
@@ -45,19 +44,19 @@ namespace Game
 						tilemap.SetTile(cellPos, FindObjectOfType<GridController>().pen);
 						easyGrid[cellPos.x, cellPos.y] = new SoilData();
 					}
-					// 耕地已经开垦
+					// 耕地已经开垦, 判断是否种植了
 					else if (!easyGrid[cellPos.x, cellPos.y].HasPlant) // 当前没有种子, 则放种子
 					{
 						ResController.Instance.seedPrefab
 							.Instantiate()
-							.Position(tileWorldPos.x, tileWorldPos.y);
+							.Position(tileWorldPos);
 						easyGrid[cellPos.x, cellPos.y].HasPlant = true;
 					}
 					
 				}
 			}
 
-			else if (Input.GetMouseButtonDown(1))
+			else if (Input.GetMouseButtonDown(1))	// 右键消除土地
 			{
 				if (cellPos.x is < 10 and >= 0 && cellPos.y is >= 0 and < 10)
 				{
@@ -65,6 +64,22 @@ namespace Game
 					{
 						tilemap.SetTile(cellPos, null);
 						easyGrid[cellPos.x, cellPos.y] = null;
+					}
+				}
+			}
+			else if (Input.GetKeyDown(KeyCode.E))	// W键浇水
+			{
+				if (cellPos.x is < 10 and >= 0 && cellPos.y is >= 0 and < 10)
+				{
+					if (easyGrid[cellPos.x, cellPos.y] != null)
+					{
+						if (easyGrid[cellPos.x, cellPos.y].HasPlant && !easyGrid[cellPos.x, cellPos.y].Watered)
+						{
+							easyGrid[cellPos.x, cellPos.y].Watered = true;
+							ResController.Instance.waterPrefab
+								.Instantiate()
+								.Position(tileWorldPos);
+						}
 					}
 				}
 			}
