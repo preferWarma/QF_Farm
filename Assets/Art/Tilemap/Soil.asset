@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Soil
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 1811014080, guid: 9556d2932ef1f6d4e9c8e7b170578ed9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 31add75cb9e52514abcea609c900502a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
