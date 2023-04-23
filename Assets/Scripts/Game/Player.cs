@@ -55,7 +55,7 @@ namespace Game
 		private void Update()
 		{
 
-			if (Input.GetKeyDown(KeyCode.Q))
+			if (Input.GetKeyDown(KeyCode.Q))	// 按下Q键，进入下一天
 			{
 				Global.Days.Value++;
 			}
@@ -91,7 +91,7 @@ namespace Game
 						easyGrid[cellPos.x, cellPos.y] = new SoilData();
 					}
 					// 耕地已经开垦, 判断是否种植了
-					else if (!easyGrid[cellPos.x, cellPos.y].HasPlant) // 当前土地没有种植则种植
+					else if (!easyGrid[cellPos.x, cellPos.y].HasPlant) // 当前土地没有植物则种植
 					{
 						var plantObj = ResController.Instance.plantPrefab
 							.Instantiate()
@@ -102,6 +102,15 @@ namespace Game
 						
 						PlantController.Instance.PlantGrid[cellPos.x, cellPos.y] = plant;
 						easyGrid[cellPos.x, cellPos.y].HasPlant = true;
+					}
+					else // 当前土地有植物则判断是否成熟, 成熟则收获
+					{
+						if (easyGrid[cellPos.x, cellPos.y].PlantSates == PlantSates.Ripe)
+						{
+							// 摘取, 切换状态, 增加水果数量
+							PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].SetState(PlantSates.Old);
+							Global.Fruits.Value++;
+						}
 					}
 					
 				}
@@ -118,7 +127,7 @@ namespace Game
 					}
 				}
 			}
-			else if (Input.GetKeyDown(KeyCode.E))	// W键浇水
+			else if (Input.GetKeyDown(KeyCode.E))	// E键浇水
 			{
 				if (cellPos.x is < 10 and >= 0 && cellPos.y is >= 0 and < 10)
 				{
@@ -142,6 +151,11 @@ namespace Game
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
 			GUILayout.Label("  天数: " + Global.Days.Value);
+			GUILayout.EndHorizontal();
+			
+			GUILayout.Space(10);
+			GUILayout.BeginHorizontal();
+			GUILayout.Label("  果子: " + Global.Fruits.Value);
 			GUILayout.EndHorizontal();
 		}
 	}

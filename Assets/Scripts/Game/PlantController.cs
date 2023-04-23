@@ -6,7 +6,8 @@ namespace Game
 	{
 		Seed,	// 种子
 		Small,	// 幼苗
-		Ripe	// 成熟
+		Ripe,	// 成熟
+		Old	    // 枯萎(已摘取)
 	}
 	
 	public partial class PlantController : ViewController, ISingleton

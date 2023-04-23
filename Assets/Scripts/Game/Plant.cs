@@ -20,6 +20,7 @@ namespace Game
 				PlantSates.Seed => ResController.Instance.seedSprite,
 				PlantSates.Small => ResController.Instance.smallPlantSprite,
 				PlantSates.Ripe => ResController.Instance.ripeSprite,
+				PlantSates.Old => ResController.Instance.oldSprite,
 				_ => GetComponent<SpriteRenderer>().sprite
 			};
 
