@@ -60,6 +60,11 @@ namespace Game
 				Global.Days.Value++;
 			}
 			
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				SceneManager.LoadScene("Scenes/GamePass");
+			}
+			
 			// 根据player的position值拿到tilemap的具体块
 			var cellPos = grid.WorldToCell(transform.position);
 			var easyGrid = FindObjectOfType<GridController>().ShowGrid;
@@ -108,7 +113,9 @@ namespace Game
 						if (easyGrid[cellPos.x, cellPos.y].PlantSates == PlantSates.Ripe)
 						{
 							// 摘取, 切换状态, 增加水果数量
-							PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].SetState(PlantSates.Old);
+							// PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].SetState(PlantSates.Old);
+							Destroy(PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].gameObject);	// 摘取后销毁, 简化流程,后期会改
+							easyGrid[cellPos.x, cellPos.y].HasPlant = false;
 							Global.Fruits.Value++;
 						}
 					}
@@ -157,6 +164,25 @@ namespace Game
 			GUILayout.BeginHorizontal();
 			GUILayout.Label("  果子: " + Global.Fruits.Value);
 			GUILayout.EndHorizontal();
+			
+			GUILayout.Space(10);
+			GUILayout.BeginHorizontal();
+			GUILayout.Label("  浇水: E");
+			GUILayout.EndHorizontal();
+			
+			GUILayout.Space(10);
+			GUILayout.BeginHorizontal();
+			GUILayout.Label("  下一天: Q");
+			GUILayout.EndHorizontal();GUILayout.Space(10);
+			
+			GUILayout.BeginHorizontal();
+			GUILayout.Label("  摘取: 鼠标左键");
+			GUILayout.EndHorizontal();
+			
+			GUILayout.Space(10);
+			GUILayout.BeginHorizontal();
+			GUILayout.Label("  消除: 鼠标右键");
+			GUILayout.EndHorizontal();GUILayout.Space(10);
 		}
 	}
 }
