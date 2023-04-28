@@ -67,27 +67,27 @@ namespace Game
 
 			if (Input.GetKeyDown(KeyCode.Alpha0))
 			{
-				Global.CurrentTool.Value = "手";
+				Global.CurrentTool.Value = Constant.ToolHand;
 			}
 			
 			if (Input.GetKeyDown(KeyCode.Alpha1))
 			{
-				Global.CurrentTool.Value = "锄头";
+				Global.CurrentTool.Value = Constant.ToolShovel;
 			}
 
 			if (Input.GetKeyDown(KeyCode.Alpha2))
 			{
-				Global.CurrentTool.Value = "水壶";
+				Global.CurrentTool.Value = Constant.ToolWateringCan;
 			}
 			
 			if (Input.GetKeyDown(KeyCode.Alpha3))
 			{
-				Global.CurrentTool.Value = "种子";
+				Global.CurrentTool.Value = Constant.ToolSeed;
 			}
 			
 			// 根据player的position值拿到tilemap的具体块
 			var cellPos = grid.WorldToCell(transform.position);
-			var easyGrid = FindObjectOfType<GridController>().ShowGrid;
+			var showGrid = FindObjectOfType<GridController>().ShowGrid;
 			
 			var tileWorldPos = grid.CellToWorld(cellPos);
 			tileWorldPos.x += grid.cellSize.x * 0.5f;
@@ -109,16 +109,16 @@ namespace Game
 
 				if (cellPos.x is < 10 and >= 0 && cellPos.y is >= 0 and < 10)
 				{
-					if (easyGrid[cellPos.x, cellPos.y] == null)	// 无耕地
+					if (showGrid[cellPos.x, cellPos.y] == null)	// 无耕地
 					{
-						if (Global.CurrentTool.Value != "锄头") return; // 当前工具不是锄头则不开垦
+						if (Global.CurrentTool.Value != Constant.ToolShovel) return; // 当前工具不是锄头则不开垦
 						tilemap.SetTile(cellPos, FindObjectOfType<GridController>().pen);
-						easyGrid[cellPos.x, cellPos.y] = new SoilData();
+						showGrid[cellPos.x, cellPos.y] = new SoilData();
 					}
 					// 耕地已经开垦, 判断是否种植了
-					else if (!easyGrid[cellPos.x, cellPos.y].HasPlant) // 当前土地没有植物则种植
+					else if (!showGrid[cellPos.x, cellPos.y].HasPlant) // 当前土地没有植物则种植
 					{
-						if (Global.CurrentTool.Value != "种子") return; // 当前工具不是种子则不种植
+						if (Global.CurrentTool.Value != Constant.ToolSeed) return; // 当前工具不是种子则不种植
 						var plantObj = ResController.Instance.plantPrefab
 							.Instantiate()
 							.Position(tileWorldPos);
@@ -128,17 +128,17 @@ namespace Game
 						plant.SetState(PlantSates.Seed);
 						
 						PlantController.Instance.PlantGrid[cellPos.x, cellPos.y] = plant;
-						easyGrid[cellPos.x, cellPos.y].HasPlant = true;
+						showGrid[cellPos.x, cellPos.y].HasPlant = true;
 					}
 					else // 当前土地有植物则判断是否成熟, 成熟则收获
 					{
-						if (Global.CurrentTool.Value != "手") return; // 当前工具不是手则不收获
-						if (easyGrid[cellPos.x, cellPos.y].PlantSates != PlantSates.Ripe) return;	// 不成熟则不收获
+						if (Global.CurrentTool.Value != Constant.ToolHand) return; // 当前工具不是手则不收获
+						if (showGrid[cellPos.x, cellPos.y].PlantSates != PlantSates.Ripe) return;	// 不成熟则不收获
 						// 摘取, 切换状态, 增加水果数量
 						// PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].SetState(PlantSates.Old);
 						Destroy(PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].gameObject);	// 摘取后销毁, 简化流程,后期会改
-						easyGrid[cellPos.x, cellPos.y].HasPlant = false;
-						easyGrid[cellPos.x, cellPos.y].PlantSates = PlantSates.Seed;// 摘取后下一次变成种子(有待改进)
+						showGrid[cellPos.x, cellPos.y].HasPlant = false;
+						showGrid[cellPos.x, cellPos.y].PlantSates = PlantSates.Seed;// 摘取后下一次变成种子(有待改进)
 						Global.Fruits.Value++;
 					}
 					
@@ -149,20 +149,20 @@ namespace Game
 			{
 				if (cellPos.x is < 10 and >= 0 && cellPos.y is >= 0 and < 10)
 				{
-					if (easyGrid[cellPos.x, cellPos.y] != null)
+					if (showGrid[cellPos.x, cellPos.y] != null)
 					{
 						tilemap.SetTile(cellPos, null);
-						easyGrid[cellPos.x, cellPos.y] = null;
+						showGrid[cellPos.x, cellPos.y] = null;
 					}
 				}
 			}
 			else if (Input.GetKeyDown(KeyCode.E))	// E键浇水
 			{
 				if (cellPos.x is >= 10 or < 0 || cellPos.y is < 0 or >= 10) return;	// 超出范围
-				if (easyGrid[cellPos.x, cellPos.y] == null) return;	// 无耕地
-				if (easyGrid[cellPos.x, cellPos.y].Watered) return;	// 已经浇过水了
-				if (Global.CurrentTool.Value != "水壶") return;	// 当前工具不是水壶
-				easyGrid[cellPos.x, cellPos.y].Watered = true;
+				if (showGrid[cellPos.x, cellPos.y] == null) return;	// 无耕地
+				if (showGrid[cellPos.x, cellPos.y].Watered) return;	// 已经浇过水了
+				if (Global.CurrentTool.Value != Constant.ToolWateringCan) return;	// 当前工具不是水壶
+				showGrid[cellPos.x, cellPos.y].Watered = true;
 				ResController.Instance.waterPrefab
 					.Instantiate()
 					.Position(tileWorldPos);
@@ -204,10 +204,10 @@ namespace Game
 			
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
-			GUILayout.Label($"当前工具: {Global.CurrentTool.Value}");
+			GUILayout.Label($"  当前工具: {Constant.DisplayName(Global.CurrentTool.Value, Language.Chinese)}");
 			GUILayout.EndHorizontal();GUILayout.Space(10);
 			
-			GUI.Label(new Rect(10, 320, 300, 24), "切换工具: 0: 手, 1: 锄头, 2: 水壶, 3: 种子");
+			GUI.Label(new Rect(10, 320, 300, 24), "切换工具: [0]手, [1]锄头, [2]水壶, [3]种子");
 		}
 	}
 }
