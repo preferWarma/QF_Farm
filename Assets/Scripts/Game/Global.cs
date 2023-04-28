@@ -11,7 +11,7 @@ namespace Game
         public static BindableProperty<string> CurrentTool = new("手");  // 当前工具
     }
 
-    public class Constant
+    public static class Constant
     {
         public const string ToolHand = "hand";  // 手
         public const string ToolShovel = "shovel";  // 锄头
