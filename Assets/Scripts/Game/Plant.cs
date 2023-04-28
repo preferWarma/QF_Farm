@@ -7,7 +7,7 @@ namespace Game
 	{
 		public int x;
 		public int y;
-		private PlantSates mSate = PlantSates.Seed;
+		[SerializeField]private PlantSates mSate = PlantSates.Seed;
 		public PlantSates Sate => mSate;
 		
 		public void SetState(PlantSates newSate)
