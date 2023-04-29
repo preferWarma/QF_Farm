@@ -9,6 +9,7 @@ namespace Game
         public static BindableProperty<int> Days = new(1); // 第几天
         public static BindableProperty<int> Fruits = new(0); // 水果数量
         public static BindableProperty<string> CurrentTool = new("手");  // 当前工具
+        public static int RipeAndHarvestCountInCurrentDay = 0; // 当天成熟并采摘的植物数量
     }
 
     public static class Constant

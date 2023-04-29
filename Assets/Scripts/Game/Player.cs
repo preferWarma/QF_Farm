@@ -18,6 +18,7 @@ namespace Game
 		{
 			Global.Days.Register(day =>
 			{
+				Global.RipeAndHarvestCountInCurrentDay = 0;	// 每天开始时，重置成熟的水果数量
 				var soilDatas = FindObjectOfType<GridController>().ShowGrid;
 				
 				PlantController.Instance.PlantGrid.ForEach((x, y, plant) =>
@@ -136,6 +137,19 @@ namespace Game
 						if (showGrid[cellPos.x, cellPos.y].PlantSates != PlantSates.Ripe) return;	// 不成熟则不收获
 						// 摘取, 切换状态, 增加水果数量
 						// PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].SetState(PlantSates.Old);
+
+						if (PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].ripeDay == Global.Days.Value)
+						{
+							Global.RipeAndHarvestCountInCurrentDay++;	// 今天成熟并且收获的数量
+							if (Global.RipeAndHarvestCountInCurrentDay >= 2)
+							{
+								ActionKit.Delay(1.0f, () =>
+								{
+									SceneManager.LoadScene("Scenes/GamePass");
+								}).Start(this);
+							}
+						}
+						
 						Destroy(PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].gameObject);	// 摘取后销毁, 简化流程,后期会改
 						showGrid[cellPos.x, cellPos.y].HasPlant = false;
 						showGrid[cellPos.x, cellPos.y].PlantSates = PlantSates.Seed;// 摘取后下一次变成种子(有待改进)
