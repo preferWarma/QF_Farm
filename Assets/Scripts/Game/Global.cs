@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Game.ChallengeSystem;
 using QFramework;
 using UnityEngine;
 
@@ -6,10 +8,16 @@ namespace Game
     // 充当Model层
     public class Global : MonoBehaviour
     {
-        public static BindableProperty<int> Days = new(1); // 第几天
-        public static BindableProperty<int> Fruits = new(0); // 水果数量
-        public static BindableProperty<string> CurrentTool = new("手");  // 当前工具
-        public static int RipeAndHarvestCountInCurrentDay = 0; // 当天成熟并采摘的植物数量
+        public static readonly BindableProperty<int> Days = new(1); // 第几天
+        public static readonly BindableProperty<int> Fruits = new(0); // 水果数量
+        public static readonly BindableProperty<string> CurrentTool = new("手");  // 当前工具
+        public static readonly BindableProperty<int> RipeAndHarvestCountInCurrentDay = new(0); // 当天成熟并采摘的植物数量
+        public static readonly List<Challenge> Challenges = new()
+        {
+            new RipeAndHarvestTwoInOneDay() // 一天成熟并收获两个果实挑战
+        }; // 挑战列表
+        public static readonly EasyEvent<Plant> OnPlantHarvest = new(); // 采摘植物事件
+        public static readonly EasyEvent<Challenge> OnChallengeFinish = new(); // 挑战完成事件
     }
 
     public static class Constant

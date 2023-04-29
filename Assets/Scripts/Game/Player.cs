@@ -18,7 +18,7 @@ namespace Game
 		{
 			Global.Days.Register(day =>
 			{
-				Global.RipeAndHarvestCountInCurrentDay = 0;	// 每天开始时，重置成熟的水果数量
+				Global.RipeAndHarvestCountInCurrentDay.Value = 0;	// 每天开始时，重置成熟的水果数量
 				var soilDatas = FindObjectOfType<GridController>().ShowGrid;
 				
 				PlantController.Instance.PlantGrid.ForEach((x, y, plant) =>
@@ -138,17 +138,7 @@ namespace Game
 						// 摘取, 切换状态, 增加水果数量
 						// PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].SetState(PlantSates.Old);
 
-						if (PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].ripeDay == Global.Days.Value)
-						{
-							Global.RipeAndHarvestCountInCurrentDay++;	// 今天成熟并且收获的数量
-							if (Global.RipeAndHarvestCountInCurrentDay >= 2)
-							{
-								ActionKit.Delay(1.0f, () =>
-								{
-									SceneManager.LoadScene("Scenes/GamePass");
-								}).Start(this);
-							}
-						}
+						Global.OnPlantHarvest.Trigger(PlantController.Instance.PlantGrid[cellPos.x, cellPos.y]);	// 触发收获事件
 						
 						Destroy(PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].gameObject);	// 摘取后销毁, 简化流程,后期会改
 						showGrid[cellPos.x, cellPos.y].HasPlant = false;
@@ -199,6 +189,11 @@ namespace Game
 			
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
+			GUILayout.Label("  当天成熟并采摘的数量: " + Global.RipeAndHarvestCountInCurrentDay.Value);
+			GUILayout.EndHorizontal();
+			
+			GUILayout.Space(10);
+			GUILayout.BeginHorizontal();
 			GUILayout.Label("  浇水: E");
 			GUILayout.EndHorizontal();
 			
@@ -215,7 +210,7 @@ namespace Game
 			GUILayout.BeginHorizontal();
 			GUILayout.Label("  消除: 鼠标右键");
 			GUILayout.EndHorizontal();GUILayout.Space(10);
-			
+
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
 			GUILayout.Label($"  当前工具: {Constant.DisplayName(Global.CurrentTool.Value, Language.Chinese)}");

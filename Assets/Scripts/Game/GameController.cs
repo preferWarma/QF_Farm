@@ -1,4 +1,9 @@
+using System;
+using System.Linq;
+using Game.ChallengeSystem;
 using QFramework;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -6,24 +11,30 @@ namespace Game
 	{
 		private void Start()
 		{
-			Global.Fruits.Register(Achievement_1);
-			Global.Days.Register(Achievement_2);
+			Global.OnChallengeFinish.Register(challenge =>Debug.Log($"完成挑战:{challenge.Name}"));
 		}
 
-		private void Achievement_1(int fruitCount)	// 成就1: 采集1个水果
+		private void Update()
 		{
-			// if (fruitCount >= 1)
-			// {
-			// 	// 1s后跳转到GamePass场景
-			// 	ActionKit.Delay(1.0f, () =>
-			// 	{
-			// 		SceneManager.LoadScene("Scenes/GamePass");
-			// 	}).Start(this);
-			// }
-		}
-
-		private void Achievement_2(int _)	// 成就2: 一天结出两个果实并采摘
-		{
+			// 检查是否有挑战完成或开始
+			foreach (var challenge in Global.Challenges.Where(challenge => challenge.State != Challenge.States.Finished))
+			{
+				if (challenge.State == Challenge.States.NotStart)
+				{
+					challenge.OnStart();
+					challenge.State = Challenge.States.Doing;
+				}
+				
+				else if (challenge.State == Challenge.States.Doing)
+				{
+					if (challenge.CheckFinish())
+					{
+						challenge.OnFinish();
+						challenge.State = Challenge.States.Finished;
+						Global.OnChallengeFinish.Trigger(challenge);	// 触发挑战完成事件
+					}
+				}
+			}
 		}
 	}
 }
