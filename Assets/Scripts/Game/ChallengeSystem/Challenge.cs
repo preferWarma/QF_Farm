@@ -10,7 +10,7 @@
             Finished    // 已完成
         }
         
-        public string Name;
+        public abstract string Name { get;} // 挑战名称
         public States State = States.NotStart;  // 当前挑战状态
         
         public abstract void OnStart(); // 挑战开始时候要做的事情

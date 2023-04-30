@@ -14,7 +14,8 @@ namespace Game
         public static readonly BindableProperty<int> RipeAndHarvestCountInCurrentDay = new(0); // 当天成熟并采摘的植物数量
         public static readonly List<Challenge> Challenges = new()
         {
-            new RipeAndHarvestTwoInOneDay() // 一天成熟并收获两个果实挑战
+            new RipeAndHarvestTwoInOneDay(), // 一天成熟并收获两个果实挑战
+            new RipeAndHarvestFiveInOneDay() // 一天成熟并收获五个果实挑战
         }; // 挑战列表
         public static readonly EasyEvent<Plant> OnPlantHarvest = new(); // 采摘植物事件
         public static readonly EasyEvent<Challenge> OnChallengeFinish = new(); // 挑战完成事件

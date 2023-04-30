@@ -1,17 +1,14 @@
 ﻿using System.Collections.Generic;
 using QFramework;
-using Unity.VisualScripting;
-using UnityEngine.SceneManagement;
 
 namespace Game.ChallengeSystem
 {
     public class RipeAndHarvestTwoInOneDay : Challenge, IUnRegisterList
     {
+        public override string Name => "一天成熟并收获两个果实";
 
         public override void OnStart()
         {
-            Name = "一天成熟并收获两个果实";
-            
             // 监听成熟的植物是否当天被采摘
             Global.OnPlantHarvest.Register(plant =>
             {

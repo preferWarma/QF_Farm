@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   welcomeScreenVersion: '1.9.5 '
   playmakerVersion: 
-  showWelcomeScreen: 1
+  showWelcomeScreen: 0
   showUpgradeGuide: 0
   lastAutoUpdateSignature: 2021.3.18f1c1__E:/UintyProjects/QF_FarmProject/Assets__0.0.0.0
   useLegacyNetworking: 0
