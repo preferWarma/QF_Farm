@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using QFramework;
-
-namespace Game.ChallengeSystem
+﻿namespace Game.ChallengeSystem
 {
-    public class RipeAndHarvestFiveInOneDay : Challenge, IUnRegisterList
+    public class RipeAndHarvestFiveInOneDay : Challenge
     {
         public override string Name => "一天成熟并收获五个果实";
 
@@ -18,9 +15,6 @@ namespace Game.ChallengeSystem
 
         public override void OnFinish()
         {
-            this.UnRegisterAll();   // 挑战完成时移除所有事件监听
         }
-
-        public List<IUnRegister> UnregisterList { get; } = new();
     }
 }

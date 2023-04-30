@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using QFramework;
 
@@ -10,9 +9,9 @@ namespace Game
 		{
 			IMGUIHelper.SetDesignResolution(640, 480);
 			GUI.Label(new Rect(640 - 200, 0, 200, 24), "挑战列表");
-			for (var i = 0; i < Global.Challenges.Count; i++)
+			for (var i = 0; i < Global.ActiveChallenges.Count; i++)
 			{
-				var change = Global.Challenges[i];
+				var change = Global.ActiveChallenges[i];
 				GUI.Label(new Rect(640 - 200, 20 + i * 20, 200, 24), change.Name + ": " + change.State);
 			}
 		}

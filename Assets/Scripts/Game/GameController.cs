@@ -11,7 +11,35 @@ namespace Game
 	{
 		private void Start()
 		{
-			Global.OnChallengeFinish.Register(challenge =>Debug.Log($"完成挑战:{challenge.Name}"));
+			// 开局随机添加一个挑战
+			var randomItem = Global.Challenges.GetRandomItem();
+			Global.ActiveChallenges.Add(randomItem);
+			
+			Global.OnChallengeFinish.Register(challenge =>
+			{
+				Global.ActiveChallenges.Remove(challenge);
+				Global.FinishedChallenges.Add(challenge);
+				Debug.Log($"完成挑战:{challenge.Name}");
+				
+				var randomItem1 = Global.Challenges.Where(challenge1 => challenge1.State == Challenge.States.Doing)
+					.ToList().GetRandomItem();
+				Global.ActiveChallenges.Add(randomItem1);	// 完成挑战时再随机添加一个未完成的挑战
+				
+				if (Global.Challenges.All(challenge1 => challenge1.State == Challenge.States.Finished))
+				{
+					ActionKit.Delay(1.0f, () => SceneManager.LoadScene("Scenes/GamePass"))
+						.Start(this);
+				}
+			});
+			
+			// 监听成熟的植物是否当天被采摘
+			Global.OnPlantHarvest.Register(plant =>
+			{
+				if (plant.ripeDay == Global.Days.Value)
+				{
+					Global.RipeAndHarvestCountInCurrentDay.Value++;
+				}
+			}).UnRegisterWhenGameObjectDestroyed(this);
 		}
 
 		private void Update()
