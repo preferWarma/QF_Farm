@@ -16,6 +16,7 @@ namespace Game
 			
 			Global.OnChallengeFinish.Register(challenge =>
 			{
+				AudioController.Instance.Sfx_Complete.Play();	// 播放挑战完成音效
 				Global.FinishedChallenges.Add(challenge);
 				Debug.Log($"完成挑战:{challenge.Name}");
 				
@@ -39,7 +40,7 @@ namespace Game
 			// 监听工具切换
 			Global.CurrentTool.Register(_ =>
 			{
-				AudioController.Instance.Sfx_Take.Play();
+				AudioController.Instance.Sfx_SwitchTool.Play();
 			});
 		}
 

@@ -18,6 +18,8 @@ namespace Game
 		{
 			Global.Days.Register(day =>
 			{
+				AudioController.Instance.Sfx_NextDay.Play();	// 播放下一天音效
+				
 				Global.RipeAndHarvestCountInCurrentDay.Value = 0;	// 每天开始时，重置当天成熟且采摘的水果数量
 				Global.HarvestCountInCurrentDay.Value = 0;	// 每天开始时，重置当天采摘的水果数量
 				var soilDatas = FindObjectOfType<GridController>().ShowGrid;
@@ -91,7 +93,8 @@ namespace Game
 					if (showGrid[cellPos.x, cellPos.y] == null)	// 无耕地
 					{
 						if (Global.CurrentTool.Value != Constant.ToolShovel) return; // 当前工具不是锄头则不开垦
-						AudioController.Instance.Sfx_Dig.Play();	// 播放开垦音效
+						
+						AudioController.Instance.Sfx_DigSoil.Play();	// 播放开垦音效
 						tilemap.SetTile(cellPos, FindObjectOfType<GridController>().pen);
 						showGrid[cellPos.x, cellPos.y] = new SoilData();
 					}
@@ -99,6 +102,8 @@ namespace Game
 					else if (!showGrid[cellPos.x, cellPos.y].HasPlant) // 当前土地没有植物则种植
 					{
 						if (Global.CurrentTool.Value != Constant.ToolSeed) return; // 当前工具不是种子则不种植
+						
+						AudioController.Instance.Sfx_PutSeed.Play();	// 播放种植音效
 						var plantObj = ResController.Instance.plantPrefab
 							.Instantiate()
 							.Position(tileWorldPos);
@@ -117,6 +122,7 @@ namespace Game
 						// 摘取, 切换状态, 增加水果数量
 						// PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].SetState(PlantSates.Old);
 
+						AudioController.Instance.Sfx_Harvest.Play();	// 播放收割音效
 						Global.OnPlantHarvest.Trigger(PlantController.Instance.PlantGrid[cellPos.x, cellPos.y]);	// 触发收获事件
 						
 						Destroy(PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].gameObject);	// 摘取后销毁, 简化流程,后期会改
@@ -145,6 +151,8 @@ namespace Game
 				if (showGrid[cellPos.x, cellPos.y] == null) return;	// 无耕地
 				if (showGrid[cellPos.x, cellPos.y].Watered) return;	// 已经浇过水了
 				if (Global.CurrentTool.Value != Constant.ToolWateringCan) return;	// 当前工具不是水壶
+				
+				AudioController.Instance.Sfx_Watering.Play();	// 播放浇水音效
 				showGrid[cellPos.x, cellPos.y].Watered = true;
 				ResController.Instance.waterPrefab
 					.Instantiate()

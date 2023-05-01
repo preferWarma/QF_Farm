@@ -20,18 +20,36 @@ MonoBehaviour:
     NameToFullName: []
     BindInfos:
     - TypeName: UnityEngine.AudioSource
-      PathToRoot: Sfx_Take
-      MemberName: Sfx_Take
+      PathToRoot: Sfx_SwitchTool
+      MemberName: Sfx_SwitchTool
     - TypeName: UnityEngine.AudioSource
-      PathToRoot: Sfx_Dig
-      MemberName: Sfx_Dig
+      PathToRoot: Sfx_DigSoil
+      MemberName: Sfx_DigSoil
+    - TypeName: UnityEngine.AudioSource
+      PathToRoot: Sfx_PutSeed
+      MemberName: Sfx_PutSeed
+    - TypeName: UnityEngine.AudioSource
+      PathToRoot: Sfx_Watering
+      MemberName: Sfx_Watering
+    - TypeName: UnityEngine.AudioSource
+      PathToRoot: Sfx_Harvest
+      MemberName: Sfx_Harvest
+    - TypeName: UnityEngine.AudioSource
+      PathToRoot: Sfx_Complete
+      MemberName: Sfx_Complete
+    - TypeName: UnityEngine.AudioSource
+      PathToRoot: Sfx_NextDay
+      MemberName: Sfx_NextDay
     ScriptsFolder: Assets/Scripts/Game
     ClassName: AudioController
     Namespace: Game
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game\r\n{\r\n\tpublic
       partial class AudioController : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:7d57ce94-1a12-41e6-b8e0-46657acadf3c\r\nusing UnityEngine;\r\n\r\nnamespace
+    DesignerCode: "// Generate Id:fea2152f-af40-49e7-b766-d375232b4a68\r\nusing UnityEngine;\r\n\r\nnamespace
       Game\r\n{\r\n\tpublic partial class AudioController\r\n\t{\r\n\r\n\t\tpublic
-      UnityEngine.AudioSource Sfx_Take;\r\n\r\n\t\tpublic UnityEngine.AudioSource
-      Sfx_Dig;\r\n\r\n\t}\r\n}\r\n"
+      UnityEngine.AudioSource Sfx_SwitchTool;\r\n\r\n\t\tpublic UnityEngine.AudioSource
+      Sfx_DigSoil;\r\n\r\n\t\tpublic UnityEngine.AudioSource Sfx_PutSeed;\r\n\r\n\t\tpublic
+      UnityEngine.AudioSource Sfx_Watering;\r\n\r\n\t\tpublic UnityEngine.AudioSource
+      Sfx_Harvest;\r\n\r\n\t\tpublic UnityEngine.AudioSource Sfx_Complete;\r\n\r\n\t\tpublic
+      UnityEngine.AudioSource Sfx_NextDay;\r\n\r\n\t}\r\n}\r\n"
