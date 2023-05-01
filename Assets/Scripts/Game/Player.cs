@@ -18,7 +18,8 @@ namespace Game
 		{
 			Global.Days.Register(day =>
 			{
-				Global.RipeAndHarvestCountInCurrentDay.Value = 0;	// 每天开始时，重置成熟的水果数量
+				Global.RipeAndHarvestCountInCurrentDay.Value = 0;	// 每天开始时，重置当天成熟且采摘的水果数量
+				Global.HarvestCountInCurrentDay.Value = 0;	// 每天开始时，重置当天采摘的水果数量
 				var soilDatas = FindObjectOfType<GridController>().ShowGrid;
 				
 				PlantController.Instance.PlantGrid.ForEach((x, y, plant) =>

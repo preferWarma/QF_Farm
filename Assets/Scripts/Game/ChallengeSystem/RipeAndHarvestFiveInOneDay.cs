@@ -6,11 +6,12 @@
 
         public override void OnStart()
         {
+            StartDate = Global.Days.Value;
         }
 
         public override bool CheckFinish()
         {
-            return Global.RipeAndHarvestCountInCurrentDay.Value >= 5;
+            return StartDate != Global.Days.Value && Global.RipeAndHarvestCountInCurrentDay.Value >= 5;
         }
 
         public override void OnFinish()

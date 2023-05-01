@@ -12,6 +12,8 @@ namespace Game
         public static readonly BindableProperty<int> Fruits = new(0); // 水果数量
         public static readonly BindableProperty<string> CurrentTool = new("手");  // 当前工具
         public static readonly BindableProperty<int> RipeAndHarvestCountInCurrentDay = new(0); // 当天成熟并采摘的植物数量
+        public static readonly BindableProperty<int> HarvestCountInCurrentDay = new(0); // 当天采摘的植物数量
+
         public static readonly List<Challenge> Challenges = new()
         {
             new ChallengeHarvestFirstFruit(),   // 收获第一个果实挑战
