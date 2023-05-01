@@ -26,6 +26,8 @@ namespace Game
 
         public static readonly EasyEvent<Plant> OnPlantHarvest = new(); // 采摘植物事件
         public static readonly EasyEvent<Challenge> OnChallengeFinish = new(); // 挑战完成事件
+
+        public static Player Player = null;
     }
 
     public static class Constant

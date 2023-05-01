@@ -1,7 +1,9 @@
+using System;
 using System.Linq;
 using Game.Data;
 using UnityEngine;
 using QFramework;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 // ReSharper disable Unity.InefficientPropertyAccess
@@ -13,6 +15,11 @@ namespace Game
 		[Header("Tilemap相关")]
 		[Tooltip("地块网格")] public Grid grid;
 		[Tooltip("地块显示")] public Tilemap tilemap;
+
+		private void Awake()
+		{
+			Global.Player = this;
+		}
 
 		private void Start()
 		{
@@ -64,8 +71,6 @@ namespace Game
 				Global.Days.Value++;
 			}
 			
-			SwitchTool();
-			
 			// 根据player的position值拿到tilemap的具体块
 			var cellPos = grid.WorldToCell(transform.position);
 			var showGrid = FindObjectOfType<GridController>().ShowGrid;
@@ -87,6 +92,7 @@ namespace Game
 			
 			if (Input.GetMouseButtonDown(0))	// 左键开垦和种植
 			{
+				if (EventSystem.current.IsPointerOverGameObject()) return;	// 如果点击到了UI则不处理
 
 				if (cellPos.x is < 10 and >= 0 && cellPos.y is >= 0 and < 10)
 				{
@@ -189,35 +195,12 @@ namespace Game
 			GUILayout.Label("  下一天: Q");
 			GUILayout.EndHorizontal();GUILayout.Space(10);
 
-			GUILayout.Space(10);
-			GUILayout.BeginHorizontal();
-			GUILayout.Label($"  当前工具: {Constant.DisplayName(Global.CurrentTool.Value, Language.Chinese)}");
-			GUILayout.EndHorizontal();GUILayout.Space(10);
-			
-			GUI.Label(new Rect(10, 320, 300, 24), "切换工具: [0]手, [1]锄头, [2]水壶, [3]种子");
+			// GUI.Label(new Rect(10, 320, 300, 24), "切换工具: [1]手, [2]锄头, [3]水壶, [4]种子");
 		}
 
-		private void SwitchTool()
+		private void OnDestroy()
 		{
-			if (Input.GetKeyDown(KeyCode.Alpha0))
-			{
-				Global.CurrentTool.Value = Constant.ToolHand;
-			}
-			
-			if (Input.GetKeyDown(KeyCode.Alpha1))
-			{
-				Global.CurrentTool.Value = Constant.ToolShovel;
-			}
-
-			if (Input.GetKeyDown(KeyCode.Alpha2))
-			{
-				Global.CurrentTool.Value = Constant.ToolWateringCan;
-			}
-			
-			if (Input.GetKeyDown(KeyCode.Alpha3))
-			{
-				Global.CurrentTool.Value = Constant.ToolSeed;
-			}
+			Global.Player = null;
 		}
 	}
 }
