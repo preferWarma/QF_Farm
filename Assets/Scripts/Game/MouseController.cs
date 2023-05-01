@@ -94,15 +94,26 @@ namespace Game
 				
 				if (!mshowGrid[cellPos.x, cellPos.y].HasPlant) // 当前土地没有植物则种植
 				{
-					if (Global.CurrentTool.Value != Constant.ToolSeed) return; // 当前工具不是种子则不种植
+					if (Global.CurrentTool.Value != Constant.ToolSeed && Global.CurrentTool.Value != Constant.ToolSeedRadish) return; // 当前工具不是种子则不种植
 
 					AudioController.Instance.Sfx_PutSeed.Play(); // 播放种植音效
-					var plantObj = ResController.Instance.plantPrefab
+					GameObject plantObj = null;
+					if (Global.CurrentTool.Value == Constant.ToolSeed)	// 根据当前工具种植不同的植物
+					{
+						plantObj = ResController.Instance.plantPrefab
 						.Instantiate()
 						.Position(tileWorldPos);
-					var plant = plantObj.GetComponent<Plant>();
-					plant.x = cellPos.x;
-					plant.y = cellPos.y;
+					}
+					else if (Global.CurrentTool.Value == Constant.ToolSeedRadish)
+					{
+						plantObj = ResController.Instance.plantRadishPrefab
+						.Instantiate()
+						.Position(tileWorldPos);
+					}
+					if (plantObj == null) return;
+					var plant = plantObj.GetComponent<IPlant>();
+					plant.X = cellPos.x;
+					plant.Y = cellPos.y;
 					plant.SetState(PlantSates.Seed);
 
 					PlantController.Instance.PlantGrid[cellPos.x, cellPos.y] = plant;
@@ -117,11 +128,20 @@ namespace Game
 
 					AudioController.Instance.Sfx_Harvest.Play(); // 播放收割音效
 					Global.OnPlantHarvest.Trigger(PlantController.Instance.PlantGrid[cellPos.x, cellPos.y]); // 触发收获事件
+					
+					if (PlantController.Instance.PlantGrid[cellPos.x, cellPos.y] as PlantRadish != null)	// 根据植物类型增加不同的水果数量
+					{
+						Global.RadishCount.Value++;
+					}
+					else
+					{
+						Global.PumpkinCount.Value++;
+					}
 
-					Destroy(PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].gameObject); // 摘取后销毁, 简化流程,后期会改
+					Destroy(PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].GameObject); // 摘取后销毁, 简化流程,后期会改
 					mshowGrid[cellPos.x, cellPos.y].HasPlant = false;
 					mshowGrid[cellPos.x, cellPos.y].PlantSates = PlantSates.Seed; // 摘取后下一次变成种子(有待改进)
-					Global.Fruits.Value++;
+					// Global.PumpkinCount.Value++;
 				}
 			}
 		}

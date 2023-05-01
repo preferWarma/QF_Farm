@@ -1,4 +1,4 @@
-// Generate Id:561dbfc5-a4fa-414e-97e6-18f7eef1b475
+// Generate Id:29fa667f-64f1-401f-847c-9ef85514a509
 using UnityEngine;
 
 namespace Game
@@ -29,6 +29,12 @@ namespace Game
 		public UnityEngine.UI.Image WatercanBtnImage;
 
 		public UnityEngine.UI.Image WatercanBtnSelect;
+
+		public UnityEngine.UI.Button SeedRadishBtn;
+
+		public UnityEngine.UI.Image SeedBtnRadishImage;
+
+		public UnityEngine.UI.Image SeedBtnRadishSelect;
 
 	}
 }

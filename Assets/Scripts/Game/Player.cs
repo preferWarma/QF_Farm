@@ -31,20 +31,7 @@ namespace Game
 				PlantController.Instance.PlantGrid.ForEach((x, y, plant) =>
 				{
 					if (plant is null)	return;
-					if (plant.Sate == PlantSates.Seed)	// 如果是种子
-					{
-						if (soilDatas[x, y].Watered)	// 如果已经浇水了, 切换为幼苗
-						{
-							plant.SetState(PlantSates.Small);
-						}
-					}
-					else if (plant.Sate == PlantSates.Small)	// 如果是幼苗
-					{
-						if (soilDatas[x, y].Watered)	// 如果已经浇水了, 切换为成熟
-						{
-							plant.SetState(PlantSates.Ripe);
-						}
-					}
+					plant.Grow(soilDatas[x, y]);
 				});
  
 				soilDatas.ForEach(data =>
@@ -100,7 +87,12 @@ namespace Game
 			
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
-			GUILayout.Label("  果子: " + Global.Fruits.Value);
+			GUILayout.Label("  南瓜果子: " + Global.PumpkinCount.Value);
+			GUILayout.EndHorizontal();
+			
+			GUILayout.Space(10);
+			GUILayout.BeginHorizontal();
+			GUILayout.Label("  胡萝卜果子: " + Global.RadishCount.Value);
 			GUILayout.EndHorizontal();
 			
 			GUILayout.Space(10);

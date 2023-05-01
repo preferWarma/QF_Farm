@@ -15,6 +15,7 @@ namespace Game
 			ShovelBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolShovel, ShovelBtnSelect);});
 			SeedBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolSeed, SeedBtnSelect);});
 			WatercanBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolWateringCan, WatercanBtnSelect);});
+			SeedRadishBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolSeedRadish, SeedBtnRadishSelect);});
 		}
 
 		private void Update()
@@ -38,6 +39,11 @@ namespace Game
 			{
 				SetCurrentTool(Constant.ToolWateringCan, WatercanBtnSelect);
 			}
+
+			if (Input.GetKeyDown(KeyCode.Alpha5))
+			{
+				SetCurrentTool(Constant.ToolSeedRadish, SeedBtnRadishSelect);
+			}
 		}
 		
 		private void SetCurrentTool(string toolName, Image selectImg)
@@ -51,6 +57,7 @@ namespace Game
 				Constant.ToolShovel => ShovelBtnImage.sprite,
 				Constant.ToolSeed => SeedBtnImage.sprite,
 				Constant.ToolWateringCan => WatercanBtnImage.sprite,
+				Constant.ToolSeedRadish => SeedBtnRadishImage.sprite,
 				_ => throw new ArgumentOutOfRangeException(nameof(toolName), toolName, null)
 			};	// 当前工具的显示图标
 			Global.Mouse.Icon.sprite = showIcon;
@@ -62,6 +69,7 @@ namespace Game
 			ShovelBtnSelect.Hide();
 			SeedBtnSelect.Hide();
 			WatercanBtnSelect.Hide();
+			SeedBtnRadishSelect.Hide();
 		}
 	}
 }

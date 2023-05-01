@@ -31,7 +31,7 @@ namespace Game
 			Global.OnPlantHarvest.Register(plant =>
 			{
 				Global.HarvestCountInCurrentDay.Value++;
-				if (plant.ripeDay == Global.Days.Value)
+				if (plant.RipeDay == Global.Days.Value)
 				{
 					Global.RipeAndHarvestCountInCurrentDay.Value++;
 				}

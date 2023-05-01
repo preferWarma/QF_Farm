@@ -9,7 +9,9 @@ namespace Game
     public class Global : MonoBehaviour
     {
         public static readonly BindableProperty<int> Days = new(1); // 第几天
-        public static readonly BindableProperty<int> Fruits = new(0); // 水果数量
+        public static readonly BindableProperty<int> PumpkinCount = new(0); // 南瓜数量
+        public static readonly BindableProperty<int> RadishCount = new(0); // 胡萝卜数量
+        
         public static readonly BindableProperty<string> CurrentTool = new("手");  // 当前工具
         public static readonly BindableProperty<int> RipeAndHarvestCountInCurrentDay = new(0); // 当天成熟并采摘的植物数量
         public static readonly BindableProperty<int> HarvestCountInCurrentDay = new(0); // 当天采摘的植物数量
@@ -24,7 +26,7 @@ namespace Game
         public static readonly List<Challenge> FinishedChallenges = new(); // 完成的挑战列表
 
 
-        public static readonly EasyEvent<Plant> OnPlantHarvest = new(); // 采摘植物事件
+        public static readonly EasyEvent<IPlant> OnPlantHarvest = new(); // 采摘植物事件
         public static readonly EasyEvent<Challenge> OnChallengeFinish = new(); // 挑战完成事件
 
         public static Player Player = null;
@@ -37,6 +39,7 @@ namespace Game
         public const string ToolShovel = "shovel";  // 锄头
         public const string ToolWateringCan = "wateringCan";    // 水壶
         public const string ToolSeed = "seed";  // 种子
+        public const string ToolSeedRadish = "seedRadish";  // 萝卜种子(逻辑有待完善)
         
         public static string DisplayName(string toolName, Language language)   // 工具名字(方便以后更改语言)
         {
@@ -48,6 +51,7 @@ namespace Game
                     ToolShovel => "锄头",
                     ToolWateringCan => "水壶",
                     ToolSeed => "种子",
+                    ToolSeedRadish => "萝卜种子",
                     _ => toolName
                 };
             }
@@ -59,6 +63,7 @@ namespace Game
                     ToolShovel => "Shovel",
                     ToolWateringCan => "Watering Can",
                     ToolSeed => "Seed",
+                    ToolSeedRadish => "Radish Seed",
                     _ => toolName
                 };
             }
