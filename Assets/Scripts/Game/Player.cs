@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Game.Data;
 using UnityEngine;
@@ -23,7 +22,7 @@ namespace Game
 
 		private void Start()
 		{
-			Global.Days.Register(day =>
+			Global.Days.Register(_ =>
 			{
 				AudioController.Instance.Sfx_NextDay.Play();	// 播放下一天音效
 				

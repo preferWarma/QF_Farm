@@ -18,56 +18,12 @@ MonoBehaviour:
     GameObject: {fileID: 0}
     From: 0
     NameToFullName: []
-    BindInfos:
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: HandBtn
-      MemberName: HandBtn
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: HandBtn/HandBtnImage
-      MemberName: HandBtnImage
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: HandBtn/HandBtnSelect
-      MemberName: HandBtnSelect
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: ShovelBtn
-      MemberName: ShovelBtn
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: ShovelBtn/ShovelBtnImage
-      MemberName: ShovelBtnImage
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: ShovelBtn/ShovelBtnSelect
-      MemberName: ShovelBtnSelect
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: SeedBtn
-      MemberName: SeedBtn
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: SeedBtn/SeedBtnImage
-      MemberName: SeedBtnImage
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: SeedBtn/SeedBtnSelect
-      MemberName: SeedBtnSelect
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: WatercanBtn
-      MemberName: WatercanBtn
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: WatercanBtn/WatercanBtnImage
-      MemberName: WatercanBtnImage
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: WatercanBtn/WatercanBtnSelect
-      MemberName: WatercanBtnSelect
+    BindInfos: []
     ScriptsFolder: Assets/Scripts/Game
-    ClassName: UIToolBar
+    ClassName: MouseController
     Namespace: Game
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game\r\n{\r\n\tpublic
-      partial class UIToolBar : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class MouseController : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:561dbfc5-a4fa-414e-97e6-18f7eef1b475\r\nusing UnityEngine;\r\n\r\nnamespace
-      Game\r\n{\r\n\tpublic partial class UIToolBar\r\n\t{\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      HandBtn;\r\n\r\n\t\tpublic UnityEngine.UI.Image HandBtnImage;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Image HandBtnSelect;\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      ShovelBtn;\r\n\r\n\t\tpublic UnityEngine.UI.Image ShovelBtnImage;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Image ShovelBtnSelect;\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      SeedBtn;\r\n\r\n\t\tpublic UnityEngine.UI.Image SeedBtnImage;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Image SeedBtnSelect;\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      WatercanBtn;\r\n\r\n\t\tpublic UnityEngine.UI.Image WatercanBtnImage;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Image WatercanBtnSelect;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:107ce1da-4b76-461a-a54c-c54a0033ef5f\r\nusing UnityEngine;\r\n\r\nnamespace
+      Game\r\n{\r\n\tpublic partial class MouseController\r\n\t{\r\n\r\n\t}\r\n}\r\n"
