@@ -45,14 +45,15 @@ namespace Game
 			Global.CurrentTool.Value = toolName;
 			HideAllSelect();
 			selectImg.Show();
-			Global.Player.CurrentToolIcon.sprite = toolName switch
+			var showIcon = toolName switch
 			{
 				Constant.ToolHand => HandBtnImage.sprite,
 				Constant.ToolShovel => ShovelBtnImage.sprite,
 				Constant.ToolSeed => SeedBtnImage.sprite,
 				Constant.ToolWateringCan => WatercanBtnImage.sprite,
 				_ => throw new ArgumentOutOfRangeException(nameof(toolName), toolName, null)
-			};	// 在Player上显示当前工具
+			};	// 当前工具的显示图标
+			Global.Mouse.Icon.sprite = showIcon;
 		}
 
 		private void HideAllSelect()

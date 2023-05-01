@@ -14,6 +14,13 @@ namespace Game
 				var change = Global.ActiveChallenges[i];
 				GUI.Label(new Rect(640 - 200, 20 + i * 20, 200, 24), change.Name + ": " + change.State);
 			}
+
+			for (var i = 0; i < Global.FinishedChallenges.Count; i++)
+			{
+				var change = Global.FinishedChallenges[i];
+				GUI.Label(new Rect(640 - 200, 20 + (i + Global.ActiveChallenges.Count) * 20, 200, 24),
+					"<color=green>" + change.Name + ": " + change.State + "</color>");
+			}
 		}
 	}
 }

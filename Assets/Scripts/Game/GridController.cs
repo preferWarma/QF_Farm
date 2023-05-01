@@ -2,6 +2,7 @@ using Game.Data;
 using UnityEngine;
 using QFramework;
 using UnityEngine.Tilemaps;
+// ReSharper disable Unity.InefficientPropertyAccess
 
 namespace Game
 {

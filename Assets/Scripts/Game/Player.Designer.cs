@@ -6,8 +6,6 @@ namespace Game
 {
 	public partial class Player
 	{
-
-		public SpriteRenderer CurrentToolIcon;
-
+		
 	}
 }
