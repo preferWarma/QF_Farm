@@ -18,12 +18,20 @@ MonoBehaviour:
     GameObject: {fileID: 0}
     From: 0
     NameToFullName: []
-    BindInfos: []
+    BindInfos:
+    - TypeName: UnityEngine.AudioSource
+      PathToRoot: Sfx_Take
+      MemberName: Sfx_Take
+    - TypeName: UnityEngine.AudioSource
+      PathToRoot: Sfx_Dig
+      MemberName: Sfx_Dig
     ScriptsFolder: Assets/Scripts/Game
-    ClassName: ChallengeController
+    ClassName: AudioController
     Namespace: Game
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game\r\n{\r\n\tpublic
-      partial class ChallengeController : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class AudioController : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:c8293bd9-e900-49b8-86bf-90737fb7cc27\r\nusing UnityEngine;\r\n\r\nnamespace
-      Game\r\n{\r\n\tpublic partial class ChallengeController\r\n\t{\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:7d57ce94-1a12-41e6-b8e0-46657acadf3c\r\nusing UnityEngine;\r\n\r\nnamespace
+      Game\r\n{\r\n\tpublic partial class AudioController\r\n\t{\r\n\r\n\t\tpublic
+      UnityEngine.AudioSource Sfx_Take;\r\n\r\n\t\tpublic UnityEngine.AudioSource
+      Sfx_Dig;\r\n\r\n\t}\r\n}\r\n"

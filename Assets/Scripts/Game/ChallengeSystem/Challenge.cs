@@ -1,6 +1,6 @@
 ﻿namespace Game.ChallengeSystem
 {
-    // 挑战
+    // 挑战基类
     public abstract class Challenge
     {
         public enum States

@@ -62,30 +62,7 @@ namespace Game
 				Global.Days.Value++;
 			}
 			
-			if (Input.GetKeyDown(KeyCode.Space))
-			{
-				SceneManager.LoadScene("Scenes/GamePass");
-			}
-
-			if (Input.GetKeyDown(KeyCode.Alpha0))
-			{
-				Global.CurrentTool.Value = Constant.ToolHand;
-			}
-			
-			if (Input.GetKeyDown(KeyCode.Alpha1))
-			{
-				Global.CurrentTool.Value = Constant.ToolShovel;
-			}
-
-			if (Input.GetKeyDown(KeyCode.Alpha2))
-			{
-				Global.CurrentTool.Value = Constant.ToolWateringCan;
-			}
-			
-			if (Input.GetKeyDown(KeyCode.Alpha3))
-			{
-				Global.CurrentTool.Value = Constant.ToolSeed;
-			}
+			SwitchTool();
 			
 			// 根据player的position值拿到tilemap的具体块
 			var cellPos = grid.WorldToCell(transform.position);
@@ -114,6 +91,7 @@ namespace Game
 					if (showGrid[cellPos.x, cellPos.y] == null)	// 无耕地
 					{
 						if (Global.CurrentTool.Value != Constant.ToolShovel) return; // 当前工具不是锄头则不开垦
+						AudioController.Instance.Sfx_Dig.Play();	// 播放开垦音效
 						tilemap.SetTile(cellPos, FindObjectOfType<GridController>().pen);
 						showGrid[cellPos.x, cellPos.y] = new SoilData();
 					}
@@ -202,15 +180,6 @@ namespace Game
 			GUILayout.BeginHorizontal();
 			GUILayout.Label("  下一天: Q");
 			GUILayout.EndHorizontal();GUILayout.Space(10);
-			
-			GUILayout.BeginHorizontal();
-			GUILayout.Label("  摘取: 鼠标左键");
-			GUILayout.EndHorizontal();
-			
-			GUILayout.Space(10);
-			GUILayout.BeginHorizontal();
-			GUILayout.Label("  消除: 鼠标右键");
-			GUILayout.EndHorizontal();GUILayout.Space(10);
 
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
@@ -218,6 +187,29 @@ namespace Game
 			GUILayout.EndHorizontal();GUILayout.Space(10);
 			
 			GUI.Label(new Rect(10, 320, 300, 24), "切换工具: [0]手, [1]锄头, [2]水壶, [3]种子");
+		}
+
+		private void SwitchTool()
+		{
+			if (Input.GetKeyDown(KeyCode.Alpha0))
+			{
+				Global.CurrentTool.Value = Constant.ToolHand;
+			}
+			
+			if (Input.GetKeyDown(KeyCode.Alpha1))
+			{
+				Global.CurrentTool.Value = Constant.ToolShovel;
+			}
+
+			if (Input.GetKeyDown(KeyCode.Alpha2))
+			{
+				Global.CurrentTool.Value = Constant.ToolWateringCan;
+			}
+			
+			if (Input.GetKeyDown(KeyCode.Alpha3))
+			{
+				Global.CurrentTool.Value = Constant.ToolSeed;
+			}
 		}
 	}
 }

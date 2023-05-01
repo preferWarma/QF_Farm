@@ -35,6 +35,12 @@ namespace Game
 					Global.RipeAndHarvestCountInCurrentDay.Value++;
 				}
 			}).UnRegisterWhenGameObjectDestroyed(this);
+			
+			// 监听工具切换
+			Global.CurrentTool.Register(_ =>
+			{
+				AudioController.Instance.Sfx_Take.Play();
+			});
 		}
 
 		private void Update()
