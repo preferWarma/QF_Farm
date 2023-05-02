@@ -1,8 +1,8 @@
-using UnityEngine;
 using QFramework;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Game
+namespace Game.SceneControllers
 {
 	public partial class GamePassController : ViewController
 	{

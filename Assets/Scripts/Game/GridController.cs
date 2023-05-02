@@ -9,17 +9,16 @@ namespace Game
 	public partial class GridController : ViewController
 	{
 		public TileBase pen;	// 地形笔刷
-		
-		private EasyGrid<SoilData> showGrid = new(10,10);	// 需要显示的Grid
-		public EasyGrid<SoilData> ShowGrid => showGrid;
+
+		public EasyGrid<SoilData> ShowGrid { get; } = new(10,10);
 
 		private void Start()
 		{
-			showGrid[0, 0] = new SoilData();
-			showGrid[1, 1] = new SoilData();
-			showGrid[2, 2] = new SoilData();
+			ShowGrid[0, 0] = new SoilData();
+			ShowGrid[1, 1] = new SoilData();
+			ShowGrid[2, 2] = new SoilData();
 			
-			showGrid.ForEach((x, y, data) =>
+			ShowGrid.ForEach((x, y, data) =>
 			{
 				if (data != null)
 				{
@@ -31,7 +30,7 @@ namespace Game
 		private void Update()
 		{
 			var grid = FindObjectOfType<Grid>();
-			showGrid.ForEach((x, y, _) =>
+			ShowGrid.ForEach((x, y, _) =>
 			{
 				var tileWorldPos = grid.CellToWorld(new Vector3Int(x, y, 0));
 				var leftBottomPos = tileWorldPos;

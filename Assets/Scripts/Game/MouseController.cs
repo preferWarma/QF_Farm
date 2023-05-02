@@ -1,4 +1,5 @@
 using Game.Data;
+using Game.Plants;
 using UnityEngine;
 using QFramework;
 using UnityEngine.EventSystems;
@@ -128,15 +129,6 @@ namespace Game
 					AudioController.Instance.Sfx_Harvest.Play(); // 播放收割音效
 					Global.OnPlantHarvest.Trigger(PlantController.Instance.PlantGrid[cellPos.x, cellPos.y]); // 触发收获事件
 					
-					if (PlantController.Instance.PlantGrid[cellPos.x, cellPos.y] as PlantRadish != null)	// 根据植物类型增加不同的水果数量
-					{
-						Global.RadishCount.Value++;
-					}
-					else
-					{
-						Global.PumpkinCount.Value++;
-					}
-
 					Destroy(PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].GameObject); // 摘取后销毁, 简化流程,后期会改
 					mshowGrid[cellPos.x, cellPos.y].HasPlant = false;
 					mshowGrid[cellPos.x, cellPos.y].PlantSates = PlantSates.Seed; // 摘取后下一次变成种子(有待改进)

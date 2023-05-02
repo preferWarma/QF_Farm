@@ -1,8 +1,8 @@
 ﻿namespace Game.ChallengeSystem
 {
-    public class ChallengeHarvestFirstFruit : Challenge
+    public class ChallengeHarvestOneFruit : Challenge
     {
-        public override string Name => "完成第一个果实的收获";
+        public override string Name => "完成一个果实的收获";
         public override void OnStart()
         {
             StartDate = Global.Days.Value;

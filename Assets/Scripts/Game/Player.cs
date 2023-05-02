@@ -1,7 +1,5 @@
-using System.Linq;
 using UnityEngine;
 using QFramework;
-using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 // ReSharper disable Unity.InefficientPropertyAccess
 
@@ -17,36 +15,7 @@ namespace Game
 		{
 			Global.Player = this;
 		}
-
-		private void Start()
-		{
-			Global.Days.Register(_ =>
-			{
-				AudioController.Instance.Sfx_NextDay.Play();	// 播放下一天音效
-				
-				Global.RipeAndHarvestCountInCurrentDay.Value = 0;	// 每天开始时，重置当天成熟且采摘的水果数量
-				Global.HarvestCountInCurrentDay.Value = 0;	// 每天开始时，重置当天采摘的水果数量
-				var soilDatas = FindObjectOfType<GridController>().ShowGrid;
-				
-				PlantController.Instance.PlantGrid.ForEach((x, y, plant) =>
-				{
-					if (plant is null)	return;
-					plant.Grow(soilDatas[x, y]);
-				});
- 
-				soilDatas.ForEach(data =>
-				{
-					if (data is null)	return;
-					data.Watered = false;	// 过了一天，所有的土地都没有水
-				});
-
-				var waters = SceneManager.GetActiveScene().GetRootGameObjects()
-					.Where(obj => obj.name.StartsWith("Water"));
-				waters.ForEach(water => { water.DestroySelf(); });	// 过了一天，所有的水都消失了
-				
-			}).UnRegisterWhenGameObjectDestroyed(gameObject);
-		}
-
+		
 		private void Update()
 		{
 

@@ -1,7 +1,7 @@
 ﻿using Game.Data;
 using UnityEngine;
 
-namespace Game
+namespace Game.Plants
 {
     public interface IPlant
     {

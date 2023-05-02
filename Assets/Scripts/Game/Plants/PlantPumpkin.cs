@@ -1,8 +1,8 @@
 using Game.Data;
-using UnityEngine;
 using QFramework;
+using UnityEngine;
 
-namespace Game
+namespace Game.Plants
 {
 	public partial class PlantPumpkin : ViewController, IPlant
 	{

@@ -1,3 +1,4 @@
+using Game.Plants;
 using QFramework;
 
 namespace Game
@@ -14,7 +15,7 @@ namespace Game
 	{
 		public static PlantController Instance => MonoSingletonProperty<PlantController>.Instance;
 
-		public EasyGrid<IPlant> PlantGrid = new(10, 10);
+		public readonly EasyGrid<IPlant> PlantGrid = new(10, 10);
 
 		public void OnSingletonInit()
 		{

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Game.ChallengeSystem;
+using Game.Plants;
 using QFramework;
 using UnityEngine;
 
@@ -15,12 +16,14 @@ namespace Game
         public static readonly BindableProperty<string> CurrentTool = new("手");  // 当前工具
         public static readonly BindableProperty<int> RipeAndHarvestCountInCurrentDay = new(0); // 当天成熟并采摘的植物数量
         public static readonly BindableProperty<int> HarvestCountInCurrentDay = new(0); // 当天采摘的植物数量
+        public static readonly BindableProperty<int> HarvestRadishCountInCurrentDay = new(0); // 当天采摘的萝卜数量
 
         public static readonly List<Challenge> Challenges = new()
         {
-            new ChallengeHarvestFirstFruit(),   // 收获第一个果实挑战
+            new ChallengeHarvestOneFruit(),   // 收获第一个果实挑战
             new RipeAndHarvestTwoInOneDay(), // 一天成熟并收获两个果实挑战
-            new RipeAndHarvestFiveInOneDay() // 一天成熟并收获五个果实挑战
+            new RipeAndHarvestFiveInOneDay(), // 一天成熟并收获五个果实挑战
+            new HarvestOneRadish(), // 收获一个萝卜挑战
         }; // 挑战列表
         public static readonly List<Challenge> ActiveChallenges = new(); // 激活的挑战列表
         public static readonly List<Challenge> FinishedChallenges = new(); // 完成的挑战列表
