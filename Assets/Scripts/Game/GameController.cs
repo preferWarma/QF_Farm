@@ -2,7 +2,6 @@ using System.Linq;
 using Game.ChallengeSystem;
 using Game.Plants;
 using QFramework;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Game
@@ -14,9 +13,8 @@ namespace Game
             // 开局随机添加一个挑战
             var randomItem = Global.Challenges.GetRandomItem();
             Global.ActiveChallenges.Add(randomItem);
-
-            RegisterOnChallengeFinish();
-            RegisterOnPlantHarvest();
+            
+            // 注册相关事件
             RegisterOnToolChange();
             RegisterOnDaysChange();
         }
@@ -65,49 +63,7 @@ namespace Game
         }
         
         #region 监听注册的相关函数
-
-        private void RegisterOnChallengeFinish()
-        {
-            // 监听挑战完成
-            Global.OnChallengeFinish.Register(challenge =>
-            {
-                AudioController.Instance.Sfx_Complete.Play(); // 播放挑战完成音效
-                Global.FinishedChallenges.Add(challenge);
-                Debug.Log($"完成挑战:{challenge.Name}");
-
-                if (Global.Challenges.Count == Global.FinishedChallenges.Count) // 如果所有的挑战都完成了
-                {
-                    ActionKit.Delay(1.0f, () => SceneManager.LoadScene("Scenes/GamePass"))
-                        .Start(this);
-                }
-            }).UnRegisterWhenGameObjectDestroyed(this);
-        }
-
-        private void RegisterOnPlantHarvest()
-        {
-            // 监听植物采摘
-            Global.OnPlantHarvest.Register(plant =>
-            {
-                Global.HarvestCountInCurrentDay.Value++;
-
-                // 根据植物类型增加不同的水果数量
-                if (plant as PlantRadish != null)
-                {
-                    Global.RadishCount.Value++;
-                    Global.HarvestRadishCountInCurrentDay.Value++;
-                }
-                else if (plant as PlantPumpkin != null)
-                {
-                    Global.PumpkinCount.Value++;
-                }
-
-                if (plant.RipeDay == Global.Days.Value) // 如果是当天成熟的植物被采摘
-                {
-                    Global.RipeAndHarvestCountInCurrentDay.Value++;
-                }
-            }).UnRegisterWhenGameObjectDestroyed(this);
-        }
-
+        
         private void RegisterOnToolChange()
         {
             // 监听工具切换

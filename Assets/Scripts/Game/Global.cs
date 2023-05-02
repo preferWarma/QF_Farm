@@ -10,14 +10,18 @@ namespace Game
     public class Global : MonoBehaviour
     {
         public static readonly BindableProperty<int> Days = new(1); // 第几天
+        public static readonly BindableProperty<string> CurrentTool = new("手");  // 当前工具
+        
+        [Header("植物数量")]
         public static readonly BindableProperty<int> PumpkinCount = new(0); // 南瓜数量
         public static readonly BindableProperty<int> RadishCount = new(0); // 胡萝卜数量
         
-        public static readonly BindableProperty<string> CurrentTool = new("手");  // 当前工具
+        [Header("挑战要求相关")]
         public static readonly BindableProperty<int> RipeAndHarvestCountInCurrentDay = new(0); // 当天成熟并采摘的植物数量
         public static readonly BindableProperty<int> HarvestCountInCurrentDay = new(0); // 当天采摘的植物数量
         public static readonly BindableProperty<int> HarvestRadishCountInCurrentDay = new(0); // 当天采摘的萝卜数量
 
+        [Header("挑战列表")]
         public static readonly List<Challenge> Challenges = new()
         {
             new ChallengeHarvestOneFruit(),   // 收获第一个果实挑战
@@ -28,9 +32,11 @@ namespace Game
         public static readonly List<Challenge> ActiveChallenges = new(); // 激活的挑战列表
         public static readonly List<Challenge> FinishedChallenges = new(); // 完成的挑战列表
         
+        [Header("事件相关")]
         public static readonly EasyEvent<IPlant> OnPlantHarvest = new(); // 采摘植物事件
         public static readonly EasyEvent<Challenge> OnChallengeFinish = new(); // 挑战完成事件
 
+        [Header("其他")]
         public static Player Player = null;
         public static MouseController Mouse = null;
     }
