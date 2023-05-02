@@ -24,8 +24,7 @@ namespace Game
         }; // 挑战列表
         public static readonly List<Challenge> ActiveChallenges = new(); // 激活的挑战列表
         public static readonly List<Challenge> FinishedChallenges = new(); // 完成的挑战列表
-
-
+        
         public static readonly EasyEvent<IPlant> OnPlantHarvest = new(); // 采摘植物事件
         public static readonly EasyEvent<Challenge> OnChallengeFinish = new(); // 挑战完成事件
 

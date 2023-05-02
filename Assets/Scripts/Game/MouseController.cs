@@ -44,7 +44,7 @@ namespace Game
 			{
 				if (cellPosition.x is < 10 and >= 0 && cellPosition.y is < 10 and >= 0)	// 鼠标在地图内
 				{
-					DoOnMouseDown0(cellPosition);
+					DoOnMouse0(cellPosition);
 					mSpriteRenderer.enabled = true;
 					var gridCenterPosition = mgrid.GetCellCenterWorld(cellPosition); // 获取格子中心点的世界坐标
 					gridCenterPosition -= mgrid.cellSize * 0.5f;
@@ -62,9 +62,9 @@ namespace Game
 			Global.Mouse = null;
 		}
 
-		private void DoOnMouseDown0(Vector3Int cellPos)
+		private void DoOnMouse0(Vector3Int cellPos)
 		{
-			if (!Input.GetMouseButtonDown(0)) return; // 鼠标左键没有按下则不处理
+			if (!Input.GetMouseButton(0)) return; // 鼠标左键没有按下则不处理
 			if (EventSystem.current.IsPointerOverGameObject()) return;	// 如果点击到了UI则不处理
 
 			var tileWorldPos = mgrid.GetCellCenterWorld(cellPos);
@@ -83,7 +83,6 @@ namespace Game
 				{
 					if (Global.CurrentTool.Value == Constant.ToolWateringCan)	// 当前工具是水壶
 					{
-
 						AudioController.Instance.Sfx_Watering.Play(); // 播放浇水音效
 						mshowGrid[cellPos.x, cellPos.y].Watered = true;
 						ResController.Instance.waterPrefab
