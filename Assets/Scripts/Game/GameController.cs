@@ -1,6 +1,5 @@
 using System.Linq;
 using Game.ChallengeSystem;
-using Game.Plants;
 using QFramework;
 using UnityEngine.SceneManagement;
 

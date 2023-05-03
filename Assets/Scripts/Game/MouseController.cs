@@ -94,23 +94,25 @@ namespace Game
 				
 				if (!mshowGrid[cellPos.x, cellPos.y].HasPlant) // 当前土地没有植物则种植
 				{
-					if (Global.CurrentTool.Value != Constant.ToolSeed && Global.CurrentTool.Value != Constant.ToolSeedRadish) return; // 当前工具不是种子则不种植
-
-					AudioController.Instance.Sfx_PutSeed.Play(); // 播放种植音效
+					if (Global.CurrentTool.Value != Constant.ToolSeedPumpkin && Global.CurrentTool.Value != Constant.ToolSeedRadish) return; // 当前工具不是种子则不种植
+					
 					GameObject plantObj = null;
-					if (Global.CurrentTool.Value == Constant.ToolSeed)	// 根据当前工具种植不同的植物
+					if (Global.CurrentTool.Value == Constant.ToolSeedPumpkin && Global.PumpKinSeedCount.Value > 0)	// 根据当前工具种植不同的植物
 					{
 						plantObj = ResController.Instance.plantPrefab
 						.Instantiate()
 						.Position(tileWorldPos);
+						Global.PumpKinSeedCount.Value--;
 					}
-					else if (Global.CurrentTool.Value == Constant.ToolSeedRadish)
+					else if (Global.CurrentTool.Value == Constant.ToolSeedRadish && Global.RadishSeedCount.Value > 0)
 					{
 						plantObj = ResController.Instance.plantRadishPrefab
 						.Instantiate()
 						.Position(tileWorldPos);
+						Global.RadishSeedCount.Value--;
 					}
 					if (plantObj == null) return;
+					AudioController.Instance.Sfx_PutSeed.Play(); // 播放种植音效
 					var plant = plantObj.GetComponent<IPlant>();
 					plant.X = cellPos.x;
 					plant.Y = cellPos.y;

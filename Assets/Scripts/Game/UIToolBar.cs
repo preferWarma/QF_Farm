@@ -13,7 +13,7 @@ namespace Game
 			
 			HandBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolHand, HandBtnSelect);});
 			ShovelBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolShovel, ShovelBtnSelect);});
-			SeedBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolSeed, SeedBtnSelect);});
+			SeedBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolSeedPumpkin, SeedBtnSelect);});
 			WatercanBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolWateringCan, WatercanBtnSelect);});
 			SeedRadishBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolSeedRadish, SeedBtnRadishSelect);});
 		}
@@ -32,7 +32,7 @@ namespace Game
 
 			if (Input.GetKeyDown(KeyCode.Alpha3))
 			{
-				SetCurrentTool(Constant.ToolSeed, SeedBtnSelect);
+				SetCurrentTool(Constant.ToolSeedPumpkin, SeedBtnSelect);
 			}
 			
 			if (Input.GetKeyDown(KeyCode.Alpha4))
@@ -55,7 +55,7 @@ namespace Game
 			{
 				Constant.ToolHand => HandBtnImage.sprite,
 				Constant.ToolShovel => ShovelBtnImage.sprite,
-				Constant.ToolSeed => SeedBtnImage.sprite,
+				Constant.ToolSeedPumpkin => SeedBtnImage.sprite,
 				Constant.ToolWateringCan => WatercanBtnImage.sprite,
 				Constant.ToolSeedRadish => SeedBtnRadishImage.sprite,
 				_ => throw new ArgumentOutOfRangeException(nameof(toolName), toolName, null)
