@@ -18,19 +18,12 @@ MonoBehaviour:
     GameObject: {fileID: 0}
     From: 0
     NameToFullName: []
-    BindInfos:
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnBuyPumpkin
-      MemberName: BtnBuyPumpkin
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnBuyRadish
-      MemberName: BtnBuyRadish
+    BindInfos: []
     ScriptsFolder: Assets/Scripts/Game
-    ClassName: UIShop
+    ClassName: TimeController
     Namespace: Game
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game\r\n{\r\n\tpublic
-      partial class UIShop : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class TimeController : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:2d39832a-832f-4e3b-806c-9c8cad3bb159\r\nusing UnityEngine;\r\n\r\nnamespace
-      Game\r\n{\r\n\tpublic partial class UIShop\r\n\t{\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      BtnBuyPumpkin;\r\n\r\n\t\tpublic UnityEngine.UI.Button BtnBuyRadish;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:b524331f-d31f-4055-b0bd-3d375f8835b0\r\nusing UnityEngine;\r\n\r\nnamespace
+      Game\r\n{\r\n\tpublic partial class TimeController\r\n\t{\r\n\r\n\t}\r\n}\r\n"
