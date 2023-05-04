@@ -11,7 +11,7 @@
 
         public override bool CheckFinish()
         {
-            return StartDate != Global.Days.Value && Global.HarvestRadishCountInCurrentDay.Value >= 1;
+            return StartDate != Global.Days.Value && ChallengeController.HarvestRadishCountInCurrentDay.Value >= 1;
         }
 
         public override void OnFinish()

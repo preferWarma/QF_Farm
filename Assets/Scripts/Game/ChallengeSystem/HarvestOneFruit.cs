@@ -10,7 +10,7 @@
 
         public override bool CheckFinish()
         {
-            return StartDate != Global.Days.Value && Global.HarvestCountInCurrentDay.Value > 0;
+            return StartDate != Global.Days.Value && ChallengeController.HarvestCountInCurrentDay.Value > 0;
         }
 
         public override void OnFinish()

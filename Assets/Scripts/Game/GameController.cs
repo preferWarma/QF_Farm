@@ -9,9 +9,7 @@ namespace Game
     {
         private void Start()
         {
-            // 开局随机添加一个挑战
-            var randomItem = Global.Challenges.GetRandomItem();
-            Global.ActiveChallenges.Add(randomItem);
+            InitValueOnStart();
             
             // 注册相关事件
             RegisterOnToolChange();
@@ -28,7 +26,7 @@ namespace Game
             var hasFinishedChallenge = false;
 
             // 检查激活列表中是否有挑战完成或开始
-            foreach (var challenge in Global.ActiveChallenges)
+            foreach (var challenge in ChallengeController.ActiveChallenges)
             {
                 if (challenge.State == Challenge.States.NotStart)
                 {
@@ -50,19 +48,20 @@ namespace Game
 
             if (hasFinishedChallenge)
             {
-                Global.ActiveChallenges.RemoveAll(challenge => challenge.State == Challenge.States.Finished);
+                ChallengeController.ActiveChallenges.RemoveAll(challenge => challenge.State == Challenge.States.Finished);
             }
 
-            if (Global.ActiveChallenges.Count == 0 && Global.FinishedChallenges.Count != Global.Challenges.Count)
+            if (ChallengeController.ActiveChallenges.Count == 0 && ChallengeController.FinishedChallenges.Count != ChallengeController.Challenges.Count)
             {
-                var randomItem = Global.Challenges.Where(challenge1 => challenge1.State == Challenge.States.NotStart)
+                var randomItem = ChallengeController.Challenges.Where(challenge1 => challenge1.State == Challenge.States.NotStart)
                     .ToList().GetRandomItem();
-                Global.ActiveChallenges.Add(randomItem); // 完成挑战时再随机添加一个未开始的挑战
+                ChallengeController.ActiveChallenges.Add(randomItem); // 完成挑战时再随机添加一个未开始的挑战
             }
         }
         
         #region 监听注册的相关函数
         
+        // 监听工具切换
         private void RegisterOnToolChange()
         {
             // 监听工具切换
@@ -70,6 +69,7 @@ namespace Game
                 .UnRegisterWhenGameObjectDestroyed(this);
         }
 
+        // 监听天数变化
         private void RegisterOnDaysChange()
         {
             // 监听天数变化
@@ -77,9 +77,9 @@ namespace Game
             {
                 AudioController.Instance.Sfx_NextDay.Play(); // 播放下一天音效
 
-                Global.RipeAndHarvestCountInCurrentDay.Value = 0; // 每天开始时，重置当天成熟且采摘的水果数量
-                Global.HarvestCountInCurrentDay.Value = 0; // 每天开始时，重置当天采摘的水果数量
-                Global.HarvestRadishCountInCurrentDay.Value = 0; // 每天开始时，重置当天采摘的萝卜数量
+                ChallengeController.RipeAndHarvestCountInCurrentDay.Value = 0; // 每天开始时，重置当天成熟且采摘的水果数量
+                ChallengeController.HarvestCountInCurrentDay.Value = 0; // 每天开始时，重置当天采摘的水果数量
+                ChallengeController.HarvestRadishCountInCurrentDay.Value = 0; // 每天开始时，重置当天采摘的萝卜数量
 
                 var soilDatas = FindObjectOfType<GridController>().ShowGrid;
 
@@ -102,5 +102,15 @@ namespace Game
         }
 
         #endregion
+
+        private void InitValueOnStart()
+        {
+            Global.Days.Value = 1;  // 开局第一天
+            Global.CurrentTool.Value = Constant.ToolHand; // 开局默认手
+            Global.PumpkinCount.Value = 0;  // 开局默认0个南瓜
+            Global.RadishCount.Value = 0; // 开局默认0个萝卜
+            Global.PumpKinSeedCount.Value = 5;  // 开局默认5个南瓜种子
+            Global.RadishSeedCount.Value = 5; // 开局默认5个萝卜种子
+        }
     }
 }

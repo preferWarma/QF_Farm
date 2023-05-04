@@ -1,3 +1,4 @@
+using Game.ChallengeSystem;
 using UnityEngine;
 using QFramework;
 using UnityEngine.Tilemaps;
@@ -76,12 +77,7 @@ namespace Game
 			
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
-			GUILayout.Label("  当天成熟并采摘的数量: " + Global.RipeAndHarvestCountInCurrentDay.Value);
-			GUILayout.EndHorizontal();
-			
-			GUILayout.Space(10);
-			GUILayout.BeginHorizontal();
-			GUILayout.Label("  浇水: E");
+			GUILayout.Label("  当天成熟并采摘的数量: " + ChallengeController.RipeAndHarvestCountInCurrentDay.Value);
 			GUILayout.EndHorizontal();
 			
 			GUILayout.Space(10);

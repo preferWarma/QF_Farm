@@ -11,7 +11,7 @@
 
         public override bool CheckFinish()
         {
-            return StartDate != Global.Days.Value && Global.RipeAndHarvestCountInCurrentDay.Value >= 2;
+            return StartDate != Global.Days.Value && ChallengeController.RipeAndHarvestCountInCurrentDay.Value >= 2;
         }
 
         public override void OnFinish()
