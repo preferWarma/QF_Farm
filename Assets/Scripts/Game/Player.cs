@@ -20,10 +20,10 @@ namespace Game
 		private void Update()
 		{
 
-			if (Input.GetKeyDown(KeyCode.Q))	// 按下Q键，进入下一天
-			{
-				Global.Days.Value++;
-			}
+			// if (Input.GetKeyDown(KeyCode.Q))	// 按下Q键，进入下一天
+			// {
+			// 	Global.Days.Value++;
+			// }
 			
 			// // 根据player的position值拿到tilemap的具体块
 			// var cellPos = grid.WorldToCell(transform.position);
@@ -80,10 +80,10 @@ namespace Game
 			GUILayout.Label("  当天成熟并采摘的数量: " + ChallengeController.RipeAndHarvestCountInCurrentDay.Value);
 			GUILayout.EndHorizontal();
 			
-			GUILayout.Space(10);
-			GUILayout.BeginHorizontal();
-			GUILayout.Label("  下一天: Q");
-			GUILayout.EndHorizontal();GUILayout.Space(10);
+			// GUILayout.Space(10);
+			// GUILayout.BeginHorizontal();
+			// GUILayout.Label("  下一天: Q");
+			// GUILayout.EndHorizontal();GUILayout.Space(10);
 
 			// GUI.Label(new Rect(10, 320, 300, 24), "切换工具: [1]手, [2]锄头, [3]水壶, [4]种子");
 		}
