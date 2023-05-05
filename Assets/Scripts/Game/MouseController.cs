@@ -30,10 +30,10 @@ namespace Game
 			mSpriteRenderer = GetComponent<SpriteRenderer>();
 			mSpriteRenderer.enabled = false;	// 默认是隐藏的
 			mshowGrid = mGridController.ShowGrid;
-			mTilemap = mGridController.Tilemap;
+			mTilemap = mGridController.Soil;
 		}
 		
-		private void Update()
+		private void LateUpdate()
 		{
 			var playerCellPos = mgrid.WorldToCell(Global.Player.transform.position);	// 获取玩家所在的格子位置
 			var worldMousePoint = mCamera.ScreenToWorldPoint(Input.mousePosition);	// 获取鼠标所在的世界坐标

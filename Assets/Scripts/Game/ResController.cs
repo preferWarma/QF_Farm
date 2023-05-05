@@ -5,7 +5,7 @@ namespace Game
 {
 	public partial class ResController : ViewController, ISingleton
 	{
-		[Header("GameObjects")]
+		[Header("预制体")]
 		public GameObject waterPrefab;	// 水
 		public GameObject plantPrefab;  // 植物
 		public GameObject plantRadishPrefab; // 萝卜植物

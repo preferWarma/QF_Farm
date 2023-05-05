@@ -8,7 +8,9 @@ namespace Game
 {
 	public partial class GridController : ViewController
 	{
+		[Header("笔刷")]
 		public TileBase pen;	// 地形笔刷
+		public TileBase grassPen;	// 草地笔刷
 
 		public EasyGrid<SoilData> ShowGrid { get; } = new(10,10);
 
@@ -22,8 +24,14 @@ namespace Game
 			{
 				if (data != null)
 				{
-					Tilemap.SetTile(new Vector3Int(x, y), pen);
+					Soil.SetTile(new Vector3Int(x, y), pen);
 				}
+			});
+			
+			// 画可以种植的草地
+			ShowGrid.ForEach((x, y, data) =>
+			{
+				Ground.SetTile(new Vector3Int(x, y), grassPen);
 			});
 		}
 

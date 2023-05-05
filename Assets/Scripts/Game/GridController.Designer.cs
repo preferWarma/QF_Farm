@@ -1,4 +1,4 @@
-// Generate Id:7fec5b61-e963-4e99-86f8-40b6c9db59f0
+// Generate Id:9192c4b1-a369-49c7-b0ae-e882ae34f0b9
 using UnityEngine;
 
 namespace Game
@@ -6,7 +6,9 @@ namespace Game
 	public partial class GridController
 	{
 
-		public UnityEngine.Tilemaps.Tilemap Tilemap;
+		public UnityEngine.Tilemaps.Tilemap Ground;
+
+		public UnityEngine.Tilemaps.Tilemap Soil;
 
 	}
 }
