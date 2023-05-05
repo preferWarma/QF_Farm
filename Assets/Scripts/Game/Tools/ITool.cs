@@ -8,6 +8,16 @@ namespace Game.Tools
     public interface ITool
     {
         bool Selected();    // 是否被选中
-        void Use(EasyGrid<SoilData> easyGrid, Tilemap tilemap, Vector3Int cellPos, TileBase pen);    // 使用
+        void Use(ToolNeedData needData);    // 使用
+    }
+
+    // 用于传递数据
+    
+    public class ToolNeedData
+    {
+        public EasyGrid<SoilData> ShowGrid;
+        public Tilemap Tilemap;
+        public Vector3Int CellPos;
+        public TileBase Pen;
     }
 }

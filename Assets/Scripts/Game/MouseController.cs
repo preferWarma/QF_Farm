@@ -1,5 +1,4 @@
 using Game.Data;
-using Game.Plants;
 using Game.Tools;
 using UnityEngine;
 using QFramework;
@@ -74,28 +73,36 @@ namespace Game
 		{
 			if (!Input.GetMouseButton(0)) return; // 鼠标左键没有按下则不处理
 			if (EventSystem.current.IsPointerOverGameObject()) return;	// 如果点击到了UI则不处理
+
+			var toolNeedData = new ToolNeedData
+			{
+				ShowGrid = mshowGrid,
+				CellPos = cellPos,
+				Tilemap = mTilemap,
+				Pen = mGridController.pen
+			};
 			
 			if (mshowGrid[cellPos.x, cellPos.y] == null)	// 无耕地
 			{
 				if (mShovel.Selected())
 				{
-					mShovel.Use(mshowGrid, mTilemap, cellPos, mGridController.pen);
+					mShovel.Use(toolNeedData);
 				}
 			}
 			else // 有耕地
 			{
 				if (mWateringCan.Selected())
 				{
-					mWateringCan.Use(mshowGrid, mTilemap, cellPos, mGridController.pen);
+					mWateringCan.Use(toolNeedData);
 				}
 				if (mSeed.Selected())
 				{
-					mSeed.Use(mshowGrid, mTilemap, cellPos, mGridController.pen);
+					mSeed.Use(toolNeedData);
 				}	
 				
 				if (mHand.Selected())
 				{
-					mHand.Use(mshowGrid, mTilemap, cellPos, mGridController.pen);
+					mHand.Use(toolNeedData);
 				}
 			}
 		}

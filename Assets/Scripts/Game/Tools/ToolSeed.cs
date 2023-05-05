@@ -1,8 +1,6 @@
-﻿using Game.Data;
-using Game.Plants;
+﻿using Game.Plants;
 using QFramework;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace Game.Tools
 {
@@ -14,12 +12,17 @@ namespace Game.Tools
                    Global.CurrentTool == Constant.ToolSeedRadish;
         }
 
-        public void Use(EasyGrid<SoilData> easyGrid, Tilemap tilemap, Vector3Int cellPos, TileBase pen)
+        public void Use(ToolNeedData needData)
         {
-            if (easyGrid[cellPos.x, cellPos.y].HasPlant) return; // 已经有植物了
+            var showGrid = needData.ShowGrid;
+            var cellPos = needData.CellPos;
+            var tilemap = needData.Tilemap;
+            var pen = needData.Pen;
+            
+            if (showGrid[cellPos.x, cellPos.y].HasPlant) return; // 已经有植物了
             
             GameObject plantObj = null;
-            Vector3 tileWorldPos = tilemap.GetCellCenterWorld(cellPos);
+            var tileWorldPos = tilemap.GetCellCenterWorld(cellPos);
             
             // 根据当前工具种植不同的植物
             if (Global.CurrentTool.Value == Constant.ToolSeedPumpkin && Global.PumpKinSeedCount.Value > 0)
@@ -44,7 +47,8 @@ namespace Game.Tools
             plant.SetState(PlantSates.Seed);
 
             PlantController.Instance.PlantGrid[cellPos.x, cellPos.y] = plant;
-            easyGrid[cellPos.x, cellPos.y].HasPlant = true;
+            showGrid[cellPos.x, cellPos.y].HasPlant = true;
         }
+        
     }
 }
