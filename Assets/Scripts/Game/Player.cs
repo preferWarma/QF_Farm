@@ -20,10 +20,10 @@ namespace Game
 		private void Update()
 		{
 
-			// if (Input.GetKeyDown(KeyCode.Q))	// 按下Q键，进入下一天
-			// {
-			// 	Global.Days.Value++;
-			// }
+			if (Input.GetKeyDown(KeyCode.Q))	// 按下Q键，进入下一天
+			{
+				Global.Days.Value++;
+			}
 			
 			// // 根据player的position值拿到tilemap的具体块
 			// var cellPos = grid.WorldToCell(transform.position);

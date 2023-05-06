@@ -17,12 +17,6 @@ namespace Game
 		private GridController mGridController;
 		private Tilemap mTilemap;
 		
-		private ITool mShovel = new ToolShovel();
-		private ITool mWateringCan = new ToolWateringCan();
-		private ITool mSeedPumpkin = new ToolSeedPumpkin();
-		private ITool mSeedRadish = new ToolSeedRadish();
-		private ITool mHand = new ToolHand();
-
 		private void Awake()
 		{
 			Global.Mouse = this;
@@ -85,28 +79,28 @@ namespace Game
 			
 			if (mshowGrid[cellPos.x, cellPos.y] == null)	// 无耕地
 			{
-				if (mShovel.Selected())
+				if (Constant.ToolShovel.Selected())	// 如果选中了锄头
 				{
-					mShovel.Use(toolNeedData);
+					Constant.ToolShovel.Use(toolNeedData);
 				}
 			}
 			else // 有耕地
 			{
-				if (mWateringCan.Selected())
+				if (Constant.ToolWateringCan.Selected())	// 如果选中了水壶
 				{
-					mWateringCan.Use(toolNeedData);
+					Constant.ToolWateringCan.Use(toolNeedData);
 				}
-				if (mSeedPumpkin.Selected())
+				if (Constant.ToolSeedPumpkin.Selected())	// 如果选中了南瓜种子
 				{
-					mSeedPumpkin.Use(toolNeedData);
+					Constant.ToolSeedPumpkin.Use(toolNeedData);
 				}	
-				if (mSeedRadish.Selected())
+				if (Constant.ToolSeedRadish.Selected())	// 如果选中了萝卜种子
 				{
-					mSeedRadish.Use(toolNeedData);
+					Constant.ToolSeedRadish.Use(toolNeedData);
 				}
-				if (mHand.Selected())
+				if (Constant.ToolHand.Selected())	// 如果选中了手
 				{
-					mHand.Use(toolNeedData);
+					Constant.ToolHand.Use(toolNeedData);
 				}
 			}
 		}

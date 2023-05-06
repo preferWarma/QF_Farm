@@ -1,4 +1,3 @@
-using System;
 using Game.Tools;
 using UnityEngine;
 using QFramework;
@@ -49,33 +48,19 @@ namespace Game
 		
 		private void SetCurrentTool(ITool tool, Image selectImg)
 		{
-			Global.CurrentTool.Value = tool;
+			Global.CurrentTool.Value = tool;	// 设置当前工具
 			HideAllSelect();
 			selectImg.Show();
 			Sprite showIcon = null;
+
+			// 获取当前工具的图标
+			if (tool == Constant.ToolHand) showIcon = HandBtnImage.sprite;
+			if (tool == Constant.ToolShovel) showIcon = ShovelBtnImage.sprite;
+			if (tool == Constant.ToolWateringCan) showIcon = WatercanBtnImage.sprite;
+			if (tool == Constant.ToolSeedPumpkin) showIcon = SeedBtnPumpkinImage.sprite;
+			if (tool == Constant.ToolSeedRadish) showIcon = SeedBtnRadishImage.sprite;
 			
-			if (tool == Constant.ToolHand)
-			{
-				showIcon = HandBtnImage.sprite;
-			}
-			else if (tool == Constant.ToolShovel)
-			{
-				showIcon = ShovelBtnImage.sprite;
-			}
-			else if (tool == Constant.ToolSeedPumpkin)
-			{
-				showIcon = SeedBtnPumpkinImage.sprite;
-			}
-			else if (tool == Constant.ToolWateringCan)
-			{
-				showIcon = WatercanBtnImage.sprite;
-			}
-			else if (tool == Constant.ToolSeedRadish)
-			{
-				showIcon = SeedBtnRadishImage.sprite;
-			}
-			
-			Global.Mouse.Icon.sprite = showIcon;
+			Global.Mouse.Icon.sprite = showIcon;	// 设置鼠标图标
 		}
 
 		private void HideAllSelect()

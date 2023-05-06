@@ -2689,7 +2689,7 @@ GameObject:
   - component: {fileID: 851476635}
   - component: {fileID: 851476638}
   m_Layer: 5
-  m_Name: SeedBtn
+  m_Name: SeedPumpkinBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2998,7 +2998,7 @@ GameObject:
   - component: {fileID: 937926522}
   - component: {fileID: 937926524}
   m_Layer: 5
-  m_Name: SeedBtnSelect
+  m_Name: SeedBtnPumpkinSelect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4429,9 +4429,9 @@ MonoBehaviour:
   ShovelBtn: {fileID: 1607286199}
   ShovelBtnImage: {fileID: 634323162}
   ShovelBtnSelect: {fileID: 1101623215}
-  SeedBtn: {fileID: 851476635}
-  SeedBtnImage: {fileID: 1509437154}
-  SeedBtnSelect: {fileID: 937926522}
+  SeedPumpkinBtn: {fileID: 851476635}
+  SeedBtnPumpkinImage: {fileID: 1509437154}
+  SeedBtnPumpkinSelect: {fileID: 937926522}
   WatercanBtn: {fileID: 1123910322}
   WatercanBtnImage: {fileID: 401045667}
   WatercanBtnSelect: {fileID: 133736946}
@@ -5596,7 +5596,7 @@ GameObject:
   - component: {fileID: 1509437154}
   - component: {fileID: 1509437156}
   m_Layer: 5
-  m_Name: SeedBtnImage
+  m_Name: SeedBtnPumpkinImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
