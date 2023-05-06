@@ -19,7 +19,8 @@ namespace Game
 		
 		private ITool mShovel = new ToolShovel();
 		private ITool mWateringCan = new ToolWateringCan();
-		private ITool mSeed = new ToolSeed();
+		private ITool mSeedPumpkin = new ToolSeedPumpkin();
+		private ITool mSeedRadish = new ToolSeedRadish();
 		private ITool mHand = new ToolHand();
 
 		private void Awake()
@@ -95,11 +96,14 @@ namespace Game
 				{
 					mWateringCan.Use(toolNeedData);
 				}
-				if (mSeed.Selected())
+				if (mSeedPumpkin.Selected())
 				{
-					mSeed.Use(toolNeedData);
+					mSeedPumpkin.Use(toolNeedData);
 				}	
-				
+				if (mSeedRadish.Selected())
+				{
+					mSeedRadish.Use(toolNeedData);
+				}
 				if (mHand.Selected())
 				{
 					mHand.Use(toolNeedData);

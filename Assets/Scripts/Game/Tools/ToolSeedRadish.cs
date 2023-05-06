@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace Game.Tools
 {
-    public class ToolSeed : ITool
+    public class ToolSeedRadish : ITool
     {
+        public string Name => "SeedRadish";
+
         public bool Selected()
         {
-            return Global.CurrentTool == Constant.ToolSeedPumpkin ||
-                   Global.CurrentTool == Constant.ToolSeedRadish;
+            return Global.CurrentTool.Value.Name == Name;
         }
 
         public void Use(ToolNeedData needData)
@@ -24,15 +25,7 @@ namespace Game.Tools
             GameObject plantObj = null;
             var tileWorldPos = tilemap.GetCellCenterWorld(cellPos);
             
-            // 根据当前工具种植不同的植物
-            if (Global.CurrentTool.Value == Constant.ToolSeedPumpkin && Global.PumpKinSeedCount.Value > 0)
-            {
-                plantObj = ResController.Instance.plantPrefab
-                    .Instantiate()
-                    .Position(tileWorldPos);
-                Global.PumpKinSeedCount.Value--;
-            }
-            else if (Global.CurrentTool.Value == Constant.ToolSeedRadish && Global.RadishSeedCount.Value > 0)
+            if (Global.RadishSeedCount.Value > 0)
             {
                 plantObj = ResController.Instance.plantRadishPrefab
                     .Instantiate()

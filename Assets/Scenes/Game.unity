@@ -1336,7 +1336,7 @@ MonoBehaviour:
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
   waterPrefab: {fileID: 5147751245669483221, guid: 37eef3ed04659c041919933ab558b23f, type: 3}
-  plantPrefab: {fileID: 949551888860867234, guid: 7e73ee98cca26b8418d1780067c076cf, type: 3}
+  plantPumpkinPrefab: {fileID: 949551888860867234, guid: 7e73ee98cca26b8418d1780067c076cf, type: 3}
   plantRadishPrefab: {fileID: 5146968983972400641, guid: fc03b318d4aab8649bae7b19b2986d5a, type: 3}
   seedSprite: {fileID: 21300000, guid: 8304f264f5aaa9d48a636521d4dba558, type: 3}
   smallPlantSprite: {fileID: 21300000, guid: 24c5e42ce935e6744852daf241582f38, type: 3}

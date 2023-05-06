@@ -5,9 +5,11 @@ namespace Game.Tools
     // 锄头工具
     public class ToolShovel : ITool
     {
+        public string Name => "Shovel";
+
         public bool Selected()
         {
-            return Global.CurrentTool == Constant.ToolShovel;
+            return Global.CurrentTool.Value.Name == Name;
         }
 
         public void Use(ToolNeedData needData)

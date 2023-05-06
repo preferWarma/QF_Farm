@@ -1,4 +1,4 @@
-// Generate Id:29fa667f-64f1-401f-847c-9ef85514a509
+// Generate Id:21fefa0d-8442-4159-b2db-620b0b38eb73
 using UnityEngine;
 
 namespace Game
@@ -18,11 +18,11 @@ namespace Game
 
 		public UnityEngine.UI.Image ShovelBtnSelect;
 
-		public UnityEngine.UI.Button SeedBtn;
+		public UnityEngine.UI.Button SeedPumpkinBtn;
 
-		public UnityEngine.UI.Image SeedBtnImage;
+		public UnityEngine.UI.Image SeedBtnPumpkinImage;
 
-		public UnityEngine.UI.Image SeedBtnSelect;
+		public UnityEngine.UI.Image SeedBtnPumpkinSelect;
 
 		public UnityEngine.UI.Button WatercanBtn;
 

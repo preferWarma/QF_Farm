@@ -7,7 +7,7 @@ namespace Game
 	{
 		[Header("预制体")]
 		public GameObject waterPrefab;	// 水
-		public GameObject plantPrefab;  // 植物
+		public GameObject plantPumpkinPrefab;  // 植物
 		public GameObject plantRadishPrefab; // 萝卜植物
 		
 		[Header("默认种子贴图")]

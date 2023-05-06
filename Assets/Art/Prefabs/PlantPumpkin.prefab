@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 949551888860867233}
   - component: {fileID: -5631153940666862188}
   m_Layer: 0
-  m_Name: Plant
+  m_Name: PlantPumpkin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

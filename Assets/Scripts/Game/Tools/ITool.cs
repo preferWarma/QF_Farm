@@ -7,6 +7,7 @@ namespace Game.Tools
 {
     public interface ITool
     {
+        string Name { get; }
         bool Selected();    // 是否被选中
         void Use(ToolNeedData needData);    // 使用
     }

@@ -4,9 +4,11 @@ namespace Game.Tools
 {
     public class ToolHand : ITool
     {
+        public string Name => "Hand";
+
         public bool Selected()
         {
-            return Global.CurrentTool == Constant.ToolHand;
+            return Global.CurrentTool.Value.Name == Name;
         }
 
         public void Use(ToolNeedData needData)

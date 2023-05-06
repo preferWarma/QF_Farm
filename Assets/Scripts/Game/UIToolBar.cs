@@ -1,4 +1,5 @@
 using System;
+using Game.Tools;
 using UnityEngine;
 using QFramework;
 using UnityEngine.UI;
@@ -13,7 +14,7 @@ namespace Game
 			
 			HandBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolHand, HandBtnSelect);});
 			ShovelBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolShovel, ShovelBtnSelect);});
-			SeedBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolSeedPumpkin, SeedBtnSelect);});
+			SeedPumpkinBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolSeedPumpkin, SeedBtnPumpkinSelect);});
 			WatercanBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolWateringCan, WatercanBtnSelect);});
 			SeedRadishBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolSeedRadish, SeedBtnRadishSelect);});
 		}
@@ -32,7 +33,7 @@ namespace Game
 
 			if (Input.GetKeyDown(KeyCode.Alpha3))
 			{
-				SetCurrentTool(Constant.ToolSeedPumpkin, SeedBtnSelect);
+				SetCurrentTool(Constant.ToolSeedPumpkin, SeedBtnPumpkinSelect);
 			}
 			
 			if (Input.GetKeyDown(KeyCode.Alpha4))
@@ -46,20 +47,34 @@ namespace Game
 			}
 		}
 		
-		private void SetCurrentTool(string toolName, Image selectImg)
+		private void SetCurrentTool(ITool tool, Image selectImg)
 		{
-			Global.CurrentTool.Value = toolName;
+			Global.CurrentTool.Value = tool;
 			HideAllSelect();
 			selectImg.Show();
-			var showIcon = toolName switch
+			Sprite showIcon = null;
+			
+			if (tool == Constant.ToolHand)
 			{
-				Constant.ToolHand => HandBtnImage.sprite,
-				Constant.ToolShovel => ShovelBtnImage.sprite,
-				Constant.ToolSeedPumpkin => SeedBtnImage.sprite,
-				Constant.ToolWateringCan => WatercanBtnImage.sprite,
-				Constant.ToolSeedRadish => SeedBtnRadishImage.sprite,
-				_ => throw new ArgumentOutOfRangeException(nameof(toolName), toolName, null)
-			};	// 当前工具的显示图标
+				showIcon = HandBtnImage.sprite;
+			}
+			else if (tool == Constant.ToolShovel)
+			{
+				showIcon = ShovelBtnImage.sprite;
+			}
+			else if (tool == Constant.ToolSeedPumpkin)
+			{
+				showIcon = SeedBtnPumpkinImage.sprite;
+			}
+			else if (tool == Constant.ToolWateringCan)
+			{
+				showIcon = WatercanBtnImage.sprite;
+			}
+			else if (tool == Constant.ToolSeedRadish)
+			{
+				showIcon = SeedBtnRadishImage.sprite;
+			}
+			
 			Global.Mouse.Icon.sprite = showIcon;
 		}
 
@@ -67,8 +82,8 @@ namespace Game
 		{
 			HandBtnSelect.Hide();
 			ShovelBtnSelect.Hide();
-			SeedBtnSelect.Hide();
 			WatercanBtnSelect.Hide();
+			SeedBtnPumpkinSelect.Hide();
 			SeedBtnRadishSelect.Hide();
 		}
 	}
