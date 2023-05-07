@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Game.Tools;
 using UnityEngine;
 using QFramework;
@@ -9,15 +10,23 @@ namespace Game
 	public partial class UIToolBar : ViewController
 	{
 		private List<UISlot> ToolbarSlots = new();
-
-		private Dictionary<int, ITool> ToolIdx = new()	// 背包槽与工具的映射
+		private Dictionary<int, ITool> ToolDic = new()	// 背包槽与工具的映射
 		{
 			{0, Constant.ToolHand},
 			{1, Constant.ToolShovel},
 			{2, Constant.ToolSeedPumpkin},
-			{3, Constant.ToolSeedRadish},
-			{4, Constant.ToolWateringCan},
+			{3, Constant.ToolWateringCan},
+			{4, Constant.ToolSeedRadish},
 			{5, Constant.ToolSeedPotato}
+		};
+		private Dictionary<int, KeyCode> ShotCutDic = new()
+		{
+			{0, KeyCode.Alpha1},
+			{1, KeyCode.Alpha2},
+			{2, KeyCode.Alpha3},
+			{3, KeyCode.Alpha4},
+			{4, KeyCode.Alpha5},
+			{5, KeyCode.Alpha6},
 		};
 
 		private void Start()
@@ -35,12 +44,12 @@ namespace Game
 			
 			SetCurrentTool(Constant.ToolHand, ToolbarSlots[0].icon, ToolbarSlots[0].select);
 			
-			for (var i = 0; i < ToolIdx.Count; i++)
+			for (var i = 0; i < ToolDic.Count; i++)
 			{
 				var i1 = i;	// 闭包, 不能直接使用i, 否则注册的事件都是最后一个i
 				ToolbarSlots[i].GetComponent<Button>().onClick.AddListener(() =>
 				{
-					SetCurrentTool(ToolIdx[i1], ToolbarSlots[i1].icon, ToolbarSlots[i1].select);
+					SetCurrentTool(ToolDic[i1], ToolbarSlots[i1].icon, ToolbarSlots[i1].select);
 				});
 				ToolbarSlots[i].shotCut.text = (i + 1).ToString();
 			}
@@ -48,34 +57,13 @@ namespace Game
 
 		private void Update()
 		{
-			if (Input.GetKeyDown(KeyCode.Alpha1))
+			for (var i = 0; i < ShotCutDic.Count; i++)
 			{
-				SetCurrentTool(Constant.ToolHand, ToolbarSlots[0].icon, ToolbarSlots[0].select);
-			}
-		
-			if (Input.GetKeyDown(KeyCode.Alpha2))
-			{
-				SetCurrentTool(Constant.ToolShovel, ToolbarSlots[1].icon, ToolbarSlots[1].select);
-			}
-
-			if (Input.GetKeyDown(KeyCode.Alpha3))
-			{
-				SetCurrentTool(Constant.ToolSeedPumpkin, ToolbarSlots[2].icon, ToolbarSlots[2].select);
-			}
-			
-			if (Input.GetKeyDown(KeyCode.Alpha4))
-			{
-				SetCurrentTool(Constant.ToolWateringCan, ToolbarSlots[3].icon, ToolbarSlots[3].select);
-			}
-
-			if (Input.GetKeyDown(KeyCode.Alpha5))
-			{
-				SetCurrentTool(Constant.ToolSeedRadish, ToolbarSlots[4].icon, ToolbarSlots[4].select);
-			}
-			
-			if (Input.GetKeyDown(KeyCode.Alpha6))
-			{
-				SetCurrentTool(Constant.ToolSeedPotato, ToolbarSlots[5].icon, ToolbarSlots[5].select);
+				var shotCut = ShotCutDic[i];
+				if (Input.GetKeyDown(shotCut))
+				{
+					SetCurrentTool(ToolDic[i], ToolbarSlots[i].icon, ToolbarSlots[i].select);
+				}
 			}
 		}
 
@@ -89,10 +77,7 @@ namespace Game
 
 		private void HideAllSelect()
 		{
-			foreach (var slot in ToolbarSlots)
-			{
-				slot.select.Hide();
-			}
+			ToolbarSlots.ForEach(slot => slot.select.Hide());
 		}
 	}
 }
