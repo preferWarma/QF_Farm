@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Game.Tools;
 using UnityEngine;
 using QFramework;
@@ -7,77 +8,91 @@ namespace Game
 {
 	public partial class UIToolBar : ViewController
 	{
+		private List<UISlot> ToolbarSlots = new();
+
+		private Dictionary<int, ITool> ToolIdx = new()	// 背包槽与工具的映射
+		{
+			{0, Constant.ToolHand},
+			{1, Constant.ToolShovel},
+			{2, Constant.ToolSeedPumpkin},
+			{3, Constant.ToolSeedRadish},
+			{4, Constant.ToolWateringCan},
+			{5, Constant.ToolSeedPotato}
+		};
+
 		private void Start()
 		{
-			SetCurrentTool(Constant.ToolHand, HandBtnSelect);
+			ToolbarSlots.Add(ToolbarSlot1);
+			ToolbarSlots.Add(ToolbarSlot2);
+			ToolbarSlots.Add(ToolbarSlot3);
+			ToolbarSlots.Add(ToolbarSlot4);
+			ToolbarSlots.Add(ToolbarSlot5);
+			ToolbarSlots.Add(ToolbarSlot6);
+			ToolbarSlots.Add(ToolbarSlot7);
+			ToolbarSlots.Add(ToolbarSlot8);
+			ToolbarSlots.Add(ToolbarSlot9);
+			ToolbarSlots.Add(ToolbarSlot10);
 			
-			HandBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolHand, HandBtnSelect);});
-			ShovelBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolShovel, ShovelBtnSelect);});
-			SeedPumpkinBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolSeedPumpkin, SeedBtnPumpkinSelect);});
-			WatercanBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolWateringCan, WatercanBtnSelect);});
-			SeedRadishBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolSeedRadish, SeedBtnRadishSelect);});
-			SeedPotatoBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolSeedPotato, SeedBtnPotatoSelect);});
+			SetCurrentTool(Constant.ToolHand, ToolbarSlots[0].icon, ToolbarSlots[0].select);
+			
+			for (var i = 0; i < ToolIdx.Count; i++)
+			{
+				var i1 = i;	// 闭包, 不能直接使用i, 否则注册的事件都是最后一个i
+				ToolbarSlots[i].GetComponent<Button>().onClick.AddListener(() =>
+				{
+					SetCurrentTool(ToolIdx[i1], ToolbarSlots[i1].icon, ToolbarSlots[i1].select);
+				});
+				ToolbarSlots[i].shotCut.text = (i + 1).ToString();
+			}
 		}
 
 		private void Update()
 		{
 			if (Input.GetKeyDown(KeyCode.Alpha1))
 			{
-				SetCurrentTool(Constant.ToolHand, HandBtnSelect);
+				SetCurrentTool(Constant.ToolHand, ToolbarSlots[0].icon, ToolbarSlots[0].select);
 			}
 		
 			if (Input.GetKeyDown(KeyCode.Alpha2))
 			{
-				SetCurrentTool(Constant.ToolShovel, ShovelBtnSelect);
+				SetCurrentTool(Constant.ToolShovel, ToolbarSlots[1].icon, ToolbarSlots[1].select);
 			}
 
 			if (Input.GetKeyDown(KeyCode.Alpha3))
 			{
-				SetCurrentTool(Constant.ToolSeedPumpkin, SeedBtnPumpkinSelect);
+				SetCurrentTool(Constant.ToolSeedPumpkin, ToolbarSlots[2].icon, ToolbarSlots[2].select);
 			}
 			
 			if (Input.GetKeyDown(KeyCode.Alpha4))
 			{
-				SetCurrentTool(Constant.ToolWateringCan, WatercanBtnSelect);
+				SetCurrentTool(Constant.ToolWateringCan, ToolbarSlots[3].icon, ToolbarSlots[3].select);
 			}
 
 			if (Input.GetKeyDown(KeyCode.Alpha5))
 			{
-				SetCurrentTool(Constant.ToolSeedRadish, SeedBtnRadishSelect);
+				SetCurrentTool(Constant.ToolSeedRadish, ToolbarSlots[4].icon, ToolbarSlots[4].select);
 			}
 			
 			if (Input.GetKeyDown(KeyCode.Alpha6))
 			{
-				SetCurrentTool(Constant.ToolSeedPotato, SeedBtnPotatoSelect);
+				SetCurrentTool(Constant.ToolSeedPotato, ToolbarSlots[5].icon, ToolbarSlots[5].select);
 			}
 		}
-		
-		private void SetCurrentTool(ITool tool, Image selectImg)
+
+		private void SetCurrentTool(ITool tool, Image icon, Image selectImg)
 		{
 			Global.CurrentTool.Value = tool;	// 设置当前工具
 			HideAllSelect();
 			selectImg.Show();
-			Sprite showIcon = null;
-
-			// 获取当前工具的图标
-			if (tool == Constant.ToolHand) showIcon = HandBtnImage.sprite;
-			if (tool == Constant.ToolShovel) showIcon = ShovelBtnImage.sprite;
-			if (tool == Constant.ToolWateringCan) showIcon = WatercanBtnImage.sprite;
-			if (tool == Constant.ToolSeedPumpkin) showIcon = SeedBtnPumpkinImage.sprite;
-			if (tool == Constant.ToolSeedRadish) showIcon = SeedBtnRadishImage.sprite;
-			if (tool == Constant.ToolSeedPotato) showIcon = SeedBtnPotatoImage.sprite;
-			
-			Global.Mouse.Icon.sprite = showIcon;	// 设置鼠标图标
+			Global.Mouse.Icon.sprite = icon.sprite;	// 设置鼠标图标
 		}
 
 		private void HideAllSelect()
 		{
-			HandBtnSelect.Hide();
-			ShovelBtnSelect.Hide();
-			WatercanBtnSelect.Hide();
-			SeedBtnPumpkinSelect.Hide();
-			SeedBtnRadishSelect.Hide();
-			SeedBtnPotatoSelect.Hide();
+			foreach (var slot in ToolbarSlots)
+			{
+				slot.select.Hide();
+			}
 		}
 	}
 }
