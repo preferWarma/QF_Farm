@@ -1,4 +1,4 @@
-// Generate Id:21fefa0d-8442-4159-b2db-620b0b38eb73
+// Generate Id:0b382872-a276-46df-afcb-4fd2b2a0bc41
 using UnityEngine;
 
 namespace Game
@@ -35,6 +35,12 @@ namespace Game
 		public UnityEngine.UI.Image SeedBtnRadishImage;
 
 		public UnityEngine.UI.Image SeedBtnRadishSelect;
+
+		public UnityEngine.UI.Button SeedPotatoBtn;
+
+		public UnityEngine.UI.Image SeedBtnPotatoImage;
+
+		public UnityEngine.UI.Image SeedBtnPotatoSelect;
 
 	}
 }

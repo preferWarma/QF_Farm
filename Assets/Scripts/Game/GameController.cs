@@ -1,5 +1,6 @@
 using System.Linq;
 using Game.ChallengeSystem;
+using Game.Plants;
 using QFramework;
 using UnityEngine.SceneManagement;
 
@@ -14,6 +15,7 @@ namespace Game
             // 注册相关事件
             RegisterOnToolChange();
             RegisterOnDaysChange();
+            RegisterOnPlantHarvest();
         }
 
         private void Update()
@@ -100,6 +102,38 @@ namespace Game
                 waters.ForEach(water => { water.DestroySelf(); }); // 过了一天，所有的水都消失了
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
+        
+        // 监听植物采摘
+        private void RegisterOnPlantHarvest()
+        {
+            // 监听植物采摘
+            Global.OnPlantHarvest.Register(plant =>
+            {
+                ChallengeController.HarvestCountInCurrentDay.Value++;
+
+                // 根据植物类型增加不同的水果数量
+                if (plant is PlantRadish)
+                {
+                    Global.RadishCount.Value++;
+                    ChallengeController.HarvestRadishCountInCurrentDay.Value++;
+                    ChallengeController.TotalRadishCount.Value++;
+                }
+                else if (plant is PlantPumpkin)
+                {
+                    Global.PumpkinCount.Value++;
+                    ChallengeController.TotalPumpkinCount.Value++;
+                }
+                else if (plant is PlantPotato)
+                {
+                    Global.PotatoCount.Value++;
+                }
+
+                if (plant.RipeDay == Global.Days.Value) // 如果是当天成熟的植物被采摘
+                {
+                    ChallengeController.RipeAndHarvestCountInCurrentDay.Value++;
+                }
+            }).UnRegisterWhenGameObjectDestroyed(this);
+        }
 
         #endregion
 
@@ -107,10 +141,13 @@ namespace Game
         {
             Global.Days.Value = 1;  // 开局第一天
             Global.CurrentTool.Value = Constant.ToolHand; // 开局默认手
+            
             Global.PumpkinCount.Value = 0;  // 开局默认0个南瓜
             Global.RadishCount.Value = 0; // 开局默认0个萝卜
             Global.PumpKinSeedCount.Value = 5;  // 开局默认5个南瓜种子
             Global.RadishSeedCount.Value = 5; // 开局默认5个萝卜种子
+            Global.PotatoCount.Value = 0; // 开局默认0个土豆
+            Global.PotatoSeedCount.Value = 5; // 开局默认5个土豆种子
         }
     }
 }

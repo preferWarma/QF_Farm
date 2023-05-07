@@ -9,8 +9,9 @@ namespace Game.Plants
         int Y { get; set; }
         GameObject GameObject { get; }
         PlantSates Sate { get; }
-        void SetState(PlantSates newSate);
         int RipeDay { get; }
+        
+        void SetState(PlantSates newSate);
         void Grow(SoilData soilData);
     }
 }

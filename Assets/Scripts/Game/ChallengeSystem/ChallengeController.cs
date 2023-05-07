@@ -37,8 +37,7 @@ namespace Game.ChallengeSystem
 			
 			// 挑战相关的事件注册
 			RegisterOnChallengeFinish();
-			RegisterOnPlantHarvest();
-			
+
 			// 开局随机添加一个挑战
 			var randomItem = Challenges.GetRandomItem();
 			ActiveChallenges.Add(randomItem);
@@ -78,34 +77,6 @@ namespace Game.ChallengeSystem
 				{
 					ActionKit.Delay(1.0f, () => SceneManager.LoadScene("Scenes/GamePass"))
 						.Start(this);
-				}
-			}).UnRegisterWhenGameObjectDestroyed(this);
-		}
-		
-		// 监听植物采摘
-		private void RegisterOnPlantHarvest()
-		{
-			// 监听植物采摘
-			Global.OnPlantHarvest.Register(plant =>
-			{
-				HarvestCountInCurrentDay.Value++;
-
-				// 根据植物类型增加不同的水果数量
-				if (plant as PlantRadish != null)
-				{
-					Global.RadishCount.Value++;
-					HarvestRadishCountInCurrentDay.Value++;
-					TotalRadishCount.Value++;
-				}
-				else if (plant as PlantPumpkin != null)
-				{
-					Global.PumpkinCount.Value++;
-					TotalPumpkinCount.Value++;
-				}
-
-				if (plant.RipeDay == Global.Days.Value) // 如果是当天成熟的植物被采摘
-				{
-					RipeAndHarvestCountInCurrentDay.Value++;
 				}
 			}).UnRegisterWhenGameObjectDestroyed(this);
 		}

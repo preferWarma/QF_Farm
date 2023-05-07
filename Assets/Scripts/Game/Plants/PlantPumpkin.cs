@@ -9,21 +9,19 @@ namespace Game.Plants
 		public int X { get; set; } = -1;
 		public int Y { get; set; } = -1;
 		public PlantSates Sate { get; private set; } = PlantSates.Seed;
-		public int RipeDay { get; set; } = -1; // 成熟的日期
+		public int RipeDay { get; private set; } = -1; // 成熟的日期
 		public GameObject GameObject => gameObject;
 		
 		public void Grow(SoilData soilData)
 		{
-			if (soilData.Watered)
+			if (!soilData.Watered) return;	// 如果没有浇水, 不生长
+			if (Sate == PlantSates.Seed) // 如果是种子
 			{
-				if (Sate == PlantSates.Seed) // 如果是种子
-				{
-					SetState(PlantSates.Small);
-				}
-				else if (Sate == PlantSates.Small) // 如果是幼苗
-				{
-					SetState(PlantSates.Ripe);
-				}
+				SetState(PlantSates.Small);
+			}
+			else if (Sate == PlantSates.Small) // 如果是幼苗
+			{
+				SetState(PlantSates.Ripe);
 			}
 		}
 
@@ -31,7 +29,7 @@ namespace Game.Plants
 		{
 			if (newSate == Sate) return;
 			
-			if (Sate == PlantSates.Small && newSate == PlantSates.Ripe)
+			if (newSate == PlantSates.Ripe)
 			{
 				RipeDay = Global.Days.Value;
 			}
@@ -49,7 +47,5 @@ namespace Game.Plants
 
 			FindObjectOfType<GridController>().ShowGrid[X, Y].PlantSates = newSate;	// 同步到SoilData
 		}
-
-		
 	}
 }

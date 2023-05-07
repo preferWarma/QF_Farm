@@ -15,7 +15,8 @@ namespace Game
         public static readonly ITool ToolWateringCan = new ToolWateringCan();
         public static readonly ITool ToolSeedPumpkin = new ToolSeedPumpkin();
         public static readonly ITool ToolSeedRadish = new ToolSeedRadish();
-        
+        public static readonly ITool ToolSeedPotato = new ToolSeedPotato();
+
         public static string DisplayName(string toolName, Language language)   // 工具名字(方便以后更改语言)
         {
             return language switch

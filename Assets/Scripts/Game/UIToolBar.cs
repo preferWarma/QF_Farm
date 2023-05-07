@@ -16,6 +16,7 @@ namespace Game
 			SeedPumpkinBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolSeedPumpkin, SeedBtnPumpkinSelect);});
 			WatercanBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolWateringCan, WatercanBtnSelect);});
 			SeedRadishBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolSeedRadish, SeedBtnRadishSelect);});
+			SeedPotatoBtn.onClick.AddListener(() => {SetCurrentTool(Constant.ToolSeedPotato, SeedBtnPotatoSelect);});
 		}
 
 		private void Update()
@@ -44,6 +45,11 @@ namespace Game
 			{
 				SetCurrentTool(Constant.ToolSeedRadish, SeedBtnRadishSelect);
 			}
+			
+			if (Input.GetKeyDown(KeyCode.Alpha6))
+			{
+				SetCurrentTool(Constant.ToolSeedPotato, SeedBtnPotatoSelect);
+			}
 		}
 		
 		private void SetCurrentTool(ITool tool, Image selectImg)
@@ -59,6 +65,7 @@ namespace Game
 			if (tool == Constant.ToolWateringCan) showIcon = WatercanBtnImage.sprite;
 			if (tool == Constant.ToolSeedPumpkin) showIcon = SeedBtnPumpkinImage.sprite;
 			if (tool == Constant.ToolSeedRadish) showIcon = SeedBtnRadishImage.sprite;
+			if (tool == Constant.ToolSeedPotato) showIcon = SeedBtnPotatoImage.sprite;
 			
 			Global.Mouse.Icon.sprite = showIcon;	// 设置鼠标图标
 		}
@@ -70,6 +77,7 @@ namespace Game
 			WatercanBtnSelect.Hide();
 			SeedBtnPumpkinSelect.Hide();
 			SeedBtnRadishSelect.Hide();
+			SeedBtnPotatoSelect.Hide();
 		}
 	}
 }

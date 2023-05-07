@@ -18,67 +18,12 @@ MonoBehaviour:
     GameObject: {fileID: 0}
     From: 0
     NameToFullName: []
-    BindInfos:
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: HandBtn
-      MemberName: HandBtn
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: HandBtn/HandBtnImage
-      MemberName: HandBtnImage
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: HandBtn/HandBtnSelect
-      MemberName: HandBtnSelect
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: ShovelBtn
-      MemberName: ShovelBtn
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: ShovelBtn/ShovelBtnImage
-      MemberName: ShovelBtnImage
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: ShovelBtn/ShovelBtnSelect
-      MemberName: ShovelBtnSelect
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: SeedPumpkinBtn
-      MemberName: SeedPumpkinBtn
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: SeedPumpkinBtn/SeedBtnPumpkinImage
-      MemberName: SeedBtnPumpkinImage
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: SeedPumpkinBtn/SeedBtnPumpkinSelect
-      MemberName: SeedBtnPumpkinSelect
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: WatercanBtn
-      MemberName: WatercanBtn
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: WatercanBtn/WatercanBtnImage
-      MemberName: WatercanBtnImage
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: WatercanBtn/WatercanBtnSelect
-      MemberName: WatercanBtnSelect
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: SeedRadishBtn
-      MemberName: SeedRadishBtn
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: SeedRadishBtn/SeedBtnRadishImage
-      MemberName: SeedBtnRadishImage
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: SeedRadishBtn/SeedBtnRadishSelect
-      MemberName: SeedBtnRadishSelect
-    ScriptsFolder: Assets/Scripts/Game
-    ClassName: UIToolBar
-    Namespace: Game
-    MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game\r\n{\r\n\tpublic
-      partial class UIToolBar : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+    BindInfos: []
+    ScriptsFolder: Assets/Scripts/Game/Plants
+    ClassName: PlantPotato
+    Namespace: Game.Plants
+    MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game.Plants\r\n{\r\n\tpublic
+      partial class PlantPotato : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:21fefa0d-8442-4159-b2db-620b0b38eb73\r\nusing UnityEngine;\r\n\r\nnamespace
-      Game\r\n{\r\n\tpublic partial class UIToolBar\r\n\t{\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      HandBtn;\r\n\r\n\t\tpublic UnityEngine.UI.Image HandBtnImage;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Image HandBtnSelect;\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      ShovelBtn;\r\n\r\n\t\tpublic UnityEngine.UI.Image ShovelBtnImage;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Image ShovelBtnSelect;\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      SeedPumpkinBtn;\r\n\r\n\t\tpublic UnityEngine.UI.Image SeedBtnPumpkinImage;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Image SeedBtnPumpkinSelect;\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      WatercanBtn;\r\n\r\n\t\tpublic UnityEngine.UI.Image WatercanBtnImage;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Image WatercanBtnSelect;\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      SeedRadishBtn;\r\n\r\n\t\tpublic UnityEngine.UI.Image SeedBtnRadishImage;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Image SeedBtnRadishSelect;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:4de1fddc-5184-4e21-b970-3a86eaa1a9fb\r\nusing UnityEngine;\r\n\r\nnamespace
+      Game.Plants\r\n{\r\n\tpublic partial class PlantPotato\r\n\t{\r\n\r\n\t}\r\n}\r\n"

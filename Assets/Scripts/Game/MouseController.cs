@@ -102,6 +102,10 @@ namespace Game
 				{
 					Constant.ToolHand.Use(toolNeedData);
 				}
+				if (Constant.ToolSeedPotato.Selected()) // 如果选中了土豆种子
+				{
+					Constant.ToolSeedPotato.Use(toolNeedData);
+				}
 			}
 		}
 	}
