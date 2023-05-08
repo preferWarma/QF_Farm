@@ -1,4 +1,6 @@
 // Generate Id:7b747dc7-0f02-4781-829c-93a8702f1567
+
+using Game.Inventory;
 using UnityEngine;
 
 namespace Game
@@ -42,25 +44,25 @@ namespace Game
 
 		public UnityEngine.UI.Image SeedBtnPotatoSelect;
 
-		public Game.UISlot ToolbarSlot1;
+		public UISlot ToolbarSlot1;
 
-		public Game.UISlot ToolbarSlot2;
+		public UISlot ToolbarSlot2;
 
-		public Game.UISlot ToolbarSlot3;
+		public UISlot ToolbarSlot3;
 
-		public Game.UISlot ToolbarSlot4;
+		public UISlot ToolbarSlot4;
 
-		public Game.UISlot ToolbarSlot5;
+		public UISlot ToolbarSlot5;
 
-		public Game.UISlot ToolbarSlot6;
+		public UISlot ToolbarSlot6;
 
-		public Game.UISlot ToolbarSlot7;
+		public UISlot ToolbarSlot7;
 
-		public Game.UISlot ToolbarSlot8;
+		public UISlot ToolbarSlot8;
 
-		public Game.UISlot ToolbarSlot9;
+		public UISlot ToolbarSlot9;
 
-		public Game.UISlot ToolbarSlot10;
+		public UISlot ToolbarSlot10;
 
 	}
 }

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
+using Game.Inventory;
 using Game.Tools;
 using UnityEngine;
 using QFramework;
@@ -9,17 +9,8 @@ namespace Game
 {
 	public partial class UIToolBar : ViewController
 	{
-		private List<UISlot> ToolbarSlots = new();
-		private Dictionary<int, ITool> ToolDic = new()	// 背包槽与工具的映射
-		{
-			{0, Constant.ToolHand},
-			{1, Constant.ToolShovel},
-			{2, Constant.ToolSeedPumpkin},
-			{3, Constant.ToolWateringCan},
-			{4, Constant.ToolSeedRadish},
-			{5, Constant.ToolSeedPotato}
-		};
-		private Dictionary<int, KeyCode> ShotCutDic = new()
+		private readonly List<UISlot> _toolbarSlots = new();	// 工具栏槽
+		private readonly Dictionary<int, KeyCode> _shotCutDict = new()	// 背包槽位置与快捷键的映射
 		{
 			{0, KeyCode.Alpha1},
 			{1, KeyCode.Alpha2},
@@ -31,38 +22,31 @@ namespace Game
 
 		private void Start()
 		{
-			ToolbarSlots.Add(ToolbarSlot1);
-			ToolbarSlots.Add(ToolbarSlot2);
-			ToolbarSlots.Add(ToolbarSlot3);
-			ToolbarSlots.Add(ToolbarSlot4);
-			ToolbarSlots.Add(ToolbarSlot5);
-			ToolbarSlots.Add(ToolbarSlot6);
-			ToolbarSlots.Add(ToolbarSlot7);
-			ToolbarSlots.Add(ToolbarSlot8);
-			ToolbarSlots.Add(ToolbarSlot9);
-			ToolbarSlots.Add(ToolbarSlot10);
+			_toolbarSlots.Add(ToolbarSlot1);
+			_toolbarSlots.Add(ToolbarSlot2);
+			_toolbarSlots.Add(ToolbarSlot3);
+			_toolbarSlots.Add(ToolbarSlot4);
+			_toolbarSlots.Add(ToolbarSlot5);
+			_toolbarSlots.Add(ToolbarSlot6);
+			_toolbarSlots.Add(ToolbarSlot7);
+			_toolbarSlots.Add(ToolbarSlot8);
+			_toolbarSlots.Add(ToolbarSlot9);
+			_toolbarSlots.Add(ToolbarSlot10);
 			
-			SetCurrentTool(Constant.ToolHand, ToolbarSlots[0].icon, ToolbarSlots[0].select);
+			SetCurrentTool(Constant.ToolHand, _toolbarSlots[0].icon, _toolbarSlots[0].select);	// 设置默认工具
 			
-			for (var i = 0; i < ToolDic.Count; i++)
-			{
-				var i1 = i;	// 闭包, 不能直接使用i, 否则注册的事件都是最后一个i
-				ToolbarSlots[i].GetComponent<Button>().onClick.AddListener(() =>
-				{
-					SetCurrentTool(ToolDic[i1], ToolbarSlots[i1].icon, ToolbarSlots[i1].select);
-				});
-				ToolbarSlots[i].shotCut.text = (i + 1).ToString();
-			}
+			InitToolBarSlots();
 		}
 
 		private void Update()
 		{
-			for (var i = 0; i < ShotCutDic.Count; i++)
+			// 设置工具对应的快捷键
+			for (var i = 0; i < _shotCutDict.Count; i++)
 			{
-				var shotCut = ShotCutDic[i];
+				var shotCut = _shotCutDict[i];
 				if (Input.GetKeyDown(shotCut))
 				{
-					SetCurrentTool(ToolDic[i], ToolbarSlots[i].icon, ToolbarSlots[i].select);
+					_toolbarSlots[i].SlotData?.OnSelect?.Invoke();
 				}
 			}
 		}
@@ -77,7 +61,25 @@ namespace Game
 
 		private void HideAllSelect()
 		{
-			ToolbarSlots.ForEach(slot => slot.select.Hide());
+			_toolbarSlots.ForEach(slot => slot.select.Hide());
+		}
+		
+		private void InitToolBarSlots()
+		{
+			for (var i = 0; i < _toolbarSlots.Count; i++)
+			{
+				var slot = _toolbarSlots[i];
+				if (i >= Config.Items.Count) break;	// 如果配置表没有对应的物品, 则结束
+				
+				var i1 = i;	// 闭包, 不能直接使用i, 否则注册的事件都是最后一个i
+				var newSlotData = new SlotData
+				{
+					Icon = ResController.Instance.LoadSprite(Config.Items[i1].iconName),	// 动态加载图标
+					OnSelect = () => { SetCurrentTool(Config.Items[i1].Tool, slot.icon, slot.select); }	// 添加执行事件
+				};
+				slot.SetSlotData(newSlotData, (i+1).ToString());
+				_toolbarSlots[i].GetComponent<Button>().onClick.AddListener(() => slot.SlotData?.OnSelect?.Invoke());	// 注册事件到Button
+			}
 		}
 	}
 }

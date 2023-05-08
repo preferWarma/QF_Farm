@@ -1,10 +1,15 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using QFramework;
+using UnityEngine.Serialization;
 
 namespace Game
 {
 	public partial class ResController : ViewController, ISingleton
 	{
+		public static ResController Instance => MonoSingletonProperty<ResController>.Instance;
+
 		[Header("预制体")]
 		public GameObject waterPrefab;	// 水
 		public GameObject plantPumpkinPrefab;  // 南瓜植物
@@ -29,7 +34,14 @@ namespace Game
 		public Sprite ripePotatoSprite;  // 成熟贴图
 		public Sprite oldPotatoSprite;  // 摘取贴图
 
-		public static ResController Instance => MonoSingletonProperty<ResController>.Instance;
+		[Header("贴图集合")]
+		public List<Sprite> sprites = new();
+		
+		public Sprite LoadSprite(string spriteName)
+		{
+			return sprites.Single(sprite => sprite.name == spriteName);
+		}
+
 
 		public void OnSingletonInit()
 		{

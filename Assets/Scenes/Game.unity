@@ -1484,6 +1484,13 @@ MonoBehaviour:
   smallPlantPotatoSprite: {fileID: 21300000, guid: 2097e918b025ad84c943b5fb5046d687, type: 3}
   ripePotatoSprite: {fileID: 21300000, guid: fa15f8ec380d90046850501d7d443b88, type: 3}
   oldPotatoSprite: {fileID: 21300000, guid: d881935930b172240bef306f14c4b18e, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: 2b252b4acaac96147a38dcaf7069e83b, type: 3}
+  - {fileID: 21300000, guid: 0beabb3458a69614f91331e7e270d59c, type: 3}
+  - {fileID: 21300000, guid: d32a079578d9bf142b3435384b907649, type: 3}
+  - {fileID: 21300000, guid: b9a39f36fc8f7604aaf12cf9edd82aa6, type: 3}
+  - {fileID: 21300000, guid: ab252b104090ebe46964ec53c5cb2ea1, type: 3}
+  - {fileID: 21300000, guid: fa9662969d9219847b488f2afd39dc41, type: 3}
 --- !u!4 &346271341
 Transform:
   m_ObjectHideFlags: 0
