@@ -22,6 +22,9 @@ namespace Game
 
 		private void Start()
 		{
+			UISlot.SpriteLoader = ResController.Instance.LoadSprite;	// 设置图标加载器方法
+			UISlot.OnUse = slot => SetCurrentTool(slot.ItemData.Tool, slot.icon, slot.select);	// 设置使用方法
+			
 			_toolbarSlots.Add(ToolbarSlot1);
 			_toolbarSlots.Add(ToolbarSlot2);
 			_toolbarSlots.Add(ToolbarSlot3);
@@ -46,7 +49,7 @@ namespace Game
 				var shotCut = _shotCutDict[i];
 				if (Input.GetKeyDown(shotCut))
 				{
-					_toolbarSlots[i].SlotData?.OnSelect?.Invoke();
+					UISlot.OnUse?.Invoke(_toolbarSlots[i]);
 				}
 			}
 		}
@@ -71,14 +74,7 @@ namespace Game
 				var slot = _toolbarSlots[i];
 				if (i >= Config.Items.Count) break;	// 如果配置表没有对应的物品, 则结束
 				
-				var i1 = i;	// 闭包, 不能直接使用i, 否则注册的事件都是最后一个i
-				var newSlotData = new SlotData
-				{
-					Icon = ResController.Instance.LoadSprite(Config.Items[i1].iconName),	// 动态加载图标
-					OnSelect = () => { SetCurrentTool(Config.Items[i1].Tool, slot.icon, slot.select); }	// 添加执行事件
-				};
-				slot.SetSlotData(newSlotData, (i+1).ToString());
-				_toolbarSlots[i].GetComponent<Button>().onClick.AddListener(() => slot.SlotData?.OnSelect?.Invoke());	// 注册事件到Button
+				slot.SetSlotData(Config.Items[i], (i+1).ToString());
 			}
 		}
 	}

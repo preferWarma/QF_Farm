@@ -6,7 +6,7 @@ namespace Game
     // 游戏配置类
     public static class Config
     {
-        public static readonly Item Hand = new Item
+        public static readonly Item Hand = new()
         {
             name = "手",
             iconName = "Hand",
@@ -16,7 +16,7 @@ namespace Game
             isPlant = false,
             plantPrefabName = string.Empty
         };
-        public static readonly Item Shovel = new Item
+        public static readonly Item Shovel = new()
         {
             name = "铲子",
             iconName = "Shovel",
@@ -26,7 +26,7 @@ namespace Game
             isPlant = false,
             plantPrefabName = string.Empty
         };
-        public static readonly Item WateringCan = new Item
+        public static readonly Item WateringCan = new()
         {
             name = "水壶",
             iconName = "WateringCan",
@@ -36,7 +36,7 @@ namespace Game
             isPlant = false,
             plantPrefabName = string.Empty
         };
-        public static readonly Item SeedPumpkin = new Item
+        public static readonly Item SeedPumpkin = new()
         {
             name = "南瓜种子",
             iconName = "SeedPumpkin",
@@ -46,7 +46,7 @@ namespace Game
             isPlant = true,
             plantPrefabName = "PlantPumpkin"
         };
-        public static readonly Item SeedRadish = new Item
+        public static readonly Item SeedRadish = new()
         {
             name = "萝卜种子",
             iconName = "SeedRadish",
@@ -56,7 +56,7 @@ namespace Game
             isPlant = true,
             plantPrefabName = "PlantRadish"
         };
-        public static readonly Item SeedPotato = new Item
+        public static readonly Item SeedPotato = new()
         {
             name = "土豆种子",
             iconName = "SeedPotato",
