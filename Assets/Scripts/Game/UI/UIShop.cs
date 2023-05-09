@@ -1,6 +1,6 @@
 using QFramework;
 
-namespace Game
+namespace Game.UI
 {
 	public partial class UIShop : ViewController
 	{

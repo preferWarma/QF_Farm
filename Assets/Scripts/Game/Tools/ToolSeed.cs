@@ -1,12 +1,15 @@
-﻿using Game.Plants;
+﻿using Game.Inventory;
+using Game.Plants;
 using QFramework;
 using UnityEngine;
 
 namespace Game.Tools
 {
-    public class ToolSeedRadish : ITool
+    public class ToolSeed : ITool
     {
-        public string Name => "SeedRadish";
+        public string Name => "Seed";
+        
+        public Item Item { get; set; }  // 与背包中的物品对应
 
         public bool Selected()
         {
@@ -15,6 +18,8 @@ namespace Game.Tools
 
         public void Use(ToolNeedData needData)
         {
+            if (Item.Count.Value <= 0) return; // 没有种子了,直接返回
+            
             var showGrid = needData.ShowGrid;
             var cellPos = needData.CellPos;
             var tilemap = needData.Tilemap;
@@ -22,18 +27,18 @@ namespace Game.Tools
             
             if (showGrid[cellPos.x, cellPos.y].HasPlant) return; // 已经有植物了
             
-            GameObject plantObj = null;
             var tileWorldPos = tilemap.GetCellCenterWorld(cellPos);
-            
-            if (Global.RadishSeedCount.Value > 0)
+            var plantObj = ResController.Instance.LoadPrefab(Item.plantPrefabName)
+                .Instantiate()
+                .Position(tileWorldPos);
+            if (!plantObj)
             {
-                plantObj = ResController.Instance.plantRadishPrefab
-                    .Instantiate()
-                    .Position(tileWorldPos);
-                Global.RadishSeedCount.Value--;
+                Debug.LogError("植物生成失败,请检查植物预制体是否存在");
+                return;
             }
-            if (!plantObj) return;
+            
             AudioController.Instance.Sfx_PutSeed.Play(); // 播放种植音效
+            Item.Count.Value--;
             var plant = plantObj.GetComponent<IPlant>();
             plant.X = cellPos.x;
             plant.Y = cellPos.y;
@@ -42,6 +47,5 @@ namespace Game.Tools
             PlantController.Instance.PlantGrid[cellPos.x, cellPos.y] = plant;
             showGrid[cellPos.x, cellPos.y].HasPlant = true;
         }
-        
     }
 }

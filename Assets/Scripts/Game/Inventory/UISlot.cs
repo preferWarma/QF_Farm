@@ -1,5 +1,4 @@
 using System;
-using Game.Tools;
 using QFramework;
 using UnityEngine;
 using UnityEngine.UI;
@@ -67,7 +66,11 @@ namespace Game.Inventory
 
             if (newItemData.canStack)
             {
-                count.text = newItemData.count.ToString();
+                // 注册数量显示, 使物品数量发生变化时, UI也会发生变化
+                newItemData.Count.RegisterWithInitValue(cnt =>
+                {
+                    count.text = cnt.ToString();
+                }).UnRegisterWhenGameObjectDestroyed(this);
             }
         }
     }

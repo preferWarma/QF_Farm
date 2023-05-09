@@ -76,36 +76,10 @@ namespace Game
 				Tilemap = mTilemap,
 				Pen = mGridController.pen
 			};
-			
-			if (mshowGrid[cellPos.x, cellPos.y] == null)	// 无耕地
+
+			if (Global.CurrentTool.Value.Selected())
 			{
-				if (Constant.ToolShovel.Selected())	// 如果选中了锄头
-				{
-					Constant.ToolShovel.Use(toolNeedData);
-				}
-			}
-			else // 有耕地
-			{
-				if (Constant.ToolWateringCan.Selected())	// 如果选中了水壶
-				{
-					Constant.ToolWateringCan.Use(toolNeedData);
-				}
-				if (Constant.ToolSeedPumpkin.Selected())	// 如果选中了南瓜种子
-				{
-					Constant.ToolSeedPumpkin.Use(toolNeedData);
-				}	
-				if (Constant.ToolSeedRadish.Selected())	// 如果选中了萝卜种子
-				{
-					Constant.ToolSeedRadish.Use(toolNeedData);
-				}
-				if (Constant.ToolHand.Selected())	// 如果选中了手
-				{
-					Constant.ToolHand.Use(toolNeedData);
-				}
-				if (Constant.ToolSeedPotato.Selected()) // 如果选中了土豆种子
-				{
-					Constant.ToolSeedPotato.Use(toolNeedData);
-				}
+				Global.CurrentTool.Value.Use(toolNeedData);
 			}
 		}
 	}

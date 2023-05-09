@@ -1,9 +1,8 @@
 // Generate Id:7b747dc7-0f02-4781-829c-93a8702f1567
 
 using Game.Inventory;
-using UnityEngine;
 
-namespace Game
+namespace Game.UI
 {
 	public partial class UIToolBar
 	{

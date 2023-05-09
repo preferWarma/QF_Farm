@@ -13,7 +13,6 @@ namespace Game.Tools
     }
 
     // 用于传递数据
-    
     public class ToolNeedData
     {
         public EasyGrid<SoilData> ShowGrid;

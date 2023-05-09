@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using Game.Inventory;
 using Game.Tools;
-using UnityEngine;
 using QFramework;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game
+namespace Game.UI
 {
 	public partial class UIToolBar : ViewController
 	{
@@ -36,7 +36,7 @@ namespace Game
 			_toolbarSlots.Add(ToolbarSlot9);
 			_toolbarSlots.Add(ToolbarSlot10);
 			
-			SetCurrentTool(Constant.ToolHand, _toolbarSlots[0].icon, _toolbarSlots[0].select);	// 设置默认工具
+			SetCurrentTool(Config.Hand.Tool, _toolbarSlots[0].icon, _toolbarSlots[0].select);	// 设置默认工具
 			
 			InitToolBarSlots();
 		}

@@ -11,7 +11,7 @@ namespace Game
     {
         [Header("游戏状态")]
         public static readonly BindableProperty<int> Days = new(1); // 第几天, 从第1天开始
-        public static readonly BindableProperty<ITool> CurrentTool = new(Constant.ToolHand);  // 当前工具, 默认为手
+        public static readonly BindableProperty<ITool> CurrentTool = new(Config.Hand.Tool);  // 当前工具, 默认为手
         
         [Header("植物数量")]
         public static readonly BindableProperty<int> PumpkinCount = new(); // 当前拥有的南瓜数量
@@ -30,11 +30,5 @@ namespace Game
         [Header("其他")]
         public static Player Player = null;
         public static MouseController Mouse = null;
-    }
-
-    public enum Language
-    {
-        Chinese,
-        English
     }
 }

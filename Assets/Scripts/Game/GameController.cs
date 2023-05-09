@@ -140,7 +140,7 @@ namespace Game
         private void InitValueOnStart()
         {
             Global.Days.Value = 1;  // 开局第一天
-            Global.CurrentTool.Value = Constant.ToolHand; // 开局默认手
+            Global.CurrentTool.Value = Config.Hand.Tool; // 开局默认手
             
             Global.PumpkinCount.Value = 0;  // 开局默认0个南瓜
             Global.RadishCount.Value = 0; // 开局默认0个萝卜

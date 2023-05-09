@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.Tools;
+using QFramework;
 using UnityEngine;
 
 namespace Game.Inventory
@@ -11,7 +12,7 @@ namespace Game.Inventory
         [Header("基本属性")]
         public string name; // 名称
         public string iconName; // 图标名(最后会使用动态加载的方式加载图标)
-        public int count; // 数量
+        public BindableProperty<int> Count; // 数量
         public bool canStack; // 是否可堆叠
 
         [Header("工具属性")]
