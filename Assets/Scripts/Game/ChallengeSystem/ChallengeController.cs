@@ -1,5 +1,4 @@
  using System.Collections.Generic;
- using Game.Plants;
  using QFramework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,6 +12,7 @@ namespace Game.ChallengeSystem
 		public static readonly BindableProperty<int> RipeAndHarvestCountInCurrentDay = new(); // 当天成熟并采摘的植物数量
 		public static readonly BindableProperty<int> HarvestCountInCurrentDay = new(); // 当天采摘的植物数量
 		public static readonly BindableProperty<int> HarvestRadishCountInCurrentDay = new(); // 当天采摘的萝卜数量
+		public static readonly BindableProperty<int> HarvestPotatoCountInCurrentDay = new(); // 当天采摘的土豆数量
 
 		[Header("和累计有关")]
 		public static readonly BindableProperty<int> TotalPumpkinCount = new(); // 累计采摘的南瓜数量
@@ -27,6 +27,7 @@ namespace Game.ChallengeSystem
 			new HarvestOneRadish(), // 收获一个萝卜挑战
 			new HarvestTenFruitsTotal(), // 累计收获10个果实挑战
 			new HasTenFruitsCurrently(), // 当前拥有十个以上的果实挑战
+			new HarvestOnePotato(), // 收获一个土豆挑战
 		}; // 挑战列表
 		public static readonly List<Challenge> ActiveChallenges = new(); // 激活的挑战列表
 		public static readonly List<Challenge> FinishedChallenges = new(); // 完成的挑战列表
@@ -66,7 +67,6 @@ namespace Game.ChallengeSystem
 		// 监听挑战完成
 		private void RegisterOnChallengeFinish()
 		{
-			// 监听挑战完成
 			Global.OnChallengeFinish.Register(challenge =>
 			{
 				AudioController.Instance.Sfx_Complete.Play(); // 播放挑战完成音效
@@ -79,6 +79,18 @@ namespace Game.ChallengeSystem
 						.Start(this);
 				}
 			}).UnRegisterWhenGameObjectDestroyed(this);
+		}
+
+		// 监听天数变化
+		private void RegisterOnDaysChange()
+		{
+			Global.Days.Register(_ =>
+			{
+				RipeAndHarvestCountInCurrentDay.Value = 0; // 每天开始时，重置当天成熟且采摘的水果数量
+				HarvestCountInCurrentDay.Value = 0; // 每天开始时，重置当天采摘的水果数量
+				HarvestRadishCountInCurrentDay.Value = 0; // 每天开始时，重置当天采摘的萝卜数量
+				HarvestPotatoCountInCurrentDay.Value = 0; // 每天开始时，重置当天采摘的土豆数量
+			});
 		}
 		
 		#endregion

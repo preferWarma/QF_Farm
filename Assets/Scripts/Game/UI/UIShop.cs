@@ -11,14 +11,16 @@ namespace Game.UI
 			BtnBuyPumpkin.onClick.AddListener(() =>
 			{
 				Global.PumpkinCount.Value--;
-				Global.PumpKinSeedCount.Value += 2;
-				
+				// Global.PumpKinSeedCount.Value += 2;
+				Config.SeedPumpkin.Count.Value += 2;
+
 				AudioController.Instance.Sfx_Trade.Play();
 			});
 			BtnBuyRadish.onClick.AddListener(() =>
 			{
 				Global.RadishCount.Value--;
-				Global.RadishSeedCount.Value += 2;
+				// Global.RadishSeedCount.Value += 2;
+				Config.SeedRadish.Count.Value += 2;
 				
 				AudioController.Instance.Sfx_Trade.Play();
 			});

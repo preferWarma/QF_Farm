@@ -75,5 +75,8 @@ namespace Game
         
         [Tooltip("有些地方会使用到的单独的物品引用")]
         public static readonly Item Hand = Items.Find(item => item.iconName == "Hand"); // 手 
+        public static readonly Item SeedPumpkin = Items.Find(item => item.iconName == "SeedPumpkin"); // 南瓜种子
+        public static readonly Item SeedRadish = Items.Find(item => item.iconName == "SeedRadish"); // 萝卜种子
+        public static readonly Item SeedPotato = Items.Find(item => item.iconName == "SeedPotato"); // 土豆种子
     }
 }

@@ -76,7 +76,7 @@ namespace Game
 				Tilemap = mTilemap,
 				Pen = mGridController.pen
 			};
-
+			
 			if (Global.CurrentTool.Value.Selected())
 			{
 				Global.CurrentTool.Value.Use(toolNeedData);

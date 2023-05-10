@@ -78,11 +78,7 @@ namespace Game
             Global.Days.Register(_ =>
             {
                 AudioController.Instance.Sfx_NextDay.Play(); // 播放下一天音效
-
-                ChallengeController.RipeAndHarvestCountInCurrentDay.Value = 0; // 每天开始时，重置当天成熟且采摘的水果数量
-                ChallengeController.HarvestCountInCurrentDay.Value = 0; // 每天开始时，重置当天采摘的水果数量
-                ChallengeController.HarvestRadishCountInCurrentDay.Value = 0; // 每天开始时，重置当天采摘的萝卜数量
-
+                
                 var soilDatas = FindObjectOfType<GridController>().ShowGrid;
 
                 PlantController.Instance.PlantGrid.ForEach((x, y, plant) =>
@@ -126,6 +122,7 @@ namespace Game
                 else if (plant is PlantPotato)
                 {
                     Global.PotatoCount.Value++;
+                    ChallengeController.HarvestPotatoCountInCurrentDay.Value++;
                 }
 
                 if (plant.RipeDay == Global.Days.Value) // 如果是当天成熟的植物被采摘
@@ -144,10 +141,7 @@ namespace Game
             
             Global.PumpkinCount.Value = 0;  // 开局默认0个南瓜
             Global.RadishCount.Value = 0; // 开局默认0个萝卜
-            Global.PumpKinSeedCount.Value = 5;  // 开局默认5个南瓜种子
-            Global.RadishSeedCount.Value = 5; // 开局默认5个萝卜种子
             Global.PotatoCount.Value = 0; // 开局默认0个土豆
-            Global.PotatoSeedCount.Value = 5; // 开局默认5个土豆种子
         }
     }
 }

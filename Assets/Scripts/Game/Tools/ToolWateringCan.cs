@@ -18,6 +18,7 @@ namespace Game.Tools
             var tilemap = needData.Tilemap;
             var pen = needData.Pen;
             
+            if (showGrid[cellPos.x, cellPos.y] == null) return; // 没有耕地
             if (showGrid[cellPos.x, cellPos.y].Watered) return; // 已经浇过水了
             AudioController.Instance.Sfx_Watering.Play();	// 播放浇水音效
             showGrid[cellPos.x, cellPos.y].Watered = true;

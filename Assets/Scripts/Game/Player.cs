@@ -24,7 +24,7 @@ namespace Game
 		private void OnGUI()
 		{
 			// 显示提示信息
-			IMGUIHelper.SetDesignResolution(1080,720);
+			IMGUIHelper.SetDesignResolution(720,480);
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
 			GUILayout.Label("  天数: " + Global.Days.Value);
@@ -34,32 +34,17 @@ namespace Game
 			GUILayout.BeginHorizontal();
 			GUILayout.Label("  南瓜果子: " + Global.PumpkinCount.Value);
 			GUILayout.EndHorizontal();
-			
-			GUILayout.Space(10);
-			GUILayout.BeginHorizontal();
-			GUILayout.Label("  南瓜种子: " + Global.PumpKinSeedCount.Value);
-			GUILayout.EndHorizontal();
-			
+
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
 			GUILayout.Label("  胡萝卜果子: " + Global.RadishCount.Value);
 			GUILayout.EndHorizontal();
-			
-			GUILayout.Space(10);
-			GUILayout.BeginHorizontal();
-			GUILayout.Label("  胡萝卜种子: " + Global.RadishSeedCount.Value);
-			GUILayout.EndHorizontal();
-			
+
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
 			GUILayout.Label("  土豆果子: " + Global.PotatoCount.Value);
 			GUILayout.EndHorizontal();
-			
-			GUILayout.Space(10);
-			GUILayout.BeginHorizontal();
-			GUILayout.Label("  土豆种子: " + Global.PotatoSeedCount.Value);
-			GUILayout.EndHorizontal();
-			
+
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
 			GUILayout.Label("  当天成熟并采摘的数量: " + ChallengeController.RipeAndHarvestCountInCurrentDay.Value);

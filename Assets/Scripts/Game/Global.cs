@@ -18,10 +18,10 @@ namespace Game
         public static readonly BindableProperty<int> RadishCount = new(); // 当前拥有的胡萝卜数量
         public static readonly BindableProperty<int> PotatoCount = new();   // 当前拥有的土豆数量
 
-        [Header("植物种子数量")] 
-        public static readonly BindableProperty<int> PumpKinSeedCount = new(5); // 南瓜种子数量
-        public static readonly BindableProperty<int> RadishSeedCount = new(5);  // 胡萝卜种子
-        public static readonly BindableProperty<int> PotatoSeedCount = new(5);  // 土豆种子
+        // [Header("植物种子数量")] 
+        // public static readonly BindableProperty<int> PumpKinSeedCount = new(5); // 南瓜种子数量
+        // public static readonly BindableProperty<int> RadishSeedCount = new(5);  // 胡萝卜种子
+        // public static readonly BindableProperty<int> PotatoSeedCount = new(5);  // 土豆种子
         
         [Header("事件相关")]
         public static readonly EasyEvent<IPlant> OnPlantHarvest = new(); // 采摘植物事件

@@ -18,6 +18,7 @@ namespace Game.Tools
             var tilemap = needData.Tilemap;
             var pen = needData.Pen;
             
+            if (showGrid[cellPos.x, cellPos.y] == null) return; // 没有耕地
             if (showGrid[cellPos.x, cellPos.y].PlantSates != PlantSates.Ripe) return;   // 当前植物未成熟
             AudioController.Instance.Sfx_Harvest.Play();	// 播放收获音效
             Global.OnPlantHarvest.Trigger(PlantController.Instance.PlantGrid[cellPos.x, cellPos.y]);    // 触发收获事件

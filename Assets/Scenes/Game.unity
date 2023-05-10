@@ -1469,9 +1469,6 @@ MonoBehaviour:
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
   waterPrefab: {fileID: 5147751245669483221, guid: 37eef3ed04659c041919933ab558b23f, type: 3}
-  plantPumpkinPrefab: {fileID: 949551888860867234, guid: 7e73ee98cca26b8418d1780067c076cf, type: 3}
-  plantRadishPrefab: {fileID: 5146968983972400641, guid: fc03b318d4aab8649bae7b19b2986d5a, type: 3}
-  plantPotatoPrefab: {fileID: 6963620104033150102, guid: 8e91e62b415586b4c9ab1227407c668d, type: 3}
   seedSprite: {fileID: 21300000, guid: 8304f264f5aaa9d48a636521d4dba558, type: 3}
   smallPlantSprite: {fileID: 21300000, guid: 24c5e42ce935e6744852daf241582f38, type: 3}
   ripeSprite: {fileID: 21300000, guid: 269a3e77b4ffed4448fd8ed22e56bb3c, type: 3}
@@ -1491,6 +1488,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b9a39f36fc8f7604aaf12cf9edd82aa6, type: 3}
   - {fileID: 21300000, guid: ab252b104090ebe46964ec53c5cb2ea1, type: 3}
   - {fileID: 21300000, guid: fa9662969d9219847b488f2afd39dc41, type: 3}
+  plantPrefabs:
+  - {fileID: 6963620104033150102, guid: 8e91e62b415586b4c9ab1227407c668d, type: 3}
+  - {fileID: 949551888860867234, guid: 7e73ee98cca26b8418d1780067c076cf, type: 3}
+  - {fileID: 5146968983972400641, guid: fc03b318d4aab8649bae7b19b2986d5a, type: 3}
 --- !u!4 &346271341
 Transform:
   m_ObjectHideFlags: 0
@@ -2457,6 +2458,8 @@ MonoBehaviour:
   icon: {fileID: 1676755208}
   select: {fileID: 721363062}
   shotCut: {fileID: 747266935}
+  count: {fileID: 1444925102}
+  button: {fileID: 567392582}
 --- !u!114 &567392581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3261,7 +3264,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e4ba712073c4bb742b47a3cc83bec07b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d32a079578d9bf142b3435384b907649, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4125,6 +4128,8 @@ MonoBehaviour:
   icon: {fileID: 743451568}
   select: {fileID: 161951254}
   shotCut: {fileID: 589010725}
+  count: {fileID: 406292738}
+  button: {fileID: 988863910}
 --- !u!114 &988863909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5226,6 +5231,8 @@ MonoBehaviour:
   icon: {fileID: 579178330}
   select: {fileID: 1371061532}
   shotCut: {fileID: 1776133793}
+  count: {fileID: 1990830449}
+  button: {fileID: 1168081949}
 --- !u!114 &1168081948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5511,24 +5518,6 @@ MonoBehaviour:
   ScriptsFolder: Assets/Scripts/Game
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
-  HandBtn: {fileID: 0}
-  HandBtnImage: {fileID: 0}
-  HandBtnSelect: {fileID: 0}
-  ShovelBtn: {fileID: 0}
-  ShovelBtnImage: {fileID: 0}
-  ShovelBtnSelect: {fileID: 0}
-  SeedPumpkinBtn: {fileID: 0}
-  SeedBtnPumpkinImage: {fileID: 0}
-  SeedBtnPumpkinSelect: {fileID: 0}
-  WatercanBtn: {fileID: 0}
-  WatercanBtnImage: {fileID: 0}
-  WatercanBtnSelect: {fileID: 0}
-  SeedRadishBtn: {fileID: 0}
-  SeedBtnRadishImage: {fileID: 0}
-  SeedBtnRadishSelect: {fileID: 0}
-  SeedPotatoBtn: {fileID: 0}
-  SeedBtnPotatoImage: {fileID: 0}
-  SeedBtnPotatoSelect: {fileID: 0}
   ToolbarSlot1: {fileID: 2107501971}
   ToolbarSlot2: {fileID: 1562900130}
   ToolbarSlot3: {fileID: 1682638199}
@@ -5599,6 +5588,8 @@ MonoBehaviour:
   icon: {fileID: 1686124807}
   select: {fileID: 227588317}
   shotCut: {fileID: 1589639112}
+  count: {fileID: 1841758178}
+  button: {fileID: 1219987331}
 --- !u!114 &1219987330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7323,7 +7314,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f2aa7af2163955f44b3ce29f112cc58a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e4ba712073c4bb742b47a3cc83bec07b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7401,6 +7392,8 @@ MonoBehaviour:
   icon: {fileID: 853504781}
   select: {fileID: 1465529653}
   shotCut: {fileID: 842594948}
+  count: {fileID: 1675654364}
+  button: {fileID: 1502834227}
 --- !u!114 &1502834226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7719,6 +7712,8 @@ MonoBehaviour:
   icon: {fileID: 1635460954}
   select: {fileID: 1877984990}
   shotCut: {fileID: 1324808653}
+  count: {fileID: 1788304901}
+  button: {fileID: 1562900132}
 --- !u!114 &1562900131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8434,6 +8429,8 @@ MonoBehaviour:
   icon: {fileID: 1539822850}
   select: {fileID: 1429603900}
   shotCut: {fileID: 1106389869}
+  count: {fileID: 1269554469}
+  button: {fileID: 1648442582}
 --- !u!114 &1648442582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8813,6 +8810,8 @@ MonoBehaviour:
   icon: {fileID: 1483398682}
   select: {fileID: 1976208963}
   shotCut: {fileID: 1169024850}
+  count: {fileID: 821389255}
+  button: {fileID: 1682638201}
 --- !u!114 &1682638200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10153,6 +10152,8 @@ MonoBehaviour:
   icon: {fileID: 73672399}
   select: {fileID: 1632201723}
   shotCut: {fileID: 1763133546}
+  count: {fileID: 2022800779}
+  button: {fileID: 1880933700}
 --- !u!114 &1880933699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11031,6 +11032,8 @@ MonoBehaviour:
   icon: {fileID: 431737990}
   select: {fileID: 632691590}
   shotCut: {fileID: 481401006}
+  count: {fileID: 597120713}
+  button: {fileID: 2107501973}
 --- !u!114 &2107501972
 MonoBehaviour:
   m_ObjectHideFlags: 0

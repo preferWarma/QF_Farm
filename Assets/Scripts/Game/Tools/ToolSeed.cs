@@ -25,6 +25,7 @@ namespace Game.Tools
             var tilemap = needData.Tilemap;
             var pen = needData.Pen;
             
+            if (showGrid[cellPos.x, cellPos.y] == null) return; // 该格子无耕地
             if (showGrid[cellPos.x, cellPos.y].HasPlant) return; // 已经有植物了
             
             var tileWorldPos = tilemap.GetCellCenterWorld(cellPos);
