@@ -1,8 +1,8 @@
-﻿namespace Game.ChallengeSystem
+﻿namespace Game.ChallengeSystem.ChallengeTasks
 {
-    public class HarvestTenFruitsTotal : Challenge
+    public class HasTenFruitsCurrently : Challenge
     {
-        public override string Name => "累计收获10个果实";
+        public override string Name => "当前拥有十个以上的果实";
         
         public override void OnStart()
         {
@@ -12,7 +12,7 @@
         public override bool CheckFinish()
         {
             if (StartDate == Global.Days.Value) return false;
-            return ChallengeController.TotalPumpkinCount.Value + ChallengeController.TotalRadishCount.Value >= 10;
+            return Global.PumpkinCount.Value + Global.RadishCount.Value >= 10;
         }
 
         public override void OnFinish()

@@ -23,7 +23,7 @@ namespace Game
 		private void OnGUI()
 		{
 			// 显示提示信息
-			IMGUIHelper.SetDesignResolution(720, 480);
+			IMGUIHelper.SetDesignResolution(720, 540);
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
 			GUILayout.Label("  天数: " + Global.Days.Value);

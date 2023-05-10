@@ -1,4 +1,5 @@
  using System.Collections.Generic;
+ using Game.ChallengeSystem.ChallengeTasks;
  using QFramework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -28,6 +29,7 @@ namespace Game.ChallengeSystem
 			new HarvestTenFruitsTotal(), // 累计收获10个果实挑战
 			new HasTenFruitsCurrently(), // 当前拥有十个以上的果实挑战
 			new HarvestOnePotato(), // 收获一个土豆挑战
+			new Have100MoneyCurrently(),	// 当前拥有100金币挑战
 		}; // 挑战列表
 		public static readonly List<Challenge> ActiveChallenges = new(); // 激活的挑战列表
 		public static readonly List<Challenge> FinishedChallenges = new(); // 完成的挑战列表

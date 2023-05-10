@@ -1,4 +1,4 @@
-﻿namespace Game.ChallengeSystem
+﻿namespace Game.ChallengeSystem.ChallengeTasks
 {
     public class RipeAndHarvestTwoInOneDay : Challenge
     {
