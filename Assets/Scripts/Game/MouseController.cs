@@ -41,7 +41,7 @@ namespace Game
 
 			Icon.Position(worldMousePoint.x, worldMousePoint.y);	// 设置鼠标图标的位置
 			
-			if (Mathf.Abs(playerCellPos.x - cellPosition.x) <= 1 && Mathf.Abs(playerCellPos.y - cellPosition.y) <= 1)	// 鼠标在玩家周围
+			// if (Mathf.Abs(playerCellPos.x - cellPosition.x) <= 1 && Mathf.Abs(playerCellPos.y - cellPosition.y) <= 1)	// 鼠标在玩家周围
 			{
 				if (cellPosition.x is < 10 and >= 0 && cellPosition.y is < 10 and >= 0)	// 鼠标在地图内
 				{
@@ -52,10 +52,10 @@ namespace Game
 					transform.position = gridCenterPosition; // 将鼠标对应的格子位置显示出来
 				}
 			}
-			else
-			{
-				mSpriteRenderer.enabled = false;
-			}
+			// else
+			// {
+			// 	mSpriteRenderer.enabled = false;
+			// }
 		}
 
 		private void OnDestroy()

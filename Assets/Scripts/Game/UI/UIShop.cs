@@ -1,4 +1,6 @@
+using System;
 using QFramework;
+using UnityEngine.UI;
 
 namespace Game.UI
 {
@@ -6,54 +8,76 @@ namespace Game.UI
 	{
 		private void Start()
 		{
-			RegisterRadish();
-			RegisterPumpkin();
-			BtnBuyPumpkin.onClick.AddListener(() =>
+			// 注册购买植物种子按钮的方法
+			RegisterBuySeed(BtnBuyPumpkinSeed, Global.Money, Config.SeedPumpkin.Count, 1);
+			RegisterBuySeed(BtnBuyRadishSeed, Global.Money, Config.SeedRadish.Count, 2);
+			RegisterBuySeed(BtnBuyPotatoSeed, Global.Money, Config.SeedPotato.Count, 3);
+			
+			// 注册出售植物按钮的方法
+			RegisterSellPlant(BtnSellPumpkin, Global.PumpkinCount, Global.Money, 2);
+			RegisterSellPlant(BtnSellRadish, Global.RadishCount, Global.Money, 4);
+			RegisterSellPlant(BtnSellPotato, Global.PotatoCount, Global.Money, 6);
+			
+			// 买按钮的显示条件
+			SetBtnShowCondition(Global.Money, BtnBuyPumpkinSeed, money => money >= 1);
+			SetBtnShowCondition(Global.Money, BtnBuyRadishSeed, money => money >= 2);
+			SetBtnShowCondition(Global.Money, BtnBuyPotatoSeed, money => money >= 3);
+			
+			// 卖按钮的显示条件
+			SetBtnShowCondition(Global.PumpkinCount, BtnSellPumpkin, count => count > 0);
+			SetBtnShowCondition(Global.RadishCount, BtnSellRadish, count => count > 0);
+			SetBtnShowCondition(Global.PotatoCount, BtnSellPotato, count => count > 0);
+			
+		}
+		
+		/// <summary>
+		/// 设置按钮显示条件
+		/// </summary>
+		/// <param name="item"> 显示条件的对象 </param>
+		/// <param name="btn"> 当前设置的按钮 </param>
+		/// <param name="showCondition"> 显示的条件 </param>
+		private void SetBtnShowCondition(BindableProperty<int> item, Button btn, Func<int, bool> showCondition)
+		{
+			item.RegisterWithInitValue(countValue =>
 			{
-				Global.PumpkinCount.Value--;
-				// Global.PumpKinSeedCount.Value += 2;
-				Config.SeedPumpkin.Count.Value += 2;
-
-				AudioController.Instance.Sfx_Trade.Play();
+				btn.gameObject.SetActive(showCondition(countValue));
 			});
-			BtnBuyRadish.onClick.AddListener(() =>
+		}
+		
+		/// <summary>
+		/// 注册购买植物种子按钮的方法
+		/// </summary>
+		/// <param name="btnBuy"> 当前设置的按钮 </param>
+		/// <param name="money"> 货币对象 </param>
+		/// <param name="seedCount"> 需要购买的植物种子的数量对象 </param>
+		/// <param name="buyPrice"> 购买单价 </param>
+		private void RegisterBuySeed(Button btnBuy, BindableProperty<int> money, BindableProperty<int> seedCount, int buyPrice)
+		{
+			btnBuy.onClick.AddListener(() =>
 			{
-				Global.RadishCount.Value--;
-				// Global.RadishSeedCount.Value += 2;
-				Config.SeedRadish.Count.Value += 2;
+				money.Value -= buyPrice;
+				seedCount.Value ++;
 				
 				AudioController.Instance.Sfx_Trade.Play();
 			});
 		}
-
-		private void RegisterPumpkin()
+		
+		/// <summary>
+		/// 注册出售植物按钮的方法
+		/// </summary>
+		/// <param name="btnSell"> 当前设置的按钮 </param>
+		/// <param name="fruitCount"> 需要出售的植物的数量对象 </param>
+		/// <param name="money"> 货币对象 </param>
+		/// <param name="sellPrice"> 出售单价 </param>
+		private void RegisterSellPlant(Button btnSell, BindableProperty<int> fruitCount, BindableProperty<int> money, int sellPrice)
 		{
-			Global.PumpkinCount.RegisterWithInitValue(count =>
+			btnSell.onClick.AddListener(() =>
 			{
-				if (count >= 1)
-				{
-					BtnBuyPumpkin.Show();
-				}
-				else
-				{
-					BtnBuyPumpkin.Hide();
-				}
-			}).UnRegisterWhenGameObjectDestroyed(this);
-		}
-
-		private void RegisterRadish()
-		{
-			Global.RadishCount.RegisterWithInitValue(count =>
-			{
-				if (count >= 1)
-				{
-					BtnBuyRadish.Show();
-				}
-				else
-				{
-					BtnBuyRadish.Hide();
-				}
-			}).UnRegisterWhenGameObjectDestroyed(this);
+				fruitCount.Value --;
+				money.Value += sellPrice;
+				
+				AudioController.Instance.Sfx_Trade.Play();
+			});
 		}
 	}
 }

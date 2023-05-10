@@ -1,4 +1,3 @@
-using Game.ChallengeSystem;
 using UnityEngine;
 using QFramework;
 
@@ -24,12 +23,17 @@ namespace Game
 		private void OnGUI()
 		{
 			// 显示提示信息
-			IMGUIHelper.SetDesignResolution(720,480);
+			IMGUIHelper.SetDesignResolution(720, 480);
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
 			GUILayout.Label("  天数: " + Global.Days.Value);
 			GUILayout.EndHorizontal();
-			
+
+			GUILayout.Space(10);
+			GUILayout.BeginHorizontal();
+			GUILayout.Label("  <color=yellow>$金币: " + Global.Money.Value + "</color>");
+			GUILayout.EndHorizontal();
+
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
 			GUILayout.Label("  南瓜果子: " + Global.PumpkinCount.Value);
@@ -43,11 +47,6 @@ namespace Game
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
 			GUILayout.Label("  土豆果子: " + Global.PotatoCount.Value);
-			GUILayout.EndHorizontal();
-
-			GUILayout.Space(10);
-			GUILayout.BeginHorizontal();
-			GUILayout.Label("  当天成熟并采摘的数量: " + ChallengeController.RipeAndHarvestCountInCurrentDay.Value);
 			GUILayout.EndHorizontal();
 		}
 

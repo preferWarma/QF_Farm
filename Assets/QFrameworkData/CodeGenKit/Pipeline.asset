@@ -20,111 +20,32 @@ MonoBehaviour:
     NameToFullName: []
     BindInfos:
     - TypeName: UnityEngine.UI.Button
-      PathToRoot: HandBtn
-      MemberName: HandBtn
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: HandBtn/HandBtnImage
-      MemberName: HandBtnImage
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: HandBtn/HandBtnSelect
-      MemberName: HandBtnSelect
+      PathToRoot: BtnBuyPumpkinSeed
+      MemberName: BtnBuyPumpkinSeed
     - TypeName: UnityEngine.UI.Button
-      PathToRoot: ShovelBtn
-      MemberName: ShovelBtn
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: ShovelBtn/ShovelBtnImage
-      MemberName: ShovelBtnImage
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: ShovelBtn/ShovelBtnSelect
-      MemberName: ShovelBtnSelect
+      PathToRoot: BtnBuyRadishSeed
+      MemberName: BtnBuyRadishSeed
     - TypeName: UnityEngine.UI.Button
-      PathToRoot: SeedPumpkinBtn
-      MemberName: SeedPumpkinBtn
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: SeedPumpkinBtn/SeedBtnPumpkinImage
-      MemberName: SeedBtnPumpkinImage
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: SeedPumpkinBtn/SeedBtnPumpkinSelect
-      MemberName: SeedBtnPumpkinSelect
+      PathToRoot: BtnBuyPotatoSeed
+      MemberName: BtnBuyPotatoSeed
     - TypeName: UnityEngine.UI.Button
-      PathToRoot: WatercanBtn
-      MemberName: WatercanBtn
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: WatercanBtn/WatercanBtnImage
-      MemberName: WatercanBtnImage
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: WatercanBtn/WatercanBtnSelect
-      MemberName: WatercanBtnSelect
+      PathToRoot: BtnSellPumpkin
+      MemberName: BtnSellPumpkin
     - TypeName: UnityEngine.UI.Button
-      PathToRoot: SeedRadishBtn
-      MemberName: SeedRadishBtn
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: SeedRadishBtn/SeedBtnRadishImage
-      MemberName: SeedBtnRadishImage
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: SeedRadishBtn/SeedBtnRadishSelect
-      MemberName: SeedBtnRadishSelect
+      PathToRoot: BtnSellRadish
+      MemberName: BtnSellRadish
     - TypeName: UnityEngine.UI.Button
-      PathToRoot: SeedPotatoBtn
-      MemberName: SeedPotatoBtn
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: SeedPotatoBtn/SeedBtnPotatoImage
-      MemberName: SeedBtnPotatoImage
-    - TypeName: UnityEngine.UI.Image
-      PathToRoot: SeedPotatoBtn/SeedBtnPotatoSelect
-      MemberName: SeedBtnPotatoSelect
-    - TypeName: Game.UISlot
-      PathToRoot: ToolbarSlot1
-      MemberName: ToolbarSlot1
-    - TypeName: Game.UISlot
-      PathToRoot: ToolbarSlot2
-      MemberName: ToolbarSlot2
-    - TypeName: Game.UISlot
-      PathToRoot: ToolbarSlot3
-      MemberName: ToolbarSlot3
-    - TypeName: Game.UISlot
-      PathToRoot: ToolbarSlot4
-      MemberName: ToolbarSlot4
-    - TypeName: Game.UISlot
-      PathToRoot: ToolbarSlot5
-      MemberName: ToolbarSlot5
-    - TypeName: Game.UISlot
-      PathToRoot: ToolbarSlot6
-      MemberName: ToolbarSlot6
-    - TypeName: Game.UISlot
-      PathToRoot: ToolbarSlot7
-      MemberName: ToolbarSlot7
-    - TypeName: Game.UISlot
-      PathToRoot: ToolbarSlot8
-      MemberName: ToolbarSlot8
-    - TypeName: Game.UISlot
-      PathToRoot: ToolbarSlot9
-      MemberName: ToolbarSlot9
-    - TypeName: Game.UISlot
-      PathToRoot: ToolbarSlot10
-      MemberName: ToolbarSlot10
-    ScriptsFolder: Assets/Scripts/Game
-    ClassName: UIToolBar
-    Namespace: Game
-    MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game\r\n{\r\n\tpublic
-      partial class UIToolBar : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      PathToRoot: BtnSellPotato
+      MemberName: BtnSellPotato
+    ScriptsFolder: Assets/Scripts/Game/UI
+    ClassName: UIShop
+    Namespace: Game.UI
+    MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game.UI\r\n{\r\n\tpublic
+      partial class UIShop : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:7b747dc7-0f02-4781-829c-93a8702f1567\r\nusing UnityEngine;\r\n\r\nnamespace
-      Game\r\n{\r\n\tpublic partial class UIToolBar\r\n\t{\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      HandBtn;\r\n\r\n\t\tpublic UnityEngine.UI.Image HandBtnImage;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Image HandBtnSelect;\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      ShovelBtn;\r\n\r\n\t\tpublic UnityEngine.UI.Image ShovelBtnImage;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Image ShovelBtnSelect;\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      SeedPumpkinBtn;\r\n\r\n\t\tpublic UnityEngine.UI.Image SeedBtnPumpkinImage;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Image SeedBtnPumpkinSelect;\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      WatercanBtn;\r\n\r\n\t\tpublic UnityEngine.UI.Image WatercanBtnImage;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Image WatercanBtnSelect;\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      SeedRadishBtn;\r\n\r\n\t\tpublic UnityEngine.UI.Image SeedBtnRadishImage;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Image SeedBtnRadishSelect;\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      SeedPotatoBtn;\r\n\r\n\t\tpublic UnityEngine.UI.Image SeedBtnPotatoImage;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Image SeedBtnPotatoSelect;\r\n\r\n\t\tpublic Game.UISlot ToolbarSlot1;\r\n\r\n\t\tpublic
-      Game.UISlot ToolbarSlot2;\r\n\r\n\t\tpublic Game.UISlot ToolbarSlot3;\r\n\r\n\t\tpublic
-      Game.UISlot ToolbarSlot4;\r\n\r\n\t\tpublic Game.UISlot ToolbarSlot5;\r\n\r\n\t\tpublic
-      Game.UISlot ToolbarSlot6;\r\n\r\n\t\tpublic Game.UISlot ToolbarSlot7;\r\n\r\n\t\tpublic
-      Game.UISlot ToolbarSlot8;\r\n\r\n\t\tpublic Game.UISlot ToolbarSlot9;\r\n\r\n\t\tpublic
-      Game.UISlot ToolbarSlot10;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:b106bcc1-27e1-4a0d-ac71-36f4048ab460\r\nusing UnityEngine;\r\n\r\nnamespace
+      Game.UI\r\n{\r\n\tpublic partial class UIShop\r\n\t{\r\n\r\n\t\tpublic UnityEngine.UI.Button
+      BtnBuyPumpkinSeed;\r\n\r\n\t\tpublic UnityEngine.UI.Button BtnBuyRadishSeed;\r\n\r\n\t\tpublic
+      UnityEngine.UI.Button BtnBuyPotatoSeed;\r\n\r\n\t\tpublic UnityEngine.UI.Button
+      BtnSellPumpkin;\r\n\r\n\t\tpublic UnityEngine.UI.Button BtnSellRadish;\r\n\r\n\t\tpublic
+      UnityEngine.UI.Button BtnSellPotato;\r\n\r\n\t}\r\n}\r\n"
