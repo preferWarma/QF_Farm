@@ -6,6 +6,7 @@ namespace Game.Tools
     public class ToolShovel : ITool
     {
         public string Name => "Shovel";
+        public int ToolScope { get; set; } = 1;
 
         public bool Selected()
         {

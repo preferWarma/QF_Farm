@@ -41,7 +41,7 @@ namespace Game.UI
 			item.RegisterWithInitValue(countValue =>
 			{
 				btn.gameObject.SetActive(showCondition(countValue));
-			});
+			}).UnRegisterWhenGameObjectDestroyed(this);
 		}
 		
 		/// <summary>

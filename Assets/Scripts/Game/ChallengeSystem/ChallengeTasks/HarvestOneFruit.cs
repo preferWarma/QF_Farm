@@ -1,6 +1,6 @@
 ﻿namespace Game.ChallengeSystem.ChallengeTasks
 {
-    public class ChallengeHarvestOneFruit : Challenge
+    public class HarvestOneFruit : Challenge
     {
         public override string Name => "完成一个果实的收获";
         public override void OnStart()

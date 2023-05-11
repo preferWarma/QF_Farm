@@ -5,6 +5,7 @@ namespace Game.Tools
     public class ToolWateringCan : ITool
     {
         public string Name => "WateringCan";
+        public int ToolScope { get; set; } = 1;
 
         public bool Selected()
         {

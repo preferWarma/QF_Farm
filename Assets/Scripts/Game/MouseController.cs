@@ -37,25 +37,25 @@ namespace Game
 		{
 			var playerCellPos = mgrid.WorldToCell(Global.Player.transform.position);	// 获取玩家所在的格子位置
 			var worldMousePoint = mCamera.ScreenToWorldPoint(Input.mousePosition);	// 获取鼠标所在的世界坐标
-			var cellPosition = mgrid.WorldToCell(worldMousePoint);		// 获取鼠标所在的格子位置
+			var mouseCellPos = mgrid.WorldToCell(worldMousePoint);		// 获取鼠标所在的格子位置
 
 			Icon.Position(worldMousePoint.x, worldMousePoint.y);	// 设置鼠标图标的位置
 			
-			// if (Mathf.Abs(playerCellPos.x - cellPosition.x) <= 1 && Mathf.Abs(playerCellPos.y - cellPosition.y) <= 1)	// 鼠标在玩家周围
+			if (InToolRange(playerCellPos, mouseCellPos, Global.CurrentTool.Value.ToolScope))	// 在工具周围内
 			{
-				if (cellPosition.x is < 10 and >= 0 && cellPosition.y is < 10 and >= 0)	// 鼠标在地图内
+				if (mouseCellPos.x is < 10 and >= 0 && mouseCellPos.y is < 10 and >= 0)	// 鼠标在地图内
 				{
-					DoOnMouse0(cellPosition);
+					DoOnMouse0(mouseCellPos);
 					mSpriteRenderer.enabled = true;
-					var gridCenterPosition = mgrid.GetCellCenterWorld(cellPosition); // 获取格子中心点的世界坐标
+					var gridCenterPosition = mgrid.GetCellCenterWorld(mouseCellPos); // 获取格子中心点的世界坐标
 					gridCenterPosition -= mgrid.cellSize * 0.5f;
 					transform.position = gridCenterPosition; // 将鼠标对应的格子位置显示出来
 				}
 			}
-			// else
-			// {
-			// 	mSpriteRenderer.enabled = false;
-			// }
+			else
+			{
+				mSpriteRenderer.enabled = false;
+			}
 		}
 
 		private void OnDestroy()
@@ -81,6 +81,12 @@ namespace Game
 			{
 				Global.CurrentTool.Value.Use(toolNeedData);
 			}
+		}
+
+		// 检测工具是否在范围内
+		private bool InToolRange(Vector3Int playerCellPos, Vector3Int mouseCellPos, int range)
+		{
+			return Mathf.Abs(playerCellPos.x - mouseCellPos.x) <= range && Mathf.Abs(playerCellPos.y - mouseCellPos.y) <= range;
 		}
 	}
 }

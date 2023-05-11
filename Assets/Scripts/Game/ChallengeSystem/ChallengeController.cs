@@ -22,7 +22,7 @@ namespace Game.ChallengeSystem
 		[Header("挑战列表")]
 		public static readonly List<Challenge> Challenges = new()
 		{
-			new ChallengeHarvestOneFruit(),   // 收获第一个果实挑战
+			new HarvestOneFruit(),   // 收获第一个果实挑战
 			new RipeAndHarvestTwoInOneDay(), // 一天成熟并收获两个果实挑战
 			new RipeAndHarvestFiveInOneDay(), // 一天成熟并收获五个果实挑战
 			new HarvestOneRadish(), // 收获一个萝卜挑战

@@ -5,6 +5,7 @@ namespace Game.Tools
     public class ToolHand : ITool
     {
         public string Name => "Hand";
+        public int ToolScope { get; set; } = 1;
 
         public bool Selected()
         {

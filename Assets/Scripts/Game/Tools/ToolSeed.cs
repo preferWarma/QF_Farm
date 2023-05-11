@@ -8,7 +8,8 @@ namespace Game.Tools
     public class ToolSeed : ITool
     {
         public string Name => "Seed";
-        
+        public int ToolScope { get; set; } = 1;
+
         public Item Item { get; set; }  // 与背包中的物品对应
 
         public bool Selected()

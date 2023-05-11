@@ -19,7 +19,10 @@ namespace Game
         public static readonly BindableProperty<int> PotatoCount = new();   // 当前拥有的土豆数量
 
         [Header("货币")]
-        public static readonly BindableProperty<int> Money = new(); // 当前拥有的金钱
+        public static readonly BindableProperty<int> Money = new(60); // 当前拥有的金钱
+        
+        [Header("升级相关")]
+        public static readonly bool[] IsToolUpgraded = new bool[3]; // 工具是否升级
         
         [Header("事件相关")]
         public static readonly EasyEvent<IPlant> OnPlantHarvest = new(); // 采摘植物事件
