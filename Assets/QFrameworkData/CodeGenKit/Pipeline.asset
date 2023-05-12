@@ -28,13 +28,17 @@ MonoBehaviour:
     - TypeName: UnityEngine.UI.Button
       PathToRoot: BtnUpgradeWateringCan
       MemberName: BtnUpgradeWateringCan
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: BtnUpgradeSeed
+      MemberName: BtnUpgradeSeed
     ScriptsFolder: Assets/Scripts/Game/UI
     ClassName: UIPowerUp
     Namespace: Game.UI
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game.UI\r\n{\r\n\tpublic
       partial class UIPowerUp : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:8a998179-1dfb-412d-bcf6-594d3f194a6d\r\nusing UnityEngine;\r\n\r\nnamespace
+    DesignerCode: "// Generate Id:4d7b8149-dab5-44e5-b6b7-59bf6efbcd8e\r\nusing UnityEngine;\r\n\r\nnamespace
       Game.UI\r\n{\r\n\tpublic partial class UIPowerUp\r\n\t{\r\n\r\n\t\tpublic UnityEngine.UI.Button
       BtnUpgradeHand;\r\n\r\n\t\tpublic UnityEngine.UI.Button BtnUpgradeShovel;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Button BtnUpgradeWateringCan;\r\n\r\n\t}\r\n}\r\n"
+      UnityEngine.UI.Button BtnUpgradeWateringCan;\r\n\r\n\t\tpublic UnityEngine.UI.Button
+      BtnUpgradeSeed;\r\n\r\n\t}\r\n}\r\n"

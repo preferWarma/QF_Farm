@@ -20,10 +20,10 @@ namespace Game
 
         [Header("货币")]
         public static readonly BindableProperty<int> Money = new(60); // 当前拥有的金钱
-        
+
         [Header("升级相关")]
-        public static readonly bool[] IsToolUpgraded = new bool[3]; // 工具是否升级
-        
+        public static readonly bool[] IsToolUpgraded = new bool[4]; // 工具是否升级(顺序按照工具的顺序)
+
         [Header("事件相关")]
         public static readonly EasyEvent<IPlant> OnPlantHarvest = new(); // 采摘植物事件
         public static readonly EasyEvent<Challenge> OnChallengeFinish = new(); // 挑战完成事件

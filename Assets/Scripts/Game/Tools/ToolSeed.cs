@@ -8,8 +8,8 @@ namespace Game.Tools
     public class ToolSeed : ITool
     {
         public string Name => "Seed";
-        public int ToolScope { get; set; } = 1;
 
+        public int ToolScope => Global.IsToolUpgraded[3] ? 2 : 1;
         public Item Item { get; set; }  // 与背包中的物品对应
 
         public bool Selected()
@@ -24,8 +24,7 @@ namespace Game.Tools
             var showGrid = needData.ShowGrid;
             var cellPos = needData.CellPos;
             var tilemap = needData.Tilemap;
-            var pen = needData.Pen;
-            
+
             if (showGrid[cellPos.x, cellPos.y] == null) return; // 该格子无耕地
             if (showGrid[cellPos.x, cellPos.y].HasPlant) return; // 已经有植物了
             
@@ -42,7 +41,7 @@ namespace Game.Tools
             AudioController.Instance.Sfx_PutSeed.Play(); // 播放种植音效
             Item.Count.Value--;
             var plant = plantObj.GetComponent<IPlant>();
-            plant.X = cellPos.x;
+            plant.X = cellPos.x;    // 设置植物的位置, 与耕地的位置一致
             plant.Y = cellPos.y;
             plant.SetState(PlantSates.Seed);
 

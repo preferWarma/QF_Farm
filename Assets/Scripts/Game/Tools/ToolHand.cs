@@ -5,7 +5,7 @@ namespace Game.Tools
     public class ToolHand : ITool
     {
         public string Name => "Hand";
-        public int ToolScope { get; set; } = 1;
+        public int ToolScope => Global.IsToolUpgraded[0] ? 2 : 1;
 
         public bool Selected()
         {
@@ -16,9 +16,7 @@ namespace Game.Tools
         {
             var showGrid = needData.ShowGrid;
             var cellPos = needData.CellPos;
-            var tilemap = needData.Tilemap;
-            var pen = needData.Pen;
-            
+
             if (showGrid[cellPos.x, cellPos.y] == null) return; // 没有耕地
             if (showGrid[cellPos.x, cellPos.y].PlantSates != PlantSates.Ripe) return;   // 当前植物未成熟
             AudioController.Instance.Sfx_Harvest.Play();	// 播放收获音效

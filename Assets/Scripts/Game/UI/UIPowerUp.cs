@@ -12,13 +12,13 @@ namespace Game.UI
 			SetBtnShowCondition(Global.Money, BtnUpgradeHand, money => money >= 10 && !Global.IsToolUpgraded[0]);
 			SetBtnShowCondition(Global.Money, BtnUpgradeShovel, money => money >= 20 && !Global.IsToolUpgraded[1]);
 			SetBtnShowCondition(Global.Money, BtnUpgradeWateringCan, money => money >= 30 && !Global.IsToolUpgraded[2]);
+			SetBtnShowCondition(Global.Money, BtnUpgradeSeed, money => money >= 40 && !Global.IsToolUpgraded[3]);
 			
 			// 注册按钮事件
 			BtnUpgradeHand.onClick.AddListener(() =>
 			{
 				Global.IsToolUpgraded[0] = true;
 				Global.Money.Value -= 10;
-				Config.Hand.Tool.ToolScope++;	// 手的工作范围增加
 				AudioController.Instance.Sfx_Trade.Play();
 			});
 			
@@ -26,7 +26,6 @@ namespace Game.UI
 			{
 				Global.IsToolUpgraded[1] = true;
 				Global.Money.Value -= 20;
-				Config.Shovel.Tool.ToolScope++;	// 锄头的工作范围增加
 				AudioController.Instance.Sfx_Trade.Play();
 			});
 			
@@ -34,7 +33,13 @@ namespace Game.UI
 			{
 				Global.IsToolUpgraded[2] = true;
 				Global.Money.Value -= 30;
-				Config.WateringCan.Tool.ToolScope++;	// 水壶的工作范围增加
+				AudioController.Instance.Sfx_Trade.Play();
+			});
+			
+			BtnUpgradeSeed.onClick.AddListener(() =>
+			{
+				Global.IsToolUpgraded[3] = true;	// 种子工具升级
+				Global.Money.Value -= 40;
 				AudioController.Instance.Sfx_Trade.Play();
 			});
 		}

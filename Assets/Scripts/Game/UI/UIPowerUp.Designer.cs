@@ -1,4 +1,4 @@
-// Generate Id:8a998179-1dfb-412d-bcf6-594d3f194a6d
+// Generate Id:4d7b8149-dab5-44e5-b6b7-59bf6efbcd8e
 using UnityEngine;
 
 namespace Game.UI
@@ -11,6 +11,8 @@ namespace Game.UI
 		public UnityEngine.UI.Button BtnUpgradeShovel;
 
 		public UnityEngine.UI.Button BtnUpgradeWateringCan;
+
+		public UnityEngine.UI.Button BtnUpgradeSeed;
 
 	}
 }
