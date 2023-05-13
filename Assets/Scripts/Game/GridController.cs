@@ -10,28 +10,16 @@ namespace Game
 	{
 		[Header("笔刷")]
 		public TileBase pen;	// 地形笔刷
-		public TileBase grassPen;	// 草地笔刷
+		public TileBase canCultivateFieldPen;	// 可开垦区域笔刷笔刷
 
-		public EasyGrid<SoilData> ShowGrid { get; } = new(10,10);
+		public EasyGrid<SoilData> ShowGrid { get; } = new(5,4);
 
 		private void Start()
 		{
-			ShowGrid[0, 0] = new SoilData();
-			ShowGrid[1, 1] = new SoilData();
-			ShowGrid[2, 2] = new SoilData();
-			
-			ShowGrid.ForEach((x, y, data) =>
+			// 画可以种植的区域
+			ShowGrid.ForEach((x, y, _) =>
 			{
-				if (data != null)
-				{
-					Soil.SetTile(new Vector3Int(x, y), pen);
-				}
-			});
-			
-			// 画可以种植的草地
-			ShowGrid.ForEach((x, y, data) =>
-			{
-				Ground.SetTile(new Vector3Int(x, y), grassPen);
+				Ground.SetTile(new Vector3Int(x, y), canCultivateFieldPen);
 			});
 		}
 

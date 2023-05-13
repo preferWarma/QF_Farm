@@ -43,7 +43,8 @@ namespace Game
 			
 			if (InToolRange(playerCellPos, mouseCellPos, Global.CurrentTool.Value.ToolScope))	// 在工具周围内
 			{
-				if (mouseCellPos.x is < 10 and >= 0 && mouseCellPos.y is < 10 and >= 0)	// 鼠标在地图内
+				if (mouseCellPos.x < mshowGrid.Width && mouseCellPos.x >= 0 &&
+				    mouseCellPos.y < mshowGrid.Height && mouseCellPos.y >= 0)	// 鼠标在地图内
 				{
 					DoOnMouse0(mouseCellPos);
 					mSpriteRenderer.enabled = true;

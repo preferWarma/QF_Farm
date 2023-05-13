@@ -15,7 +15,7 @@ namespace Game
 	{
 		public static PlantController Instance => MonoSingletonProperty<PlantController>.Instance;
 
-		public readonly EasyGrid<IPlant> PlantGrid = new(10, 10);
+		public readonly EasyGrid<IPlant> PlantGrid = new(5, 4);
 
 		public void OnSingletonInit()
 		{
