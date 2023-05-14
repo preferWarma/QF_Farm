@@ -17,6 +17,7 @@ namespace Game
         public static readonly BindableProperty<int> PumpkinCount = new(); // 当前拥有的南瓜数量
         public static readonly BindableProperty<int> RadishCount = new(); // 当前拥有的胡萝卜数量
         public static readonly BindableProperty<int> PotatoCount = new();   // 当前拥有的土豆数量
+        public static readonly BindableProperty<int> TomatoCount = new();   // 当前拥有的西红柿数量
 
         [Header("货币")]
         public static readonly BindableProperty<int> Money = new(60); // 当前拥有的金钱

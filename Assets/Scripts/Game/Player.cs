@@ -23,7 +23,7 @@ namespace Game
 		private void OnGUI()
 		{
 			// 显示提示信息
-			IMGUIHelper.SetDesignResolution(720, 480);
+			IMGUIHelper.SetDesignResolution(720, 360);
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
 			GUILayout.Label(" 天数: " + Global.Days.Value);
@@ -36,17 +36,22 @@ namespace Game
 
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
-			GUILayout.Label(" 南瓜果子: " + Global.PumpkinCount.Value);
+			GUILayout.Label("<color=black>" + " 南瓜果子: " + Global.PumpkinCount.Value + "</color>");
 			GUILayout.EndHorizontal();
 
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
-			GUILayout.Label(" 胡萝卜果子: " + Global.RadishCount.Value);
+			GUILayout.Label("<color=black>" + " 胡萝卜果子: " + Global.RadishCount.Value + "</color>");
 			GUILayout.EndHorizontal();
 
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
-			GUILayout.Label(" 土豆果子: " + Global.PotatoCount.Value);
+			GUILayout.Label("<color=black>" + " 土豆果子: " + Global.PotatoCount.Value + "</color>");
+			GUILayout.EndHorizontal();
+			
+			GUILayout.Space(10);
+			GUILayout.BeginHorizontal();
+			GUILayout.Label("<color=black>" + " 西红柿果子: " + Global.TomatoCount.Value + "</color>");
 			GUILayout.EndHorizontal();
 		}
 

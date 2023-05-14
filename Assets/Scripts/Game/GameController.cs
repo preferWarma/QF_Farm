@@ -66,7 +66,6 @@ namespace Game
         // 监听工具切换
         private void RegisterOnToolChange()
         {
-            // 监听工具切换
             Global.CurrentTool.Register(_ => { AudioController.Instance.Sfx_SwitchTool.Play(); })
                 .UnRegisterWhenGameObjectDestroyed(this);
         }
@@ -123,6 +122,10 @@ namespace Game
                 {
                     Global.PotatoCount.Value++;
                     ChallengeController.HarvestPotatoCountInCurrentDay.Value++;
+                }
+                else if (plant is PlantTomato)
+                {
+                    Global.TomatoCount.Value++;
                 }
 
                 if (plant.RipeDay == Global.Days.Value) // 如果是当天成熟的植物被采摘

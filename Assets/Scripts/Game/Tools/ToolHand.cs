@@ -24,6 +24,7 @@ namespace Game.Tools
             Global.OnPlantHarvest.Trigger(PlantController.Instance.PlantGrid[cellPos.x, cellPos.y]);    // 触发收获事件
             Object.Destroy(PlantController.Instance.PlantGrid[cellPos.x, cellPos.y].GameObject); // 摘取后销毁, 简化流程,后期会改
             showGrid[cellPos.x, cellPos.y] = null; // 摘取后清空耕地,下次可以重新开垦
+            PlantController.Instance.PlantGrid[cellPos.x, cellPos.y] = null;    // 同步清空植物
         }
     }
 }

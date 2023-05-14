@@ -71,6 +71,17 @@ namespace Game
                 isPlant = true,
                 plantPrefabName = "PlantPotato"
             }.Self(item => {item.Tool = new ToolSeed { Item = item }; }),
+            
+            new Item
+            {
+                name = "西红柿种子",
+                iconName = "SeedTomato",
+                Count =  new BindableProperty<int>(5),
+                canStack = true,
+                Tool = new ToolSeed(),
+                isPlant = true,
+                plantPrefabName = "PlantTomato"
+            }.Self(item => {item.Tool = new ToolSeed{ Item = item }; }),
         };
         
         [Tooltip("有些地方会使用到的单独的物品引用")]
@@ -80,5 +91,6 @@ namespace Game
         public static readonly Item SeedPumpkin = Items.Find(item => item.iconName == "SeedPumpkin"); // 南瓜种子
         public static readonly Item SeedRadish = Items.Find(item => item.iconName == "SeedRadish"); // 萝卜种子
         public static readonly Item SeedPotato = Items.Find(item => item.iconName == "SeedPotato"); // 土豆种子
+        public static readonly Item SeedTomato = Items.Find(item => item.iconName == "SeedTomato"); // 西红柿种子
     }
 }
