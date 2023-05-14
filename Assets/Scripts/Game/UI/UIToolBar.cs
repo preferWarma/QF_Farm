@@ -36,9 +36,8 @@ namespace Game.UI
 			_toolbarSlots.Add(ToolbarSlot9);
 			_toolbarSlots.Add(ToolbarSlot10);
 			
-			SetCurrentTool(Config.Hand.Tool, _toolbarSlots[0].icon, _toolbarSlots[0].select);	// 设置默认工具
-			
 			InitToolBarSlots();
+			SetCurrentTool(Config.Hand.Tool, _toolbarSlots[0].icon, _toolbarSlots[0].select);	// 设置默认工具
 		}
 
 		private void Update()
