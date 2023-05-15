@@ -68,17 +68,25 @@ namespace Game.Inventory
 
         public void SetSlotData(Item newItemData, string newShotCut)
         {
-            ItemData = newItemData;
-            icon.sprite = SpriteLoader?.Invoke(newItemData.iconName);
-            shotCut.text = newShotCut;
-
-            if (newItemData.canStack)
+            if (newItemData == null)    // 如果传入的物品为空, 则表示清空该背包槽
             {
-                // 注册数量显示, 使物品数量发生变化时, UI也会发生变化
-                newItemData.Count.RegisterWithInitValue(cnt =>
+                ItemData = null;
+                icon.sprite = SpriteLoader?.Invoke("UIMask");;
+                shotCut.text = string.Empty;
+                count.text = string.Empty;
+            }
+            else
+            {
+                ItemData = newItemData;
+                icon.sprite = SpriteLoader?.Invoke(newItemData.iconName);
+                shotCut.text = newShotCut;
+
+                if (newItemData.canStack)
                 {
-                    count.text = cnt.ToString();
-                }).UnRegisterWhenGameObjectDestroyed(this);
+                    // 注册数量显示, 使物品数量发生变化时, UI也会发生变化
+                    newItemData.Count.RegisterWithInitValue(cnt => { count.text = cnt.ToString(); })
+                        .UnRegisterWhenGameObjectDestroyed(this);
+                }
             }
         }
     }

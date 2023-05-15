@@ -1,5 +1,6 @@
 ﻿using Game.Inventory;
 using Game.Plants;
+using Game.UI;
 using QFramework;
 using UnityEngine;
 
@@ -47,6 +48,14 @@ namespace Game.Tools
 
             PlantController.Instance.PlantGrid[cellPos.x, cellPos.y] = plant;
             showGrid[cellPos.x, cellPos.y].HasPlant = true;
+
+            if (Item.Count.Value == 0)  // 种子用完了,切换回默认工具:手
+            {
+                Config.Items.Remove(Item);
+                var toolBar = Object.FindObjectOfType<UIToolBar>();
+                toolBar.RemoveItemSlot(Item);
+                toolBar.SetDefaultTool();
+            }
         }
     }
 }

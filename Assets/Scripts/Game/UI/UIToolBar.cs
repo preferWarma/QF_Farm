@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Game.Inventory;
 using Game.Tools;
 using QFramework;
@@ -27,7 +28,7 @@ namespace Game.UI
 		private void Start()
 		{
 			UISlot.SpriteLoader = ResController.Instance.LoadSprite;	// 设置图标加载器方法
-			UISlot.OnUse = slot => SetCurrentTool(slot.ItemData.Tool, slot.icon, slot.select);	// 设置使用方法
+			UISlot.OnUse = slot => SetCurrentTool(slot.ItemData?.Tool, slot.icon, slot.select);	// 设置使用方法
 			
 			_toolbarSlots.Add(ToolbarSlot1);
 			_toolbarSlots.Add(ToolbarSlot2);
@@ -41,7 +42,7 @@ namespace Game.UI
 			_toolbarSlots.Add(ToolbarSlot10);
 			
 			InitToolBarSlots();
-			SetCurrentTool(Config.Hand.Tool, _toolbarSlots[0].icon, _toolbarSlots[0].select);	// 设置默认工具
+			SetDefaultTool();
 		}
 
 		private void Update()
@@ -52,17 +53,25 @@ namespace Game.UI
 				var shotCut = _shotCutDict[i];
 				if (Input.GetKeyDown(shotCut))
 				{
-					UISlot.OnUse?.Invoke(_toolbarSlots[i]);
+					if (_toolbarSlots[i])
+						UISlot.OnUse?.Invoke(_toolbarSlots[i]);
 				}
 			}
 		}
 
 		private void SetCurrentTool(ITool tool, Image icon, Image selectImg)
 		{
-			Global.CurrentTool.Value = tool;	// 设置当前工具
-			HideAllSelect();
-			selectImg.Show();
-			Global.Mouse.Icon.sprite = icon.sprite;	// 设置鼠标图标
+			if (tool == null)
+			{
+				Global.Mouse.Icon.sprite = icon.sprite;
+			}
+			else
+			{
+				Global.CurrentTool.Value = tool; // 设置当前工具
+				HideAllSelect();
+				selectImg.Show();
+				Global.Mouse.Icon.sprite = icon.sprite; // 设置鼠标图标
+			}
 		}
 
 		private void HideAllSelect()
@@ -75,9 +84,10 @@ namespace Game.UI
 			for (var i = 0; i < _toolbarSlots.Count; i++)
 			{
 				var slot = _toolbarSlots[i];
-				if (i >= Config.Items.Count) break;	// 如果配置表没有对应的物品, 则结束
-				
-				slot.SetSlotData(Config.Items[i], (i+1).ToString());
+				if (i < Config.Items.Count)
+					slot.SetSlotData(Config.Items[i], (i+1).ToString());
+				else 
+					slot.SetSlotData(null, string.Empty);
 			}
 		}
 
@@ -94,6 +104,18 @@ namespace Game.UI
 			}
 			if (!slot) return;
 			slot.SetSlotData(item, (idx + 1).ToString());
+		}
+		
+		public void RemoveItemSlot(Item item)
+		{
+			var slot = _toolbarSlots.FirstOrDefault(s => s.ItemData == item);
+			if (!slot) return;
+			slot.SetSlotData(null,string.Empty);
+		}
+
+		public void SetDefaultTool()
+		{
+			SetCurrentTool(Config.Hand.Tool, _toolbarSlots[0].icon, _toolbarSlots[0].select);	// 设置默认工具
 		}
 	}
 }

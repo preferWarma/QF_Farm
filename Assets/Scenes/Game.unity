@@ -9606,6 +9606,7 @@ MonoBehaviour:
   ripeTomatoSprite: {fileID: 21300000, guid: 5374f9d3fc0e3cf45a890bd16f083324, type: 3}
   oldTomatoSprite: {fileID: 21300000, guid: 82549f6e9d38edb42bff5bf59fe1dc25, type: 3}
   sprites:
+  - {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 21300000, guid: 2b252b4acaac96147a38dcaf7069e83b, type: 3}
   - {fileID: 21300000, guid: 0beabb3458a69614f91331e7e270d59c, type: 3}
   - {fileID: 21300000, guid: d32a079578d9bf142b3435384b907649, type: 3}
@@ -10903,8 +10904,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d79d6d2e47f4de6408ebcf8034d71c93, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -12309,7 +12310,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 
 --- !u!222 &842594949
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12391,8 +12392,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d79d6d2e47f4de6408ebcf8034d71c93, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -13720,7 +13721,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 
 --- !u!222 &1106389870
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15027,7 +15028,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 
 --- !u!222 &1269554470
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -40572,8 +40573,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d79d6d2e47f4de6408ebcf8034d71c93, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -41693,7 +41694,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 
 --- !u!222 &1675654365
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -42859,7 +42860,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 
 --- !u!222 &1776133794
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -43920,7 +43921,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 
 --- !u!222 &1990830450
 CanvasRenderer:
   m_ObjectHideFlags: 0
