@@ -18,6 +18,10 @@ namespace Game.UI
 			{3, KeyCode.Alpha4},
 			{4, KeyCode.Alpha5},
 			{5, KeyCode.Alpha6},
+			{6, KeyCode.Alpha7},
+			{7, KeyCode.Alpha8},
+			{8, KeyCode.Alpha9},
+			{9, KeyCode.Alpha0},
 		};
 
 		private void Start()
@@ -75,6 +79,21 @@ namespace Game.UI
 				
 				slot.SetSlotData(Config.Items[i], (i+1).ToString());
 			}
+		}
+
+		public void AddItemSlot(Item item)
+		{
+			UISlot slot = null;
+			var idx = -1;
+			for (var i = 0; i < _toolbarSlots.Count; i++)
+			{
+				if (_toolbarSlots[i].ItemData != null) continue;
+				idx = i;
+				slot = _toolbarSlots[i];
+				break;
+			}
+			if (!slot) return;
+			slot.SetSlotData(item, (idx + 1).ToString());
 		}
 	}
 }

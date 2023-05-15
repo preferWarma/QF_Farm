@@ -32,7 +32,15 @@ namespace Game.Inventory
                 OnUse?.Invoke(this);
             });
         }
-        
+
+        private void Update()
+        {
+            // if (ItemData == null)
+            // {
+            //     gameObject.SetActive(false);
+            // }
+        }
+
 #if UNITY_EDITOR
         // 编辑器模式下, 用于更新UI
         private void OnValidate()

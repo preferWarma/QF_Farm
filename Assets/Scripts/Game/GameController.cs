@@ -1,6 +1,8 @@
+using System;
 using System.Linq;
 using Game.ChallengeSystem;
 using Game.Plants;
+using Game.UI;
 using QFramework;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +10,13 @@ namespace Game
 {
     public partial class GameController : ViewController
     {
+        private UIToolBar mUIToolBar;
+
+        private void Awake()
+        {
+            mUIToolBar = FindObjectOfType<UIToolBar>();
+        }
+
         private void Start()
         {
             InitValueOnStart();
@@ -117,6 +126,18 @@ namespace Game
                 {
                     Global.PumpkinCount.Value++;
                     ChallengeController.TotalPumpkinCount.Value++;
+                    
+                    var pumpkin = Config.Items.Find(item => item.name == ItemNameCollections.Pumpkin);
+                    if (pumpkin == null)
+                    {
+                        var item = Config.CreateItem(ItemNameCollections.Pumpkin);
+                        Config.Items.Add(item);
+                        mUIToolBar.AddItemSlot(item);
+                    }
+                    else
+                    {
+                        pumpkin.Count.Value++;
+                    }
                 }
                 else if (plant is PlantPotato)
                 {

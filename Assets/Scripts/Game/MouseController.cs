@@ -41,6 +41,7 @@ namespace Game
 
 			Icon.Position(worldMousePoint.x, worldMousePoint.y);	// 设置鼠标图标的位置
 			
+			if (Global.CurrentTool.Value == null) return;	// 如果没有选择的是植物果实则不处理
 			if (InToolRange(playerCellPos, mouseCellPos, Global.CurrentTool.Value.ToolScope))	// 在工具周围内
 			{
 				if (mouseCellPos.x < mshowGrid.Width && mouseCellPos.x >= 0 &&
