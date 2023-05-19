@@ -21,7 +21,7 @@ namespace System
             {
                 var item = Config.CreateItem(mItemName, mAddCount);
                 Config.Items.Add(item);
-                UnityEngine.Object.FindObjectOfType<UIToolBar>().AddItemSlot(item);
+                ToolBarSystem.OnItemAdd.Trigger(item);
             }
             else
             {

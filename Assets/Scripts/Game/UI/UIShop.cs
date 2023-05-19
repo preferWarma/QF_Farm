@@ -8,30 +8,29 @@ namespace Game.UI
 	{
 		private void Start()
 		{
-			var items = Global.Interface.GetSystem<IToolBarSystem>().Items;
-			var seedPumpkin = items.Find(item => item.name == ItemNameCollections.SeedPumpkin);
-			var seedRadish = items.Find(item => item.name == ItemNameCollections.SeedRadish);
-			var seedPotato = items.Find(item => item.name == ItemNameCollections.SeedPotato);
-			
 			// 注册购买植物种子按钮的方法
 			RegisterBuySeed(BtnBuyPumpkinSeed, Global.Money,ItemNameCollections.SeedPumpkin , 1);
 			RegisterBuySeed(BtnBuyRadishSeed, Global.Money, ItemNameCollections.SeedRadish, 2);
 			RegisterBuySeed(BtnBuyPotatoSeed, Global.Money, ItemNameCollections.SeedPotato, 3);
+			RegisterBuySeed(BtnBuyTomatoSeed, Global.Money, ItemNameCollections.SeedTomato, 4);
 			
 			// 注册出售植物按钮的方法
-			RegisterSellPlant(BtnSellPumpkin, Global.PumpkinCount, Global.Money, 2);
-			RegisterSellPlant(BtnSellRadish, Global.RadishCount, Global.Money, 4);
-			RegisterSellPlant(BtnSellPotato, Global.PotatoCount, Global.Money, 6);
+			RegisterSellPlant(BtnSellPumpkin, ItemNameCollections.Pumpkin, Global.Money, 2);
+			RegisterSellPlant(BtnSellRadish, ItemNameCollections.Radish, Global.Money, 4);
+			RegisterSellPlant(BtnSellPotato, ItemNameCollections.Potato, Global.Money, 6);
+			RegisterSellPlant(BtnSellTomato, ItemNameCollections.Tomato, Global.Money, 8);
 			
 			// 买按钮的显示条件
 			SetBtnShowCondition(Global.Money, BtnBuyPumpkinSeed, money => money >= 1);
 			SetBtnShowCondition(Global.Money, BtnBuyRadishSeed, money => money >= 2);
 			SetBtnShowCondition(Global.Money, BtnBuyPotatoSeed, money => money >= 3);
+			SetBtnShowCondition(Global.Money, BtnBuyTomatoSeed, money => money >= 4);
 			
 			// 卖按钮的显示条件
 			SetBtnShowCondition(Global.PumpkinCount, BtnSellPumpkin, count => count > 0);
 			SetBtnShowCondition(Global.RadishCount, BtnSellRadish, count => count > 0);
 			SetBtnShowCondition(Global.PotatoCount, BtnSellPotato, count => count > 0);
+			SetBtnShowCondition(Global.TomatoCount, BtnSellTomato, count => count > 0);
 			
 		}
 		
@@ -66,20 +65,20 @@ namespace Game.UI
 				AudioController.Instance.Sfx_Trade.Play();
 			});
 		}
-		
+
 		/// <summary>
 		/// 注册出售植物按钮的方法
 		/// </summary>
 		/// <param name="btnSell"> 当前设置的按钮 </param>
-		/// <param name="fruitCount"> 需要出售的植物的数量对象 </param>
+		/// <param name="fruitName"> 需要出售的植物的名称 </param>
 		/// <param name="money"> 货币对象 </param>
 		/// <param name="sellPrice"> 出售单价 </param>
-		private void RegisterSellPlant(Button btnSell, BindableProperty<int> fruitCount, BindableProperty<int> money, int sellPrice)
+		private void RegisterSellPlant(Button btnSell, string fruitName, BindableProperty<int> money, int sellPrice)
 		{
 			btnSell.onClick.AddListener(() =>
 			{
-				fruitCount.Value --;
 				money.Value += sellPrice;
+				this.SendCommand(new SubItemCountCommand(fruitName, 1));
 				
 				AudioController.Instance.Sfx_Trade.Play();
 			});

@@ -20,6 +20,9 @@ namespace System
     // 工具栏系统,管理工具栏数据
     public class ToolBarSystem : AbstractSystem, IToolBarSystem
     {
+        public static readonly EasyEvent<Item> OnItemAdd = new();	// 物品添加事件
+        public static readonly EasyEvent<Item> OnItemRemove = new();	// 物品移除事件
+        
         public List<Item> Items { get; } = new() // 所有物品
         {
             Config.CreateItem(ItemNameCollections.Hand),

@@ -121,23 +121,29 @@ namespace Game
                     Global.RadishCount.Value++;
                     ChallengeController.HarvestRadishCountInCurrentDay.Value++;
                     ChallengeController.TotalRadishCount.Value++;
+
+                    this.SendCommand(new AddItemCountCommand(ItemNameCollections.Radish, 1));
                 }
                 else if (plant is PlantPumpkin)
                 {
                     Global.PumpkinCount.Value++;
                     ChallengeController.TotalPumpkinCount.Value++;
                     
-                    // SendCommand
+                    // 使用command来完成物品数量的增加
                     this.SendCommand(new AddItemCountCommand(ItemNameCollections.Pumpkin, 1));
                 }
                 else if (plant is PlantPotato)
                 {
                     Global.PotatoCount.Value++;
                     ChallengeController.HarvestPotatoCountInCurrentDay.Value++;
+                    
+                    this.SendCommand(new AddItemCountCommand(ItemNameCollections.Potato, 1));
                 }
                 else if (plant is PlantTomato)
                 {
                     Global.TomatoCount.Value++;
+
+                    this.SendCommand(new AddItemCountCommand(ItemNameCollections.Tomato, 1));
                 }
 
                 if (plant.RipeDay == Global.Days.Value) // 如果是当天成熟的植物被采摘

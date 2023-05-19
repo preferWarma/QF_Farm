@@ -94,6 +94,37 @@ public static class Config
                 Tool = null,
                 plantPrefabName = string.Empty
             },
+            ItemNameCollections.Radish => new Item
+            {
+                name = ItemNameCollections.Radish,
+                iconName = "Radish",
+                Count = new BindableProperty<int>(initCount),
+                canStack = true,
+                isPlant = false,
+                Tool = null,
+                plantPrefabName = string.Empty
+            },
+            ItemNameCollections.Potato => new Item
+            {
+                name = ItemNameCollections.Potato,
+                iconName = "Potato",
+                Count = new BindableProperty<int>(initCount),
+                canStack = true,
+                isPlant = false,
+                Tool = null,
+                plantPrefabName = string.Empty
+            },
+            ItemNameCollections.Tomato => new Item
+            {
+                name = ItemNameCollections.Tomato,
+                iconName = "Tomato",
+                Count = new BindableProperty<int>(initCount),
+                canStack = true,
+                isPlant = false,
+                Tool = null,
+                plantPrefabName = string.Empty
+            },
+            
                 
             _ => null
         };

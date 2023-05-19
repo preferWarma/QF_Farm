@@ -15,15 +15,44 @@ MonoBehaviour:
   CurrentTask:
     ShowLog: 0
     Status: 1
-    GameObject: {fileID: 6963620104033150102, guid: a6075d22782375848ac0251b68f5db3e, type: 3}
+    GameObject: {fileID: 0}
     From: 0
     NameToFullName: []
-    BindInfos: []
-    ScriptsFolder: Assets/Scripts/Game/Plants
-    ClassName: PlantTomato
-    Namespace: Game.Plants
-    MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game.Plants\r\n{\r\n\tpublic
-      partial class PlantTomato : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+    BindInfos:
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: BuySeed/BtnBuyPumpkinSeed
+      MemberName: BtnBuyPumpkinSeed
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: BuySeed/BtnBuyRadishSeed
+      MemberName: BtnBuyRadishSeed
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: BuySeed/BtnBuyPotatoSeed
+      MemberName: BtnBuyPotatoSeed
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: BuySeed/BtnBuyTomatoSeed
+      MemberName: BtnBuyTomatoSeed
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: SellFruit/BtnSellPumpkin
+      MemberName: BtnSellPumpkin
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: SellFruit/BtnSellRadish
+      MemberName: BtnSellRadish
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: SellFruit/BtnSellPotato
+      MemberName: BtnSellPotato
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: SellFruit/BtnSellTomato
+      MemberName: BtnSellTomato
+    ScriptsFolder: Assets/Scripts/Game/UI
+    ClassName: UIShop
+    Namespace: Game.UI
+    MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game.UI\r\n{\r\n\tpublic
+      partial class UIShop : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:e3e0e4d1-317f-40cf-8328-1806f3559081\r\nusing UnityEngine;\r\n\r\nnamespace
-      Game.Plants\r\n{\r\n\tpublic partial class PlantTomato\r\n\t{\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:addda5e7-ef0e-4a88-8cad-7fe8293e7943\r\nusing UnityEngine;\r\n\r\nnamespace
+      Game.UI\r\n{\r\n\tpublic partial class UIShop\r\n\t{\r\n\r\n\t\tpublic UnityEngine.UI.Button
+      BtnBuyPumpkinSeed;\r\n\r\n\t\tpublic UnityEngine.UI.Button BtnBuyRadishSeed;\r\n\r\n\t\tpublic
+      UnityEngine.UI.Button BtnBuyPotatoSeed;\r\n\r\n\t\tpublic UnityEngine.UI.Button
+      BtnBuyTomatoSeed;\r\n\r\n\t\tpublic UnityEngine.UI.Button BtnSellPumpkin;\r\n\r\n\t\tpublic
+      UnityEngine.UI.Button BtnSellRadish;\r\n\r\n\t\tpublic UnityEngine.UI.Button
+      BtnSellPotato;\r\n\r\n\t\tpublic UnityEngine.UI.Button BtnSellTomato;\r\n\r\n\t}\r\n}\r\n"

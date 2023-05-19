@@ -1,12 +1,14 @@
-﻿using Game.Inventory;
+﻿using System;
+using Game.Inventory;
 using Game.Plants;
 using Game.UI;
 using QFramework;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Game.Tools
 {
-    public class ToolSeed : ITool
+    public class ToolSeed : ITool, IController
     {
         public string Name => "Seed";
 
@@ -40,7 +42,9 @@ namespace Game.Tools
             }
             
             AudioController.Instance.Sfx_PutSeed.Play(); // 播放种植音效
-            Item.Count.Value--;
+            
+            this.SendCommand(new SubItemCountCommand(Item.name, 1));    // 种子数量减1
+            
             var plant = plantObj.GetComponent<IPlant>();
             plant.X = cellPos.x;    // 设置植物的位置, 与耕地的位置一致
             plant.Y = cellPos.y;
@@ -49,13 +53,18 @@ namespace Game.Tools
             PlantController.Instance.PlantGrid[cellPos.x, cellPos.y] = plant;
             showGrid[cellPos.x, cellPos.y].HasPlant = true;
 
-            if (Item.Count.Value == 0)  // 种子用完了,切换回默认工具:手
-            {
-                Config.Items.Remove(Item);
-                var toolBar = Object.FindObjectOfType<UIToolBar>();
-                toolBar.RemoveItemSlot(Item);
-                toolBar.SetDefaultTool();
-            }
+            // if (Item.Count.Value == 0)  // 种子用完了,切换回默认工具:手
+            // {
+            //     Config.Items.Remove(Item);
+            //     var toolBar = Object.FindObjectOfType<UIToolBar>();
+            //     ToolBarSystem.OnItemRemove.Trigger(Item);
+            //     toolBar.SetDefaultTool();
+            // }
+        }
+
+        public IArchitecture GetArchitecture()
+        {
+            return Global.Interface;
         }
     }
 }

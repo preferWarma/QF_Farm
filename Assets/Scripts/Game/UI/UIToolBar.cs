@@ -30,6 +30,12 @@ namespace Game.UI
 		{
 			UISlot.SpriteLoader = ResController.Instance.LoadSprite;	// 设置图标加载器方法
 			UISlot.OnUse = slot => SetCurrentTool(slot.ItemData?.Tool, slot.icon, slot.select);	// 设置使用方法
+			ToolBarSystem.OnItemAdd.Register(AddItemSlot).UnRegisterWhenGameObjectDestroyed(this);	// 注册添加物品槽方法
+			ToolBarSystem.OnItemRemove.Register(item =>
+			{
+				RemoveItemSlot(item);
+				SetDefaultTool();
+			}).UnRegisterWhenGameObjectDestroyed(this);	// 注册移除物品槽方法
 			
 			_toolbarSlots.Add(ToolbarSlot1);
 			_toolbarSlots.Add(ToolbarSlot2);
@@ -94,7 +100,7 @@ namespace Game.UI
 			}
 		}
 
-		public void AddItemSlot(Item item)
+		private void AddItemSlot(Item item)
 		{
 			UISlot slot = null;
 			var idx = -1;
@@ -108,8 +114,8 @@ namespace Game.UI
 			if (!slot) return;
 			slot.SetSlotData(item, (idx + 1).ToString());
 		}
-		
-		public void RemoveItemSlot(Item item)
+
+		private void RemoveItemSlot(Item item)
 		{
 			var slot = _toolbarSlots.FirstOrDefault(s => s.ItemData == item);
 			if (!slot) return;

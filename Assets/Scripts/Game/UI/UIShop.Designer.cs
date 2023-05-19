@@ -1,4 +1,4 @@
-// Generate Id:b106bcc1-27e1-4a0d-ac71-36f4048ab460
+// Generate Id:addda5e7-ef0e-4a88-8cad-7fe8293e7943
 using UnityEngine;
 
 namespace Game.UI
@@ -12,11 +12,15 @@ namespace Game.UI
 
 		public UnityEngine.UI.Button BtnBuyPotatoSeed;
 
+		public UnityEngine.UI.Button BtnBuyTomatoSeed;
+
 		public UnityEngine.UI.Button BtnSellPumpkin;
 
 		public UnityEngine.UI.Button BtnSellRadish;
 
 		public UnityEngine.UI.Button BtnSellPotato;
+
+		public UnityEngine.UI.Button BtnSellTomato;
 
 	}
 }
