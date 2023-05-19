@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace Game
 {
-    public partial class GameController : ViewController
+    public partial class GameController : ViewController, IController
     {
         private UIToolBar mUIToolBar;
 
@@ -127,17 +127,8 @@ namespace Game
                     Global.PumpkinCount.Value++;
                     ChallengeController.TotalPumpkinCount.Value++;
                     
-                    var pumpkin = Config.Items.Find(item => item.name == ItemNameCollections.Pumpkin);
-                    if (pumpkin == null)
-                    {
-                        var item = Config.CreateItem(ItemNameCollections.Pumpkin);
-                        Config.Items.Add(item);
-                        mUIToolBar.AddItemSlot(item);
-                    }
-                    else
-                    {
-                        pumpkin.Count.Value++;
-                    }
+                    // SendCommand
+                    this.SendCommand(new AddItemCountCommand(ItemNameCollections.Pumpkin, 1));
                 }
                 else if (plant is PlantPotato)
                 {
@@ -161,11 +152,15 @@ namespace Game
         private void InitValueOnStart()
         {
             Global.Days.Value = 1;  // 开局第一天
-            Global.CurrentTool.Value = Config.Hand.Tool; // 开局默认手
-            
+
             Global.PumpkinCount.Value = 0;  // 开局默认0个南瓜
             Global.RadishCount.Value = 0; // 开局默认0个萝卜
             Global.PotatoCount.Value = 0; // 开局默认0个土豆
+        }
+
+        public IArchitecture GetArchitecture()
+        {
+            return Global.Interface;
         }
     }
 }

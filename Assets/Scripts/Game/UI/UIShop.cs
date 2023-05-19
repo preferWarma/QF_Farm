@@ -4,14 +4,19 @@ using UnityEngine.UI;
 
 namespace Game.UI
 {
-	public partial class UIShop : ViewController
+	public partial class UIShop : ViewController, IController
 	{
 		private void Start()
 		{
+			var items = Global.Interface.GetSystem<IToolBarSystem>().Items;
+			var seedPumpkin = items.Find(item => item.name == ItemNameCollections.SeedPumpkin);
+			var seedRadish = items.Find(item => item.name == ItemNameCollections.SeedRadish);
+			var seedPotato = items.Find(item => item.name == ItemNameCollections.SeedPotato);
+			
 			// 注册购买植物种子按钮的方法
-			RegisterBuySeed(BtnBuyPumpkinSeed, Global.Money, Config.SeedPumpkin.Count, 1);
-			RegisterBuySeed(BtnBuyRadishSeed, Global.Money, Config.SeedRadish.Count, 2);
-			RegisterBuySeed(BtnBuyPotatoSeed, Global.Money, Config.SeedPotato.Count, 3);
+			RegisterBuySeed(BtnBuyPumpkinSeed, Global.Money,ItemNameCollections.SeedPumpkin , 1);
+			RegisterBuySeed(BtnBuyRadishSeed, Global.Money, ItemNameCollections.SeedRadish, 2);
+			RegisterBuySeed(BtnBuyPotatoSeed, Global.Money, ItemNameCollections.SeedPotato, 3);
 			
 			// 注册出售植物按钮的方法
 			RegisterSellPlant(BtnSellPumpkin, Global.PumpkinCount, Global.Money, 2);
@@ -43,20 +48,20 @@ namespace Game.UI
 				btn.gameObject.SetActive(showCondition(countValue));
 			}).UnRegisterWhenGameObjectDestroyed(this);
 		}
-		
+
 		/// <summary>
 		/// 注册购买植物种子按钮的方法
 		/// </summary>
 		/// <param name="btnBuy"> 当前设置的按钮 </param>
 		/// <param name="money"> 货币对象 </param>
-		/// <param name="seedCount"> 需要购买的植物种子的数量对象 </param>
+		/// <param name="itemName"> 购买的物品名 </param>
 		/// <param name="buyPrice"> 购买单价 </param>
-		private void RegisterBuySeed(Button btnBuy, BindableProperty<int> money, BindableProperty<int> seedCount, int buyPrice)
+		private void RegisterBuySeed(Button btnBuy, BindableProperty<int> money, string itemName, int buyPrice)
 		{
 			btnBuy.onClick.AddListener(() =>
 			{
 				money.Value -= buyPrice;
-				seedCount.Value ++;
+				this.SendCommand(new AddItemCountCommand(itemName, 1));
 				
 				AudioController.Instance.Sfx_Trade.Play();
 			});
@@ -78,6 +83,11 @@ namespace Game.UI
 				
 				AudioController.Instance.Sfx_Trade.Play();
 			});
+		}
+
+		public IArchitecture GetArchitecture()
+		{
+			return Global.Interface;
 		}
 	}
 }

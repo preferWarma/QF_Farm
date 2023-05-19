@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Inventory;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Game.UI
 {
-	public partial class UIToolBar : ViewController
+	public partial class UIToolBar : ViewController, IController
 	{
 		private readonly List<UISlot> _toolbarSlots = new();	// 工具栏槽
 		private readonly Dictionary<int, KeyCode> _shotCutDict = new()	// 背包槽位置与快捷键的映射
@@ -81,11 +82,13 @@ namespace Game.UI
 		
 		private void InitToolBarSlots()
 		{
+			var toolbarSystem = this.GetSystem<IToolBarSystem>();
+			
 			for (var i = 0; i < _toolbarSlots.Count; i++)
 			{
 				var slot = _toolbarSlots[i];
-				if (i < Config.Items.Count)
-					slot.SetSlotData(Config.Items[i], (i+1).ToString());
+				if (i < toolbarSystem.Items.Count)
+					slot.SetSlotData(toolbarSystem.Items[i], (i+1).ToString());
 				else 
 					slot.SetSlotData(null, string.Empty);
 			}
@@ -115,7 +118,14 @@ namespace Game.UI
 
 		public void SetDefaultTool()
 		{
-			SetCurrentTool(Config.Hand.Tool, _toolbarSlots[0].icon, _toolbarSlots[0].select);	// 设置默认工具
+			var toolbarSystem = this.GetSystem<IToolBarSystem>();
+			var defaultTool = toolbarSystem.Items.Find(item => item.name == ItemNameCollections.Hand);
+			SetCurrentTool(defaultTool?.Tool, _toolbarSlots[0].icon, _toolbarSlots[0].select);	// 设置默认工具
+		}
+
+		public IArchitecture GetArchitecture()
+		{
+			return Global.Interface;
 		}
 	}
 }

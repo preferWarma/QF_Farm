@@ -1,0 +1,32 @@
+﻿using Game.UI;
+using QFramework;
+
+namespace System
+{
+    public class AddItemCountCommand : AbstractCommand
+    {
+        private readonly string mItemName;  // 物品名
+        private readonly int mAddCount; // 增加的数量
+        
+        public AddItemCountCommand(string itemName, int addCount)
+        {
+            mItemName = itemName;
+            mAddCount = addCount;
+        }
+
+        protected override void OnExecute()
+        {
+            var mItem = Config.Items.Find(item => item.name == mItemName);
+            if (mItem == null)
+            {
+                var item = Config.CreateItem(mItemName, mAddCount);
+                Config.Items.Add(item);
+                UnityEngine.Object.FindObjectOfType<UIToolBar>().AddItemSlot(item);
+            }
+            else
+            {
+                mItem.Count.Value += mAddCount;
+            }
+        }
+    }
+}
