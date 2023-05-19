@@ -10,11 +10,9 @@ namespace Game
 {
     public partial class GameController : ViewController, IController
     {
-        private UIToolBar mUIToolBar;
-
         private void Awake()
         {
-            mUIToolBar = FindObjectOfType<UIToolBar>();
+            FindObjectOfType<UIToolBar>();
         }
 
         private void Start()
@@ -25,6 +23,7 @@ namespace Game
             RegisterOnToolChange();
             RegisterOnDaysChange();
             RegisterOnPlantHarvest();
+            RegisterOnItemCountChange();
         }
 
         private void Update()
@@ -114,35 +113,28 @@ namespace Game
             Global.OnPlantHarvest.Register(plant =>
             {
                 ChallengeController.HarvestCountInCurrentDay.Value++;
+                ChallengeController.TotalFruitCount.Value++;
 
                 // 根据植物类型增加不同的水果数量
                 if (plant is PlantRadish)
                 {
-                    Global.RadishCount.Value++;
                     ChallengeController.HarvestRadishCountInCurrentDay.Value++;
                     ChallengeController.TotalRadishCount.Value++;
-
                     this.SendCommand(new AddItemCountCommand(ItemNameCollections.Radish, 1));
                 }
                 else if (plant is PlantPumpkin)
                 {
-                    Global.PumpkinCount.Value++;
                     ChallengeController.TotalPumpkinCount.Value++;
-                    
-                    // 使用command来完成物品数量的增加
                     this.SendCommand(new AddItemCountCommand(ItemNameCollections.Pumpkin, 1));
                 }
                 else if (plant is PlantPotato)
                 {
-                    Global.PotatoCount.Value++;
                     ChallengeController.HarvestPotatoCountInCurrentDay.Value++;
-                    
                     this.SendCommand(new AddItemCountCommand(ItemNameCollections.Potato, 1));
                 }
                 else if (plant is PlantTomato)
                 {
-                    Global.TomatoCount.Value++;
-
+                    ChallengeController.HarvestTomatoInCurrentDay.Value++;
                     this.SendCommand(new AddItemCountCommand(ItemNameCollections.Tomato, 1));
                 }
 
@@ -152,16 +144,36 @@ namespace Game
                 }
             }).UnRegisterWhenGameObjectDestroyed(this);
         }
+        
+        // 监听物品栏数量变化
+        private void RegisterOnItemCountChange()
+        {
+            ToolBarSystem.OnItemCountChange.Register((item, count) =>
+            {
+                if (item.name == ItemNameCollections.Pumpkin)
+                {
+                    Global.PumpkinCount.Value = count;
+                }
+                else if (item.name == ItemNameCollections.Radish)
+                {
+                    Global.RadishCount.Value = count;
+                }
+                else if (item.name == ItemNameCollections.Potato)
+                {
+                    Global.PotatoCount.Value = count;
+                }
+                else if (item.name == ItemNameCollections.Tomato)
+                {
+                    Global.TomatoCount.Value = count;
+                }
+            }).UnRegisterWhenGameObjectDestroyed(this);
+        }
 
         #endregion
 
         private void InitValueOnStart()
         {
             Global.Days.Value = 1;  // 开局第一天
-
-            Global.PumpkinCount.Value = 0;  // 开局默认0个南瓜
-            Global.RadishCount.Value = 0; // 开局默认0个萝卜
-            Global.PotatoCount.Value = 0; // 开局默认0个土豆
         }
 
         public IArchitecture GetArchitecture()

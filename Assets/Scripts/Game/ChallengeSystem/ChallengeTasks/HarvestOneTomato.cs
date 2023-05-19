@@ -1,9 +1,9 @@
 ﻿namespace Game.ChallengeSystem.ChallengeTasks
 {
-    public class HasTenFruitsCurrently : Challenge
+    public class HarvestOneTomato : Challenge
     {
-        public override string Name => "当前拥有十个以上的果实";
-        
+        public override string Name => "采摘一个番茄";
+
         public override void OnStart()
         {
             StartDate = Global.Days.Value;
@@ -11,13 +11,13 @@
 
         public override bool CheckFinish()
         {
-            if (StartDate == Global.Days.Value) return false;
-            return ChallengeController.TotalFruitCount.Value >= 10;
+            return StartDate != Global.Days.Value && ChallengeController.HarvestTomatoInCurrentDay.Value >= 1;
         }
 
         public override void OnFinish()
         {
-            
         }
+
+        
     }
 }

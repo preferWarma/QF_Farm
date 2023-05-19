@@ -33,26 +33,6 @@ namespace Game
 			GUILayout.BeginHorizontal();
 			GUILayout.Label(" <color=yellow>$金币: " + Global.Money.Value + "</color>");
 			GUILayout.EndHorizontal();
-
-			GUILayout.Space(10);
-			GUILayout.BeginHorizontal();
-			GUILayout.Label("<color=black>" + " 南瓜果子: " + Global.PumpkinCount.Value + "</color>");
-			GUILayout.EndHorizontal();
-
-			GUILayout.Space(10);
-			GUILayout.BeginHorizontal();
-			GUILayout.Label("<color=black>" + " 胡萝卜果子: " + Global.RadishCount.Value + "</color>");
-			GUILayout.EndHorizontal();
-
-			GUILayout.Space(10);
-			GUILayout.BeginHorizontal();
-			GUILayout.Label("<color=black>" + " 土豆果子: " + Global.PotatoCount.Value + "</color>");
-			GUILayout.EndHorizontal();
-			
-			GUILayout.Space(10);
-			GUILayout.BeginHorizontal();
-			GUILayout.Label("<color=black>" + " 西红柿果子: " + Global.TomatoCount.Value + "</color>");
-			GUILayout.EndHorizontal();
 		}
 
 		private void OnDestroy()

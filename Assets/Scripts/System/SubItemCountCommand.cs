@@ -1,5 +1,4 @@
-﻿using Game.UI;
-using QFramework;
+﻿using QFramework;
 
 namespace System
 {
@@ -25,6 +24,7 @@ namespace System
                 Config.Items.Remove(item);
                 ToolBarSystem.OnItemRemove.Trigger(item);
             }
+            ToolBarSystem.OnItemCountChange.Trigger(item, item.Count);
         }
     }
 }

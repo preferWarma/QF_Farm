@@ -1,4 +1,4 @@
-﻿using Game.UI;
+﻿using System.Collections.Generic;
 using QFramework;
 
 namespace System
@@ -16,17 +16,19 @@ namespace System
 
         protected override void OnExecute()
         {
-            var mItem = Config.Items.Find(item => item.name == mItemName);
-            if (mItem == null)
+            var item = Config.Items.Find(item => item.name == mItemName);
+            if (item == null)
             {
-                var item = Config.CreateItem(mItemName, mAddCount);
+                item = Config.CreateItem(mItemName, mAddCount);
                 Config.Items.Add(item);
                 ToolBarSystem.OnItemAdd.Trigger(item);
             }
             else
             {
-                mItem.Count.Value += mAddCount;
+                item.Count.Value += mAddCount;
             }
+            ToolBarSystem.OnItemCountChange.Trigger(item, item.Count);
+            
         }
     }
 }
