@@ -26,18 +26,29 @@ namespace Game.Plants
         public void Grow(SoilData soilData)
         {
             if (!soilData.Watered) return;  // 如果没有浇水, 不生长
-            
-            if (Sate == PlantSates.Seed) // 如果是种子
+
+            switch (Sate)
             {
-                SetState(PlantSates.Small);
-            }
-            else if (Sate == PlantSates.Small) // 如果是幼苗
-            {
-                mSmallDay++;
-                if (mSmallDay == 2)
+                case PlantSates.Seed:
+                    SetState(PlantSates.Small);
+                    break;
+                case PlantSates.Small:
                 {
-                    SetState(PlantSates.Ripe);
+                    mSmallDay++;
+                    if (mSmallDay == 2)
+                    {
+                        SetState(PlantSates.Mid);
+                    }
+
+                    break;
                 }
+                case PlantSates.Mid:
+                    SetState(PlantSates.Big);
+                    break;
+                case PlantSates.Big:
+                    SetState(PlantSates.Ripe);
+                    break;
+
             }
         }
 
@@ -58,10 +69,11 @@ namespace Game.Plants
 			
             mSpriteRenderer.sprite = newSate switch	// 切换表现
             {
-                PlantSates.Seed => ResController.Instance.seedRadishSprite,
-                PlantSates.Small => ResController.Instance.smallPlantRadishSprite,
-                PlantSates.Ripe => ResController.Instance.ripeRadishSprite,
-                PlantSates.Old => ResController.Instance.oldRadishSprite,
+                PlantSates.Seed => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.SeedRadish),
+                PlantSates.Small => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.SmallRadish),
+                PlantSates.Mid => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.MidRadish),
+                PlantSates.Big => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.BigRadish),
+                PlantSates.Ripe => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.RipeRadish),
                 _ => mSpriteRenderer.sprite
             };
 

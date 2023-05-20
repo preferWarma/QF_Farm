@@ -27,21 +27,34 @@ namespace Game.Plants
         public void Grow(SoilData soilData)
         {
             if (!soilData.Watered) return; // 如果没有浇水, 不生长
-            if (Sate == PlantSates.Seed) // 如果是种子
+            switch (Sate)
             {
-                mSeedDay++;
-                if (mSeedDay == 2)
+                case PlantSates.Seed:
                 {
-                    SetState(PlantSates.Small);
+                    mSeedDay++;
+                    if (mSeedDay == 2)
+                    {
+                        SetState(PlantSates.Small);
+                    }
+
+                    break;
                 }
-            }
-            else if (Sate == PlantSates.Small) // 如果是幼苗
-            {
-                mSmallDay++;
-                if (mSmallDay == 2)
+                case PlantSates.Small:
                 {
+                    mSmallDay++;
+                    if (mSmallDay == 2)
+                    {
+                        SetState(PlantSates.Mid);
+                    }
+
+                    break;
+                }
+                case PlantSates.Mid:
+                    SetState(PlantSates.Big);
+                    break;
+                case PlantSates.Big:
                     SetState(PlantSates.Ripe);
-                }
+                    break;
             }
         }
 
@@ -62,10 +75,11 @@ namespace Game.Plants
 
             mSpriteRenderer.sprite = newSate switch // 切换表现
             {
-                PlantSates.Seed => ResController.Instance.seedPotatoSprite,
-                PlantSates.Small => ResController.Instance.smallPlantPotatoSprite,
-                PlantSates.Ripe => ResController.Instance.ripePotatoSprite,
-                PlantSates.Old => ResController.Instance.oldPotatoSprite,
+                PlantSates.Seed => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.SeedPotato),
+                PlantSates.Small => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.SmallPotato),
+                PlantSates.Mid => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.MidPotato),
+                PlantSates.Big => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.BigPotato),
+                PlantSates.Ripe => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.RipePotato),
                 _ => mSpriteRenderer.sprite
             };
 

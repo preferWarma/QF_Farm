@@ -7,7 +7,7 @@ namespace Game
 	{
 		Seed,	// 种子
 		Small,	// 幼苗1
-		Middle,	// 幼苗2
+		Mid,	// 幼苗2
 		Big,	// 幼苗3
 		Ripe,	// 成熟
 		Old	    // 枯萎(已摘取)

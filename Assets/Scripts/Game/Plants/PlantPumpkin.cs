@@ -24,14 +24,23 @@ namespace Game.Plants
 		public void Grow(SoilData soilData)
 		{
 			if (!soilData.Watered) return;	// 如果没有浇水, 不生长
-			
-			if (Sate == PlantSates.Seed) // 如果是种子
+
+			switch (Sate)
 			{
-				SetState(PlantSates.Small);
-			}
-			else if (Sate == PlantSates.Small) // 如果是幼苗
-			{
-				SetState(PlantSates.Ripe);
+				// 如果是种子
+				case PlantSates.Seed:
+					SetState(PlantSates.Small);
+					break;
+				// 如果是幼苗
+				case PlantSates.Small:
+					SetState(PlantSates.Mid);
+					break;
+				case PlantSates.Mid:
+					SetState(PlantSates.Big);
+					break;
+				case PlantSates.Big:
+					SetState(PlantSates.Ripe);
+					break;
 			}
 		}
 
@@ -52,10 +61,12 @@ namespace Game.Plants
 			
 			mSpriteRenderer.sprite = newSate switch	// 切换表现
 			{
-				PlantSates.Seed => ResController.Instance.seedSprite,
-				PlantSates.Small => ResController.Instance.smallPlantSprite,
-				PlantSates.Ripe => ResController.Instance.ripeSprite,
-				PlantSates.Old => ResController.Instance.oldSprite,
+				PlantSates.Seed => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.SeedPumpkin),
+				PlantSates.Small => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.SmallPumpkin),
+				PlantSates.Mid => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.MidPumpkin),
+				PlantSates.Big => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.BigPumpkin),
+				PlantSates.Ripe => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.RipePumpkin),
+				
 				_ => mSpriteRenderer.sprite
 			};
 

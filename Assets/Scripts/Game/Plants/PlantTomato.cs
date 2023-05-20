@@ -36,10 +36,10 @@ namespace Game.Plants
                 }
                 case PlantSates.Small:
                 {
-                    SetState(PlantSates.Middle);
+                    SetState(PlantSates.Mid);
                     break;
                 }
-                case PlantSates.Middle:
+                case PlantSates.Mid:
                     SetState(PlantSates.Big);
                     break;
                 case PlantSates.Big:
@@ -69,12 +69,11 @@ namespace Game.Plants
 
             mSpriteRenderer.sprite = newSate switch // 切换表现
             {
-                PlantSates.Seed => ResController.Instance.seedTomatoSprite,
-                PlantSates.Small => ResController.Instance.smallPlantTomatoSprite,
-                PlantSates.Middle => ResController.Instance.middlePlantTomatoSprite,
-                PlantSates.Big => ResController.Instance.bigPlantTomatoSprite,
-                PlantSates.Ripe => ResController.Instance.ripeTomatoSprite,
-                PlantSates.Old => ResController.Instance.oldTomatoSprite,
+                PlantSates.Seed => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.SeedTomato),
+                PlantSates.Small => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.SmallTomato),
+                PlantSates.Mid => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.MidTomato),
+                PlantSates.Big => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.BigTomato),
+                PlantSates.Ripe => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.RipeTomato),
                 _ => mSpriteRenderer.sprite
             };
 
