@@ -102,5 +102,25 @@ MonoBehaviour:
   ScriptsFolder: Assets/Scripts/Game
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
-  x: 0
-  y: 0
+  plantName: Radish
+  stateInfos:
+  - sate: 0
+    sprite: {fileID: 21300000, guid: a2fc30471dbcc1246bb1867fff987b85, type: 3}
+    growDay: 1
+    showSoilDig: 1
+  - sate: 1
+    sprite: {fileID: 21300000, guid: 14444e3c860e3a748b9f2d98ada995b8, type: 3}
+    growDay: 1
+    showSoilDig: 0
+  - sate: 2
+    sprite: {fileID: 21300000, guid: 4d0a9d3df00edab43bbfc03fc8876521, type: 3}
+    growDay: 2
+    showSoilDig: 0
+  - sate: 3
+    sprite: {fileID: 21300000, guid: 52589e03794966942bfec00c818e2491, type: 3}
+    growDay: 1
+    showSoilDig: 0
+  - sate: 4
+    sprite: {fileID: 21300000, guid: 1e984b8e71f490c4c888d9f7e6feec82, type: 3}
+    growDay: 0
+    showSoilDig: 0

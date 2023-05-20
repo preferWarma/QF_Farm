@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Game.Data;
 using UnityEngine;
 using QFramework;
@@ -12,7 +13,11 @@ namespace Game.Plants
         public int RipeDay { get; private set; } = -1;
         public GameObject GameObject => gameObject;
 
-        private int mBigDay = 0;  // 阶段3生长天数
+        [Header("植物生长相关信息")]
+        public string plantName = ItemNameCollections.Tomato;
+        public List<PlantStateInfo> stateInfos = new ();
+		
+        private int mCurrentStateDay = 0;	// 当前状态的生长天数
 
         private SpriteRenderer mSpriteRenderer;
         private GridController mGridController;
@@ -25,30 +30,16 @@ namespace Game.Plants
         
         public void Grow(SoilData soilData)
         {
-            if (!soilData.Watered) return; // 如果没有浇水, 不生长
-            
-            switch (Sate)
+            if (!soilData.Watered) return;	// 如果没有浇水, 不生长
+            if (Sate == PlantSates.Ripe) return;	// 如果已经成熟, 不再生长
+            mCurrentStateDay++;
+			
+            var currentStateInfo = stateInfos.Find(info => info.sate == Sate);
+            if (mCurrentStateDay >= currentStateInfo.growDay)	// 生长天数到了, 可以切换为下一个状态
             {
-                case PlantSates.Seed:
-                {
-                    SetState(PlantSates.Small);
-                    break;
-                }
-                case PlantSates.Small:
-                {
-                    SetState(PlantSates.Mid);
-                    break;
-                }
-                case PlantSates.Mid:
-                    SetState(PlantSates.Big);
-                    break;
-                case PlantSates.Big:
-                    mBigDay++;
-                    if (mBigDay == 2)
-                    {
-                        SetState(PlantSates.Ripe);
-                    }
-                    break;
+                var curIdx = stateInfos.IndexOf(currentStateInfo);
+                SetState(stateInfos[curIdx + 1].sate);
+                mCurrentStateDay = 0;	// 重置生长天数
             }
         }
 
@@ -57,25 +48,19 @@ namespace Game.Plants
             if (newSate == Sate) return;
             Sate = newSate;
             
-            if (newSate == PlantSates.Small)
+            var newStateInfo = stateInfos.Find(info => info.sate == newSate);
+            if (newStateInfo == null) return;
+
+            if (!newStateInfo.showSoilDig)
             {
-                this.ClearSoilDigState(mGridController);    // 清除耕地开垦状态
+                this.ClearSoilDigState(mGridController);
             }
+            mSpriteRenderer.sprite = newStateInfo.sprite;
             
             if (newSate == PlantSates.Ripe)
             {
                 RipeDay = Global.Days.Value;
             }
-
-            mSpriteRenderer.sprite = newSate switch // 切换表现
-            {
-                PlantSates.Seed => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.SeedTomato),
-                PlantSates.Small => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.SmallTomato),
-                PlantSates.Mid => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.MidTomato),
-                PlantSates.Big => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.BigTomato),
-                PlantSates.Ripe => ResController.Instance.LoadPlantSprite(PlantSpriteNameCollections.RipeTomato),
-                _ => mSpriteRenderer.sprite
-            };
 
             mGridController.ShowGrid[X, Y].PlantSates = newSate; // 同步到SoilData
         }

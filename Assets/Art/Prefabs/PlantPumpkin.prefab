@@ -102,6 +102,25 @@ MonoBehaviour:
   ScriptsFolder: Assets/Scripts/Game
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
-  x: 0
-  y: 0
-  ripeDay: -1
+  plantName: Pumpkin
+  stateInfos:
+  - sate: 0
+    sprite: {fileID: 21300000, guid: a159250c71459ad489b7b2ea2b425c65, type: 3}
+    growDay: 1
+    showSoilDig: 1
+  - sate: 1
+    sprite: {fileID: 21300000, guid: 0de2c40ed4139a648af63eaa89cf0b23, type: 3}
+    growDay: 1
+    showSoilDig: 0
+  - sate: 2
+    sprite: {fileID: 21300000, guid: f58cf74496d25f349821fc530d8cb899, type: 3}
+    growDay: 1
+    showSoilDig: 0
+  - sate: 3
+    sprite: {fileID: 21300000, guid: 49bde84609c64cb41a5344f3df4158b8, type: 3}
+    growDay: 1
+    showSoilDig: 0
+  - sate: 4
+    sprite: {fileID: 21300000, guid: 713c66fbc08f21f4dbf6f0a6f3904829, type: 3}
+    growDay: 0
+    showSoilDig: 0

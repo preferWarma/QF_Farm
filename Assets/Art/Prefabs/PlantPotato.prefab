@@ -102,3 +102,25 @@ MonoBehaviour:
   ScriptsFolder: Assets/Scripts/Game/Plants
   GeneratePrefab: 1
   PrefabFolder: Assets/Art/Prefabs
+  plantName: Potato
+  stateInfos:
+  - sate: 0
+    sprite: {fileID: 21300000, guid: fe30633394a8d7346bedc6178197bcef, type: 3}
+    growDay: 1
+    showSoilDig: 1
+  - sate: 1
+    sprite: {fileID: 21300000, guid: af4126f8fc6821e4086d35afae538a55, type: 3}
+    growDay: 2
+    showSoilDig: 0
+  - sate: 2
+    sprite: {fileID: 21300000, guid: a4199941696a43d459b5903c220fb8ef, type: 3}
+    growDay: 1
+    showSoilDig: 0
+  - sate: 3
+    sprite: {fileID: 21300000, guid: 8853c937b46f9ed44be07916201d721c, type: 3}
+    growDay: 1
+    showSoilDig: 0
+  - sate: 4
+    sprite: {fileID: 21300000, guid: b3c6b2adff7e63a4ea98a67e603e5b66, type: 3}
+    growDay: 0
+    showSoilDig: 0

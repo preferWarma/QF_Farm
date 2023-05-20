@@ -1,4 +1,6 @@
-﻿using Game.Data;
+﻿using System;
+using System.Collections.Generic;
+using Game.Data;
 using UnityEngine;
 
 namespace Game.Plants
@@ -13,6 +15,15 @@ namespace Game.Plants
         
         void SetState(PlantSates newSate);
         void Grow(SoilData soilData);
+    }
+
+    [Serializable]
+    public class PlantStateInfo
+    {
+        [Tooltip("状态")] public PlantSates sate;
+        [Tooltip("状态对应的贴图")] public Sprite sprite;
+        [Tooltip("状态对应的生长天数")] public int growDay;
+        [Tooltip("是否显示地块挖掘状态")] public bool showSoilDig;
     }
 
     // 为IPlant接口添加扩展方法
