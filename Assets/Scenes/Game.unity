@@ -9446,27 +9446,6 @@ MonoBehaviour:
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
   waterPrefab: {fileID: 5147751245669483221, guid: 37eef3ed04659c041919933ab558b23f, type: 3}
-  plantSprites:
-  - {fileID: 21300000, guid: 49bde84609c64cb41a5344f3df4158b8, type: 3}
-  - {fileID: 21300000, guid: f58cf74496d25f349821fc530d8cb899, type: 3}
-  - {fileID: 21300000, guid: 713c66fbc08f21f4dbf6f0a6f3904829, type: 3}
-  - {fileID: 21300000, guid: a159250c71459ad489b7b2ea2b425c65, type: 3}
-  - {fileID: 21300000, guid: 0de2c40ed4139a648af63eaa89cf0b23, type: 3}
-  - {fileID: 21300000, guid: 14d832d2a3d9e8144ab32c0f9e3abbb3, type: 3}
-  - {fileID: 21300000, guid: 418f3365787eb1245aecb4cedd9e4fd8, type: 3}
-  - {fileID: 21300000, guid: bace45d25a1a1c84890999951f97c663, type: 3}
-  - {fileID: 21300000, guid: 9a271c5273c5c16498295de7507a985e, type: 3}
-  - {fileID: 21300000, guid: 101add82d403b024291610695bc47236, type: 3}
-  - {fileID: 21300000, guid: 52589e03794966942bfec00c818e2491, type: 3}
-  - {fileID: 21300000, guid: 4d0a9d3df00edab43bbfc03fc8876521, type: 3}
-  - {fileID: 21300000, guid: 1e984b8e71f490c4c888d9f7e6feec82, type: 3}
-  - {fileID: 21300000, guid: a2fc30471dbcc1246bb1867fff987b85, type: 3}
-  - {fileID: 21300000, guid: 14444e3c860e3a748b9f2d98ada995b8, type: 3}
-  - {fileID: 21300000, guid: 8853c937b46f9ed44be07916201d721c, type: 3}
-  - {fileID: 21300000, guid: a4199941696a43d459b5903c220fb8ef, type: 3}
-  - {fileID: 21300000, guid: b3c6b2adff7e63a4ea98a67e603e5b66, type: 3}
-  - {fileID: 21300000, guid: fe30633394a8d7346bedc6178197bcef, type: 3}
-  - {fileID: 21300000, guid: af4126f8fc6821e4086d35afae538a55, type: 3}
   sprites:
   - {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 21300000, guid: 2b252b4acaac96147a38dcaf7069e83b, type: 3}
@@ -9476,15 +9455,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ab252b104090ebe46964ec53c5cb2ea1, type: 3}
   - {fileID: 21300000, guid: fa9662969d9219847b488f2afd39dc41, type: 3}
   - {fileID: 21300000, guid: 64084a36101e2c64d9c7943150c38ce2, type: 3}
+  - {fileID: 21300000, guid: 0a48e3d5281d1f44694c59740b695ca3, type: 3}
   - {fileID: 21300000, guid: df6da52f44f23674abffeb60201a8940, type: 3}
   - {fileID: 21300000, guid: ce67509a6a2171942b80b55dc6b970ae, type: 3}
   - {fileID: 21300000, guid: 90f28a1f4feb8b84aaad69c154f1de1a, type: 3}
   - {fileID: 21300000, guid: 51ace3cc55973154f9395ca35965c209, type: 3}
+  - {fileID: 21300000, guid: e3c253febc2e0b84da141aa7a2aed22f, type: 3}
   plantPrefabs:
   - {fileID: 6963620104033150102, guid: 8e91e62b415586b4c9ab1227407c668d, type: 3}
   - {fileID: 949551888860867234, guid: 7e73ee98cca26b8418d1780067c076cf, type: 3}
   - {fileID: 5146968983972400641, guid: fc03b318d4aab8649bae7b19b2986d5a, type: 3}
   - {fileID: 6963620104033150102, guid: a6075d22782375848ac0251b68f5db3e, type: 3}
+  - {fileID: 3562982842733779808, guid: d6693fd0dcfafb448bad6cd28ab0ed04, type: 3}
 --- !u!4 &346271341
 Transform:
   m_ObjectHideFlags: 0

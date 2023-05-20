@@ -33,6 +33,7 @@ namespace System
             Config.CreateItem(ItemNameCollections.SeedRadish, 5),
             Config.CreateItem(ItemNameCollections.SeedPotato, 5),
             Config.CreateItem(ItemNameCollections.SeedTomato, 5),
+            Config.CreateItem(ItemNameCollections.SeedBean, 5),
         };
 
         public int MaxCount => 10;

@@ -13,6 +13,8 @@ public static class Config
     {
         return itemName switch
         {
+            #region 固定物品
+            
             ItemNameCollections.Hand => new Item
             {
                 name = ItemNameCollections.Hand,
@@ -43,7 +45,11 @@ public static class Config
                 isPlant = false,
                 plantPrefabName = string.Empty
             },
-                
+            
+            #endregion
+            
+            #region 种子
+            
             ItemNameCollections.SeedPumpkin => new Item
             {
                 name = ItemNameCollections.SeedPumpkin,
@@ -83,7 +89,21 @@ public static class Config
                 isPlant = true,
                 plantPrefabName = "PlantTomato"
             }.Self(item => { item.Tool = new ToolSeed { Item = item }; }),
-                
+            
+            ItemNameCollections.SeedBean => new Item
+            {
+                name = ItemNameCollections.SeedBean,
+                iconName = "SeedBean",
+                Count = new BindableProperty<int>(initCount),
+                canStack = true,
+                isPlant = true,
+                plantPrefabName = "PlantBean"
+            }.Self(item => { item.Tool = new ToolSeed() { Item = item };}),
+            
+            #endregion
+            
+            #region 植物
+            
             ItemNameCollections.Pumpkin => new Item
             {
                 name = ItemNameCollections.Pumpkin,
@@ -124,9 +144,20 @@ public static class Config
                 Tool = null,
                 plantPrefabName = string.Empty
             },
+            ItemNameCollections.Bean => new Item
+            {
+                name = ItemNameCollections.Bean,
+                iconName = "Bean",
+                Count = new BindableProperty<int>(initCount),
+                canStack = true,
+                isPlant = false,
+                Tool = null,
+                plantPrefabName = string.Empty
+            },
             
+            #endregion
                 
             _ => null
         };
     }
-}
+}               
