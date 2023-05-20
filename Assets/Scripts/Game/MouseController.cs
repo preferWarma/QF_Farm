@@ -10,7 +10,7 @@ namespace Game
 {
 	public partial class MouseController : ViewController
 	{
-		private Grid mgrid;
+		private Grid mGrid;
 		private Camera mCamera;
 		private SpriteRenderer mSpriteRenderer;
 		private EasyGrid<SoilData> mshowGrid;
@@ -25,7 +25,7 @@ namespace Game
 		private void Start()
 		{
 			mGridController = FindObjectOfType<GridController>();
-			mgrid = mGridController.GetComponent<Grid>();
+			mGrid = mGridController.GetComponent<Grid>();
 			mCamera = Camera.main;
 			mSpriteRenderer = GetComponent<SpriteRenderer>();
 			mSpriteRenderer.enabled = false;	// 默认是隐藏的
@@ -35,9 +35,9 @@ namespace Game
 		
 		private void LateUpdate()
 		{
-			var playerCellPos = mgrid.WorldToCell(Global.Player.transform.position);	// 获取玩家所在的格子位置
+			var playerCellPos = mGrid.WorldToCell(Global.Player.transform.position);	// 获取玩家所在的格子位置
 			var worldMousePoint = mCamera.ScreenToWorldPoint(Input.mousePosition);	// 获取鼠标所在的世界坐标
-			var mouseCellPos = mgrid.WorldToCell(worldMousePoint);		// 获取鼠标所在的格子位置
+			var mouseCellPos = mGrid.WorldToCell(worldMousePoint);		// 获取鼠标所在的格子位置
 
 			Icon.Position(worldMousePoint.x, worldMousePoint.y);	// 设置鼠标图标的位置
 			
@@ -49,8 +49,8 @@ namespace Game
 				{
 					DoOnMouse0(mouseCellPos);
 					mSpriteRenderer.enabled = true;
-					var gridCenterPosition = mgrid.GetCellCenterWorld(mouseCellPos); // 获取格子中心点的世界坐标
-					gridCenterPosition -= mgrid.cellSize * 0.5f;
+					var gridCenterPosition = mGrid.GetCellCenterWorld(mouseCellPos); // 获取格子中心点的世界坐标
+					gridCenterPosition -= mGrid.cellSize * 0.5f;
 					transform.position = gridCenterPosition; // 将鼠标对应的格子位置显示出来
 				}
 			}

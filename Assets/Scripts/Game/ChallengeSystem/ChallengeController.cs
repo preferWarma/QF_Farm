@@ -51,12 +51,12 @@ namespace Game.ChallengeSystem
 			Challenges.Add(new GenericChallenge().SetName("累计收获10个果实").OnStart(challenge =>
 			{
 				challenge.StartDate = Global.Days.Value;
-			}).CheckFinish(challenge => TotalFruitCount.Value >= 10));
+			}).CheckFinish(challenge => challenge.StartDate != Global.Days.Value && TotalFruitCount.Value >= 10));
 			
 			Challenges.Add(new GenericChallenge().SetName("当前拥有十个以上的果实").OnStart(challenge =>
 			{
 				challenge.StartDate = Global.Days.Value;
-			}).CheckFinish(challenge => TotalFruitCount.Value >= 10));
+			}).CheckFinish(challenge => challenge.StartDate != Global.Days.Value && TotalFruitCount.Value >= 10));
 			
 			Challenges.Add(new GenericChallenge().SetName("收获一个土豆").OnStart(challenge =>
 			{
@@ -66,7 +66,7 @@ namespace Game.ChallengeSystem
 			Challenges.Add(new GenericChallenge().SetName("当前拥有100金币").OnStart(challenge =>
 			{
 				challenge.StartDate = Global.Days.Value;
-			}).CheckFinish(challenge => Global.Money.Value >= 100));
+			}).CheckFinish(challenge => challenge.StartDate != Global.Days.Value && Global.Money.Value >= 100));
 			
 			Challenges.Add(new GenericChallenge().SetName("采摘一个番茄").OnStart(challenge =>
 			{
