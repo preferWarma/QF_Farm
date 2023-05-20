@@ -1,10 +1,12 @@
-// Generate Id:addda5e7-ef0e-4a88-8cad-7fe8293e7943
+// Generate Id:81b4bf87-c039-4b68-84fe-cf48031d2392
 using UnityEngine;
 
 namespace Game.UI
 {
 	public partial class UIShop
 	{
+
+		public RectTransform BtnRoot;
 
 		public UnityEngine.UI.Button BtnBuyPumpkinSeed;
 
@@ -14,6 +16,8 @@ namespace Game.UI
 
 		public UnityEngine.UI.Button BtnBuyTomatoSeed;
 
+		public UnityEngine.UI.Button BtnBuyBeanSeed;
+
 		public UnityEngine.UI.Button BtnSellPumpkin;
 
 		public UnityEngine.UI.Button BtnSellRadish;
@@ -21,6 +25,8 @@ namespace Game.UI
 		public UnityEngine.UI.Button BtnSellPotato;
 
 		public UnityEngine.UI.Button BtnSellTomato;
+
+		public UnityEngine.UI.Button BtnSellBean;
 
 	}
 }

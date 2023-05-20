@@ -139,6 +139,7 @@ namespace Game
                 }
                 else if (plant is PlantBean)
                 {
+                    ChallengeController.HarvestBeanInCurrentDay.Value++;
                     this.SendCommand(new AddItemCountCommand(ItemNameCollections.Bean, 1));
                 }
 
@@ -169,6 +170,10 @@ namespace Game
                 else if (item.name == ItemNameCollections.Tomato)
                 {
                     Global.TomatoCount.Value = count;
+                }
+                else if (item.name == ItemNameCollections.Bean)
+                {
+                    Global.BeanCount.Value = count;
                 }
             }).UnRegisterWhenGameObjectDestroyed(this);
         }

@@ -13,25 +13,28 @@ namespace Game.UI
 			RegisterBuySeed(BtnBuyRadishSeed, Global.Money, ItemNameCollections.SeedRadish, 2);
 			RegisterBuySeed(BtnBuyPotatoSeed, Global.Money, ItemNameCollections.SeedPotato, 3);
 			RegisterBuySeed(BtnBuyTomatoSeed, Global.Money, ItemNameCollections.SeedTomato, 4);
+			RegisterBuySeed(BtnBuyBeanSeed, Global.Money, ItemNameCollections.SeedBean, 5);
 			
 			// 注册出售植物按钮的方法
 			RegisterSellPlant(BtnSellPumpkin, ItemNameCollections.Pumpkin, Global.Money, 2);
 			RegisterSellPlant(BtnSellRadish, ItemNameCollections.Radish, Global.Money, 4);
 			RegisterSellPlant(BtnSellPotato, ItemNameCollections.Potato, Global.Money, 6);
 			RegisterSellPlant(BtnSellTomato, ItemNameCollections.Tomato, Global.Money, 8);
+			RegisterSellPlant(BtnSellBean, ItemNameCollections.Bean, Global.Money, 10);
 			
 			// 买按钮的显示条件
 			SetBtnShowCondition(Global.Money, BtnBuyPumpkinSeed, money => money >= 1);
 			SetBtnShowCondition(Global.Money, BtnBuyRadishSeed, money => money >= 2);
 			SetBtnShowCondition(Global.Money, BtnBuyPotatoSeed, money => money >= 3);
 			SetBtnShowCondition(Global.Money, BtnBuyTomatoSeed, money => money >= 4);
+			SetBtnShowCondition(Global.Money, BtnBuyBeanSeed, money => money >= 5);
 			
 			// 卖按钮的显示条件
 			SetBtnShowCondition(Global.PumpkinCount, BtnSellPumpkin, count => count > 0);
 			SetBtnShowCondition(Global.RadishCount, BtnSellRadish, count => count > 0);
 			SetBtnShowCondition(Global.PotatoCount, BtnSellPotato, count => count > 0);
 			SetBtnShowCondition(Global.TomatoCount, BtnSellTomato, count => count > 0);
-			
+			SetBtnShowCondition(Global.BeanCount, BtnSellBean, count => count > 0);
 		}
 		
 		/// <summary>
