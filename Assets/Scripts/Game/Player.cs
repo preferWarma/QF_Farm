@@ -7,9 +7,15 @@ namespace Game
 {
 	public partial class Player : ViewController
 	{
+		public float moveSpeed = 5f;
+		[Tooltip("移动平滑度")] public float smooth = 10f;
+		
+		private Rigidbody2D mRigidbody;
+		
 		private void Awake()
 		{
 			Global.Player = this;
+			mRigidbody = GetComponent<Rigidbody2D>();
 		}
 		
 		private void Update()
@@ -18,6 +24,13 @@ namespace Game
 			{
 				Global.Days.Value++;
 			}
+			
+			var horizontal = Input.GetAxisRaw("Horizontal");
+			var vertical = Input.GetAxisRaw("Vertical");
+			var direction = new Vector2(horizontal, vertical).normalized;
+			
+			var targetVelocity = direction * moveSpeed;
+			mRigidbody.velocity = Vector2.Lerp(mRigidbody.velocity, targetVelocity, 1-Mathf.Exp(-Time.deltaTime * smooth));	// 平滑移动
 		}
 
 		private void OnGUI()
@@ -27,6 +40,11 @@ namespace Game
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
 			GUILayout.Label(" 天数: " + Global.Days.Value);
+			GUILayout.EndHorizontal();
+			
+			GUILayout.Space(10);
+			GUILayout.BeginHorizontal();
+			GUILayout.Label(" 剩余小时: " + Global.RestHours.Value);
 			GUILayout.EndHorizontal();
 
 			GUILayout.Space(10);

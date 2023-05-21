@@ -10,6 +10,8 @@ public class Global : Architecture<Global>
 {
     [Header("游戏状态")]
     public static readonly BindableProperty<int> Days = new(1); // 第几天, 从第1天开始
+
+    public static readonly BindableProperty<int> RestHours = new(10);  // 当天剩余时间
     public static readonly BindableProperty<ITool> CurrentTool = new();  // 当前工具
         
     [Header("植物数量")]

@@ -5,6 +5,7 @@ using Game.Plants;
 using Game.UI;
 using QFramework;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 namespace Game
 {
@@ -81,7 +82,7 @@ namespace Game
         // 监听天数变化
         private void RegisterOnDaysChange()
         {
-            // 监听天数变化
+            // 土地浇水相关
             Global.Days.Register(_ =>
             {
                 AudioController.Instance.Sfx_NextDay.Play(); // 播放下一天音效
@@ -104,6 +105,12 @@ namespace Game
                     .Where(obj => obj.name.StartsWith("Water"));
                 waters.ForEach(water => { water.DestroySelf(); }); // 过了一天，所有的水都消失了
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            
+            // 每日剩余时间相关
+            Global.Days.Register(_ =>
+            {
+                Global.RestHours.Value = Random.Range(8, 12 + 1);
+            }).UnRegisterWhenGameObjectDestroyed(this);
         }
         
         // 监听植物采摘
