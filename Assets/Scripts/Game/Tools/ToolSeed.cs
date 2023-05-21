@@ -1,20 +1,18 @@
 ﻿using System;
 using Game.Inventory;
 using Game.Plants;
-using Game.UI;
 using QFramework;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Game.Tools
 {
     public class ToolSeed : ITool, IController
     {
         public string Name => "Seed";
-
+        public float CostHours => 0.1f;
         public int ToolScope => Global.IsToolUpgraded[3] ? 2 : 1;
         public Item Item { get; set; }  // 与背包中的物品对应
-
+        
         public bool Selected()
         {
             return Global.CurrentTool.Value.Name == Name;
@@ -27,10 +25,16 @@ namespace Game.Tools
             var showGrid = needData.ShowGrid;
             var cellPos = needData.CellPos;
             var tilemap = needData.Tilemap;
-
+            Global.Mouse.TimeNotEnough.gameObject.SetActive(false);
+            
             if (showGrid[cellPos.x, cellPos.y] == null) return; // 该格子无耕地
             if (showGrid[cellPos.x, cellPos.y].HasPlant) return; // 已经有植物了
-            
+            if (Global.RestHours.Value < CostHours)   // 时间不够
+            {
+                Global.Mouse.TimeNotEnough.gameObject.SetActive(true);
+                return;
+            }
+
             var tileWorldPos = tilemap.GetCellCenterWorld(cellPos);
             var plantObj = ResController.Instance.LoadPrefab(Item.plantPrefabName)
                 .Instantiate()
@@ -53,13 +57,7 @@ namespace Game.Tools
             PlantController.Instance.PlantGrid[cellPos.x, cellPos.y] = plant;
             showGrid[cellPos.x, cellPos.y].HasPlant = true;
 
-            // if (Item.Count.Value == 0)  // 种子用完了,切换回默认工具:手
-            // {
-            //     Config.Items.Remove(Item);
-            //     var toolBar = Object.FindObjectOfType<UIToolBar>();
-            //     ToolBarSystem.OnItemRemove.Trigger(Item);
-            //     toolBar.SetDefaultTool();
-            // }
+            Global.RestHours.Value -= CostHours;
         }
 
         public IArchitecture GetArchitecture()

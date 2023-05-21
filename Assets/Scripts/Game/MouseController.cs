@@ -11,7 +11,7 @@ namespace Game
 	public partial class MouseController : ViewController
 	{
 		private Grid mGrid;
-		private Camera mCamera;
+		public Camera mCamera;
 		private SpriteRenderer mSpriteRenderer;
 		private EasyGrid<SoilData> mshowGrid;
 		private GridController mGridController;
@@ -31,6 +31,13 @@ namespace Game
 			mSpriteRenderer.enabled = false;	// 默认是隐藏的
 			mshowGrid = mGridController.ShowGrid;
 			mTilemap = mGridController.Soil;
+			
+			Global.Days.Register(_ => TimeNotEnough.gameObject.SetActive(false))
+				.UnRegisterWhenGameObjectDestroyed(this);	// 天数改变时隐藏时间不够提示
+			Global.CurrentTool.Register(tool =>
+			{
+				TimeNotEnough.gameObject.SetActive(tool.CostHours > Global.RestHours.Value);
+			}).UnRegisterWhenGameObjectDestroyed(this);
 		}
 		
 		private void LateUpdate()
@@ -40,6 +47,10 @@ namespace Game
 			var mouseCellPos = mGrid.WorldToCell(worldMousePoint);		// 获取鼠标所在的格子位置
 
 			Icon.Position(worldMousePoint.x, worldMousePoint.y);	// 设置鼠标图标的位置
+			if (TimeNotEnough.gameObject.activeSelf)
+			{
+				TimeNotEnough.transform.position = Icon.transform.position;
+			}
 			
 			if (Global.CurrentTool.Value == null) return;	// 如果没有选择的是植物果实则不处理
 			if (InToolRange(playerCellPos, mouseCellPos, Global.CurrentTool.Value.ToolScope))	// 在工具周围内

@@ -7,10 +7,7 @@ namespace Game
 	{
 		public void NextDay()
 		{
-			ActionKit.Delay(0.5f, () =>
-			{
-				Global.Days.Value++;
-			}).Start(this);
+			Global.Days.Value++;
 		}
 	}
 }

@@ -85,8 +85,6 @@ namespace Game
             // 土地浇水相关
             Global.Days.Register(_ =>
             {
-                AudioController.Instance.Sfx_NextDay.Play(); // 播放下一天音效
-                
                 var soilDatas = FindObjectOfType<GridController>().ShowGrid;
 
                 PlantController.Instance.PlantGrid.ForEach((x, y, plant) =>
@@ -109,6 +107,7 @@ namespace Game
             // 每日剩余时间相关
             Global.Days.Register(_ =>
             {
+                AudioController.Instance.Sfx_NextDay.Play(); // 播放下一天音效
                 Global.RestHours.Value = Random.Range(8, 12 + 1);
             }).UnRegisterWhenGameObjectDestroyed(this);
         }

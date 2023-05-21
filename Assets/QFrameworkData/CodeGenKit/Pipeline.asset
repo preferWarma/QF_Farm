@@ -19,15 +19,18 @@ MonoBehaviour:
     From: 0
     NameToFullName: []
     BindInfos:
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnFunctionRoot/BtnCreateFirst
-      MemberName: BtnCreateFirst
-    ScriptsFolder: Assets/Scripts/Game/UI
-    ClassName: UIHome
-    Namespace: Game.UI
-    MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game.UI\r\n{\r\n\tpublic
-      partial class UIHome : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+    - TypeName: SpriteRenderer
+      PathToRoot: TimeNotEnough
+      MemberName: TimeNotEnough
+    - TypeName: SpriteRenderer
+      PathToRoot: Icon
+      MemberName: Icon
+    ScriptsFolder: Assets/Scripts/Game
+    ClassName: MouseController
+    Namespace: Game
+    MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game\r\n{\r\n\tpublic
+      partial class MouseController : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:00bc462e-a504-4033-866b-44e69b27d650\r\nusing UnityEngine;\r\n\r\nnamespace
-      Game.UI\r\n{\r\n\tpublic partial class UIHome\r\n\t{\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      BtnCreateFirst;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:8503e179-2fdd-471d-bd89-7b7237f89aea\r\nusing UnityEngine;\r\n\r\nnamespace
+      Game\r\n{\r\n\tpublic partial class MouseController\r\n\t{\r\n\r\n\t\tpublic
+      SpriteRenderer TimeNotEnough;\r\n\r\n\t\tpublic SpriteRenderer Icon;\r\n\r\n\t}\r\n}\r\n"

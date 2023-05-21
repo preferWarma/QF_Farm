@@ -44,7 +44,7 @@ namespace Game
 			
 			GUILayout.Space(10);
 			GUILayout.BeginHorizontal();
-			GUILayout.Label(" 剩余小时: " + Global.RestHours.Value);
+			GUILayout.Label($" 剩余小时: {Global.RestHours.Value :0.0}");
 			GUILayout.EndHorizontal();
 
 			GUILayout.Space(10);

@@ -9,6 +9,7 @@ namespace Game.Tools
     {
         string Name { get; }
         int ToolScope { get;}  // 作用范围
+        float CostHours { get; }    // 消耗时间
         bool Selected();    // 是否被选中
         void Use(ToolNeedData needData);    // 使用
     }
