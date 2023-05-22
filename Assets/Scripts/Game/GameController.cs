@@ -30,6 +30,11 @@ namespace Game
         private void Update()
         {
             UpdateChallenge();
+            if(Global.Money.Value < 0) // 如果钱不够了，游戏结束
+            {
+                ActionKit.Delay(0.5f, () => SceneManager.LoadScene("Scenes/GameOver"))
+                    .Start(this);
+            }
         }
 
         private void UpdateChallenge()
@@ -121,6 +126,8 @@ namespace Game
                 ChallengeController.HarvestCountInCurrentDay.Value++;
                 ChallengeController.TotalFruitCount.Value++;
 
+                UIMessageQueue.Push(ResController.Instance.LoadSprite(plant.plantName), "+1");
+                
                 // 根据植物类型增加不同的水果数量
                 if (plant is PlantRadish)
                 {
@@ -189,6 +196,7 @@ namespace Game
         private void InitValueOnStart()
         {
             Global.Days.Value = 1;  // 开局第一天
+            Global.Money.Value = 20; // 开局20块钱
         }
 
         public IArchitecture GetArchitecture()

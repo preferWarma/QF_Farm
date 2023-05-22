@@ -19,18 +19,18 @@ MonoBehaviour:
     From: 0
     NameToFullName: []
     BindInfos:
-    - TypeName: SpriteRenderer
-      PathToRoot: TimeNotEnough
-      MemberName: TimeNotEnough
-    - TypeName: SpriteRenderer
-      PathToRoot: Icon
-      MemberName: Icon
+    - TypeName: Game.UI.UIMessageItem
+      PathToRoot: UIMessageTemplate
+      MemberName: UIMessageTemplate
+    - TypeName: RectTransform
+      PathToRoot: MessageRoot
+      MemberName: MessageRoot
     ScriptsFolder: Assets/Scripts/Game
-    ClassName: MouseController
+    ClassName: UIMessageQueue
     Namespace: Game
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game\r\n{\r\n\tpublic
-      partial class MouseController : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class UIMessageQueue : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:8503e179-2fdd-471d-bd89-7b7237f89aea\r\nusing UnityEngine;\r\n\r\nnamespace
-      Game\r\n{\r\n\tpublic partial class MouseController\r\n\t{\r\n\r\n\t\tpublic
-      SpriteRenderer TimeNotEnough;\r\n\r\n\t\tpublic SpriteRenderer Icon;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:a2084b72-20f9-4c3f-b09c-378ef8563cec\r\nusing UnityEngine;\r\n\r\nnamespace
+      Game\r\n{\r\n\tpublic partial class UIMessageQueue\r\n\t{\r\n\r\n\t\tpublic
+      Game.UI.UIMessageItem UIMessageTemplate;\r\n\r\n\t\tpublic RectTransform MessageRoot;\r\n\r\n\t}\r\n}\r\n"

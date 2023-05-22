@@ -12,9 +12,8 @@ namespace Game.Plants
 		public PlantSates Sate { get; private set; }
 		public int RipeDay { get; private set; } = -1; // 成熟的日期
 		public GameObject GameObject => gameObject;
-
-		[Header("植物生长相关信息")]
-		public string plantName = ItemNameCollections.Pumpkin;
+		
+		public string plantName => ItemNameCollections.Pumpkin;
 		public List<PlantStateInfo> stateInfos = new ();
 		
 		private int mCurrentStateDay = 0;	// 当前状态的生长天数

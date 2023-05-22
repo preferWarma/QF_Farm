@@ -23,7 +23,8 @@ namespace System
         public static readonly EasyEvent<Item> OnItemAdd = new();	// 物品添加事件
         public static readonly EasyEvent<Item> OnItemRemove = new();	// 物品移除事件
         public static readonly EasyEvent<Item, int> OnItemCountChange = new();	// 物品数量改变事件
-
+        public int MaxCount => 10;
+        
         public List<Item> Items { get; } = new() // 所有物品
         {
             Config.CreateItem(ItemNameCollections.Hand),
@@ -36,7 +37,7 @@ namespace System
             Config.CreateItem(ItemNameCollections.SeedBean, 5),
         };
 
-        public int MaxCount => 10;
+        
 
         protected override void OnInit()
         {

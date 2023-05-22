@@ -1,5 +1,6 @@
 using UnityEngine;
 using QFramework;
+using UnityEditor;
 
 // ReSharper disable Unity.InefficientPropertyAccess
 
@@ -16,6 +17,12 @@ namespace Game
 		{
 			Global.Player = this;
 			mRigidbody = GetComponent<Rigidbody2D>();
+		}
+		
+		[MenuItem("Lyf/游戏/金钱最大")]
+		public static void MoneyMAX()
+		{
+			Global.Money.Value = 999999;
 		}
 		
 		private void Update()

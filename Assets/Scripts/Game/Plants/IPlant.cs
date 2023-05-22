@@ -12,7 +12,7 @@ namespace Game.Plants
         GameObject GameObject { get; }
         PlantSates Sate { get; }
         int RipeDay { get; }
-        
+        string plantName { get; }
         void SetState(PlantSates newSate);
         void Grow(SoilData soilData);
     }

@@ -9,7 +9,7 @@ namespace Game.Tools
     public class ToolSeed : ITool, IController
     {
         public string Name => "Seed";
-        public float CostHours => 0.1f;
+        public float CostHours => 0.2f;
         public int ToolScope => Global.IsToolUpgraded[3] ? 2 : 1;
         public Item Item { get; set; }  // 与背包中的物品对应
         
@@ -25,10 +25,10 @@ namespace Game.Tools
             var showGrid = needData.ShowGrid;
             var cellPos = needData.CellPos;
             var tilemap = needData.Tilemap;
-            Global.Mouse.TimeNotEnough.gameObject.SetActive(false);
-            
             if (showGrid[cellPos.x, cellPos.y] == null) return; // 该格子无耕地
             if (showGrid[cellPos.x, cellPos.y].HasPlant) return; // 已经有植物了
+            
+            Global.Mouse.TimeNotEnough.gameObject.SetActive(false);
             if (Global.RestHours.Value < CostHours)   // 时间不够
             {
                 Global.Mouse.TimeNotEnough.gameObject.SetActive(true);
