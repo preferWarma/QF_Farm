@@ -47,6 +47,9 @@ namespace Game.UI
 			_toolbarSlots.Add(ToolbarSlot8);
 			_toolbarSlots.Add(ToolbarSlot9);
 			_toolbarSlots.Add(ToolbarSlot10);
+			_toolbarSlots.Add(ToolbarSlot11);
+			_toolbarSlots.Add(ToolbarSlot12);
+			_toolbarSlots.Add(ToolbarSlot13);
 			
 			InitToolBarSlots();
 			SetDefaultTool();
