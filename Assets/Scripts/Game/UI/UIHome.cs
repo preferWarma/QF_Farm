@@ -67,6 +67,7 @@ namespace Game.UI
 					currentHours_1.Value += Global.RestHours.Value;
 					Global.RestHours.Value = 0; // 消耗剩余时间
 				}
+				AudioController.Instance.Sfx_Trade.Play();
 			});
 		}
 
@@ -91,7 +92,9 @@ namespace Game.UI
 			{
 				var perHourIncome = Random.Range(1f, 2f);
 				Global.Money.Value += Convert.ToInt32(perHourIncome * Global.RestHours.Value);
+				UIMessageQueue.Push(null,$"打工收入${perHourIncome * Global.RestHours.Value}元");
 				Global.RestHours.Value = 0;
+				AudioController.Instance.Sfx_Trade.Play();
 			});
 		}
 		

@@ -64,7 +64,7 @@ namespace Game.UI
 			{
 				money.Value -= buyPrice;
 				this.SendCommand(new AddItemCountCommand(itemName, 1));
-				
+				UIMessageQueue.Push(ResController.Instance.LoadSprite(itemName), $"+1\t金币-{buyPrice}");
 				AudioController.Instance.Sfx_Trade.Play();
 			});
 		}
@@ -82,7 +82,7 @@ namespace Game.UI
 			{
 				money.Value += sellPrice;
 				this.SendCommand(new SubItemCountCommand(fruitName, 1));
-				
+				UIMessageQueue.Push(ResController.Instance.LoadSprite(fruitName), $"-1\t金币+{sellPrice}");
 				AudioController.Instance.Sfx_Trade.Play();
 			});
 		}

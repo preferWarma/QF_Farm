@@ -137,5 +137,20 @@ namespace Lyf.ObjectPool
 
             Debug.Log(containActive ? "已清空所有对象池中的全部对象" : "已清空所有对象池中未激活的全部对象");
         }
+
+        /// <summary>
+        /// 返回指定对象池的当前使用率
+        /// </summary>
+        /// <param name="prefabName"> 对象名 </param>
+        /// <returns> 使用率，如果当前对象池不存在则返回空 </returns>
+        public float? PoolUseRate(string prefabName)
+        {
+            if (_objectPools.TryGetValue(prefabName, out var pool))
+            {
+                return 1 - (float)pool.Count / _poolMaxCountDic[prefabName];
+            }
+
+            return null;
+        }
     }
 }

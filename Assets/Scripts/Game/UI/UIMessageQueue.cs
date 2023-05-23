@@ -1,6 +1,4 @@
-using System;
 using QFramework;
-using UnityEditor;
 using UnityEngine;
 
 namespace Game.UI
@@ -8,7 +6,7 @@ namespace Game.UI
 	public partial class UIMessageQueue : ViewController
 	{
 		private static UIMessageQueue mInstance;
-		
+
 		public static void Push(Sprite icon, string message)
 		{
 			mInstance.UIMessageTemplate.InstantiateWithParent(mInstance.MessageRoot)
