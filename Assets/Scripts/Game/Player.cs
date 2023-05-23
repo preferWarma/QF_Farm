@@ -1,4 +1,5 @@
 using System;
+using Game.UI;
 using UnityEngine;
 using QFramework;
 using UnityEditor;
@@ -43,14 +44,21 @@ namespace Game
 			Global.Interface.SendCommand(new AddItemCountCommand(ItemNameCollections.Potato, 999));
 		}
 		
+		[MenuItem("Lyf/游戏/进入下一天(快捷键Q)")]
+		public static void NoMoneyCost()
+		{
+			Global.Days.Value++;
+		}
+		
 		#endregion
 		
 		private void Update()
 		{
-			if (Input.GetKeyDown(KeyCode.Q))	// 按下Q键，进入下一天
+			if (Input.GetKeyDown(KeyCode.Q))
 			{
 				Global.Days.Value++;
 			}
+			
 			
 			var horizontal = Input.GetAxisRaw("Horizontal");
 			var vertical = Input.GetAxisRaw("Vertical");

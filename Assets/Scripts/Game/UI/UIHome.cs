@@ -1,6 +1,5 @@
 using System;
 using QFramework;
-using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -12,7 +11,7 @@ namespace Game.UI
 		private BindableProperty<float> currentHours_1 = new(0f);
 		private bool isFinished_1 = false;
 		
-		private void Start()
+		private void Awake()
 		{
 			RegisterGlobal();
 			RegisterProject();
@@ -92,7 +91,7 @@ namespace Game.UI
 			{
 				var perHourIncome = Random.Range(1f, 2f);
 				Global.Money.Value += Convert.ToInt32(perHourIncome * Global.RestHours.Value);
-				UIMessageQueue.Push(null,$"打工收入${perHourIncome * Global.RestHours.Value}元");
+				UIMessageQueue.Push(null,$"打工收入${perHourIncome * Global.RestHours.Value:0.0}元");
 				Global.RestHours.Value = 0;
 				AudioController.Instance.Sfx_Trade.Play();
 			});

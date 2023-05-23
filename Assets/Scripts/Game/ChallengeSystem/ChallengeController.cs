@@ -1,4 +1,5 @@
  using System.Collections.Generic;
+ using Game.UI;
  using QFramework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -119,7 +120,7 @@ namespace Game.ChallengeSystem
 			{
 				AudioController.Instance.Sfx_Complete.Play(); // 播放挑战完成音效
 				FinishedChallenges.Add(challenge);
-				Debug.Log($"完成挑战:{challenge.Name}");
+				UIMessageQueue.Push(null, $"完成挑战:{challenge.Name}, <color=yellow>金币+100</color>");
 
 				if (Challenges.Count == FinishedChallenges.Count) // 如果所有的挑战都完成了
 				{
