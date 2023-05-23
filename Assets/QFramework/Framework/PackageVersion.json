@@ -1,6 +1,6 @@
 {
     "Id": "",
-    "Version": "v1.0.40",
+    "Version": "v1.0.53",
     "Type": 0,
     "AccessRight": 0,
     "DownloadUrl": "",
@@ -11,10 +11,10 @@
     ],
     "DocUrl": "https://liangxiegame.com",
     "Readme": {
-        "version": "v1.0.40",
-        "content": "UIKit：重复 LoadPanel 代码删除（感谢高跟鞋、NormalKatt 提供反馈）",
+        "version": "v1.0.53",
+        "content": "ResKit LoadSceneAsync 不执行问题修复",
         "author": "liangxie",
-        "date": "2023 年 03 月 21 日 17:43",
+        "date": "2023 年 05 月 23 日 12:50",
         "PackageId": ""
     }
 }

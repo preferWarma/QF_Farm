@@ -7,6 +7,7 @@
  ****************************************************************************/
 
 using System;
+using UnityEngine;
 
 namespace QFramework
 {
@@ -30,6 +31,7 @@ namespace QFramework
         public static Delay Allocate(float delayTime, System.Action onDelayFinish = null)
         {
             var retNode = mPool.Allocate();
+            retNode.ActionID = ActionKit.ID_GENERATOR++;
             retNode.Deinited = false;
             retNode.Reset();
             retNode.DelayTime = delayTime;
@@ -48,8 +50,9 @@ namespace QFramework
             retNode.CurrentSeconds = 0.0f;
             return retNode;
         }
-        
 
+
+        public ulong ActionID { get; set; }
         public ActionStatus Status { get; set; }
 
         public void OnStart()
@@ -78,6 +81,7 @@ namespace QFramework
         public void Reset()
         {
             Status = ActionStatus.NotStart;
+            Paused = false;
             CurrentSeconds = 0.0f;
         }
 

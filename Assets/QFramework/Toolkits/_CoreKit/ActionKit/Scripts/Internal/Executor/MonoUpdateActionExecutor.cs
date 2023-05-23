@@ -7,39 +7,58 @@
  ****************************************************************************/
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace QFramework
 {
     internal class MonoUpdateActionExecutor : MonoBehaviour, IActionExecutor
     {
-        private Action mOnUpdate = () => { };
-        
-        public void Execute(IAction action,Action<IAction> onFinish = null)
+
+        private Dictionary<IAction, Action<IActionController>> mActionAndFinishCallbacks = new Dictionary<IAction, Action<IActionController>>();
+
+        public void Execute(IAction action,Action<IActionController> onFinish = null)
         {
             if (action.Status == ActionStatus.Finished) action.Reset();
             if (this.UpdateAction(action, 0, onFinish)) return;
 
-            void OnUpdate()
+            if (mActionAndFinishCallbacks.ContainsKey(action))
             {
-                if (this.UpdateAction(action,Time.deltaTime,onFinish))
+                mActionAndFinishCallbacks[action] = onFinish;
+            }
+            else
+            {
+                mActionAndFinishCallbacks.Add(action, onFinish);
+            }
+        }
+
+        private List<IAction> mToActionRemove = new List<IAction>();
+        private void Update()
+        {
+            foreach (var actionAndFinishCallback in mActionAndFinishCallbacks)
+            {
+                if (this.UpdateAction(actionAndFinishCallback.Key, Time.deltaTime, actionAndFinishCallback.Value))
                 {
-                    mOnUpdate -= OnUpdate;
+                    mToActionRemove.Add(actionAndFinishCallback.Key);
                 }
             }
 
-            mOnUpdate += OnUpdate;
-        }
-
-        private void Update()
-        {
-            mOnUpdate?.Invoke();
+            if (mToActionRemove.Count > 0)
+            {
+                foreach (var action in mToActionRemove)
+                {
+                    mActionAndFinishCallbacks.Remove(action);
+                }
+                
+                mToActionRemove.Clear();
+            }
         }
     }
 
     public static class MonoUpdateActionExecutorExtension
     {
-        public static IAction ExecuteByUpdate<T>(this T self, IAction action,Action<IAction> onFinish = null) where T : MonoBehaviour
+        public static IAction ExecuteByUpdate<T>(this T self, IAction action,Action<IActionController> onFinish = null) where T : MonoBehaviour
         {
             if (action.Status == ActionStatus.Finished) action.Reset();
             self.gameObject.GetOrAddComponent<MonoUpdateActionExecutor>().Execute(action,onFinish);
