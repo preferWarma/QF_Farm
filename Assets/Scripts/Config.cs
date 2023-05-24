@@ -7,6 +7,11 @@ using QFramework;
 // 游戏配置类
 public static class Config
 {
+    public const int InitMoney = 50; // 初始金钱
+    public const int InitDays = 1; // 初始天数
+    public const float InitRestHours = 10; // 初始剩余时间
+
+
     public static List<Item> Items => Global.Interface.GetSystem<IToolBarSystem>().Items;
 
     public static Item CreateItem(string itemName, int initCount = 1)

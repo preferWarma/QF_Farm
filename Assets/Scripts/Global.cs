@@ -3,15 +3,18 @@ using Game;
 using Game.ChallengeSystem;
 using Game.Plants;
 using Game.Tools;
+using Lyf.SaveSystem;
 using QFramework;
+using UnityEditor;
 using UnityEngine;
+using SaveType = Lyf.SaveSystem.SaveType;
 
-public class Global : Architecture<Global>
+public class Global : Architecture<Global>, ISaveWithJson
 {
     [Header("游戏状态")]
-    public static readonly BindableProperty<int> Days = new(1); // 第几天, 从第1天开始
+    public static readonly BindableProperty<int> Days = new(Config.InitDays); // 第几天, 从第1天开始
 
-    public static readonly BindableProperty<float> RestHours = new(10);  // 当天剩余时间
+    public static readonly BindableProperty<float> RestHours = new(Config.InitRestHours);  // 当天剩余时间
     public static readonly BindableProperty<ITool> CurrentTool = new();  // 当前工具
         
     [Header("植物数量")]
@@ -22,10 +25,10 @@ public class Global : Architecture<Global>
     public static readonly BindableProperty<int> BeanCount = new();   // 当前拥有的豆角数量
 
     [Header("货币")]
-    public static readonly BindableProperty<int> Money = new(20); // 当前拥有的金钱
+    public static readonly BindableProperty<int> Money = new(Config.InitMoney); // 当前拥有的金钱
 
     [Header("升级相关")]
-    public static readonly bool[] IsToolUpgraded = new bool[4]; // 工具是否升级(顺序按照工具的顺序)
+    public static bool[] IsToolUpgraded = new bool[4]; // 工具是否升级(顺序按照工具的顺序)
 
     [Header("事件相关")]
     public static readonly EasyEvent<IPlant> OnPlantHarvest = new(); // 采摘植物事件
@@ -34,10 +37,89 @@ public class Global : Architecture<Global>
     [Header("其他")]
     public static Player Player = null;
     public static MouseController Mouse = null;
-        
-        
+    
     protected override void Init()
     {
         RegisterSystem<IToolBarSystem>(new ToolBarSystem());
+
+        SaveManager.Instance.Register(this, SaveType.Json);
+        LoadWithJson();
+        // 天数变化时, 保存数据
+        Days.Register(_ =>
+        {
+            ActionKit.NextFrame(SaveWithJson).StartGlobal();
+        });
     }
+
+    #region 存储相关
+
+    [MenuItem("Lyf/存档/保存所有注册数据")]
+    public static void Save()
+    {
+        SaveManager.Instance.SaveAllRegister(SaveType.Json);
+    }
+    
+    [MenuItem("Lyf/读档/读取所有注册数据")]
+    public static void Load()
+    {
+        SaveManager.Instance.LoadAllRegister(SaveType.Json);
+    }
+    
+    [MenuItem("Lyf/默认数据/加载当前Global默认数据")]
+    public static void LoadDefaultData()
+    {
+        Days.Value = Config.InitDays;
+        RestHours.Value = Config.InitRestHours;
+        Money.Value = Config.InitMoney;
+    }
+    
+    public string SAVE_FILE_NAME => "Global";
+    private class SaveDataCollection    // 需要保存的数据
+    {
+        public int Days;
+        public float RestHours;
+        public int PumpkinCount;
+        public int RadishCount;
+        public int PotatoCount;
+        public int TomatoCount;
+        public int BeanCount;
+        public int Money;
+        public bool[] IsToolUpgraded;
+    }
+    
+    public void SaveWithJson()
+    {
+        var saveData = new SaveDataCollection()
+        {
+            Days = Days.Value,
+            RestHours = RestHours.Value,
+            PumpkinCount = PumpkinCount.Value,
+            RadishCount = RadishCount.Value,
+            PotatoCount = PotatoCount.Value,
+            TomatoCount = TomatoCount.Value,
+            BeanCount = BeanCount.Value,
+            Money = Money.Value,
+            IsToolUpgraded = IsToolUpgraded
+        };
+        SaveManager.SaveWithJson(SAVE_FILE_NAME, saveData);
+    }
+
+    public void LoadWithJson()
+    {
+        var saveData = SaveManager.LoadWithJson<SaveDataCollection>(SAVE_FILE_NAME);
+        if (saveData == null) return;
+        Days.Value = saveData.Days;
+        RestHours.Value = saveData.RestHours;
+        PumpkinCount.Value = saveData.PumpkinCount;
+        RadishCount.Value = saveData.RadishCount;
+        PotatoCount.Value = saveData.PotatoCount;
+        TomatoCount.Value = saveData.TomatoCount;
+        BeanCount.Value = saveData.BeanCount;
+        Money.Value = saveData.Money;
+        IsToolUpgraded = saveData.IsToolUpgraded;
+        
+        Debug.Log("Global 数据已加载");
+    }
+    
+    #endregion
 }

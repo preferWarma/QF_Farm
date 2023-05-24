@@ -10,6 +10,7 @@ namespace Game.SceneControllers
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
+				Global.LoadDefaultData();	// 新的游戏开始时，加载默认数据
 				SceneManager.LoadScene("Scenes/Game");
 			}
 		}
