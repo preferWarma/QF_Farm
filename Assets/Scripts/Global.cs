@@ -41,13 +41,17 @@ public class Global : Architecture<Global>, ISaveWithJson
     protected override void Init()
     {
         RegisterSystem<IToolBarSystem>(new ToolBarSystem());
+        RegisterSystem<ISoilSystem>(new SoilSystem());
 
         SaveManager.Instance.Register(this, SaveType.Json);
         LoadWithJson();
         // 天数变化时, 保存数据
         Days.Register(_ =>
         {
-            ActionKit.NextFrame(SaveWithJson).StartGlobal();
+            ActionKit.NextFrame(() =>
+            {
+                SaveManager.Instance.SaveAllRegister(SaveType.Json);
+            }).StartGlobal();
         });
     }
 
@@ -65,12 +69,13 @@ public class Global : Architecture<Global>, ISaveWithJson
         SaveManager.Instance.LoadAllRegister(SaveType.Json);
     }
     
-    [MenuItem("Lyf/默认数据/加载当前Global默认数据")]
+    [MenuItem("Lyf/重置数据/加载所有默认数据")]
     public static void LoadDefaultData()
     {
         Days.Value = Config.InitDays;
         RestHours.Value = Config.InitRestHours;
         Money.Value = Config.InitMoney;
+        Interface.GetSystem<ISoilSystem>().LoadDefaultData();
     }
     
     public string SAVE_FILE_NAME => "Global";
@@ -118,7 +123,10 @@ public class Global : Architecture<Global>, ISaveWithJson
         Money.Value = saveData.Money;
         IsToolUpgraded = saveData.IsToolUpgraded;
         
-        Debug.Log("Global 数据已加载");
+        Debug.Log("加载Global数据成功,加载的数据如下:\n" +
+                  "Days: " + Days.Value + "\n" +
+                  "RestHours: " + RestHours.Value + "\n" +
+                  "Money: " + Money.Value + "\n");
     }
     
     #endregion

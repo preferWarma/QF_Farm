@@ -18,8 +18,6 @@ namespace Game
 
         private void Start()
         {
-            InitValueOnStart();
-            
             // 注册相关事件
             RegisterOnToolChange();
             RegisterOnDaysChange();
@@ -192,13 +190,7 @@ namespace Game
         }
 
         #endregion
-
-        private void InitValueOnStart()
-        {
-            Global.Days.Value = 1;  // 开局第一天
-            Global.Money.Value = 20; // 开局20块钱
-        }
-
+        
         public IArchitecture GetArchitecture()
         {
             return Global.Interface;

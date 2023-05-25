@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Game.Inventory;
-using Game.Tools;
 using QFramework;
 
 namespace System
@@ -36,9 +35,7 @@ namespace System
             Config.CreateItem(ItemNameCollections.SeedTomato, 5),
             Config.CreateItem(ItemNameCollections.SeedBean, 5),
         };
-
         
-
         protected override void OnInit()
         {
         }

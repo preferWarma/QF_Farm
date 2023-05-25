@@ -44,12 +44,6 @@ namespace Game
 			Global.Interface.SendCommand(new AddItemCountCommand(ItemNameCollections.Potato, 999));
 		}
 		
-		[MenuItem("Lyf/游戏/进入下一天(快捷键Q)")]
-		public static void NoMoneyCost()
-		{
-			Global.Days.Value++;
-		}
-		
 		#endregion
 		
 		private void Update()
