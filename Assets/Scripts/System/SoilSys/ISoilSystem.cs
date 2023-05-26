@@ -60,6 +60,7 @@ namespace System.SoilSys
                 return;
             }
             SoilGrid.Resize(saveData.Width, saveData.Height,(_,_)=>null);
+            PlantController.Instance.PlantGrid.Resize(saveData.Width, saveData.Height,(_,_)=>null);
             
             for (var i = 0; i < SoilGrid.Width; i++)
             {
@@ -73,7 +74,7 @@ namespace System.SoilSys
         public void ResetDefaultData()
         {
             SoilGrid = new EasyGrid<SoilData>(Config.InitSoilWidth, Config.InitSoilHeight);
-            
+            PlantController.Instance.PlantGrid.Resize(Config.InitSoilWidth, Config.InitSoilHeight, (_, _) => null);
             SaveWithJson();
         }
 

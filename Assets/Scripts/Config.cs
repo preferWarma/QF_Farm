@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ToolBarSys;
 using Game.Inventory;
 using Game.Tools;
@@ -8,12 +7,19 @@ using QFramework;
 // 游戏配置类
 public static class Config
 {
+    // 游戏配置
     public const int InitMoney = 50; // 初始金钱
     public const int InitDays = 1; // 初始天数
     public const float InitRestHours = 10; // 初始剩余时间
     public const int InitSoilWidth = 5;
-    public const int InitSoilHeight = 4;
+    public const int InitSoilHeight = 5;
 
+    // 背包配置
+    public const int InitPumpkinSeedCount = 5;
+    public const int InitRadishSeedCount = 5;
+    public const int InitPotatoSeedCount = 5;
+    public const int InitTomatoSeedCount = 5;
+    public const int InitBeanSeedCount = 5;
 
     public static List<Item> Items => Global.Interface.GetSystem<IToolBarSystem>().Items;
 

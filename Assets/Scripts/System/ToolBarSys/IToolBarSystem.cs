@@ -29,11 +29,11 @@ namespace System.ToolBarSys
             Config.CreateItem(ItemNameCollections.Hand),
             Config.CreateItem(ItemNameCollections.Shovel),
             Config.CreateItem(ItemNameCollections.WateringCan),
-            Config.CreateItem(ItemNameCollections.SeedPumpkin, 5),
-            Config.CreateItem(ItemNameCollections.SeedRadish, 5),
-            Config.CreateItem(ItemNameCollections.SeedPotato, 5),
-            Config.CreateItem(ItemNameCollections.SeedTomato, 5),
-            Config.CreateItem(ItemNameCollections.SeedBean, 5),
+            Config.CreateItem(ItemNameCollections.SeedPumpkin, Config.InitPumpkinSeedCount),
+            Config.CreateItem(ItemNameCollections.SeedRadish, Config.InitRadishSeedCount),
+            Config.CreateItem(ItemNameCollections.SeedPotato, Config.InitPotatoSeedCount),
+            Config.CreateItem(ItemNameCollections.SeedTomato, Config.InitTomatoSeedCount),
+            Config.CreateItem(ItemNameCollections.SeedBean, Config.InitBeanSeedCount),
         };
         
         protected override void OnInit()
