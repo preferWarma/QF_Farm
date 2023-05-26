@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3562982842733779810}
   - component: {fileID: 3562982842733779811}
-  - component: {fileID: 3562982842733779812}
+  - component: {fileID: -2982319746317895664}
   m_Layer: 0
   m_Name: PlantBean
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3562982842733779812
+--- !u!114 &-2982319746317895664
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3562982842733779808}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce9e25e30ce64d19bff283e3ec03d340, type: 3}
+  m_Script: {fileID: 11500000, guid: d7c22afcfb02a934cba4c55f7f3ea201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Namespace: Game
@@ -114,7 +114,7 @@ MonoBehaviour:
     showSoilDig: 0
   - sate: 2
     sprite: {fileID: 21300000, guid: fe7280f19e65c3840974faab316976f1, type: 3}
-    growDay: 1
+    growDay: 2
     showSoilDig: 0
   - sate: 3
     sprite: {fileID: 21300000, guid: 418b770960f241741b46c38322cacb20, type: 3}

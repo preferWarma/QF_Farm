@@ -17,7 +17,8 @@ namespace Game
 	{
 		public static PlantController Instance => MonoSingletonProperty<PlantController>.Instance;
 
-		public readonly EasyGrid<IPlant> PlantGrid = new(5, 4);
+		// TODO 跟随土壤宽高变化
+		public readonly EasyGrid<IPlant> PlantGrid = new(Config.InitSoilWidth, Config.InitSoilHeight);
 
 		public void OnSingletonInit()
 		{

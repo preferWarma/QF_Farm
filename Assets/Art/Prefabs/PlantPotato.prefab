@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6963620104033150100}
   - component: {fileID: 6963620104033150101}
-  - component: {fileID: 5205692182073017116}
+  - component: {fileID: -2741405167654798291}
   m_Layer: 0
   m_Name: PlantPotato
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5205692182073017116
+--- !u!114 &-2741405167654798291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,14 +94,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6963620104033150102}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07dd3fac1fe845ffa53b266b3511e8b6, type: 3}
+  m_Script: {fileID: 11500000, guid: d7c22afcfb02a934cba4c55f7f3ea201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Namespace: Game.Plants
+  Namespace: Game
   ScriptName: PlantPotato
-  ScriptsFolder: Assets/Scripts/Game/Plants
-  GeneratePrefab: 1
-  PrefabFolder: Assets/Art/Prefabs
+  ScriptsFolder: Assets/Scripts/Game
+  GeneratePrefab: 0
+  PrefabFolder: Assets/Art/Prefab
   plantName: Potato
   stateInfos:
   - sate: 0

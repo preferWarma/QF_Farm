@@ -1,9 +1,7 @@
-using System;
 using System.Linq;
 using System.SoilSys;
 using System.ToolBarSys;
 using Game.ChallengeSystem;
-using Game.Plants;
 using Game.UI;
 using QFramework;
 using UnityEngine.SceneManagement;
@@ -13,11 +11,6 @@ namespace Game
 {
     public partial class GameController : ViewController, IController
     {
-        private void Awake()
-        {
-            FindObjectOfType<UIToolBar>();
-        }
-
         private void Start()
         {
             // 注册相关事件
@@ -126,31 +119,31 @@ namespace Game
                 ChallengeController.HarvestCountInCurrentDay.Value++;
                 ChallengeController.TotalFruitCount.Value++;
 
-                UIMessageQueue.Push(ResController.Instance.LoadSprite(plant.plantName), "+1");
+                UIMessageQueue.Push(ResController.Instance.LoadSprite(plant.PlantName), "+1");
                 
                 // 根据植物类型增加不同的水果数量
-                if (plant is PlantRadish)
+                if (plant.PlantName == ItemNameCollections.Radish)
                 {
                     ChallengeController.HarvestRadishCountInCurrentDay.Value++;
                     ChallengeController.TotalRadishCount.Value++;
                     this.SendCommand(new AddItemCountCommand(ItemNameCollections.Radish, 1));
                 }
-                else if (plant is PlantPumpkin)
+                else if (plant.PlantName == ItemNameCollections.Pumpkin)
                 {
                     ChallengeController.TotalPumpkinCount.Value++;
                     this.SendCommand(new AddItemCountCommand(ItemNameCollections.Pumpkin, 1));
                 }
-                else if (plant is PlantPotato)
+                else if (plant.PlantName == ItemNameCollections.Potato)
                 {
                     ChallengeController.HarvestPotatoCountInCurrentDay.Value++;
                     this.SendCommand(new AddItemCountCommand(ItemNameCollections.Potato, 1));
                 }
-                else if (plant is PlantTomato)
+                else if (plant.PlantName == ItemNameCollections.Tomato)
                 {
                     ChallengeController.HarvestTomatoInCurrentDay.Value++;
                     this.SendCommand(new AddItemCountCommand(ItemNameCollections.Tomato, 1));
                 }
-                else if (plant is PlantBean)
+                else if (plant.PlantName == ItemNameCollections.Bean)
                 {
                     ChallengeController.HarvestBeanInCurrentDay.Value++;
                     this.SendCommand(new AddItemCountCommand(ItemNameCollections.Bean, 1));

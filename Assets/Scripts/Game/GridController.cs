@@ -32,16 +32,20 @@ namespace Game
 			{
 				Ground.SetTile(new Vector3Int(x, y), canCultivateFieldPen);
 			});
-
-			// Global.Days.Register(_ => Show());
 		}
-
-		// 画开垦了的区域
-		private void Show()
+		
+		public void Show()
 		{
 			ShowGrid.ForEach((x, y, soilData) =>
 			{
-				if (soilData == null) return;
+				if (soilData == null)
+				{
+					Soil.SetTile(new Vector3Int(x, y), null);
+					if (PlantController.Instance.PlantGrid[x, y] == null) return;
+					PlantController.Instance.PlantGrid[x, y].GameObject.DestroySelf();
+					PlantController.Instance.PlantGrid[x, y] = null;
+					return;
+				}
 				Soil.SetTile(new Vector3Int(x, y), pen);
 				if (soilData.HasPlant)
 				{

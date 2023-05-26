@@ -1,4 +1,3 @@
-using System;
 using System.SoilSys;
 using System.ToolBarSys;
 using Game;
@@ -9,6 +8,7 @@ using Lyf.SaveSystem;
 using QFramework;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 using SaveType = Lyf.SaveSystem.SaveType;
 
 public class Global : Architecture<Global>, ISaveWithJson
@@ -76,7 +76,8 @@ public class Global : Architecture<Global>, ISaveWithJson
         Days.SetValueWithoutEvent(Config.InitDays);
         RestHours.SetValueWithoutEvent(Config.InitRestHours);
         Money.SetValueWithoutEvent(Config.InitMoney);
-        Interface.GetSystem<ISoilSystem>().LoadDefaultData();
+        Interface.GetSystem<ISoilSystem>().ResetDefaultData();
+        Object.FindObjectOfType<GridController>()?.Show();
     }
     
     public string SAVE_FILE_NAME => "Global";

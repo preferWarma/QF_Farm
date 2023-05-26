@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5146968983972400643}
   - component: {fileID: 5146968983972400642}
-  - component: {fileID: 1814452822867198016}
+  - component: {fileID: 5881657242655037056}
   m_Layer: 0
   m_Name: PlantRadish
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1814452822867198016
+--- !u!114 &5881657242655037056
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5146968983972400641}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0e3ca2e4eef82342a75b07117f92345, type: 3}
+  m_Script: {fileID: 11500000, guid: d7c22afcfb02a934cba4c55f7f3ea201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Namespace: Game

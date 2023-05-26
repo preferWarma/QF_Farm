@@ -2,7 +2,7 @@
 
 namespace Game.Plants
 {
-	public partial class PlantPumpkin
+	public partial class Plant
 	{
 
 	}

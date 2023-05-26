@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6963620104033150100}
   - component: {fileID: 6963620104033150101}
-  - component: {fileID: 3671689660343663913}
+  - component: {fileID: -5867863302684371378}
   m_Layer: 0
   m_Name: PlantTomato
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3671689660343663913
+--- !u!114 &-5867863302684371378
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,27 +94,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 6963620104033150102}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 952446c48e3e19d43a003b31b3ac763b, type: 3}
+  m_Script: {fileID: 11500000, guid: d7c22afcfb02a934cba4c55f7f3ea201, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Namespace: Game.Plants
+  Namespace: Game
   ScriptName: PlantTomato
-  ScriptsFolder: Assets/Scripts/Game/Plants
+  ScriptsFolder: Assets/Scripts/Game
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
   plantName: Tomato
   stateInfos:
   - sate: 0
     sprite: {fileID: 21300000, guid: 9a271c5273c5c16498295de7507a985e, type: 3}
-    growDay: 1
+    growDay: 0
     showSoilDig: 1
   - sate: 1
     sprite: {fileID: 21300000, guid: 101add82d403b024291610695bc47236, type: 3}
-    growDay: 1
+    growDay: 0
     showSoilDig: 0
   - sate: 2
     sprite: {fileID: 21300000, guid: 418f3365787eb1245aecb4cedd9e4fd8, type: 3}
-    growDay: 1
+    growDay: 0
     showSoilDig: 0
   - sate: 3
     sprite: {fileID: 21300000, guid: 14d832d2a3d9e8144ab32c0f9e3abbb3, type: 3}

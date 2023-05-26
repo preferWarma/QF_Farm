@@ -8,12 +8,12 @@ namespace System.SoilSys
     public interface ISoilSystem : ISystem, ISaveWithJson
     {
         EasyGrid<SoilData> SoilGrid { get; }
-        void LoadDefaultData();
+        void ResetDefaultData();
     }
 
     public class SoilSystem : AbstractSystem, ISoilSystem
     {
-        public EasyGrid<SoilData> SoilGrid { get; } = new(5, 4);
+        public EasyGrid<SoilData> SoilGrid { get; private set; } = new(Config.InitSoilWidth, Config.InitSoilHeight);
 
         protected override void OnInit()
         {
@@ -25,6 +25,8 @@ namespace System.SoilSys
         private class SaveDataCollection
         {
             public SoilData[][] SoilDatas;
+            public int Width;
+            public int Height;
         }
 
         public string SAVE_FILE_NAME => "SoilData";
@@ -33,7 +35,9 @@ namespace System.SoilSys
         {
             var saveData = new SaveDataCollection
             {
-                SoilDatas = new SoilData[SoilGrid.Width][]
+                SoilDatas = new SoilData[SoilGrid.Width][],
+                Width = SoilGrid.Width,
+                Height = SoilGrid.Height
             };
             for (var i = 0; i < SoilGrid.Width; i++)
             {
@@ -55,7 +59,8 @@ namespace System.SoilSys
                 Debug.LogError("加载土地数据失败");
                 return;
             }
-
+            SoilGrid.Resize(saveData.Width, saveData.Height,(_,_)=>null);
+            
             for (var i = 0; i < SoilGrid.Width; i++)
             {
                 for (var j = 0; j < SoilGrid.Height; j++)
@@ -63,19 +68,12 @@ namespace System.SoilSys
                     SoilGrid[i, j] = saveData.SoilDatas[i][j];
                 }
             }
-            
-            Debug.Log("加载土地数据成功");
         }
         
-        public void LoadDefaultData()
+        public void ResetDefaultData()
         {
-            for (var i = 0; i < SoilGrid.Width; i++)
-            {
-                for (var j = 0; j < SoilGrid.Height; j++)
-                {
-                    SoilGrid[i, j] = null;
-                }
-            }
+            SoilGrid = new EasyGrid<SoilData>(Config.InitSoilWidth, Config.InitSoilHeight);
+            
             SaveWithJson();
         }
 

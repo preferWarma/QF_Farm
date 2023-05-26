@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.Plants
 {
-	public partial class PlantPumpkin : ViewController, IPlant, IController
+	public partial class Plant : ViewController, IPlant, IController
 	{
 		public int X { get; set; } = -1;
 		public int Y { get; set; } = -1;
@@ -17,11 +17,16 @@ namespace Game.Plants
 			get => mSoilSystem.SoilGrid[X, Y].PlantSate;
 			private set => mSoilSystem.SoilGrid[X, Y].PlantSate = value;
 		}
-		
-		public string plantName => ItemNameCollections.Pumpkin;
+
+		public string PlantName => plantName;
+		[SerializeField] public string plantName = "未知植物";	// 供外部设置
 		public List<PlantStateInfo> stateInfos = new ();
-		
-		private int mCurrentStateDay = 0;	// 当前状态的生长天数
+
+		private int mCurrentStateDay	// 当前阶段已经生长的天数
+		{
+			get => mSoilSystem.SoilGrid[X, Y].CurrentStateDay;
+			set => mSoilSystem.SoilGrid[X, Y].CurrentStateDay = value;
+		}
 		private SpriteRenderer mSpriteRenderer;
 		private GridController mGridController;
 		private ISoilSystem mSoilSystem;

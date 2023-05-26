@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.SoilSys;
 using UnityEngine;
 
@@ -12,7 +11,7 @@ namespace Game.Plants
         GameObject GameObject { get; }
         PlantSates Sate { get; }
         int RipeDay { get; }
-        string plantName { get; }
+        string PlantName { get; }
         void SetState(PlantSates newSate);
         void Grow(SoilData soilData);
     }
