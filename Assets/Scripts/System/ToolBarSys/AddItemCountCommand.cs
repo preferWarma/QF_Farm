@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using QFramework;
+﻿using QFramework;
 
-namespace System
+namespace System.ToolBarSys
 {
     public class AddItemCountCommand : AbstractCommand
     {

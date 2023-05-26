@@ -25,13 +25,13 @@ namespace Game.UI
 			{
 				var cost = Random.Range(5, 8 + 1);
 				Global.Money.Value -= cost;	// 每天扣5块钱
-				UIMessageQueue.Push(null,$"昨日消耗$-{cost}元");
+				UIMessageQueue.Push(null,$"昨日消耗$-${cost}");
 			
 				if (isFinished_1)
 				{
 					var earn = Random.Range(5,8+1);
 					Global.Money.Value += earn;
-					UIMessageQueue.Push(null,$"项目1昨天收入${earn}元");
+					UIMessageQueue.Push(null,$"项目1昨天收入+${earn}元");
 				}
 			}).UnRegisterWhenGameObjectDestroyed(this);
 		}
@@ -91,7 +91,7 @@ namespace Game.UI
 			{
 				var perHourIncome = Random.Range(1f, 2f);
 				Global.Money.Value += Convert.ToInt32(perHourIncome * Global.RestHours.Value);
-				UIMessageQueue.Push(null,$"打工收入${perHourIncome * Global.RestHours.Value:0.0}元");
+				UIMessageQueue.Push(null,$"打工收入${perHourIncome * Global.RestHours.Value:0.0}");
 				Global.RestHours.Value = 0;
 				AudioController.Instance.Sfx_Trade.Play();
 			});

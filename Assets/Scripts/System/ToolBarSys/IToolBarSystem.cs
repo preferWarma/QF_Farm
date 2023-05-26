@@ -2,7 +2,7 @@
 using Game.Inventory;
 using QFramework;
 
-namespace System
+namespace System.ToolBarSys
 {
     public interface IToolBarSystem : ISystem
     {

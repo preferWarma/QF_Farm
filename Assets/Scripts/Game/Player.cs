@@ -1,4 +1,5 @@
 using System;
+using System.ToolBarSys;
 using Game.UI;
 using UnityEngine;
 using QFramework;
@@ -20,6 +21,7 @@ namespace Game
 			Global.Player = this;
 			mRigidbody = GetComponent<Rigidbody2D>();
 		}
+		
 		#region 作弊菜单
 		
 		[MenuItem("Lyf/游戏/金钱无限")]

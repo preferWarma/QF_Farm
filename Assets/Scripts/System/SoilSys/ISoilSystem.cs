@@ -1,9 +1,9 @@
-﻿using Game.Data;
+﻿using Game;
 using Lyf.SaveSystem;
 using QFramework;
 using UnityEngine;
 
-namespace System
+namespace System.SoilSys
 {
     public interface ISoilSystem : ISystem, ISaveWithJson
     {

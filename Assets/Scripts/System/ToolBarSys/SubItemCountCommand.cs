@@ -1,6 +1,6 @@
 ﻿using QFramework;
 
-namespace System
+namespace System.ToolBarSys
 {
     public class SubItemCountCommand : AbstractCommand
     {
@@ -12,8 +12,7 @@ namespace System
             mItemName = itemName;
             mSubCount = subCount;
         }
-
-
+        
         protected override void OnExecute()
         {
             var item = Config.Items.Find(item => item.name == mItemName);

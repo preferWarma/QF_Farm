@@ -1,5 +1,6 @@
+using System;
 using System.Collections.Generic;
-using Game.Data;
+using System.SoilSys;
 using UnityEngine;
 using QFramework;
 
@@ -12,7 +13,7 @@ namespace Game.Plants
         public PlantSates Sate { get; private set; }
         public int RipeDay { get; private set; } = -1;
         public GameObject GameObject => gameObject;
-        
+         
         public string plantName => ItemNameCollections.Tomato;
         public List<PlantStateInfo> stateInfos = new ();
 		
@@ -61,7 +62,7 @@ namespace Game.Plants
                 RipeDay = Global.Days.Value;
             }
 
-            mGridController.ShowGrid[X, Y].PlantSates = newSate; // 同步到SoilData
+            mGridController.ShowGrid[X, Y].PlantSate = newSate; // 同步到SoilData
         }
 	}
 }

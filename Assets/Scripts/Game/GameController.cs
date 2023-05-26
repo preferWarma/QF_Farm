@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using System.SoilSys;
+using System.ToolBarSys;
 using Game.ChallengeSystem;
 using Game.Plants;
 using Game.UI;
@@ -88,7 +90,7 @@ namespace Game
             // 土地浇水相关
             Global.Days.Register(_ =>
             {
-                var soilDatas = FindObjectOfType<GridController>().ShowGrid;
+                var soilDatas = this.GetSystem<ISoilSystem>().SoilGrid;
 
                 PlantController.Instance.PlantGrid.ForEach((x, y, plant) =>
                 {

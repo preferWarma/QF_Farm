@@ -1,17 +1,22 @@
 using System.Collections.Generic;
-using Game.Data;
+using System.SoilSys;
 using QFramework;
 using UnityEngine;
 
 namespace Game.Plants
 {
-	public partial class PlantPumpkin : ViewController, IPlant
+	public partial class PlantPumpkin : ViewController, IPlant, IController
 	{
 		public int X { get; set; } = -1;
 		public int Y { get; set; } = -1;
-		public PlantSates Sate { get; private set; }
 		public int RipeDay { get; private set; } = -1; // 成熟的日期
 		public GameObject GameObject => gameObject;
+
+		public PlantSates Sate	// 与土壤数据同步
+		{
+			get => mSoilSystem.SoilGrid[X, Y].PlantSate;
+			private set => mSoilSystem.SoilGrid[X, Y].PlantSate = value;
+		}
 		
 		public string plantName => ItemNameCollections.Pumpkin;
 		public List<PlantStateInfo> stateInfos = new ();
@@ -19,11 +24,13 @@ namespace Game.Plants
 		private int mCurrentStateDay = 0;	// 当前状态的生长天数
 		private SpriteRenderer mSpriteRenderer;
 		private GridController mGridController;
-
+		private ISoilSystem mSoilSystem;
+ 
 		private void Awake()
 		{
 			mSpriteRenderer = GetComponent<SpriteRenderer>();
 			mGridController = FindObjectOfType<GridController>();
+			mSoilSystem = this.GetSystem<ISoilSystem>();
 		}
 
 		public void Grow(SoilData soilData)
@@ -38,30 +45,15 @@ namespace Game.Plants
 				var curIdx = stateInfos.IndexOf(currentStateInfo);
 				SetState(stateInfos[curIdx + 1].sate);
 				mCurrentStateDay = 0;	// 重置生长天数
+				if (stateInfos[curIdx + 1].sate == PlantSates.Ripe)	// 纪录成熟的日期
+				{
+					RipeDay = Global.Days.Value;
+				}
 			}
-
-			// switch (Sate)
-			// {
-			// 	// 如果是种子
-			// 	case PlantSates.Seed:
-			// 		SetState(PlantSates.Small);
-			// 		break;
-			// 	// 如果是幼苗
-			// 	case PlantSates.Small:
-			// 		SetState(PlantSates.Mid);
-			// 		break;
-			// 	case PlantSates.Mid:
-			// 		SetState(PlantSates.Big);
-			// 		break;
-			// 	case PlantSates.Big:
-			// 		SetState(PlantSates.Ripe);
-			// 		break;
-			// }
 		}
 
 		public void SetState(PlantSates newSate)
 		{
-			if (newSate == Sate) return;
 			Sate = newSate;
 			
 			var newStateInfo = stateInfos.Find(info => info.sate == newSate);
@@ -72,14 +64,18 @@ namespace Game.Plants
 				this.ClearSoilDigState(mGridController);
 			}
 			mSpriteRenderer.sprite = newStateInfo.sprite;
-			
-            
-			if (newSate == PlantSates.Ripe)
-			{
-				RipeDay = Global.Days.Value;
-			}
-			
-			mGridController.ShowGrid[X, Y].PlantSates = newSate;	// 同步到SoilData
+		}
+
+		public IArchitecture GetArchitecture()
+		{
+			return Global.Interface;
+		}
+
+		private void OnDestroy()
+		{
+			mSpriteRenderer = null;
+			mGridController = null;
+			mSoilSystem = null;
 		}
 	}
 }

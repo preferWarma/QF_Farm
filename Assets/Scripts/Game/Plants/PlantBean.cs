@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Game.Data;
+using System.SoilSys;
 using UnityEngine;
 using QFramework;
 
@@ -39,12 +39,15 @@ namespace Game.Plants
                 var curIdx = stateInfos.IndexOf(currentStateInfo);
                 SetState(stateInfos[curIdx + 1].sate);
                 mCurrentStateDay = 0;	// 重置生长天数
+                if (stateInfos[curIdx + 1].sate == PlantSates.Ripe)	// 纪录成熟的日期
+                {
+                    RipeDay = Global.Days.Value;
+                }
             }
         }
 
         public void SetState(PlantSates newSate)
         {
-            if (newSate == Sate) return;
             Sate = newSate;
             
             var newStateInfo = stateInfos.Find(info => info.sate == newSate);
@@ -55,13 +58,6 @@ namespace Game.Plants
                 this.ClearSoilDigState(mGridController);
             }
             mSpriteRenderer.sprite = newStateInfo.sprite;
-            
-            if (newSate == PlantSates.Ripe)
-            {
-                RipeDay = Global.Days.Value;
-            }
-
-            mGridController.ShowGrid[X, Y].PlantSates = newSate; // 同步到SoilData
         }
 	}
 }

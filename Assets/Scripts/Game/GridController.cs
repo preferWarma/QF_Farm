@@ -1,5 +1,5 @@
-using System;
-using Game.Data;
+using System.SoilSys;
+using Game.Plants;
 using UnityEngine;
 using QFramework;
 using UnityEngine.Tilemaps;
@@ -33,16 +33,34 @@ namespace Game
 				Ground.SetTile(new Vector3Int(x, y), canCultivateFieldPen);
 			});
 
-			Global.Days.Register(_ => Show());
+			// Global.Days.Register(_ => Show());
 		}
 
 		// 画开垦了的区域
 		private void Show()
 		{
-			ShowGrid.ForEach((x, y, _) =>
+			ShowGrid.ForEach((x, y, soilData) =>
 			{
-				if (_ == null) return;
+				if (soilData == null) return;
 				Soil.SetTile(new Vector3Int(x, y), pen);
+				if (soilData.HasPlant)
+				{
+					var plantObj = ResController.Instance.LoadPrefab(soilData.PlantPrefabName)
+						.Instantiate()
+						.Position(Soil.layoutGrid.GetCellCenterWorld(new Vector3Int(x, y)));
+					var plant = plantObj.GetComponent<IPlant>();
+					PlantController.Instance.PlantGrid[x, y] = plant;
+					plant.X = x;
+					plant.Y = y;
+					plant.SetState(soilData.PlantSate);
+				}
+
+				if (soilData.Watered)
+				{
+					ResController.Instance.waterPrefab
+						.Instantiate()
+						.Position(Soil.layoutGrid.GetCellCenterWorld(new Vector3Int(x, y)));
+				}
 			});
 		}
 

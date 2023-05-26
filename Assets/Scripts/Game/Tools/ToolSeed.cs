@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ToolBarSys;
 using Game.Inventory;
 using Game.Plants;
 using QFramework;
@@ -56,6 +57,7 @@ namespace Game.Tools
 
             PlantController.Instance.PlantGrid[cellPos.x, cellPos.y] = plant;
             showGrid[cellPos.x, cellPos.y].HasPlant = true;
+            showGrid[cellPos.x, cellPos.y].PlantPrefabName = Item.plantPrefabName;
 
             Global.RestHours.Value -= CostHours;
         }

@@ -20,7 +20,7 @@ namespace Game.Tools
             var cellPos = needData.CellPos;
 
             if (showGrid[cellPos.x, cellPos.y] == null) return; // 没有耕地
-            if (showGrid[cellPos.x, cellPos.y].PlantSates != PlantSates.Ripe) return;   // 当前植物未成熟
+            if (showGrid[cellPos.x, cellPos.y].PlantSate != PlantSates.Ripe) return;   // 当前植物未成熟
             
             Global.Mouse.TimeNotEnough.gameObject.SetActive(false);
             if (Global.RestHours.Value < CostHours)   // 时间不够

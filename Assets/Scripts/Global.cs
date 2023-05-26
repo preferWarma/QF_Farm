@@ -1,4 +1,6 @@
 using System;
+using System.SoilSys;
+using System.ToolBarSys;
 using Game;
 using Game.ChallengeSystem;
 using Game.Plants;
@@ -13,7 +15,6 @@ public class Global : Architecture<Global>, ISaveWithJson
 {
     [Header("游戏状态")]
     public static readonly BindableProperty<int> Days = new(Config.InitDays); // 第几天, 从第1天开始
-
     public static readonly BindableProperty<float> RestHours = new(Config.InitRestHours);  // 当天剩余时间
     public static readonly BindableProperty<ITool> CurrentTool = new();  // 当前工具
         
@@ -72,9 +73,9 @@ public class Global : Architecture<Global>, ISaveWithJson
     [MenuItem("Lyf/重置数据/加载所有默认数据")]
     public static void LoadDefaultData()
     {
-        Days.Value = Config.InitDays;
-        RestHours.Value = Config.InitRestHours;
-        Money.Value = Config.InitMoney;
+        Days.SetValueWithoutEvent(Config.InitDays);
+        RestHours.SetValueWithoutEvent(Config.InitRestHours);
+        Money.SetValueWithoutEvent(Config.InitMoney);
         Interface.GetSystem<ISoilSystem>().LoadDefaultData();
     }
     
@@ -113,14 +114,14 @@ public class Global : Architecture<Global>, ISaveWithJson
     {
         var saveData = SaveManager.LoadWithJson<SaveDataCollection>(SAVE_FILE_NAME);
         if (saveData == null) return;
-        Days.Value = saveData.Days;
-        RestHours.Value = saveData.RestHours;
+        Days.SetValueWithoutEvent(saveData.Days);
+        RestHours.SetValueWithoutEvent(saveData.RestHours);
         PumpkinCount.Value = saveData.PumpkinCount;
         RadishCount.Value = saveData.RadishCount;
         PotatoCount.Value = saveData.PotatoCount;
         TomatoCount.Value = saveData.TomatoCount;
         BeanCount.Value = saveData.BeanCount;
-        Money.Value = saveData.Money;
+        Money.SetValueWithoutEvent(saveData.Money);
         IsToolUpgraded = saveData.IsToolUpgraded;
         
         Debug.Log("加载Global数据成功,加载的数据如下:\n" +
