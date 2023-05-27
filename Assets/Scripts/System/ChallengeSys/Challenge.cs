@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Game.ChallengeSystem
+﻿namespace System.ChallengeSys
 {
     // 挑战基类
     public abstract class Challenge

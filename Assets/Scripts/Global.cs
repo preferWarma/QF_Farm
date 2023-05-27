@@ -1,7 +1,7 @@
+using System.ChallengeSys;
 using System.SoilSys;
 using System.ToolBarSys;
 using Game;
-using Game.ChallengeSystem;
 using Game.Plants;
 using Game.Tools;
 using Lyf.SaveSystem;
@@ -43,9 +43,10 @@ public class Global : Architecture<Global>, ISaveWithJson
     {
         RegisterSystem<IToolBarSystem>(new ToolBarSystem());
         RegisterSystem<ISoilSystem>(new SoilSystem());
+        RegisterSystem<IChallengeSystem>(new ChallengeSystem());
 
         SaveManager.Instance.Register(this, SaveType.Json);
-        LoadWithJson();
+        
         // 天数变化时, 保存数据
         Days.Register(_ =>
         {
@@ -56,6 +57,13 @@ public class Global : Architecture<Global>, ISaveWithJson
         });
     }
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    public static void DoLoadAll()
+    {
+        SaveManager.Instance.LoadAllRegister(SaveType.Json);
+    }
+    
+    
     #region 存储相关
 
     [MenuItem("Lyf/存档/保存所有注册数据")]
@@ -78,6 +86,7 @@ public class Global : Architecture<Global>, ISaveWithJson
         Money.SetValueWithoutEvent(Config.InitMoney);
         Interface.GetSystem<ISoilSystem>().ResetDefaultData();
         Object.FindObjectOfType<GridController>()?.Show();
+        Interface.GetSystem<IChallengeSystem>().ResetDefaultData();
     }
     
     public string SAVE_FILE_NAME => "Global";

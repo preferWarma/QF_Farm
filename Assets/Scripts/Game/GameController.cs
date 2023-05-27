@@ -1,7 +1,7 @@
+using System.ChallengeSys;
 using System.Linq;
 using System.SoilSys;
 using System.ToolBarSys;
-using Game.ChallengeSystem;
 using Game.UI;
 using QFramework;
 using UnityEngine.SceneManagement;
@@ -22,7 +22,6 @@ namespace Game
 
         private void Update()
         {
-            UpdateChallenge();
             if(Global.Money.Value < 0) // 如果钱不够了，游戏结束
             {
                 ActionKit.Delay(0.5f, () => SceneManager.LoadScene("Scenes/GameOver"))
@@ -30,44 +29,6 @@ namespace Game
             }
         }
 
-        private void UpdateChallenge()
-        {
-            var hasFinishedChallenge = false;
-
-            // 检查激活列表中是否有挑战完成或开始
-            foreach (var challenge in ChallengeController.ActiveChallenges)
-            {
-                if (challenge.State == Challenge.States.NotStart)
-                {
-                    challenge.OnStart();
-                    challenge.State = Challenge.States.Doing;
-                }
-
-                else if (challenge.State == Challenge.States.Doing)
-                {
-                    if (challenge.CheckFinish())
-                    {
-                        challenge.OnFinish();
-                        challenge.State = Challenge.States.Finished;
-                        Global.OnChallengeFinish.Trigger(challenge); // 触发挑战完成事件
-                        hasFinishedChallenge = true;
-                    }
-                }
-            }
-
-            if (hasFinishedChallenge)
-            {
-                ChallengeController.ActiveChallenges.RemoveAll(challenge => challenge.State == Challenge.States.Finished);
-            }
-
-            if (ChallengeController.ActiveChallenges.Count == 0 && ChallengeController.FinishedChallenges.Count != ChallengeController.Challenges.Count)
-            {
-                var randomItem = ChallengeController.Challenges.Where(challenge1 => challenge1.State == Challenge.States.NotStart)
-                    .ToList().GetRandomItem();
-                ChallengeController.ActiveChallenges.Add(randomItem); // 完成挑战时再随机添加一个未开始的挑战
-            }
-        }
-        
         #region 监听注册的相关函数
         
         // 监听工具切换
@@ -116,42 +77,42 @@ namespace Game
             // 监听植物采摘
             Global.OnPlantHarvest.Register(plant =>
             {
-                ChallengeController.HarvestCountInCurrentDay.Value++;
-                ChallengeController.TotalFruitCount.Value++;
+                ChallengeSystem.HarvestCountInCurrentDay.Value++;
+                ChallengeSystem.TotalFruitCount.Value++;
 
                 UIMessageQueue.Push(ResController.Instance.LoadSprite(plant.PlantName), "+1");
                 
                 // 根据植物类型增加不同的水果数量
                 if (plant.PlantName == ItemNameCollections.Radish)
                 {
-                    ChallengeController.HarvestRadishCountInCurrentDay.Value++;
-                    ChallengeController.TotalRadishCount.Value++;
+                    ChallengeSystem.HarvestRadishCountInCurrentDay.Value++;
+                    ChallengeSystem.TotalRadishCount.Value++;
                     this.SendCommand(new AddItemCountCommand(ItemNameCollections.Radish, 1));
                 }
                 else if (plant.PlantName == ItemNameCollections.Pumpkin)
                 {
-                    ChallengeController.TotalPumpkinCount.Value++;
+                    ChallengeSystem.TotalPumpkinCount.Value++;
                     this.SendCommand(new AddItemCountCommand(ItemNameCollections.Pumpkin, 1));
                 }
                 else if (plant.PlantName == ItemNameCollections.Potato)
                 {
-                    ChallengeController.HarvestPotatoCountInCurrentDay.Value++;
+                    ChallengeSystem.HarvestPotatoCountInCurrentDay.Value++;
                     this.SendCommand(new AddItemCountCommand(ItemNameCollections.Potato, 1));
                 }
                 else if (plant.PlantName == ItemNameCollections.Tomato)
                 {
-                    ChallengeController.HarvestTomatoInCurrentDay.Value++;
+                    ChallengeSystem.HarvestTomatoInCurrentDay.Value++;
                     this.SendCommand(new AddItemCountCommand(ItemNameCollections.Tomato, 1));
                 }
                 else if (plant.PlantName == ItemNameCollections.Bean)
                 {
-                    ChallengeController.HarvestBeanInCurrentDay.Value++;
+                    ChallengeSystem.HarvestBeanInCurrentDay.Value++;
                     this.SendCommand(new AddItemCountCommand(ItemNameCollections.Bean, 1));
                 }
 
                 if (plant.RipeDay == Global.Days.Value) // 如果是当天成熟的植物被采摘
                 {
-                    ChallengeController.RipeAndHarvestCountInCurrentDay.Value++;
+                    ChallengeSystem.RipeAndHarvestCountInCurrentDay.Value++;
                 }
             }).UnRegisterWhenGameObjectDestroyed(this);
         }
