@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using QFramework;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,14 +32,6 @@ namespace Game.Inventory
             {
                 OnUse?.Invoke(this);
             });
-        }
-
-        private void Update()
-        {
-            // if (ItemData == null)
-            // {
-            //     gameObject.SetActive(false);
-            // }
         }
 
 #if UNITY_EDITOR

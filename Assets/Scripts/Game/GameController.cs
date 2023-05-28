@@ -1,8 +1,10 @@
+using System;
 using System.ChallengeSys;
 using System.Linq;
 using System.SoilSys;
 using System.ToolBarSys;
 using Game.UI;
+using Lyf.SaveSystem;
 using QFramework;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -150,6 +152,11 @@ namespace Game
         public IArchitecture GetArchitecture()
         {
             return Global.Interface;
+        }
+
+        private void OnApplicationQuit() // 退出游戏时保存数据
+        {
+            SaveManager.Instance.SaveAllRegister(SaveType.Json);
         }
     }
 }

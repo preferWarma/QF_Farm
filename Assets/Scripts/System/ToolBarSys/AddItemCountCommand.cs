@@ -27,7 +27,6 @@ namespace System.ToolBarSys
                 item.Count.Value += mAddCount;
             }
             ToolBarSystem.OnItemCountChange.Trigger(item, item.Count);
-            
         }
     }
 }

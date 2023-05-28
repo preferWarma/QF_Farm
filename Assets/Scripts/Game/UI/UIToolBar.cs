@@ -27,6 +27,13 @@ namespace Game.UI
 			{9, KeyCode.Alpha0},
 		};
 
+		private IToolBarSystem mToolBarSystem;
+
+		private void Awake()
+		{
+			mToolBarSystem = this.GetSystem<IToolBarSystem>();
+		}
+
 		private void Start()
 		{
 			UISlot.SpriteLoader = ResController.Instance.LoadSprite;	// 设置图标加载器方法
@@ -54,6 +61,7 @@ namespace Game.UI
 			
 			InitToolBarSlots();
 			SetDefaultTool();
+
 		}
 
 		private void Update()
@@ -70,10 +78,13 @@ namespace Game.UI
 			}
 		}
 
+		#region ToolBar逻辑相关
+		
 		private void SetCurrentTool(ITool tool, Image icon, Image selectImg)
 		{
 			if (tool == null)
 			{
+				selectImg.Show();
 				Global.Mouse.Icon.sprite = icon.sprite;
 			}
 			else
@@ -128,10 +139,11 @@ namespace Game.UI
 
 		public void SetDefaultTool()
 		{
-			var toolbarSystem = this.GetSystem<IToolBarSystem>();
-			var defaultTool = toolbarSystem.Items.Find(item => item.name == ItemNameCollections.Hand);
+			var defaultTool = mToolBarSystem.Items.Find(item => item.name == ItemNameCollections.Hand);
 			SetCurrentTool(defaultTool?.Tool, _toolbarSlots[0].icon, _toolbarSlots[0].select);	// 设置默认工具
 		}
+		
+		#endregion
 
 		public IArchitecture GetArchitecture()
 		{

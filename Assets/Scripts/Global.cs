@@ -49,14 +49,14 @@ public class Global : Architecture<Global>, ISaveWithJson
 
         SaveManager.Instance.Register(this, SaveType.Json);
         
-        // 天数变化时, 保存数据
-        Days.Register(_ =>
-        {
-            ActionKit.NextFrame(() =>
-            {
-                SaveManager.Instance.SaveAllRegister(SaveType.Json);
-            }).StartGlobal();
-        });
+        // // 天数变化时, 保存数据
+        // Days.Register(_ =>
+        // {
+        //     ActionKit.NextFrame(() =>
+        //     {
+        //         SaveManager.Instance.SaveAllRegister(SaveType.Json);
+        //     }).StartGlobal();
+        // });
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -89,7 +89,7 @@ public class Global : Architecture<Global>, ISaveWithJson
         Interface.GetSystem<ISoilSystem>().ResetDefaultData();
         Object.FindObjectOfType<GridController>()?.Show();
         Interface.GetSystem<IChallengeSystem>().ResetDefaultData();
-        
+        Interface.GetSystem<IToolBarSystem>().ResetDefaultData();
         SaveManager.Instance.SaveAllRegister(SaveType.Json);
     }
     
@@ -137,11 +137,6 @@ public class Global : Architecture<Global>, ISaveWithJson
         BeanCount.Value = saveData.BeanCount;
         Money.SetValueWithoutEvent(saveData.Money);
         IsToolUpgraded = saveData.IsToolUpgraded;
-        
-        Debug.Log("加载Global数据成功,加载的数据如下:\n" +
-                  "Days: " + Days.Value + "\n" +
-                  "RestHours: " + RestHours.Value + "\n" +
-                  "Money: " + Money.Value + "\n");
     }
     
     private void ResetDefaultData()

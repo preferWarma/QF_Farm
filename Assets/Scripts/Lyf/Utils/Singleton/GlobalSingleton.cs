@@ -25,7 +25,9 @@ namespace Lyf.Utils.Singleton
                             _instance = FindObjectOfType<T>();  // 从场景中寻找一个T类型的组件
                             if (_instance == null)
                             {
-                                throw new Exception($"Can not find {typeof(T)} in scene");
+                                Debug.LogWarning($"Can not find {typeof(T)} in scene, now create a new one.");
+                                var obj = new GameObject("SaveManager");
+                                _instance = obj.AddComponent<T>();
                             }
                         }
                     }// lock
