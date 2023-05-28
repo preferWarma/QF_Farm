@@ -75,7 +75,6 @@ namespace System.SoilSys
         {
             SoilGrid = new EasyGrid<SoilData>(Config.InitSoilWidth, Config.InitSoilHeight);
             PlantController.Instance.PlantGrid.Resize(Config.InitSoilWidth, Config.InitSoilHeight, (_, _) => null);
-            SaveWithJson();
         }
 
         #endregion

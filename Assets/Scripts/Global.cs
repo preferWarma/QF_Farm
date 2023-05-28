@@ -41,6 +41,8 @@ public class Global : Architecture<Global>, ISaveWithJson
     
     protected override void Init()
     {
+        _self = this;
+        
         RegisterSystem<IToolBarSystem>(new ToolBarSystem());
         RegisterSystem<ISoilSystem>(new SoilSystem());
         RegisterSystem<IChallengeSystem>(new ChallengeSystem());
@@ -66,6 +68,8 @@ public class Global : Architecture<Global>, ISaveWithJson
     
     #region 存储相关
 
+    private static Global _self;
+
     [MenuItem("Lyf/存档/保存所有注册数据")]
     public static void Save()
     {
@@ -81,12 +85,12 @@ public class Global : Architecture<Global>, ISaveWithJson
     [MenuItem("Lyf/重置数据/加载所有默认数据")]
     public static void LoadDefaultData()
     {
-        Days.SetValueWithoutEvent(Config.InitDays);
-        RestHours.SetValueWithoutEvent(Config.InitRestHours);
-        Money.SetValueWithoutEvent(Config.InitMoney);
+        _self.ResetDefaultData();
         Interface.GetSystem<ISoilSystem>().ResetDefaultData();
         Object.FindObjectOfType<GridController>()?.Show();
         Interface.GetSystem<IChallengeSystem>().ResetDefaultData();
+        
+        SaveManager.Instance.SaveAllRegister(SaveType.Json);
     }
     
     public string SAVE_FILE_NAME => "Global";
@@ -138,6 +142,19 @@ public class Global : Architecture<Global>, ISaveWithJson
                   "Days: " + Days.Value + "\n" +
                   "RestHours: " + RestHours.Value + "\n" +
                   "Money: " + Money.Value + "\n");
+    }
+    
+    private void ResetDefaultData()
+    {
+        Days.SetValueWithoutEvent(Config.InitDays);
+        RestHours.SetValueWithoutEvent(Config.InitRestHours);
+        Money.SetValueWithoutEvent(Config.InitMoney);
+        IsToolUpgraded = new bool[4];
+        PumpkinCount.Value = 0;
+        RadishCount.Value = 0;
+        PotatoCount.Value = 0;
+        TomatoCount.Value = 0;
+        BeanCount.Value = 0;
     }
     
     #endregion

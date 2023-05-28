@@ -31,7 +31,7 @@ namespace System.ChallengeSys
         public static readonly BindableProperty<int> TotalRadishCount = new(); // 累计采摘的胡萝卜数量
 
         [Header("挑战列表")]
-        public static readonly List<Challenge> Challenges = new(); // 挑战列表
+        private static readonly List<Challenge> Challenges = new(); // 挑战列表
         public static readonly List<Challenge> ActiveChallenges = new(); // 激活的挑战列表
         public static readonly List<Challenge> FinishedChallenges = new(); // 完成的挑战列表
         
@@ -188,6 +188,9 @@ namespace System.ChallengeSys
         private class SaveDataCollection
         {
 	        public Dictionary<string, Challenge.States> ChallengeStates;
+	        public int TotalFruitCount;
+	        public int TotalPumpkinCount;
+	        public int TotalRadishCount;
         }
         
         public string SAVE_FILE_NAME => "Challenge";
@@ -195,7 +198,11 @@ namespace System.ChallengeSys
         {
 	        var saveData = new SaveDataCollection
 	        {
-		        ChallengeStates = new Dictionary<string, Challenge.States>()
+		        ChallengeStates = new Dictionary<string, Challenge.States>(),
+		        TotalFruitCount =  TotalFruitCount.Value,
+		        TotalPumpkinCount = TotalPumpkinCount.Value,
+		        TotalRadishCount = TotalRadishCount.Value,
+		        
 	        };
 	        foreach (var challenge in Challenges)
 	        {
@@ -212,6 +219,10 @@ namespace System.ChallengeSys
 		        Debug.LogError("加载挑战数据失败");
 		        return;
 	        }
+	        TotalFruitCount.SetValueWithoutEvent(TotalFruitCount);
+	        TotalPumpkinCount.SetValueWithoutEvent(TotalPumpkinCount);
+	        TotalRadishCount.SetValueWithoutEvent(TotalRadishCount);
+	        
 	        foreach (var challenge in Challenges)
 	        {
 		        if (saveData.ChallengeStates.TryGetValue(challenge.Name, out var state))
@@ -234,6 +245,9 @@ namespace System.ChallengeSys
         public void ResetDefaultData()
         {
 	        InitChallengeList();
+	        TotalFruitCount.SetValueWithoutEvent(0);
+	        TotalPumpkinCount.SetValueWithoutEvent(0);
+	        TotalRadishCount.SetValueWithoutEvent(0);
         }
 
         #endregion
