@@ -11,6 +11,9 @@ namespace System.ChallengeSys
 {
     public interface IChallengeSystem : ISystem, ISaveWithJson
     {
+	    List<Challenge> Challenges { get; }
+	    List<Challenge> ActiveChallenges { get; }
+	    List<Challenge> FinishedChallenges { get; }
 	    void ResetDefaultData();
     }
 
@@ -29,11 +32,11 @@ namespace System.ChallengeSys
         public static readonly BindableProperty<int> TotalFruitCount = new(); // 累计采摘的果实数量
         public static readonly BindableProperty<int> TotalPumpkinCount = new(); // 累计采摘的南瓜数量
         public static readonly BindableProperty<int> TotalRadishCount = new(); // 累计采摘的胡萝卜数量
-
-        [Header("挑战列表")]
-        private static readonly List<Challenge> Challenges = new(); // 挑战列表
-        public static readonly List<Challenge> ActiveChallenges = new(); // 激活的挑战列表
-        public static readonly List<Challenge> FinishedChallenges = new(); // 完成的挑战列表
+        
+        [Tooltip("挑战相关")]
+        public List<Challenge> Challenges { get; } = new(); // 挑战列表
+        public List<Challenge> ActiveChallenges { get; } = new(); // 激活的挑战列表
+        public List<Challenge> FinishedChallenges { get; } = new(); // 完成的挑战列表
         
         protected override void OnInit()
         {

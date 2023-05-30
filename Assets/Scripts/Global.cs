@@ -48,23 +48,13 @@ public class Global : Architecture<Global>, ISaveWithJson
         RegisterSystem<IChallengeSystem>(new ChallengeSystem());
 
         SaveManager.Instance.Register(this, SaveType.Json);
-        
-        // // 天数变化时, 保存数据
-        // Days.Register(_ =>
-        // {
-        //     ActionKit.NextFrame(() =>
-        //     {
-        //         SaveManager.Instance.SaveAllRegister(SaveType.Json);
-        //     }).StartGlobal();
-        // });
     }
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]   // 在start之前执行
     public static void DoLoadAll()
     {
         SaveManager.Instance.LoadAllRegister(SaveType.Json);
     }
-    
     
     #region 存储相关
 

@@ -25,7 +25,6 @@ namespace Game
 		
 		private void Start()
 		{
-			mSoilSystem.LoadWithJson();
 			Show();
 			
 			ShowGrid.ForEach((x, y, _) =>
