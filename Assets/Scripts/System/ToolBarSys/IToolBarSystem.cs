@@ -9,7 +9,6 @@ namespace System.ToolBarSys
     public interface IToolBarSystem : ISystem, ISaveWithJson
     {
         List<Item> Items { get; }
-        List<ToolBarSlot> ToolBarSlots { get; } // 引入的目的是为了方便存储
         int MaxCount { get; }
         void ResetDefaultData();
         
@@ -81,10 +80,9 @@ namespace System.ToolBarSys
                 return;
             }
             Items.Clear();
-            for (var i = 0; i < saveData.ToolBarSlots.Length; i++)
+            foreach (var saveInfo in saveData.ToolBarSlots)
             {
-                ToolBarSlots.Add(saveData.ToolBarSlots[i]);
-                Items.Add(Config.CreateItem(ToolBarSlots[i].ItemID, ToolBarSlots[i].Count));
+                Items.Add(Config.CreateItem(saveInfo.ItemID, saveInfo.Count));
             }
         }
         
