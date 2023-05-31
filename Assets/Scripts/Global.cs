@@ -41,7 +41,7 @@ public class Global : Architecture<Global>, ISaveWithJson
     
     protected override void Init()
     {
-        _self = this;
+        _self = this;   // 用于存储时候调用非静态方法
         
         RegisterSystem<IToolBarSystem>(new ToolBarSystem());
         RegisterSystem<ISoilSystem>(new SoilSystem());
