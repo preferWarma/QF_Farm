@@ -26,7 +26,7 @@ namespace Lyf.SaveSystem
     {
         private readonly List<ISaveWithPlayerPrefs> _prefs = new();
         private readonly List<ISaveWithJson> _jsons = new();
-
+        
         private void Start()
         {
             AddSerializedJson.AddAllConverter();
@@ -213,6 +213,11 @@ namespace Lyf.SaveSystem
         }
 
         #endregion
+
+        public void OnSingletonInit()
+        {
+            
+        }
     }
 
     public enum SaveType

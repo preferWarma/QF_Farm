@@ -1,5 +1,5 @@
-using System;
 using System.SoilSys;
+using DG.Tweening;
 using Game.Tools;
 using UnityEngine;
 using QFramework;
@@ -12,12 +12,12 @@ namespace Game
 	public partial class MouseController : ViewController
 	{
 		private Grid mGrid;
-		public Camera mCamera;
+		private Camera mCamera;
 		private SpriteRenderer mSpriteRenderer;
 		private EasyGrid<SoilData> mshowGrid;
 		private GridController mGridController;
 		private Tilemap mTilemap;
-		
+
 		private void Awake()
 		{
 			Global.Mouse = this;
@@ -72,12 +72,6 @@ namespace Game
 				mSpriteRenderer.enabled = false;
 			}
 		}
-
-		private void OnDestroy()
-		{
-			Global.Mouse = null;
-		}
-
 		
 		private void DoOnMouse0(Vector3Int cellPos)
 		{
@@ -103,5 +97,18 @@ namespace Game
 		{
 			return Mathf.Abs(playerCellPos.x - mouseCellPos.x) <= range && Mathf.Abs(playerCellPos.y - mouseCellPos.y) <= range;
 		}
+		
+		public static void RotateIcon()
+		{
+			var randomRotation = RandomUtility.Choose(-360, 360);
+			
+			Global.Mouse.Icon.transform.DORotate(new Vector3(0, 0, randomRotation), 0.3f, RotateMode.FastBeyond360)	// 旋转图标
+				.SetEase(Ease.OutCubic);	// 设置旋转的缓动
+		}
+		
+		private void OnDestroy()
+        {
+         	Global.Mouse = null;
+        }
 	}
 }

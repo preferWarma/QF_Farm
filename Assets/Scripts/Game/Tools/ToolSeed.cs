@@ -60,6 +60,8 @@ namespace Game.Tools
             showGrid[cellPos.x, cellPos.y].PlantPrefabName = Item.plantPrefabName;
 
             Global.RestHours.Value -= CostHours;
+            
+            MouseController.RotateIcon();
         }
 
         public IArchitecture GetArchitecture()

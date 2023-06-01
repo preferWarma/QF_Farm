@@ -1,10 +1,12 @@
-// Generate Id:8503e179-2fdd-471d-bd89-7b7237f89aea
+// Generate Id:3129e036-66e6-498b-8213-efc804226eff
 using UnityEngine;
 
 namespace Game
 {
 	public partial class MouseController
 	{
+
+		public UnityEngine.ParticleSystem Dig_Fx;
 
 		public SpriteRenderer TimeNotEnough;
 

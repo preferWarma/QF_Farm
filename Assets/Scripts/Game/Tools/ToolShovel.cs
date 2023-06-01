@@ -1,5 +1,5 @@
-﻿using System;
-using System.SoilSys;
+﻿using System.SoilSys;
+using QFramework;
 
 namespace Game.Tools
 {
@@ -36,6 +36,14 @@ namespace Game.Tools
             showGrid[cellPos.x, cellPos.y] = new SoilData();
             
             Global.RestHours.Value -= CostHours;
+
+            // 以下特效方面
+            var digFx = Global.Mouse.Dig_Fx;   // 挖掘特效
+            var digPos = tilemap.GetCellCenterWorld(cellPos);   // 获取挖掘特效位置
+            digFx.gameObject.transform.Position(digPos.x, digPos.y);   // 设置挖掘特效位置,z轴不变
+            digFx.Play();   // 播放挖掘特效
+            MouseController.RotateIcon();   // 旋转鼠标图标
+            CameraController.Shake();   // 震动镜头
         }
     }
 }

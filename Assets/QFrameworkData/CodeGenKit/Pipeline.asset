@@ -19,15 +19,22 @@ MonoBehaviour:
     From: 0
     NameToFullName: []
     BindInfos:
-    - TypeName: RectTransform
-      PathToRoot: Scroll View/Viewport/UIChallengeContentRoot
-      MemberName: UIChallengeContentRoot
-    ScriptsFolder: Assets/Scripts/Game/UI
-    ClassName: UIChallenge
-    Namespace: Game.UI
-    MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game.UI\r\n{\r\n\tpublic
-      partial class UIChallenge : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+    - TypeName: UnityEngine.ParticleSystem
+      PathToRoot: Dig_Fx
+      MemberName: Dig_Fx
+    - TypeName: SpriteRenderer
+      PathToRoot: TimeNotEnough
+      MemberName: TimeNotEnough
+    - TypeName: SpriteRenderer
+      PathToRoot: Icon
+      MemberName: Icon
+    ScriptsFolder: Assets/Scripts/Game
+    ClassName: MouseController
+    Namespace: Game
+    MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game\r\n{\r\n\tpublic
+      partial class MouseController : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:492188ec-b0f4-425c-9d11-0780c3b97757\r\nusing UnityEngine;\r\n\r\nnamespace
-      Game.UI\r\n{\r\n\tpublic partial class UIChallenge\r\n\t{\r\n\r\n\t\tpublic
-      RectTransform UIChallengeContentRoot;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:3129e036-66e6-498b-8213-efc804226eff\r\nusing UnityEngine;\r\n\r\nnamespace
+      Game\r\n{\r\n\tpublic partial class MouseController\r\n\t{\r\n\r\n\t\tpublic
+      UnityEngine.ParticleSystem Dig_Fx;\r\n\r\n\t\tpublic SpriteRenderer TimeNotEnough;\r\n\r\n\t\tpublic
+      SpriteRenderer Icon;\r\n\r\n\t}\r\n}\r\n"

@@ -36,6 +36,8 @@ namespace Game.Tools
                 .Position(tilemap.GetCellCenterWorld(cellPos));
             
             Global.RestHours.Value -= CostHours;
+            
+            MouseController.RotateIcon();
         }
     }
 }

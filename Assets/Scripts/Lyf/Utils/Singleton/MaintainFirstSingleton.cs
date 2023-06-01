@@ -1,14 +1,12 @@
 ﻿using System;
-using UnityEngine;
 
 namespace Lyf.Utils.Singleton
 {
-    /// <summary>
-    /// 全局单例, 一直存在, 切换场景时不会被销毁, 且保留第一个创建的实例
-    /// </summary>
-    public class GlobalSingleton<T> : MonoBehaviour, ISingleton, IDisposable where T : GlobalSingleton<T>
+    using UnityEngine;
+
+    public class MaintainFirstSingleton<T> : MonoBehaviour, ISingleton, IDisposable where T : MaintainFirstSingleton<T>
     {
-        private static readonly object Lock = new();
+        private static readonly object Lock = new object();
         private static T _instance;
 
         public static T Instance

@@ -41,8 +41,6 @@ public class Global : Architecture<Global>, ISaveWithJson
     
     protected override void Init()
     {
-        _self = this;   // 用于存储时候调用非静态方法
-        
         RegisterSystem<IToolBarSystem>(new ToolBarSystem());
         RegisterSystem<ISoilSystem>(new SoilSystem());
         RegisterSystem<IChallengeSystem>(new ChallengeSystem());
@@ -57,8 +55,6 @@ public class Global : Architecture<Global>, ISaveWithJson
     }
     
     #region 存储相关
-
-    private static Global _self;
 
     [MenuItem("Lyf/存档/保存所有注册数据")]
     public static void Save()
@@ -75,7 +71,7 @@ public class Global : Architecture<Global>, ISaveWithJson
     [MenuItem("Lyf/重置数据/加载所有默认数据")]
     public static void LoadDefaultData()
     {
-        _self.ResetDefaultData();
+        ResetDefaultData();
         Interface.GetSystem<ISoilSystem>().ResetDefaultData();
         Object.FindObjectOfType<GridController>()?.Show();
         Interface.GetSystem<IChallengeSystem>().ResetDefaultData();
@@ -129,7 +125,7 @@ public class Global : Architecture<Global>, ISaveWithJson
         IsToolUpgraded = saveData.IsToolUpgraded;
     }
     
-    private void ResetDefaultData()
+    private static void ResetDefaultData()
     {
         Days.SetValueWithoutEvent(Config.InitDays);
         RestHours.SetValueWithoutEvent(Config.InitRestHours);

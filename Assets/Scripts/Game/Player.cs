@@ -59,9 +59,12 @@ namespace Game
 
 			_moveDirection = Input.GetAxis("Horizontal");
 			_isMoving = Mathf.Abs(_moveDirection) > 0.01f;
-			
 
-			Move();
+			if (CameraController.CanMove)
+			{
+				Move();
+			}
+
 			UpdateAnimation();
 		}
 
