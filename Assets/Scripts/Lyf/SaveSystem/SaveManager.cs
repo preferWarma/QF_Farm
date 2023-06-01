@@ -213,11 +213,6 @@ namespace Lyf.SaveSystem
         }
 
         #endregion
-
-        public void OnSingletonInit()
-        {
-            
-        }
     }
 
     public enum SaveType
