@@ -61,6 +61,7 @@ namespace Game.Tools
 
             Global.RestHours.Value -= CostHours;
             
+            CameraController.Shake(ShakeType.Light);
             MouseController.RotateIcon();
         }
 

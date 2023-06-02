@@ -36,6 +36,9 @@ namespace Game.Tools
             PlantController.Instance.PlantGrid[cellPos.x, cellPos.y] = null;    // 同步清空植物
             
             Global.RestHours.Value -= CostHours;
+            
+            MouseController.RotateIcon();
+            CameraController.Shake(ShakeType.Middle);
         }
     }
 }

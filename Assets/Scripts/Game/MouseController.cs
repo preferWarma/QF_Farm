@@ -53,7 +53,7 @@ namespace Game
 			{
 				TimeNotEnough.transform.position = Icon.transform.position;
 			}
-			if (Global.CurrentTool.Value == null) return;	// 如果没有选择的是植物果实则不处理
+			if (Global.CurrentTool.Value == null) return;	// 如果选择的是植物果实则不处理
 			if (InToolRange(playerCellPos, mouseCellPos, Global.CurrentTool.Value.ToolScope))	// 在工具周围内
 			{
 				if (mouseCellPos.x < mshowGrid.Width && mouseCellPos.x >= 0 &&
@@ -98,7 +98,7 @@ namespace Game
 			return Mathf.Abs(playerCellPos.x - mouseCellPos.x) <= range && Mathf.Abs(playerCellPos.y - mouseCellPos.y) <= range;
 		}
 		
-		public static void RotateIcon()
+		public static void RotateIcon()	// 旋转图标
 		{
 			var randomRotation = RandomUtility.Choose(-360, 360);
 			

@@ -43,7 +43,7 @@ namespace Game.Tools
             digFx.gameObject.transform.Position(digPos.x, digPos.y);   // 设置挖掘特效位置,z轴不变
             digFx.Play();   // 播放挖掘特效
             MouseController.RotateIcon();   // 旋转鼠标图标
-            CameraController.Shake();   // 震动镜头
+            CameraController.Shake(ShakeType.Heavy);   // 震动镜头
         }
     }
 }

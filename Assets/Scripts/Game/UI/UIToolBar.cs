@@ -82,8 +82,10 @@ namespace Game.UI
 		
 		private void SetCurrentTool(ITool tool, Image icon, Image selectImg)
 		{
-			if (tool == null)
+			if (tool == null)	// 是果实而不是可用工具
 			{
+				Global.CurrentTool.Value = Global.ToolFruit;
+				HideAllSelect();
 				selectImg.Show();
 				Global.Mouse.Icon.sprite = icon.sprite;
 			}

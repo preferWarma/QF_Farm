@@ -28,13 +28,16 @@ MonoBehaviour:
     - TypeName: SpriteRenderer
       PathToRoot: Icon
       MemberName: Icon
+    - TypeName: UnityEngine.ParticleSystem
+      PathToRoot: Watering_Fx
+      MemberName: Watering_Fx
     ScriptsFolder: Assets/Scripts/Game
     ClassName: MouseController
     Namespace: Game
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game\r\n{\r\n\tpublic
       partial class MouseController : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:3129e036-66e6-498b-8213-efc804226eff\r\nusing UnityEngine;\r\n\r\nnamespace
+    DesignerCode: "// Generate Id:837cd858-dd0b-428a-aa7a-806aa42e467a\r\nusing UnityEngine;\r\n\r\nnamespace
       Game\r\n{\r\n\tpublic partial class MouseController\r\n\t{\r\n\r\n\t\tpublic
       UnityEngine.ParticleSystem Dig_Fx;\r\n\r\n\t\tpublic SpriteRenderer TimeNotEnough;\r\n\r\n\t\tpublic
-      SpriteRenderer Icon;\r\n\r\n\t}\r\n}\r\n"
+      SpriteRenderer Icon;\r\n\r\n\t\tpublic UnityEngine.ParticleSystem Watering_Fx;\r\n\r\n\t}\r\n}\r\n"

@@ -37,6 +37,12 @@ namespace Game.Tools
             
             Global.RestHours.Value -= CostHours;
             
+            // 以下特效方面
+            var wateringFx = Global.Mouse.Watering_Fx;   // 挖掘特效
+            var wateringPos = tilemap.GetCellCenterWorld(cellPos);   // 获取挖掘特效位置
+            wateringFx.gameObject.transform.Position(wateringPos.x, wateringPos.y);   // 设置挖掘特效位置,z轴不变
+            wateringFx.Play();   // 播放挖掘特效
+            CameraController.Shake(ShakeType.Light);
             MouseController.RotateIcon();
         }
     }
