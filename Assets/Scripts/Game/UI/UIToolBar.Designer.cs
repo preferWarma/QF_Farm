@@ -1,10 +1,12 @@
-// Generate Id:fe09fd20-c296-4bf8-9933-4c58df390d37
+// Generate Id:df10d825-d2ac-4779-b10d-2d6d3d4ec946
 using UnityEngine;
 
 namespace Game.UI
 {
 	public partial class UIToolBar
 	{
+
+		public UnityEngine.UI.Image HarvestCollection;
 
 		public Game.Inventory.UISlot ToolbarSlot1;
 

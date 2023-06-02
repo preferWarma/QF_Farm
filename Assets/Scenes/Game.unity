@@ -723,7 +723,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 148429271}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &73672396
 GameObject:
@@ -8979,9 +8979,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1459974472}
+  - {fileID: 960163146}
   - {fileID: 985045827}
   - {fileID: 65799021}
-  - {fileID: 960163146}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15976,7 +15976,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 148429271}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &960163147
 MonoBehaviour:
@@ -20911,7 +20911,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 148429271}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &985045828
 MonoBehaviour:
@@ -22997,7 +22997,7 @@ Tilemap:
       m_AnimatedSprites:
       - {fileID: 21300000, guid: 4bb516165d9f40e4da923182fe0c8f20, type: 2}
       - {fileID: 21300000, guid: 1503da1fc59db2d4a90b9d8c4547bafc, type: 2}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 10, y: -11, z: 0}
@@ -23013,7 +23013,7 @@ Tilemap:
       m_AnimatedSprites:
       - {fileID: 21300000, guid: 743e96656a59fdb4fa0e9846002e32f6, type: 2}
       - {fileID: 21300000, guid: 3b73c3839866f044d9887228c5b4dd7a, type: 2}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 3, y: -9, z: 0}
@@ -23077,7 +23077,7 @@ Tilemap:
       m_AnimatedSprites:
       - {fileID: 21300000, guid: 743e96656a59fdb4fa0e9846002e32f6, type: 2}
       - {fileID: 21300000, guid: 3b73c3839866f044d9887228c5b4dd7a, type: 2}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   m_TileAssetArray:
@@ -23495,10 +23495,10 @@ RectTransform:
   m_Father: {fileID: 702568}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 540}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1206061762
 MonoBehaviour:
@@ -23517,6 +23517,7 @@ MonoBehaviour:
   ScriptsFolder: Assets/Scripts/Game/UI
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
+  HarvestCollection: {fileID: 2142573508298896520, guid: 4a22edb63b9e5844294d1e698f261213, type: 3}
   ToolbarSlot1: {fileID: 2107501971}
   ToolbarSlot2: {fileID: 1562900130}
   ToolbarSlot3: {fileID: 1682638199}

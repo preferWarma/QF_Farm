@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ToolBarSys;
@@ -12,7 +11,7 @@ namespace Game.UI
 {
 	public partial class UIToolBar : ViewController, IController
 	{
-		private readonly List<UISlot> _toolbarSlots = new();	// 工具栏槽
+		public List<UISlot> ToolbarSlots { get; } = new();	// 工具栏槽
 		private readonly Dictionary<int, KeyCode> _shotCutDict = new()	// 背包槽位置与快捷键的映射
 		{
 			{0, KeyCode.Alpha1},
@@ -32,6 +31,7 @@ namespace Game.UI
 		private void Awake()
 		{
 			mToolBarSystem = this.GetSystem<IToolBarSystem>();
+			// HarvestCollection.Hide();
 		}
 
 		private void Start()
@@ -45,23 +45,22 @@ namespace Game.UI
 				SetDefaultTool();
 			}).UnRegisterWhenGameObjectDestroyed(this);	// 注册移除物品槽方法
 			
-			_toolbarSlots.Add(ToolbarSlot1);
-			_toolbarSlots.Add(ToolbarSlot2);
-			_toolbarSlots.Add(ToolbarSlot3);
-			_toolbarSlots.Add(ToolbarSlot4);
-			_toolbarSlots.Add(ToolbarSlot5);
-			_toolbarSlots.Add(ToolbarSlot6);
-			_toolbarSlots.Add(ToolbarSlot7);
-			_toolbarSlots.Add(ToolbarSlot8);
-			_toolbarSlots.Add(ToolbarSlot9);
-			_toolbarSlots.Add(ToolbarSlot10);
-			_toolbarSlots.Add(ToolbarSlot11);
-			_toolbarSlots.Add(ToolbarSlot12);
-			_toolbarSlots.Add(ToolbarSlot13);
+			ToolbarSlots.Add(ToolbarSlot1);
+			ToolbarSlots.Add(ToolbarSlot2);
+			ToolbarSlots.Add(ToolbarSlot3);
+			ToolbarSlots.Add(ToolbarSlot4);
+			ToolbarSlots.Add(ToolbarSlot5);
+			ToolbarSlots.Add(ToolbarSlot6);
+			ToolbarSlots.Add(ToolbarSlot7);
+			ToolbarSlots.Add(ToolbarSlot8);
+			ToolbarSlots.Add(ToolbarSlot9);
+			ToolbarSlots.Add(ToolbarSlot10);
+			ToolbarSlots.Add(ToolbarSlot11);
+			ToolbarSlots.Add(ToolbarSlot12);
+			ToolbarSlots.Add(ToolbarSlot13);
 			
 			InitToolBarSlots();
 			SetDefaultTool();
-
 		}
 
 		private void Update()
@@ -72,8 +71,8 @@ namespace Game.UI
 				var shotCut = _shotCutDict[i];
 				if (Input.GetKeyDown(shotCut))
 				{
-					if (_toolbarSlots[i])
-						UISlot.OnUse?.Invoke(_toolbarSlots[i]);
+					if (ToolbarSlots[i])
+						UISlot.OnUse?.Invoke(ToolbarSlots[i]);
 				}
 			}
 		}
@@ -100,16 +99,16 @@ namespace Game.UI
 
 		private void HideAllSelect()
 		{
-			_toolbarSlots.ForEach(slot => slot.select.Hide());
+			ToolbarSlots.ForEach(slot => slot.select.Hide());
 		}
 		
 		private void InitToolBarSlots()
 		{
 			var toolbarSystem = this.GetSystem<IToolBarSystem>();
 			
-			for (var i = 0; i < _toolbarSlots.Count; i++)
+			for (var i = 0; i < ToolbarSlots.Count; i++)
 			{
-				var slot = _toolbarSlots[i];
+				var slot = ToolbarSlots[i];
 				if (i < toolbarSystem.Items.Count)
 					slot.SetSlotData(toolbarSystem.Items[i], (i+1).ToString());
 				else 
@@ -121,11 +120,11 @@ namespace Game.UI
 		{
 			UISlot slot = null;
 			var idx = -1;
-			for (var i = 0; i < _toolbarSlots.Count; i++)
+			for (var i = 0; i < ToolbarSlots.Count; i++)
 			{
-				if (_toolbarSlots[i].ItemData != null) continue;
+				if (ToolbarSlots[i].ItemData != null) continue;
 				idx = i;
-				slot = _toolbarSlots[i];
+				slot = ToolbarSlots[i];
 				break;
 			}
 			if (!slot) return;
@@ -134,7 +133,7 @@ namespace Game.UI
 
 		private void RemoveItemSlot(Item item)
 		{
-			var slot = _toolbarSlots.FirstOrDefault(s => s.ItemData == item);
+			var slot = ToolbarSlots.FirstOrDefault(s => s.ItemData == item);
 			if (!slot) return;
 			slot.SetSlotData(null,string.Empty);
 		}
@@ -142,7 +141,7 @@ namespace Game.UI
 		public void SetDefaultTool()
 		{
 			var defaultTool = mToolBarSystem.Items.Find(item => item.name == ItemNameCollections.Hand);
-			SetCurrentTool(defaultTool?.Tool, _toolbarSlots[0].icon, _toolbarSlots[0].select);	// 设置默认工具
+			SetCurrentTool(defaultTool?.Tool, ToolbarSlots[0].icon, ToolbarSlots[0].select);	// 设置默认工具
 		}
 		
 		#endregion
