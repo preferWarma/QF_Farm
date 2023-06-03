@@ -6,8 +6,9 @@ namespace Game.Tools
     {
         public string Name => "WateringCan";
         public float CostHours => 0.2f;
+        public float CdTime { get; set; } = Config.CdToolWateringCan;
+        public float InitCdTime => Config.CdToolWateringCan;
         public int ToolScope => Global.IsToolUpgraded[2] ? 2 : 1;
-
         public bool Selected()
         {
             return Global.CurrentTool.Value.Name == Name;

@@ -4,7 +4,6 @@ using Game.UI;
 using QFramework;
 using UnityEngine;
 using UnityEngine.UI;
-using Screen = UnityEngine.Device.Screen;
 
 namespace Game.Tools
 {
@@ -12,8 +11,10 @@ namespace Game.Tools
     {
         public string Name => "Hand";
         public float CostHours => 0.1f;
+        public float CdTime { get; set; } = Config.CdToolHand;
+        public float InitCdTime => Config.CdToolHand;
         public int ToolScope => Global.IsToolUpgraded[0] ? 2 : 1;
-
+        
         public bool Selected()
         {
             return Global.CurrentTool.Value.Name == Name;

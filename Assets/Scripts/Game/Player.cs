@@ -64,6 +64,10 @@ namespace Game
 			{
 				Move();
 			}
+			else
+			{
+				_rigidbody.velocity = Vector2.zero;
+			}
 
 			UpdateAnimation();
 		}

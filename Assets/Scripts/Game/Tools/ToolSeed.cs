@@ -1,5 +1,4 @@
-﻿using System;
-using System.ToolBarSys;
+﻿using System.ToolBarSys;
 using Game.Inventory;
 using Game.Plants;
 using QFramework;
@@ -11,9 +10,12 @@ namespace Game.Tools
     {
         public string Name => "Seed";
         public float CostHours => 0.2f;
+        public float CdTime { get; set; } = Config.CdToolSeed;
+        public float InitCdTime => Config.CdToolSeed;
         public int ToolScope => Global.IsToolUpgraded[3] ? 2 : 1;
         public Item Item { get; set; }  // 与背包中的物品对应
         
+
         public bool Selected()
         {
             return Global.CurrentTool.Value.Name == Name;

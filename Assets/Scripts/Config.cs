@@ -20,6 +20,13 @@ public static class Config
     public const int InitPotatoSeedCount = 5;
     public const int InitTomatoSeedCount = 5;
     public const int InitBeanSeedCount = 5;
+    
+    // 工具配置
+    public const float CdToolSeed = 0.3f;
+    public const float CdToolShovel = 0.6f;
+    public const float CdToolWateringCan = 0.5f;
+    public const float CdToolHand = 0.3f;
+    public const float CdToolFruit = 0.0f;
 
     public static List<Item> Items => Global.Interface.GetSystem<IToolBarSystem>().Items;
 

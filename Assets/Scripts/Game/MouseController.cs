@@ -43,6 +43,8 @@ namespace Game
 		
 		private void LateUpdate()
 		{
+			Global.CurrentTool.Value.CdTime -= Time.deltaTime;
+			
 			var playerCellPos = mGrid.WorldToCell(Global.Player.transform.position);	// 获取玩家所在的格子位置
 			var worldMousePoint = mCamera.ScreenToWorldPoint(Input.mousePosition);	// 获取鼠标所在的世界坐标
 			var mouseCellPos = mGrid.WorldToCell(worldMousePoint);		// 获取鼠标所在的格子位置
@@ -88,7 +90,11 @@ namespace Game
 			
 			if (Global.CurrentTool.Value.Selected())
 			{
-				Global.CurrentTool.Value.Use(toolNeedData);
+				if (Global.CurrentTool.Value.CdTime <= 0)
+				{
+					Global.CurrentTool.Value.Use(toolNeedData);
+					Global.CurrentTool.Value.CdTime = Global.CurrentTool.Value.InitCdTime;
+				}
 			}
 		}
 

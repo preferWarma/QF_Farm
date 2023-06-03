@@ -27,7 +27,7 @@ public class Global : Architecture<Global>, ISaveWithJson
 
     [Header("货币")]
     public static readonly BindableProperty<int> Money = new(Config.InitMoney); // 当前拥有的金钱
-
+    
     [Header("升级相关")]
     public static bool[] IsToolUpgraded = new bool[4]; // 工具是否升级(顺序按照工具的顺序)
 
@@ -35,10 +35,10 @@ public class Global : Architecture<Global>, ISaveWithJson
     public static readonly EasyEvent<IPlant> OnPlantHarvest = new(); // 采摘植物事件
     public static readonly EasyEvent<Challenge> OnChallengeFinish = new(); // 挑战完成事件
 
-    [Header("其他")]
+    [Header("一些全局引用")]
     public static Player Player = null;
     public static MouseController Mouse = null;
-    public static ToolFruit ToolFruit = new ();
+    public static readonly ToolFruit ToolFruit = new ();
     
     protected override void Init()
     {

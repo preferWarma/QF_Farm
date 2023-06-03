@@ -83,33 +83,31 @@ namespace Game
                 ChallengeSystem.TotalFruitCount.Value++;
 
                 UIMessageQueue.Push(ResController.Instance.LoadSprite(plant.PlantName), "+1");
-                
-                // 根据植物类型增加不同的水果数量
-                if (plant.PlantName == ItemNameCollections.Radish)
+
+                switch (plant.PlantName)
                 {
-                    ChallengeSystem.HarvestRadishCountInCurrentDay.Value++;
-                    ChallengeSystem.TotalRadishCount.Value++;
-                    this.SendCommand(new AddItemCountCommand(ItemNameCollections.Radish, 1));
-                }
-                else if (plant.PlantName == ItemNameCollections.Pumpkin)
-                {
-                    ChallengeSystem.TotalPumpkinCount.Value++;
-                    this.SendCommand(new AddItemCountCommand(ItemNameCollections.Pumpkin, 1));
-                }
-                else if (plant.PlantName == ItemNameCollections.Potato)
-                {
-                    ChallengeSystem.HarvestPotatoCountInCurrentDay.Value++;
-                    this.SendCommand(new AddItemCountCommand(ItemNameCollections.Potato, 1));
-                }
-                else if (plant.PlantName == ItemNameCollections.Tomato)
-                {
-                    ChallengeSystem.HarvestTomatoInCurrentDay.Value++;
-                    this.SendCommand(new AddItemCountCommand(ItemNameCollections.Tomato, 1));
-                }
-                else if (plant.PlantName == ItemNameCollections.Bean)
-                {
-                    ChallengeSystem.HarvestBeanInCurrentDay.Value++;
-                    this.SendCommand(new AddItemCountCommand(ItemNameCollections.Bean, 1));
+                    // 根据植物类型增加不同的水果数量, 以及完成对应的挑战
+                    case ItemNameCollections.Radish:
+                        ChallengeSystem.HarvestRadishCountInCurrentDay.Value++;
+                        ChallengeSystem.TotalRadishCount.Value++;
+                        this.SendCommand(new AddItemCountCommand(ItemNameCollections.Radish, 1));
+                        break;
+                    case ItemNameCollections.Pumpkin:
+                        ChallengeSystem.TotalPumpkinCount.Value++;
+                        this.SendCommand(new AddItemCountCommand(ItemNameCollections.Pumpkin, 1));
+                        break;
+                    case ItemNameCollections.Potato:
+                        ChallengeSystem.HarvestPotatoCountInCurrentDay.Value++;
+                        this.SendCommand(new AddItemCountCommand(ItemNameCollections.Potato, 1));
+                        break;
+                    case ItemNameCollections.Tomato:
+                        ChallengeSystem.HarvestTomatoInCurrentDay.Value++;
+                        this.SendCommand(new AddItemCountCommand(ItemNameCollections.Tomato, 1));
+                        break;
+                    case ItemNameCollections.Bean:
+                        ChallengeSystem.HarvestBeanInCurrentDay.Value++;
+                        this.SendCommand(new AddItemCountCommand(ItemNameCollections.Bean, 1));
+                        break;
                 }
 
                 if (plant.RipeDay == Global.Days.Value) // 如果是当天成熟的植物被采摘
