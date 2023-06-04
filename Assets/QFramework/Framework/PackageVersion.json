@@ -1,6 +1,6 @@
 {
     "Id": "",
-    "Version": "v1.0.53",
+    "Version": "v1.0.58",
     "Type": 0,
     "AccessRight": 0,
     "DownloadUrl": "",
@@ -11,10 +11,10 @@
     ],
     "DocUrl": "https://liangxiegame.com",
     "Readme": {
-        "version": "v1.0.53",
-        "content": "ResKit LoadSceneAsync 不执行问题修复",
+        "version": "v1.0.58",
+        "content": "v1.0.59 ResLoader 支持用 MonoScript 加载 prefab",
         "author": "liangxie",
-        "date": "2023 年 05 月 23 日 12:50",
+        "date": "2023 年 05 月 26 日 15:02",
         "PackageId": ""
     }
 }

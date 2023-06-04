@@ -29,7 +29,7 @@ namespace Game
 			
 			ShowGrid.ForEach((x, y, _) =>
 			{
-				Ground.SetTile(new Vector3Int(x, y), canCultivateFieldPen);
+				BackGround.SetTile(new Vector3Int(x, y), canCultivateFieldPen);
 			});
 		}
 		

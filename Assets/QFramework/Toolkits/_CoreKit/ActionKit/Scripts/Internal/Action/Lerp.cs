@@ -54,7 +54,7 @@ namespace QFramework
                 Deinited = true;
                 OnLerp = null;
                 OnLerpFinish = null;
-                mPool.Recycle(this);
+                ActionQueue.AddCallback(new ActionQueueRecycleCallback<Lerp>(mPool,this));
             }
         }
 
