@@ -21,6 +21,7 @@ namespace Game
 		private void Awake()
 		{
 			mSoilSystem = this.GetSystem<ISoilSystem>();
+			Global.GridController = this;
 		}
 		
 		private void Start()
@@ -75,6 +76,7 @@ namespace Game
 		private void OnDestroy()
 		{
 			mSoilSystem = null;
+			Global.GridController = null;
 		}
 	}
 }

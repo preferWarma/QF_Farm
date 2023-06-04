@@ -6,6 +6,7 @@ using System.ToolBarSys;
 using Game.UI;
 using Lyf.SaveSystem;
 using QFramework;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
@@ -46,23 +47,25 @@ namespace Game
             // 土地浇水相关
             Global.Days.Register(_ =>
             {
-                var soilDatas = this.GetSystem<ISoilSystem>().SoilGrid;
+                var soilGrid = this.GetSystem<ISoilSystem>().SoilGrid;
 
                 PlantController.Instance.PlantGrid.ForEach((x, y, plant) =>
                 {
                     if (plant is null) return;
-                    plant.Grow(soilDatas[x, y]);
+                    plant.Grow(soilGrid[x, y]);
                 });
 
-                soilDatas.ForEach(data =>
+                soilGrid.ForEach((x,y,data) =>
                 {
                     if (data is null) return;
                     data.Watered = false; // 过了一天，所有的土地都没有水
+                    Global.GridController.Watering.SetTile(new Vector3Int(x, y), null); // 同步清空水的tilemap
                 });
 
                 var waters = SceneManager.GetActiveScene().GetRootGameObjects()
                     .Where(obj => obj.name.StartsWith("Water"));
                 waters.ForEach(water => { water.DestroySelf(); }); // 过了一天，所有的水都消失了
+                
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
             
             // 每日剩余时间相关

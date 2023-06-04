@@ -39,6 +39,7 @@ public class Global : Architecture<Global>, ISaveWithJson
     public static Player Player = null;
     public static MouseController Mouse = null;
     public static readonly ToolFruit ToolFruit = new ();
+    public static GridController GridController = null;
     
     protected override void Init()
     {

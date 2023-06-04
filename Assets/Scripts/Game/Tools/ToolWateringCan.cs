@@ -1,4 +1,5 @@
 ﻿using QFramework;
+using UnityEngine;
 
 namespace Game.Tools
 {
@@ -37,6 +38,10 @@ namespace Game.Tools
                 .Position(tilemap.GetCellCenterWorld(cellPos));
             
             Global.RestHours.Value -= CostHours;
+            
+            // Tilemap方面
+            Global.GridController.Watering.SetTile(new Vector3Int(cellPos.x, cellPos.y),
+                Global.GridController.WaterTile);
             
             // 以下特效方面
             var wateringFx = Global.Mouse.Watering_Fx;   // 挖掘特效
