@@ -1,4 +1,3 @@
-using System;
 using System.ChallengeSys;
 using System.Linq;
 using System.SoilSys;
