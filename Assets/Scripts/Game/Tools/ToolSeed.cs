@@ -40,7 +40,7 @@ namespace Game.Tools
 
             var tileWorldPos = tilemap.GetCellCenterWorld(cellPos);
             var plantObj = ResController.Instance.LoadPrefab(Item.plantPrefabName)
-                .Instantiate()
+                .InstantiateWithParent(Global.PlantsRoot.transform)
                 .Position(tileWorldPos);
             if (!plantObj)
             {

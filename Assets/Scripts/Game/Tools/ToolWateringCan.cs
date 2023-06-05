@@ -34,7 +34,7 @@ namespace Game.Tools
             AudioController.Instance.Sfx_Watering.Play();	// 播放浇水音效
             showGrid[cellPos.x, cellPos.y].Watered = true;
             ResController.Instance.waterPrefab
-                .Instantiate()
+                .InstantiateWithParent(Global.WaterRoot.transform)
                 .Position(tilemap.GetCellCenterWorld(cellPos));
             
             Global.RestHours.Value -= CostHours;

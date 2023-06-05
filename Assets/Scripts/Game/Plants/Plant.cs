@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.SoilSys;
+using DG.Tweening;
 using QFramework;
 using UnityEngine;
 
@@ -30,12 +31,30 @@ namespace Game.Plants
 		private SpriteRenderer mSpriteRenderer;
 		private GridController mGridController;
 		private ISoilSystem mSoilSystem;
+		private bool _tweenPlaying;
  
 		private void Awake()
 		{
 			mSpriteRenderer = GetComponent<SpriteRenderer>();
 			mGridController = FindObjectOfType<GridController>();
 			mSoilSystem = this.GetSystem<ISoilSystem>();
+		}
+
+		private void OnTriggerExit2D(Collider2D other)
+		{
+			if (!other.CompareTag("Player")) return;
+			if (_tweenPlaying) return;
+			if (Sate == PlantSates.Seed) return;
+			
+			_tweenPlaying = true;
+			DOTween.Sequence()
+				.Append(transform.DORotate(Vector3.back * 5, 0.2f).SetEase(Ease.OutCubic))
+				.Append(transform.DORotate(Vector3.forward * 5, 0.2f).SetEase(Ease.OutCubic))
+				.Append(transform.DORotate(Vector3.zero, 0.1f).SetEase(Ease.OutCubic))
+				.OnComplete(() =>
+				{
+					_tweenPlaying = false;
+				});
 		}
 
 		public void Grow(SoilData soilData)

@@ -50,7 +50,7 @@ namespace Game
 				if (soilData.HasPlant)
 				{
 					var plantObj = ResController.Instance.LoadPrefab(soilData.PlantPrefabName)
-						.Instantiate()
+						.InstantiateWithParent(Global.PlantsRoot.transform)
 						.Position(Soil.layoutGrid.GetCellCenterWorld(new Vector3Int(x, y)));
 					var plant = plantObj.GetComponent<IPlant>();
 					PlantController.Instance.PlantGrid[x, y] = plant;

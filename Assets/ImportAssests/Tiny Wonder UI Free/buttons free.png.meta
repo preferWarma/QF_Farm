@@ -201,7 +201,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: buttons free_4
+      name: button_Quit
       rect:
         serializedVersion: 2
         x: 3
@@ -255,8 +255,8 @@ TextureImporter:
     nameFileIdTable:
       buttons free_3: -1660560566
       Button_Press: -1097756133
-      buttons free_4: 1343697308
       buttons free_5: 1126424295
+      button_Quit: 1343697308
       Button_Normal: 1411596271
       buttons free_2: -613816078
   spritePackingTag: 

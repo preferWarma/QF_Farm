@@ -40,6 +40,8 @@ public class Global : Architecture<Global>, ISaveWithJson
     public static MouseController Mouse = null;
     public static readonly ToolFruit ToolFruit = new ();
     public static GridController GridController = null;
+    public static readonly GameObject PlantsRoot = GameObject.Find("PlantsRoot");
+    public static readonly GameObject WaterRoot = GameObject.Find("WaterRoot");
     
     protected override void Init()
     {

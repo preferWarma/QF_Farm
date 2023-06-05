@@ -1,4 +1,4 @@
-// Generate Id:01a5b9fc-86a9-4e13-9eef-9d96dcc83f26
+// Generate Id:d8794fab-e54d-4388-9912-371aa87a2048
 using UnityEngine;
 
 namespace Game
@@ -21,6 +21,8 @@ namespace Game
 		public UnityEngine.AudioSource Sfx_NextDay;
 
 		public UnityEngine.AudioSource Sfx_Trade;
+
+		public UnityEngine.AudioSource BackGround;
 
 	}
 }

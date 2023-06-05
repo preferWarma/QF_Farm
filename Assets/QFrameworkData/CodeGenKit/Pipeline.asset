@@ -19,23 +19,22 @@ MonoBehaviour:
     From: 0
     NameToFullName: []
     BindInfos:
-    - TypeName: UnityEngine.Tilemaps.Tilemap
-      PathToRoot: Soil
-      MemberName: Soil
-    - TypeName: UnityEngine.Tilemaps.Tilemap
-      PathToRoot: Watering
-      MemberName: Watering
-    - TypeName: UnityEngine.Tilemaps.Tilemap
-      PathToRoot: BackGround
-      MemberName: BackGround
-    ScriptsFolder: Assets/Scripts/Game
-    ClassName: GridController
-    Namespace: Game
-    MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game\r\n{\r\n\tpublic
-      partial class GridController : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+    - TypeName: RectTransform
+      PathToRoot: SettingsRoot
+      MemberName: SettingsRoot
+    - TypeName: UnityEngine.UI.Slider
+      PathToRoot: SettingsRoot/SoundSettingRoot/SoundSlider
+      MemberName: SoundSlider
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: SettingsRoot/ExitGameRoot/BtnQuit
+      MemberName: BtnQuit
+    ScriptsFolder: Assets/Scripts/Game/UI
+    ClassName: UISetting
+    Namespace: Game.UI
+    MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game.UI\r\n{\r\n\tpublic
+      partial class UISetting : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:9d148af4-f9d6-495b-bb10-313d99c1e76c\r\nusing UnityEngine;\r\n\r\nnamespace
-      Game\r\n{\r\n\tpublic partial class GridController\r\n\t{\r\n\r\n\t\tpublic
-      UnityEngine.Tilemaps.Tilemap Soil;\r\n\r\n\t\tpublic UnityEngine.Tilemaps.Tilemap
-      Watering;\r\n\r\n\t\tpublic UnityEngine.Tilemaps.Tilemap BackGround;\r\n\r\n\t\tpublic
-      UnityEngine.RuleTile WaterTile;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:1eaaadd4-0b86-42fe-92b0-a50770be5536\r\nusing UnityEngine;\r\n\r\nnamespace
+      Game.UI\r\n{\r\n\tpublic partial class UISetting\r\n\t{\r\n\r\n\t\tpublic RectTransform
+      SettingsRoot;\r\n\r\n\t\tpublic UnityEngine.UI.Slider SoundSlider;\r\n\r\n\t\tpublic
+      UnityEngine.UI.Button BtnQuit;\r\n\r\n\t}\r\n}\r\n"

@@ -8,7 +8,7 @@ namespace Game.Plants
     {
         int X { get; set; }
         int Y { get; set; }
-        GameObject GameObject { get; }
+        GameObject GameObject { get; }  // 植物的GameObject
         PlantSates Sate { get; }
         int RipeDay { get; }
         string PlantName { get; }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5146968983972400643}
   - component: {fileID: 5146968983972400642}
   - component: {fileID: 5881657242655037056}
+  - component: {fileID: -3531186238397067290}
   m_Layer: 0
   m_Name: PlantRadish
   m_TagString: Untagged
@@ -124,3 +125,29 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 1e984b8e71f490c4c888d9f7e6feec82, type: 3}
     growDay: 0
     showSoilDig: 0
+--- !u!61 &-3531186238397067290
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5146968983972400641}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.69, y: 0.69}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.69, y: 0.69}
+  m_EdgeRadius: 0
