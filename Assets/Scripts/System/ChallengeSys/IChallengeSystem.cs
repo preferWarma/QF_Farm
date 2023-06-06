@@ -229,9 +229,9 @@ namespace System.ChallengeSys
 		        Debug.LogError("加载挑战数据失败");
 		        return;
 	        }
-	        TotalFruitCount.SetValueWithoutEvent(TotalFruitCount);
-	        TotalPumpkinCount.SetValueWithoutEvent(TotalPumpkinCount);
-	        TotalRadishCount.SetValueWithoutEvent(TotalRadishCount);
+	        TotalFruitCount.SetValueWithoutEvent(saveData.TotalFruitCount);
+	        TotalPumpkinCount.SetValueWithoutEvent(saveData.TotalPumpkinCount);
+	        TotalRadishCount.SetValueWithoutEvent(saveData.TotalRadishCount);
 	        
 	        foreach (var challenge in Challenges)
 	        {
