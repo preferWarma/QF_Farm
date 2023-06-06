@@ -23,6 +23,7 @@ namespace System.ChallengeSys
         [Header("和当日有关")]
         public static readonly BindableProperty<int> RipeAndHarvestCountInCurrentDay = new(); // 当天成熟并采摘的植物数量
         public static readonly BindableProperty<int> HarvestCountInCurrentDay = new(); // 当天采摘的植物数量
+        public static readonly BindableProperty<int> HarvestPumpkinCountInCurrentDay = new(); // 当天采摘的果实数量
         public static readonly BindableProperty<int> HarvestRadishCountInCurrentDay = new(); // 当天采摘的萝卜数量
         public static readonly BindableProperty<int> HarvestPotatoCountInCurrentDay = new(); // 当天采摘的土豆数量
         public static readonly BindableProperty<int> HarvestTomatoInCurrentDay = new(); // 当天采摘的番茄数量
@@ -58,10 +59,16 @@ namespace System.ChallengeSys
 	        
 	        #region 挑战列表添加
 	        
-	        Challenges.Add(new GenericChallenge().SetName("收获第一个果实").OnStart(challenge =>
-			{
-				challenge.StartDate = Global.Days.Value;
-			}).CheckFinish(challenge => challenge.StartDate != Global.Days.Value && TotalFruitCount.Value >= 1));
+	        Challenges.Add(new GenericChallenge().SetName("收获一个南瓜")
+		        .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
+		        .CheckFinish(challenge => challenge.StartDate != Global.Days.Value && HarvestPumpkinCountInCurrentDay.Value >= 1)
+		        .OnFinish(challenge =>
+		        {
+			        Global.CanShowRadish.Value = true;
+			        UIMessageQueue.Push($"完成挑战:{challenge.Name}, <color=yellow>金币+100</color>");
+			        Global.Money.Value += 100;
+			        UIMessageQueue.Push("已解锁<color=orange>胡萝卜种子</color>, 请前往商店查看");
+		        }));
 			
 			Challenges.Add(new GenericChallenge().SetName("一天成熟并收获两个果实").OnStart(challenge =>
 			{
@@ -145,7 +152,8 @@ namespace System.ChallengeSys
 	        if (ActiveChallenges.Count == 0 && FinishedChallenges.Count != Challenges.Count)
 	        {
 		        var randomItem = Challenges.Where(challenge1 => challenge1.State == Challenge.States.NotStart)
-			        .ToList().GetRandomItem();
+			        .ToList()
+			        .First();
 		        ActiveChallenges.Add(randomItem); // 完成挑战时再随机添加一个未开始的挑战
 	        }
         }
@@ -159,7 +167,6 @@ namespace System.ChallengeSys
 	        {
 		        AudioController.Instance.Sfx_Complete.Play(); // 播放挑战完成音效
 		        FinishedChallenges.Add(challenge);
-		        UIMessageQueue.Push(null, $"完成挑战:{challenge.Name}, <color=yellow>金币+100</color>");
 
 		        if (Challenges.Count == FinishedChallenges.Count) // 如果所有的挑战都完成了
 		        {

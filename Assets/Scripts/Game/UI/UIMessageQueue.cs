@@ -30,6 +30,11 @@ namespace Game.UI
 				}).Show();
 		}
 
+		public static void Push(string message)
+		{
+			Push(null, message);
+		}
+
 		private void Awake()
 		{
 			mInstance = this;

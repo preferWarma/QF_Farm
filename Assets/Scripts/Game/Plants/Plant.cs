@@ -44,6 +44,7 @@ namespace Game.Plants
 		{
 			if (!other.CompareTag("Player")) return;
 			if (_tweenPlaying) return;
+			if (mSoilSystem.SoilGrid[X, Y] == null) return;
 			if (Sate == PlantSates.Seed) return;
 			
 			_tweenPlaying = true;

@@ -17,5 +17,4 @@ public static class ItemNameCollections
     public const string Potato = "Potato";
     public const string Tomato = "Tomato";
     public const string Bean = "Bean";
-        
 }

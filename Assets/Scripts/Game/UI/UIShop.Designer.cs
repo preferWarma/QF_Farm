@@ -1,4 +1,4 @@
-// Generate Id:81b4bf87-c039-4b68-84fe-cf48031d2392
+// Generate Id:e187a263-c080-4b0d-a7ba-bd54cb5a3670
 using UnityEngine;
 
 namespace Game.UI
@@ -7,6 +7,8 @@ namespace Game.UI
 	{
 
 		public RectTransform BtnRoot;
+
+		public UnityEngine.UI.Button BtnBuyComputer;
 
 		public UnityEngine.UI.Button BtnBuyPumpkinSeed;
 

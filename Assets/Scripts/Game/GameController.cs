@@ -60,12 +60,10 @@ namespace Game
                     data.Watered = false; // 过了一天，所有的土地都没有水
                     Global.GridController.Watering.SetTile(new Vector3Int(x, y), null); // 同步清空水的tilemap
                 });
-
-                var waters = SceneManager.GetActiveScene().GetRootGameObjects()
-                    .Where(obj => obj.name.StartsWith("Water"));
-                waters.ForEach(water => { water.DestroySelf(); }); // 过了一天，所有的水都消失了
                 
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+                Global.WaterRoot.transform.DestroyChildren();
+
+                }).UnRegisterWhenGameObjectDestroyed(gameObject);
             
             // 每日剩余时间相关
             Global.Days.Register(_ =>
@@ -96,6 +94,7 @@ namespace Game
                         break;
                     case ItemNameCollections.Pumpkin:
                         ChallengeSystem.TotalPumpkinCount.Value++;
+                        ChallengeSystem.HarvestPumpkinCountInCurrentDay.Value++;
                         this.SendCommand(new AddItemCountCommand(ItemNameCollections.Pumpkin, 1));
                         break;
                     case ItemNameCollections.Potato:

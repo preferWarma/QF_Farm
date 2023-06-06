@@ -8,7 +8,6 @@ using Lyf.SaveSystem;
 using QFramework;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 using SaveType = Lyf.SaveSystem.SaveType;
 
 public class Global : Architecture<Global>, ISaveWithJson
@@ -30,6 +29,10 @@ public class Global : Architecture<Global>, ISaveWithJson
     
     [Header("升级相关")]
     public static bool[] IsToolUpgraded = new bool[4]; // 工具是否升级(顺序按照工具的顺序)
+    public static bool HasComputer;    // 是否拥有电脑
+    
+    [Header("控制游戏流程")]
+    public static readonly BindableProperty<bool> CanShowRadish = new();
 
     [Header("事件相关")]
     public static readonly EasyEvent<IPlant> OnPlantHarvest = new(); // 采摘植物事件
@@ -40,8 +43,8 @@ public class Global : Architecture<Global>, ISaveWithJson
     public static MouseController Mouse = null;
     public static readonly ToolFruit ToolFruit = new ();
     public static GridController GridController = null;
-    public static readonly GameObject PlantsRoot = GameObject.Find("PlantsRoot");
-    public static readonly GameObject WaterRoot = GameObject.Find("WaterRoot");
+    public static GameObject PlantsRoot => GameObject.Find("PlantsRoot") ?? new GameObject("PlantsRoot");
+    public static GameObject WaterRoot => GameObject.Find("WaterRoot") ?? new GameObject("WaterRoot");
     
     protected override void Init()
     {
@@ -95,11 +98,13 @@ public class Global : Architecture<Global>, ISaveWithJson
         public int BeanCount;
         public int Money;
         public bool[] IsToolUpgraded;
+        public bool HasComputer;
+        public bool CanShowRadish;
     }
     
     public void SaveWithJson()
     {
-        var saveData = new SaveDataCollection()
+        var saveData = new SaveDataCollection
         {
             Days = Days.Value,
             RestHours = RestHours.Value,
@@ -109,7 +114,9 @@ public class Global : Architecture<Global>, ISaveWithJson
             TomatoCount = TomatoCount.Value,
             BeanCount = BeanCount.Value,
             Money = Money.Value,
-            IsToolUpgraded = IsToolUpgraded
+            IsToolUpgraded = IsToolUpgraded,
+            HasComputer = HasComputer,
+            CanShowRadish = CanShowRadish.Value,
         };
         SaveManager.SaveWithJson(SAVE_FILE_NAME, saveData);
     }
@@ -127,6 +134,8 @@ public class Global : Architecture<Global>, ISaveWithJson
         BeanCount.Value = saveData.BeanCount;
         Money.SetValueWithoutEvent(saveData.Money);
         IsToolUpgraded = saveData.IsToolUpgraded;
+        HasComputer = saveData.HasComputer;
+        CanShowRadish.Value = saveData.CanShowRadish;
     }
     
     private static void ResetDefaultData()
@@ -140,7 +149,9 @@ public class Global : Architecture<Global>, ISaveWithJson
         PotatoCount.Value = 0;
         TomatoCount.Value = 0;
         BeanCount.Value = 0;
+        HasComputer = false;
+        CanShowRadish.Value = false;
     }
-    
+
     #endregion
 }

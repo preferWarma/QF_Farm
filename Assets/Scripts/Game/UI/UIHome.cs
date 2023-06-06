@@ -7,15 +7,24 @@ namespace Game.UI
 {
 	public partial class UIHome : ViewController
 	{
-		private float totalHours_1 = 100f;
-		private BindableProperty<float> currentHours_1 = new(0f);
-		private bool isFinished_1 = false;
+		private const float TotalHours1 = 100f;
+		private readonly BindableProperty<float> _currentHours1 = new();
+		private bool _isFinished1;
+		private bool _project1Registered;
 		
 		private void Awake()
 		{
 			RegisterGlobal();
-			RegisterProject();
 			RegisterWork();
+		}
+
+		private void Update()
+		{
+			if (Global.HasComputer && !_project1Registered)
+			{
+				RegisterProject();
+				_project1Registered = true;
+			}
 		}
 
 		// 注册全局事件
@@ -25,13 +34,13 @@ namespace Game.UI
 			{
 				var cost = Random.Range(5, 8 + 1);
 				Global.Money.Value -= cost;	// 每天扣5块钱
-				UIMessageQueue.Push(null,$"昨日消耗$-${cost}");
+				UIMessageQueue.Push($"昨日消耗$-${cost}");
 			
-				if (isFinished_1)
+				if (_isFinished1)
 				{
 					var earn = Random.Range(5,8+1);
 					Global.Money.Value += earn;
-					UIMessageQueue.Push(null,$"项目1昨天收入+${earn}元");
+					UIMessageQueue.Push($"项目1昨天收入+${earn}元");
 				}
 			}).UnRegisterWhenGameObjectDestroyed(this);
 		}
@@ -39,31 +48,31 @@ namespace Game.UI
 		// 注册项目事件
 		private void RegisterProject()
 		{
-			currentHours_1.RegisterWithInitValue(cur =>
+			_currentHours1.RegisterWithInitValue(cur =>
 			{
-				if (cur >= totalHours_1)
+				if (cur >= TotalHours1)
 				{
 					BtnCreateFirst.GetComponentInChildren<Text>().text = "项目1已完成(+$(5-8)/天)";
 					BtnCreateFirst.interactable = false;
-					isFinished_1 = true;
+					_isFinished1 = true;
 				}
 				else
 				{
 					BtnCreateFirst.GetComponentInChildren<Text>().text =
-						$"项目1进行中...{cur :0.0}/{totalHours_1 :0.0}";
+						$"项目1进行中...{cur :0.0}/{TotalHours1 :0.0}";
 				}
 			}).UnRegisterWhenGameObjectDestroyed(this);
 			
 			BtnCreateFirst.onClick.AddListener(() =>
 			{
-				if (currentHours_1 + Global.RestHours.Value >= totalHours_1)
+				if (_currentHours1 + Global.RestHours.Value >= TotalHours1)
 				{
-					Global.RestHours.Value -= totalHours_1 - currentHours_1;
-					currentHours_1.Value = totalHours_1;
+					Global.RestHours.Value -= TotalHours1 - _currentHours1;
+					_currentHours1.Value = TotalHours1;
 				}
 				else
 				{
-					currentHours_1.Value += Global.RestHours.Value;
+					_currentHours1.Value += Global.RestHours.Value;
 					Global.RestHours.Value = 0; // 消耗剩余时间
 				}
 				AudioController.Instance.Sfx_Trade.Play();
@@ -91,7 +100,7 @@ namespace Game.UI
 			{
 				var perHourIncome = Random.Range(1f, 2f);
 				Global.Money.Value += Convert.ToInt32(perHourIncome * Global.RestHours.Value);
-				UIMessageQueue.Push(null,$"打工收入${perHourIncome * Global.RestHours.Value:0.0}");
+				UIMessageQueue.Push($"打工收入${perHourIncome * Global.RestHours.Value:0.0}");
 				Global.RestHours.Value = 0;
 				AudioController.Instance.Sfx_Trade.Play();
 			});
