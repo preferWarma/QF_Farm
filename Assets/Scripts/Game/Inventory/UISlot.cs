@@ -100,6 +100,9 @@ namespace Game.Inventory
                     var temp = slot.ItemData;
                     slot.SetSlotData(ItemData, slot.shotCut.text);
                     SetSlotData(temp, shotCut.text);
+                    
+                    slot.select.Show(); // 交换后, 选中交换到的背包槽
+                    select.Hide();  // 同时隐藏当前开始的选中框
                 }
             }
         }
