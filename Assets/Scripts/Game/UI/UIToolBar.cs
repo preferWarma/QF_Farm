@@ -26,6 +26,7 @@ namespace Game.UI
 			{9, KeyCode.Alpha0},
 		};
 
+		public Image harvestCollection;
 		private IToolBarSystem mToolBarSystem;
 
 		private void Awake()

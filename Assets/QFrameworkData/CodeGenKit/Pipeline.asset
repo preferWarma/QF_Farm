@@ -20,54 +20,61 @@ MonoBehaviour:
     NameToFullName: []
     BindInfos:
     - TypeName: RectTransform
-      PathToRoot: BtnRoot
-      MemberName: BtnRoot
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnRoot/BtnBuyComputer
-      MemberName: BtnBuyComputer
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnRoot/BtnBuyPumpkinSeed
-      MemberName: BtnBuyPumpkinSeed
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnRoot/BtnBuyRadishSeed
-      MemberName: BtnBuyRadishSeed
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnRoot/BtnBuyPotatoSeed
-      MemberName: BtnBuyPotatoSeed
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnRoot/BtnBuyTomatoSeed
-      MemberName: BtnBuyTomatoSeed
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnRoot/BtnBuyBeanSeed
-      MemberName: BtnBuyBeanSeed
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnRoot/BtnSellPumpkin
-      MemberName: BtnSellPumpkin
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnRoot/BtnSellRadish
-      MemberName: BtnSellRadish
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnRoot/BtnSellPotato
-      MemberName: BtnSellPotato
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnRoot/BtnSellTomato
-      MemberName: BtnSellTomato
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnRoot/BtnSellBean
-      MemberName: BtnSellBean
+      PathToRoot: DragParent
+      MemberName: DragParent
+    - TypeName: Game.Inventory.UISlot
+      PathToRoot: ToolbarSlotRoot/ToolbarSlot1
+      MemberName: ToolbarSlot1
+    - TypeName: Game.Inventory.UISlot
+      PathToRoot: ToolbarSlotRoot/ToolbarSlot2
+      MemberName: ToolbarSlot2
+    - TypeName: Game.Inventory.UISlot
+      PathToRoot: ToolbarSlotRoot/ToolbarSlot3
+      MemberName: ToolbarSlot3
+    - TypeName: Game.Inventory.UISlot
+      PathToRoot: ToolbarSlotRoot/ToolbarSlot4
+      MemberName: ToolbarSlot4
+    - TypeName: Game.Inventory.UISlot
+      PathToRoot: ToolbarSlotRoot/ToolbarSlot5
+      MemberName: ToolbarSlot5
+    - TypeName: Game.Inventory.UISlot
+      PathToRoot: ToolbarSlotRoot/ToolbarSlot6
+      MemberName: ToolbarSlot6
+    - TypeName: Game.Inventory.UISlot
+      PathToRoot: ToolbarSlotRoot/ToolbarSlot7
+      MemberName: ToolbarSlot7
+    - TypeName: Game.Inventory.UISlot
+      PathToRoot: ToolbarSlotRoot/ToolbarSlot8
+      MemberName: ToolbarSlot8
+    - TypeName: Game.Inventory.UISlot
+      PathToRoot: ToolbarSlotRoot/ToolbarSlot9
+      MemberName: ToolbarSlot9
+    - TypeName: Game.Inventory.UISlot
+      PathToRoot: ToolbarSlotRoot/ToolbarSlot10
+      MemberName: ToolbarSlot10
+    - TypeName: Game.Inventory.UISlot
+      PathToRoot: ToolbarSlotRoot/ToolbarSlot11
+      MemberName: ToolbarSlot11
+    - TypeName: Game.Inventory.UISlot
+      PathToRoot: ToolbarSlotRoot/ToolbarSlot12
+      MemberName: ToolbarSlot12
+    - TypeName: Game.Inventory.UISlot
+      PathToRoot: ToolbarSlotRoot/ToolbarSlot13
+      MemberName: ToolbarSlot13
     ScriptsFolder: Assets/Scripts/Game/UI
-    ClassName: UIShop
+    ClassName: UIToolBar
     Namespace: Game.UI
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game.UI\r\n{\r\n\tpublic
-      partial class UIShop : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class UIToolBar : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:e187a263-c080-4b0d-a7ba-bd54cb5a3670\r\nusing UnityEngine;\r\n\r\nnamespace
-      Game.UI\r\n{\r\n\tpublic partial class UIShop\r\n\t{\r\n\r\n\t\tpublic RectTransform
-      BtnRoot;\r\n\r\n\t\tpublic UnityEngine.UI.Button BtnBuyComputer;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Button BtnBuyPumpkinSeed;\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      BtnBuyRadishSeed;\r\n\r\n\t\tpublic UnityEngine.UI.Button BtnBuyPotatoSeed;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Button BtnBuyTomatoSeed;\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      BtnBuyBeanSeed;\r\n\r\n\t\tpublic UnityEngine.UI.Button BtnSellPumpkin;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Button BtnSellRadish;\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      BtnSellPotato;\r\n\r\n\t\tpublic UnityEngine.UI.Button BtnSellTomato;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Button BtnSellBean;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:95f155b5-ce79-4b8c-a1d0-e3916a902783\r\nusing UnityEngine;\r\n\r\nnamespace
+      Game.UI\r\n{\r\n\tpublic partial class UIToolBar\r\n\t{\r\n\r\n\t\tpublic RectTransform
+      DragParent;\r\n\r\n\t\tpublic Game.Inventory.UISlot ToolbarSlot1;\r\n\r\n\t\tpublic
+      Game.Inventory.UISlot ToolbarSlot2;\r\n\r\n\t\tpublic Game.Inventory.UISlot
+      ToolbarSlot3;\r\n\r\n\t\tpublic Game.Inventory.UISlot ToolbarSlot4;\r\n\r\n\t\tpublic
+      Game.Inventory.UISlot ToolbarSlot5;\r\n\r\n\t\tpublic Game.Inventory.UISlot
+      ToolbarSlot6;\r\n\r\n\t\tpublic Game.Inventory.UISlot ToolbarSlot7;\r\n\r\n\t\tpublic
+      Game.Inventory.UISlot ToolbarSlot8;\r\n\r\n\t\tpublic Game.Inventory.UISlot
+      ToolbarSlot9;\r\n\r\n\t\tpublic Game.Inventory.UISlot ToolbarSlot10;\r\n\r\n\t\tpublic
+      Game.Inventory.UISlot ToolbarSlot11;\r\n\r\n\t\tpublic Game.Inventory.UISlot
+      ToolbarSlot12;\r\n\r\n\t\tpublic Game.Inventory.UISlot ToolbarSlot13;\r\n\r\n\t}\r\n}\r\n"

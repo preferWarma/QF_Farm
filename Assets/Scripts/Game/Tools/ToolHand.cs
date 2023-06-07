@@ -57,7 +57,7 @@ namespace Game.Tools
                 RectTransformUtility.WorldToScreenPoint(Camera.main, toolNeedData.CellPos); // 获取植物的屏幕坐标
             var targetPos = GetFruitPosInToolBar(toolBar, plantName);
 
-            toolBar.HarvestCollection.InstantiateWithParent(toolBar.transform)
+            toolBar.harvestCollection.InstantiateWithParent(toolBar.transform)
                 .Position(plantScreenPos)
                 .Show()
                 .Self(self =>
