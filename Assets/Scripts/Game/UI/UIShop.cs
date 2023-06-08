@@ -1,8 +1,6 @@
 using System;
 using System.ToolBarSys;
-using Lyf.SaveSystem;
 using QFramework;
-using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.UI
@@ -57,7 +55,7 @@ namespace Game.UI
 		{
 			item.RegisterWithInitValue(countValue =>
 			{
-				btn.gameObject.SetActive(showCondition(countValue));
+				btn.gameObject.transform.parent.gameObject.SetActive(showCondition(countValue));
 			}).UnRegisterWhenGameObjectDestroyed(this);
 		}
 

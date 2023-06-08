@@ -537,7 +537,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: gui_free_20
+      name: ShopItem
       rect:
         serializedVersion: 2
         x: 147
@@ -546,7 +546,7 @@ TextureImporter:
         height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 6, y: 6, z: 6, w: 6}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -902,6 +902,7 @@ TextureImporter:
       gui_free_34: -637008186
       gui_free_30: 1758388944
       gui_free_4: 1185271422
+      ShopItem: -215112182
       gui_free_13: 1932244037
       gui_free_17: 1821921596
       gui_free_29: -715493675
@@ -909,15 +910,14 @@ TextureImporter:
       gui_free_16: 1383973865
       gui_free_21: 80938213
       UILight: -461993292
-      gui_free_20: -215112182
+      gui_free_23: 1315265650
       gui_free_10: 1438148484
       gui_free_31: -2124301217
-      gui_free_23: 1315265650
+      gui_free_27: -1177461018
       gui_free_15: 1949904560
       gui_free_35: 257739848
       gui_free_6: 1656048599
       gui_free_18: 1089958817
-      gui_free_27: -1177461018
       bar_gui: -433249181
   spritePackingTag: 
   pSDRemoveMatte: 0

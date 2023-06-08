@@ -181,4 +181,4 @@ public static class Config
             _ => null
         };
     }
-}               
+}

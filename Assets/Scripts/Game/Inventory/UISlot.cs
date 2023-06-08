@@ -43,7 +43,7 @@ namespace Game.Inventory
             if (newItemData == null)    // 如果传入的物品为空, 则表示清空该背包槽
             {
                 ItemData = null;
-                icon.sprite = SpriteLoader?.Invoke("UIMask");;
+                icon.sprite = SpriteLoader?.Invoke("UIMask");
                 shotCut.text = string.Empty;
                 count.text = string.Empty;
             }
