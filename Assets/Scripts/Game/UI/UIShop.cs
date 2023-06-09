@@ -9,11 +9,15 @@ namespace Game.UI
 	public partial class UIShop : ViewController, IController
 	{
 		[Header("控制游戏流程")]
-		public static BindableProperty<bool> CanShowRadishSeed = new();
-		public static BindableProperty<bool> CanShowPotatoSeed = new();
-		public static BindableProperty<bool> CanShowTomatoSeed = new();
-		public static BindableProperty<bool> CanShowBeanSeed = new();
+		public static readonly BindableProperty<bool> CanShowRadishSeed = new();
+		public static readonly BindableProperty<bool> CanShowPotatoSeed = new();
+		public static readonly BindableProperty<bool> CanShowTomatoSeed = new();
+		public static readonly BindableProperty<bool> CanShowBeanSeed = new();
 		
+		// 避免单独创建新的函数
+		private static readonly BindableProperty<bool> CanShowPumpkinSeed = new(true);
+		private static readonly BindableProperty<bool> CanShowComputer = new(true);
+
 		private void Start()
 		{
 			// 注册购买植物种子按钮的方法
@@ -22,9 +26,7 @@ namespace Game.UI
 			RegisterBuy(BtnBuyPotatoSeed, Global.Money, ItemNameCollections.SeedPotato, 3);
 			RegisterBuy(BtnBuyTomatoSeed, Global.Money, ItemNameCollections.SeedTomato, 4);
 			RegisterBuy(BtnBuyBeanSeed, Global.Money, ItemNameCollections.SeedBean, 5);
-			
-			// 注册购买电脑按钮的方法
-			RegisterBuyComputer(BtnBuyComputer, Global.Money, 500);
+			RegisterBuy(BtnBuyComputer, Global.Money, ItemNameCollections.Computer, 500);
 			
 			// 注册出售植物按钮的方法
 			RegisterSell(BtnSellPumpkin, ItemNameCollections.Pumpkin, Global.Money, 2);
@@ -34,14 +36,12 @@ namespace Game.UI
 			RegisterSell(BtnSellBean, ItemNameCollections.Bean, Global.Money, 10);
 			
 			// 买按钮的显示条件
-			SetBtnShowCondition(Global.Money, BtnBuyPumpkinSeed, money => money >= 1);
+			SetBtnShowCondition(Global.Money, BtnBuyPumpkinSeed, money => money >= 1, CanShowPumpkinSeed);
 			SetBtnShowCondition(Global.Money, BtnBuyRadishSeed, money => money >= 2, CanShowRadishSeed);
 			SetBtnShowCondition(Global.Money, BtnBuyPotatoSeed, money => money >= 3, CanShowPotatoSeed);
 			SetBtnShowCondition(Global.Money, BtnBuyTomatoSeed, money => money >= 4, CanShowTomatoSeed);
 			SetBtnShowCondition(Global.Money, BtnBuyBeanSeed, money => money >= 5, CanShowBeanSeed);
-			
-			// 电脑一直存在,不可购买时按钮不可点击
-			SetBtnComputerCanBuyCondition(Global.Money, BtnBuyComputer, money => money >= 500 && Global.HasComputer == false);
+			SetBtnShowCondition(Global.Money, BtnBuyComputer, money => money >= 500,CanShowComputer);
 			
 			// 卖按钮的显示条件
 			SetBtnShowCondition(Global.PumpkinCount, BtnSellPumpkin, count => count > 0);
@@ -66,7 +66,14 @@ namespace Game.UI
 				btn.transform.parent.gameObject.SetActive(showCondition(countValue));
 			}).UnRegisterWhenGameObjectDestroyed(this);
 		}
-		
+
+		/// <summary>
+		/// 设置按钮显示条件
+		/// </summary>
+		/// <param name="item"> 显示条件对象 </param>
+		/// <param name="btn"> 当前设置的按钮 </param>
+		/// <param name="showCondition"> 显示的条件 </param>
+		/// <param name="isCreated"> 是否已经创建 </param>
 		private void SetBtnShowCondition(BindableProperty<int> item, Button btn, Func<int, bool> showCondition, BindableProperty<bool> isCreated)
 		{
 			isCreated.RegisterWithInitValue(v => btn.transform.parent.gameObject.SetActive(v));
@@ -85,11 +92,6 @@ namespace Game.UI
 				}
 				
 			}).UnRegisterWhenGameObjectDestroyed(this);
-			
-			// item.RegisterWithInitValue(countValue =>
-			// {
-			// 	btn.transform.parent.gameObject.SetActive(showCondition(countValue));
-			// }).UnRegisterWhenGameObjectDestroyed(this);
 		}
 
 		/// <summary>
@@ -128,35 +130,6 @@ namespace Game.UI
 			});
 		}
 
-		private void RegisterBuyComputer(Button btn, BindableProperty<int> money, int buyPrice)
-		{
-			btn.onClick.AddListener(() =>
-			{
-				money.Value -= buyPrice;
-				Global.HasComputer = true;
-				UIMessageQueue.Push(ResController.Instance.LoadSprite(ItemNameCollections.Computer),
-					$"+1\t金币-{buyPrice}");
-				AudioController.Instance.Sfx_Trade.Play();
-			});
-		}
-
-		private void SetBtnComputerCanBuyCondition(BindableProperty<int> item, Button btn, Func<int, bool> showCondition)
-		{
-			item.RegisterWithInitValue(countValue =>
-			{
-				if (showCondition(countValue))
-				{
-					btn.GetComponentInChildren<Text>().color = new Color(0.2f, 0.2f, 0.2f);
-					btn.interactable = true;
-				}
-				else
-				{
-					btn.GetComponentInChildren<Text>().color = Color.gray;
-					btn.interactable = false;
-				}
-			}).UnRegisterWhenGameObjectDestroyed(this);
-		}
-		
 		#endregion
 
 		public IArchitecture GetArchitecture()
