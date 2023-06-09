@@ -8,6 +8,11 @@ namespace Game.UI
 {
 	public partial class UIShop : ViewController, IController
 	{
+		[Header("控制游戏流程")]
+		public static BindableProperty<bool> CanShowRadishSeed = new();
+		public static BindableProperty<bool> CanShowPotatoSeed = new();
+		public static BindableProperty<bool> CanShowTomatoSeed = new();
+		public static BindableProperty<bool> CanShowBeanSeed = new();
 		
 		private void Start()
 		{
@@ -30,11 +35,13 @@ namespace Game.UI
 			
 			// 买按钮的显示条件
 			SetBtnShowCondition(Global.Money, BtnBuyPumpkinSeed, money => money >= 1);
-			SetBtnShowCondition(Global.Money, BtnBuyRadishSeed, money => money >= 2 && Global.CanShowRadish.Value);
-			SetBtnShowCondition(Global.Money, BtnBuyPotatoSeed, money => money >= 3);
-			SetBtnShowCondition(Global.Money, BtnBuyTomatoSeed, money => money >= 4);
-			SetBtnShowCondition(Global.Money, BtnBuyBeanSeed, money => money >= 5);
-			SetBtnShowCondition(Global.Money, BtnBuyComputer, money => money >= 500);
+			SetBtnShowCondition(Global.Money, BtnBuyRadishSeed, money => money >= 2, CanShowRadishSeed);
+			SetBtnShowCondition(Global.Money, BtnBuyPotatoSeed, money => money >= 3, CanShowPotatoSeed);
+			SetBtnShowCondition(Global.Money, BtnBuyTomatoSeed, money => money >= 4, CanShowTomatoSeed);
+			SetBtnShowCondition(Global.Money, BtnBuyBeanSeed, money => money >= 5, CanShowBeanSeed);
+			
+			// 电脑一直存在,不可购买时按钮不可点击
+			SetBtnComputerCanBuyCondition(Global.Money, BtnBuyComputer, money => money >= 500 && Global.HasComputer == false);
 			
 			// 卖按钮的显示条件
 			SetBtnShowCondition(Global.PumpkinCount, BtnSellPumpkin, count => count > 0);
@@ -56,6 +63,16 @@ namespace Game.UI
 		{
 			item.RegisterWithInitValue(countValue =>
 			{
+				btn.transform.parent.gameObject.SetActive(showCondition(countValue));
+			}).UnRegisterWhenGameObjectDestroyed(this);
+		}
+		
+		private void SetBtnShowCondition(BindableProperty<int> item, Button btn, Func<int, bool> showCondition, BindableProperty<bool> isCreated)
+		{
+			isCreated.RegisterWithInitValue(v => btn.transform.parent.gameObject.SetActive(v));
+			
+			item.RegisterWithInitValue(countValue =>
+			{
 				if (showCondition(countValue))
 				{
 					btn.GetComponentInChildren<Text>().color = new Color(0.2f, 0.2f, 0.2f);
@@ -66,7 +83,13 @@ namespace Game.UI
 					btn.GetComponentInChildren<Text>().color = Color.gray;
 					btn.interactable = false;
 				}
+				
 			}).UnRegisterWhenGameObjectDestroyed(this);
+			
+			// item.RegisterWithInitValue(countValue =>
+			// {
+			// 	btn.transform.parent.gameObject.SetActive(showCondition(countValue));
+			// }).UnRegisterWhenGameObjectDestroyed(this);
 		}
 
 		/// <summary>
@@ -111,7 +134,27 @@ namespace Game.UI
 			{
 				money.Value -= buyPrice;
 				Global.HasComputer = true;
+				UIMessageQueue.Push(ResController.Instance.LoadSprite(ItemNameCollections.Computer),
+					$"+1\t金币-{buyPrice}");
+				AudioController.Instance.Sfx_Trade.Play();
 			});
+		}
+
+		private void SetBtnComputerCanBuyCondition(BindableProperty<int> item, Button btn, Func<int, bool> showCondition)
+		{
+			item.RegisterWithInitValue(countValue =>
+			{
+				if (showCondition(countValue))
+				{
+					btn.GetComponentInChildren<Text>().color = new Color(0.2f, 0.2f, 0.2f);
+					btn.interactable = true;
+				}
+				else
+				{
+					btn.GetComponentInChildren<Text>().color = Color.gray;
+					btn.interactable = false;
+				}
+			}).UnRegisterWhenGameObjectDestroyed(this);
 		}
 		
 		#endregion

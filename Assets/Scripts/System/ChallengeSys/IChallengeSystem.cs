@@ -64,7 +64,7 @@ namespace System.ChallengeSys
 		        .CheckFinish(challenge => challenge.StartDate != Global.Days.Value && HarvestPumpkinCountInCurrentDay.Value >= 1)
 		        .OnFinish(challenge =>
 		        {
-			        Global.CanShowRadish.Value = true;
+			        UIShop.CanShowRadishSeed.Value = true;
 			        UIMessageQueue.Push($"完成挑战:{challenge.Name}, <color=yellow>金币+100</color>");
 			        Global.Money.Value += 100;
 			        UIMessageQueue.Push("已解锁<color=orange>胡萝卜种子</color>, 请前往商店查看");

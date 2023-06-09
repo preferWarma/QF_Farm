@@ -4,6 +4,7 @@ using System.ToolBarSys;
 using Game;
 using Game.Plants;
 using Game.Tools;
+using Game.UI;
 using Lyf.SaveSystem;
 using QFramework;
 using UnityEditor;
@@ -31,9 +32,6 @@ public class Global : Architecture<Global>, ISaveWithJson
     public static bool[] IsToolUpgraded = new bool[4]; // 工具是否升级(顺序按照工具的顺序)
     public static bool HasComputer;    // 是否拥有电脑
     
-    [Header("控制游戏流程")]
-    public static readonly BindableProperty<bool> CanShowRadish = new();
-
     [Header("事件相关")]
     public static readonly EasyEvent<IPlant> OnPlantHarvest = new(); // 采摘植物事件
     public static readonly EasyEvent<Challenge> OnChallengeFinish = new(); // 挑战完成事件
@@ -99,7 +97,11 @@ public class Global : Architecture<Global>, ISaveWithJson
         public int Money;
         public bool[] IsToolUpgraded;
         public bool HasComputer;
-        public bool CanShowRadish;
+        public bool CanShowRadishSeed;
+        public bool CanShowPotatoSeed;
+        public bool CanShowTomatoSeed;
+        public bool CanShowBeanSeed;
+        
     }
     
     public void SaveWithJson()
@@ -116,7 +118,10 @@ public class Global : Architecture<Global>, ISaveWithJson
             Money = Money.Value,
             IsToolUpgraded = IsToolUpgraded,
             HasComputer = HasComputer,
-            CanShowRadish = CanShowRadish.Value,
+            CanShowRadishSeed = UIShop.CanShowRadishSeed,
+            CanShowPotatoSeed = UIShop.CanShowPotatoSeed,
+            CanShowTomatoSeed = UIShop.CanShowTomatoSeed,
+            CanShowBeanSeed = UIShop.CanShowBeanSeed,
         };
         SaveManager.SaveWithJson(SAVE_FILE_NAME, saveData);
     }
@@ -135,7 +140,10 @@ public class Global : Architecture<Global>, ISaveWithJson
         Money.SetValueWithoutEvent(saveData.Money);
         IsToolUpgraded = saveData.IsToolUpgraded;
         HasComputer = saveData.HasComputer;
-        CanShowRadish.Value = saveData.CanShowRadish;
+        UIShop.CanShowRadishSeed.Value = saveData.CanShowRadishSeed;
+        UIShop.CanShowPotatoSeed.Value = saveData.CanShowPotatoSeed;
+        UIShop.CanShowTomatoSeed.Value = saveData.CanShowTomatoSeed;
+        UIShop.CanShowBeanSeed.Value = saveData.CanShowBeanSeed;
     }
     
     private static void ResetDefaultData()
@@ -150,7 +158,10 @@ public class Global : Architecture<Global>, ISaveWithJson
         TomatoCount.Value = 0;
         BeanCount.Value = 0;
         HasComputer = false;
-        CanShowRadish.Value = false;
+        UIShop.CanShowRadishSeed.Value = false;
+        UIShop.CanShowPotatoSeed.Value = false;
+        UIShop.CanShowTomatoSeed.Value = false;
+        UIShop.CanShowBeanSeed.Value = false;
     }
 
     #endregion
