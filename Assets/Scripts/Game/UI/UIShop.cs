@@ -1,6 +1,7 @@
 using System;
 using System.ToolBarSys;
 using QFramework;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.UI
@@ -55,7 +56,16 @@ namespace Game.UI
 		{
 			item.RegisterWithInitValue(countValue =>
 			{
-				btn.gameObject.transform.parent.gameObject.SetActive(showCondition(countValue));
+				if (showCondition(countValue))
+				{
+					btn.GetComponentInChildren<Text>().color = new Color(0.2f, 0.2f, 0.2f);
+					btn.interactable = true;
+				}
+				else
+				{
+					btn.GetComponentInChildren<Text>().color = Color.gray;
+					btn.interactable = false;
+				}
 			}).UnRegisterWhenGameObjectDestroyed(this);
 		}
 
