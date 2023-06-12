@@ -18,6 +18,8 @@ namespace System.PowerUpSys
         
         protected override void OnInit()
         {
+            SaveManager.Instance.Register(this, SaveType.Json);
+            
             PowerUps.Add(new PowerUp().WithKey("10")
                 .WithPrice(10)
                 .WithTitle("花洒范围+1")
@@ -25,7 +27,7 @@ namespace System.PowerUpSys
                 .WithKey("wateringCanUp")
                 .SetOnUnlock(up =>
                 {
-                    IsToolUpgraded[0] = true;
+                    IsToolUpgraded[2] = true;
                     Global.Money.Value -= up.Price;
                     AudioController.Instance.Sfx_Trade.Play();
                 })

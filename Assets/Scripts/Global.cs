@@ -30,7 +30,6 @@ public class Global : Architecture<Global>, ISaveWithJson
     public static readonly BindableProperty<int> Money = new(Config.InitMoney); // 当前拥有的金钱
     
     [Header("升级相关")]
-    // public static bool[] IsToolUpgraded = new bool[4]; // 工具是否升级(顺序按照工具的顺序)
     public static bool HasComputer;    // 是否拥有电脑
     
     [Header("事件相关")]
@@ -84,6 +83,7 @@ public class Global : Architecture<Global>, ISaveWithJson
         Object.FindObjectOfType<GridController>()?.Show();
         Interface.GetSystem<IChallengeSystem>().ResetDefaultData();
         Interface.GetSystem<IToolBarSystem>().ResetDefaultData();
+        Interface.GetSystem<IPowerUpSystem>().ResetDefaultData();
         SaveManager.Instance.SaveAllRegister(SaveType.Json);
     }
     
@@ -98,7 +98,6 @@ public class Global : Architecture<Global>, ISaveWithJson
         public int TomatoCount;
         public int BeanCount;
         public int Money;
-        public bool[] IsToolUpgraded;
         public bool HasComputer;
         public bool CanShowRadishSeed;
         public bool CanShowPotatoSeed;
@@ -119,7 +118,6 @@ public class Global : Architecture<Global>, ISaveWithJson
             TomatoCount = TomatoCount.Value,
             BeanCount = BeanCount.Value,
             Money = Money.Value,
-            // IsToolUpgraded = IsToolUpgraded,
             HasComputer = HasComputer,
             CanShowRadishSeed = UIShop.CanShowRadishSeed,
             CanShowPotatoSeed = UIShop.CanShowPotatoSeed,
@@ -141,7 +139,6 @@ public class Global : Architecture<Global>, ISaveWithJson
         TomatoCount.Value = saveData.TomatoCount;
         BeanCount.Value = saveData.BeanCount;
         Money.SetValueWithoutEvent(saveData.Money);
-        // IsToolUpgraded = saveData.IsToolUpgraded;
         HasComputer = saveData.HasComputer;
         UIShop.CanShowRadishSeed.Value = saveData.CanShowRadishSeed;
         UIShop.CanShowPotatoSeed.Value = saveData.CanShowPotatoSeed;
@@ -154,7 +151,6 @@ public class Global : Architecture<Global>, ISaveWithJson
         Days.SetValueWithoutEvent(Config.InitDays);
         RestHours.SetValueWithoutEvent(Config.InitRestHours);
         Money.SetValueWithoutEvent(Config.InitMoney);
-        // IsToolUpgraded = new bool[4];
         PumpkinCount.Value = 0;
         RadishCount.Value = 0;
         PotatoCount.Value = 0;
