@@ -1,4 +1,5 @@
-﻿using QFramework;
+﻿using System.PowerUpSys;
+using QFramework;
 using UnityEngine;
 
 namespace Game.Tools
@@ -9,7 +10,7 @@ namespace Game.Tools
         public float CostHours => 0.2f;
         public float CdTime { get; set; } = Config.CdToolWateringCan;
         public float InitCdTime => Config.CdToolWateringCan;
-        public int ToolScope => Global.IsToolUpgraded[2] ? 2 : 1;
+        public int ToolScope => PowerUpSystem.IsToolUpgraded[2] ? 2 : 1;
         public bool Selected()
         {
             return Global.CurrentTool.Value.Name == Name;

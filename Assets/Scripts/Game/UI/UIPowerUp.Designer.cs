@@ -1,10 +1,14 @@
-// Generate Id:4d7b8149-dab5-44e5-b6b7-59bf6efbcd8e
+// Generate Id:f056c405-9bb5-4bce-b4fd-3283d043a172
 using UnityEngine;
 
 namespace Game.UI
 {
 	public partial class UIPowerUp
 	{
+
+		public RectTransform BtnRoot;
+
+		public Game.PowerUpSys.PowerUpItem PowerUpItemTemplate;
 
 		public UnityEngine.UI.Button BtnUpgradeHand;
 

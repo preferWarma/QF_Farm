@@ -1,4 +1,5 @@
-﻿using System.SoilSys;
+﻿using System.PowerUpSys;
+using System.SoilSys;
 using QFramework;
 
 namespace Game.Tools
@@ -10,7 +11,7 @@ namespace Game.Tools
         public float CostHours => 0.5f;
         public float CdTime { get; set; } = Config.CdToolShovel;
         public float InitCdTime => Config.CdToolShovel;
-        public int ToolScope => Global.IsToolUpgraded[1] ? 2 : 1;
+        public int ToolScope => PowerUpSystem.IsToolUpgraded[1] ? 2 : 1;
 
         public bool Selected()
         {

@@ -1,47 +1,69 @@
 using System;
+using System.PowerUpSys;
 using QFramework;
 using UnityEngine.UI;
 
 namespace Game.UI
 {
-	public partial class UIPowerUp : ViewController
+	public partial class UIPowerUp : ViewController, IController
 	{
+		private IPowerUpSystem mPowerUpSystem;
+		
 		private void Start()
 		{
-			// 设置按钮显示条件
-			SetBtnShowCondition(Global.Money, BtnUpgradeHand, money => money >= 10 && !Global.IsToolUpgraded[0]);
-			SetBtnShowCondition(Global.Money, BtnUpgradeShovel, money => money >= 20 && !Global.IsToolUpgraded[1]);
-			SetBtnShowCondition(Global.Money, BtnUpgradeWateringCan, money => money >= 30 && !Global.IsToolUpgraded[2]);
-			SetBtnShowCondition(Global.Money, BtnUpgradeSeed, money => money >= 40 && !Global.IsToolUpgraded[3]);
+			mPowerUpSystem = this.GetSystem<IPowerUpSystem>();
+			PowerUpItemTemplate.Hide();
 			
-			// 注册按钮事件
-			BtnUpgradeHand.onClick.AddListener(() =>
+			foreach (var powerUp in mPowerUpSystem.PowerUps)
 			{
-				Global.IsToolUpgraded[0] = true;
-				Global.Money.Value -= 10;
-				AudioController.Instance.Sfx_Trade.Play();
-			});
+				PowerUpItemTemplate.InstantiateWithParent(BtnRoot).Show()
+					.Self(self =>
+					{
+						self.TextName.text = powerUp.Title;
+						self.Price.text = $"价格{powerUp.Price}";
+						var tmp = powerUp;
+						self.Button.onClick.AddListener(() =>
+						{
+							tmp.Unlock();
+						});
+						self.Button.GetComponentInChildren<Text>().text = powerUp.Description;
+					});
+			}
+
+			// // 设置按钮显示条件
+			// SetBtnShowCondition(Global.Money, BtnUpgradeHand, money => money >= 10 && !PowerUpSystem.IsToolUpgraded[0]);
+			// SetBtnShowCondition(Global.Money, BtnUpgradeShovel, money => money >= 20 && !PowerUpSystem.IsToolUpgraded[1]);
+			// SetBtnShowCondition(Global.Money, BtnUpgradeWateringCan, money => money >= 30 && !PowerUpSystem.IsToolUpgraded[2]);
+			// SetBtnShowCondition(Global.Money, BtnUpgradeSeed, money => money >= 40 && !PowerUpSystem.IsToolUpgraded[3]);
 			
-			BtnUpgradeShovel.onClick.AddListener(() =>
-			{
-				Global.IsToolUpgraded[1] = true;
-				Global.Money.Value -= 20;
-				AudioController.Instance.Sfx_Trade.Play();
-			});
-			
-			BtnUpgradeWateringCan.onClick.AddListener(() =>
-			{
-				Global.IsToolUpgraded[2] = true;
-				Global.Money.Value -= 30;
-				AudioController.Instance.Sfx_Trade.Play();
-			});
-			
-			BtnUpgradeSeed.onClick.AddListener(() =>
-			{
-				Global.IsToolUpgraded[3] = true;	// 种子工具升级
-				Global.Money.Value -= 40;
-				AudioController.Instance.Sfx_Trade.Play();
-			});
+			// // 注册按钮事件
+			// BtnUpgradeHand.onClick.AddListener(() =>
+			// {
+			// 	PowerUpSystem.IsToolUpgraded[0] = true;
+			// 	Global.Money.Value -= 10;
+			// 	AudioController.Instance.Sfx_Trade.Play();
+			// });
+			//
+			// BtnUpgradeShovel.onClick.AddListener(() =>
+			// {
+			// 	PowerUpSystem.IsToolUpgraded[1] = true;
+			// 	Global.Money.Value -= 20;
+			// 	AudioController.Instance.Sfx_Trade.Play();
+			// });
+			//
+			// BtnUpgradeWateringCan.onClick.AddListener(() =>
+			// {
+			// 	PowerUpSystem.IsToolUpgraded[2] = true;
+			// 	Global.Money.Value -= 30;
+			// 	AudioController.Instance.Sfx_Trade.Play();
+			// });
+			//
+			// BtnUpgradeSeed.onClick.AddListener(() =>
+			// {
+			// 	PowerUpSystem.IsToolUpgraded[3] = true;	// 种子工具升级
+			// 	Global.Money.Value -= 40;
+			// 	AudioController.Instance.Sfx_Trade.Play();
+			// });
 		}
 		
 		// 同UIShop.cs
@@ -51,6 +73,11 @@ namespace Game.UI
 			{
 				btn.gameObject.SetActive(showCondition(countValue));
 			}).UnRegisterWhenGameObjectDestroyed(this);
+		}
+
+		public IArchitecture GetArchitecture()
+		{
+			return Global.Interface;
 		}
 	}
 }

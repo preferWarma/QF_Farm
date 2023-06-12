@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.PowerUpSys;
 using DG.Tweening;
 using Game.UI;
 using QFramework;
@@ -13,7 +14,7 @@ namespace Game.Tools
         public float CostHours => 0.1f;
         public float CdTime { get; set; } = Config.CdToolHand;
         public float InitCdTime => Config.CdToolHand;
-        public int ToolScope => Global.IsToolUpgraded[0] ? 2 : 1;
+        public int ToolScope => PowerUpSystem.IsToolUpgraded[0] ? 2 : 1;
         
         public bool Selected()
         {
