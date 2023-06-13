@@ -1,4 +1,5 @@
 ﻿using Game;
+using Game.Plants;
 using Lyf.SaveSystem;
 using QFramework;
 using UnityEngine;
@@ -74,7 +75,7 @@ namespace System.SoilSys
         public void ResetDefaultData()
         {
             SoilGrid = new EasyGrid<SoilData>(Config.InitSoilWidth, Config.InitSoilHeight);
-            PlantController.Instance.PlantGrid.Resize(Config.InitSoilWidth, Config.InitSoilHeight, (_, _) => null);
+            PlantController.Instance.PlantGrid = new EasyGrid<IPlant>(Config.InitSoilWidth, Config.InitSoilHeight);
         }
 
         #endregion

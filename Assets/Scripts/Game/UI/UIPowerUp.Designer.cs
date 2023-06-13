@@ -1,4 +1,4 @@
-// Generate Id:f056c405-9bb5-4bce-b4fd-3283d043a172
+// Generate Id:41de3d33-a9e8-496e-aac1-21d1766bf402
 using UnityEngine;
 
 namespace Game.UI
@@ -6,17 +6,11 @@ namespace Game.UI
 	public partial class UIPowerUp
 	{
 
+		public UnityEngine.UI.Text Title;
+
 		public RectTransform BtnRoot;
 
-		public Game.PowerUpSys.PowerUpItem PowerUpItemTemplate;
-
-		public UnityEngine.UI.Button BtnUpgradeHand;
-
-		public UnityEngine.UI.Button BtnUpgradeShovel;
-
-		public UnityEngine.UI.Button BtnUpgradeWateringCan;
-
-		public UnityEngine.UI.Button BtnUpgradeSeed;
+		public System.PowerUpSys.PowerUpItem PowerUpItemTemplate;
 
 	}
 }

@@ -1,6 +1,7 @@
 using System;
 using System.PowerUpSys;
 using QFramework;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game.UI
@@ -14,6 +15,7 @@ namespace Game.UI
 			mPowerUpSystem = this.GetSystem<IPowerUpSystem>();
 			PowerUpItemTemplate.Hide();
 			
+			// 生成强化项
 			foreach (var powerUp in mPowerUpSystem.PowerUps)
 			{
 				PowerUpItemTemplate.InstantiateWithParent(BtnRoot).Show()
@@ -24,54 +26,31 @@ namespace Game.UI
 						var tmp = powerUp;
 						self.Button.onClick.AddListener(() =>
 						{
-							tmp.Unlock();
+							tmp.OnUnlock();
 						});
 						self.Button.GetComponentInChildren<Text>().text = powerUp.Description;
+						SetBtnShowCondition(Global.Money, self.gameObject, tmp.ShowCondition);// 设置按钮显示条件
 					});
 			}
 
-			// // 设置按钮显示条件
-			// SetBtnShowCondition(Global.Money, BtnUpgradeHand, money => money >= 10 && !PowerUpSystem.IsToolUpgraded[0]);
-			// SetBtnShowCondition(Global.Money, BtnUpgradeShovel, money => money >= 20 && !PowerUpSystem.IsToolUpgraded[1]);
-			// SetBtnShowCondition(Global.Money, BtnUpgradeWateringCan, money => money >= 30 && !PowerUpSystem.IsToolUpgraded[2]);
-			// SetBtnShowCondition(Global.Money, BtnUpgradeSeed, money => money >= 40 && !PowerUpSystem.IsToolUpgraded[3]);
-			
-			// // 注册按钮事件
-			// BtnUpgradeHand.onClick.AddListener(() =>
-			// {
-			// 	PowerUpSystem.IsToolUpgraded[0] = true;
-			// 	Global.Money.Value -= 10;
-			// 	AudioController.Instance.Sfx_Trade.Play();
-			// });
-			//
-			// BtnUpgradeShovel.onClick.AddListener(() =>
-			// {
-			// 	PowerUpSystem.IsToolUpgraded[1] = true;
-			// 	Global.Money.Value -= 20;
-			// 	AudioController.Instance.Sfx_Trade.Play();
-			// });
-			//
-			// BtnUpgradeWateringCan.onClick.AddListener(() =>
-			// {
-			// 	PowerUpSystem.IsToolUpgraded[2] = true;
-			// 	Global.Money.Value -= 30;
-			// 	AudioController.Instance.Sfx_Trade.Play();
-			// });
-			//
-			// BtnUpgradeSeed.onClick.AddListener(() =>
-			// {
-			// 	PowerUpSystem.IsToolUpgraded[3] = true;	// 种子工具升级
-			// 	Global.Money.Value -= 40;
-			// 	AudioController.Instance.Sfx_Trade.Play();
-			// });
+			// 强化流程控制
+			PowerUpSystem.IntensifiedToday.RegisterWithInitValue(todayIntensified =>
+			{
+				BtnRoot.GetComponentsInChildren<PowerUpItem>().ForEach(item =>
+				{
+					item.Button.interactable = !todayIntensified;
+					item.Button.GetComponentInChildren<Text>().color = todayIntensified ? Color.gray : Color.black;
+				});
+				Title.text = todayIntensified ? "今日已强化, 请明天再来" : "强化!!!";
+			}).UnRegisterWhenGameObjectDestroyed(this);
+
 		}
 		
-		// 同UIShop.cs
-		private void SetBtnShowCondition(BindableProperty<int> item, Button btn, Func<int, bool> showCondition)
+		private void SetBtnShowCondition(BindableProperty<int> money, GameObject obj, Func<bool> showCondition)
 		{
-			item.RegisterWithInitValue(countValue =>
+			money.RegisterWithInitValue(_ =>
 			{
-				btn.gameObject.SetActive(showCondition(countValue));
+				obj.SetActive(showCondition());
 			}).UnRegisterWhenGameObjectDestroyed(this);
 		}
 

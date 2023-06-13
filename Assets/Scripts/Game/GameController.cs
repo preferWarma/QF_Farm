@@ -1,5 +1,6 @@
 using System.ChallengeSys;
 using System.Linq;
+using System.PowerUpSys;
 using System.SoilSys;
 using System.ToolBarSys;
 using Game.UI;
@@ -64,6 +65,12 @@ namespace Game
                 Global.WaterRoot.transform.DestroyChildren();
 
                 }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            
+            // 强化相关
+            Global.Days.Register(_ =>
+            {
+                PowerUpSystem.IntensifiedToday.Value = false;
+            }).UnRegisterWhenGameObjectDestroyed(this);
             
             // 每日剩余时间相关
             Global.Days.Register(_ =>

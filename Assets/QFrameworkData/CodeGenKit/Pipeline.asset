@@ -19,33 +19,22 @@ MonoBehaviour:
     From: 0
     NameToFullName: []
     BindInfos:
+    - TypeName: UnityEngine.UI.Text
+      PathToRoot: Title
+      MemberName: Title
     - TypeName: RectTransform
       PathToRoot: Scroll View/Viewport/BtnRoot
       MemberName: BtnRoot
     - TypeName: Game.PowerUpSys.PowerUpItem
       PathToRoot: Scroll View/Viewport/BtnRoot/PowerUpItemTemplate
       MemberName: PowerUpItemTemplate
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: Scroll View/Viewport/BtnRoot/BtnUpgradeHand
-      MemberName: BtnUpgradeHand
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: Scroll View/Viewport/BtnRoot/BtnUpgradeShovel
-      MemberName: BtnUpgradeShovel
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: Scroll View/Viewport/BtnRoot/BtnUpgradeWateringCan
-      MemberName: BtnUpgradeWateringCan
-    - TypeName: UnityEngine.UI.Button
-      PathToRoot: Scroll View/Viewport/BtnRoot/BtnUpgradeSeed
-      MemberName: BtnUpgradeSeed
     ScriptsFolder: Assets/Scripts/Game/UI
     ClassName: UIPowerUp
     Namespace: Game.UI
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game.UI\r\n{\r\n\tpublic
       partial class UIPowerUp : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:f056c405-9bb5-4bce-b4fd-3283d043a172\r\nusing UnityEngine;\r\n\r\nnamespace
-      Game.UI\r\n{\r\n\tpublic partial class UIPowerUp\r\n\t{\r\n\r\n\t\tpublic RectTransform
-      BtnRoot;\r\n\r\n\t\tpublic Game.PowerUpSys.PowerUpItem PowerUpItemTemplate;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Button BtnUpgradeHand;\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      BtnUpgradeShovel;\r\n\r\n\t\tpublic UnityEngine.UI.Button BtnUpgradeWateringCan;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Button BtnUpgradeSeed;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:41de3d33-a9e8-496e-aac1-21d1766bf402\r\nusing UnityEngine;\r\n\r\nnamespace
+      Game.UI\r\n{\r\n\tpublic partial class UIPowerUp\r\n\t{\r\n\r\n\t\tpublic UnityEngine.UI.Text
+      Title;\r\n\r\n\t\tpublic RectTransform BtnRoot;\r\n\r\n\t\tpublic Game.PowerUpSys.PowerUpItem
+      PowerUpItemTemplate;\r\n\r\n\t}\r\n}\r\n"

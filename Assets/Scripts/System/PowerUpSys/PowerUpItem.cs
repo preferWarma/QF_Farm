@@ -1,13 +1,8 @@
-using UnityEngine;
 using QFramework;
 
-namespace Game.PowerUpSys
+namespace System.PowerUpSys
 {
 	public partial class PowerUpItem : ViewController
 	{
-		void Start()
-		{
-			// Code Here
-		}
 	}
 }

@@ -9,7 +9,7 @@
         int Price { get; set; } // 解锁价格
         
         bool ShowCondition();   // 显示条件
-        void Unlock();  // 解锁
+        void OnUnlock();  // 解锁
     }
     
     public class PowerUp : IPowerUp
@@ -28,9 +28,10 @@
             return !UnLocked && (_condition == null || _condition.Invoke(this));
         }
 
-        public void Unlock()
+        public void OnUnlock()
         {
             UnLocked = true;
+            PowerUpSystem.IntensifiedToday.Value = true;
             _onUnlock?.Invoke(this);
         }
 

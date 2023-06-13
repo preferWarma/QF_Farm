@@ -11,8 +11,8 @@ public static class Config
     public const int InitMoney = 50; // 初始金钱
     public const int InitDays = 1; // 初始天数
     public const float InitRestHours = 10; // 初始剩余时间
-    public const int InitSoilWidth = 5;
-    public const int InitSoilHeight = 5;
+    public const int InitSoilWidth = 5; // 初始土地宽度
+    public const int InitSoilHeight = 4;    // 初始土地高度
 
     // 背包配置
     public const int InitPumpkinSeedCount = 5;

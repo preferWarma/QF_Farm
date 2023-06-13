@@ -1,12 +1,10 @@
-// Generate Id:e2e09cdd-74b4-43c9-b196-e4ada5f3a336
+// Generate Id:8452661d-0154-4e5a-a715-69d3acdd9ffb
 using UnityEngine;
 
-namespace Game.PowerUpSys
+namespace System.PowerUpSys
 {
 	public partial class PowerUpItem
 	{
-
-		public UnityEngine.UI.Image Icon;
 
 		public UnityEngine.UI.Text TextName;
 

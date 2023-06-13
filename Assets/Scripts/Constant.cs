@@ -5,6 +5,9 @@ public static class ItemNameCollections
     public const string Hand = "Hand";
     public const string Shovel = "Shovel";
     public const string WateringCan = "WateringCan";
+    public const string Seed = "Seed";
+    
+    // 种子类
     public const string SeedPumpkin = "SeedPumpkin";
     public const string SeedRadish = "SeedRadish";
     public const string SeedPotato = "SeedPotato";
