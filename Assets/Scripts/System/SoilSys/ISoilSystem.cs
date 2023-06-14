@@ -19,7 +19,11 @@ namespace System.SoilSys
 
         protected override void OnInit()
         {
-            SaveManager.Instance.Register(this, SaveType.Json);
+            if (!_hasRegistered)
+            {
+                SaveManager.Instance.Register(this, SaveType.Json);
+                _hasRegistered = true;
+            }
         }
 
         [Tooltip("重置SoilGrid,同时重置PlantGrid")]
@@ -31,6 +35,10 @@ namespace System.SoilSys
         }
 
         #region 存储相关
+        
+        private static bool _hasRegistered;
+        
+        public string SAVE_FILE_NAME => "SoilData";
 
         private class SaveDataCollection
         {
@@ -38,9 +46,7 @@ namespace System.SoilSys
             public int Width;
             public int Height;
         }
-
-        public string SAVE_FILE_NAME => "SoilData";
-
+        
         public void SaveWithJson()
         {
             var saveData = new SaveDataCollection

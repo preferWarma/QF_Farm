@@ -41,7 +41,11 @@ namespace System.ChallengeSys
 
         protected override void OnInit()
         {
-            SaveManager.Instance.Register(this, SaveType.Json);
+            if (!_hasRegistered)
+            {
+                SaveManager.Instance.Register(this, SaveType.Json);
+                _hasRegistered = true;
+            }
 
             InitChallengeList();
             RegisterOnDaysChange();
@@ -248,7 +252,10 @@ namespace System.ChallengeSys
 
         #region 存储相关
 
-        [Serializable]
+        private static bool _hasRegistered;
+        
+        public string SAVE_FILE_NAME => "Challenge";
+
         private class SaveDataCollection
         {
             public Dictionary<string, Challenge.States> ChallengeStates;
@@ -256,9 +263,7 @@ namespace System.ChallengeSys
             public int TotalPumpkinCount;
             public int TotalRadishCount;
         }
-
-        public string SAVE_FILE_NAME => "Challenge";
-
+        
         public void SaveWithJson()
         {
             var saveData = new SaveDataCollection

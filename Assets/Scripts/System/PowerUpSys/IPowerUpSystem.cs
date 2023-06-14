@@ -28,12 +28,17 @@ namespace System.PowerUpSys
         
         protected override void OnInit()
         {
-            SaveManager.Instance.Register(this, SaveType.Json);
-            ToolPowerUp();   
+            ToolPowerUp();
             SoilPowerUp(5, 200, 5);
             SoilPowerUp(6,500,10);
             SoilPowerUp(7,1000,20);
             SoilPowerUp(8,2000,40);
+            
+            if (!_hasRegistered)
+            {
+                SaveManager.Instance.Register(this, SaveType.Json);
+                _hasRegistered = true;
+            }
         }
 
         // 做一个简单封装,使得可以链式调用
@@ -122,6 +127,8 @@ namespace System.PowerUpSys
         }
 
         #region 存储相关
+        
+        private static bool _hasRegistered;
         
         public string SAVE_FILE_NAME => "PowerUp";
         
