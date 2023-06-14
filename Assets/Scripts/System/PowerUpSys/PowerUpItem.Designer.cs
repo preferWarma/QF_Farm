@@ -1,4 +1,4 @@
-// Generate Id:8452661d-0154-4e5a-a715-69d3acdd9ffb
+// Generate Id:973879c6-542d-478c-ac7e-4a6e1798f745
 using UnityEngine;
 
 namespace System.PowerUpSys
@@ -9,6 +9,8 @@ namespace System.PowerUpSys
 		public UnityEngine.UI.Text TextName;
 
 		public UnityEngine.UI.Text Price;
+
+		public UnityEngine.UI.Text Description;
 
 		public UnityEngine.UI.Button Button;
 

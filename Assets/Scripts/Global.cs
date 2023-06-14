@@ -31,6 +31,7 @@ public class Global : Architecture<Global>, ISaveWithJson
     
     [Header("升级相关")]
     public static bool HasComputer;    // 是否拥有电脑
+    public static int DailyCost = Config.InitDailyCost; // 每日花费
     
     [Header("事件相关")]
     public static readonly EasyEvent<IPlant> OnPlantHarvest = new(); // 采摘植物事件
@@ -63,18 +64,6 @@ public class Global : Architecture<Global>, ISaveWithJson
     
     #region 存储相关
 
-    [MenuItem("Lyf/存档/保存所有注册数据")]
-    public static void Save()
-    {
-        SaveManager.Instance.SaveAllRegister(SaveType.Json);
-    }
-    
-    [MenuItem("Lyf/读档/读取所有注册数据")]
-    public static void Load()
-    {
-        SaveManager.Instance.LoadAllRegister(SaveType.Json);
-    }
-    
     [MenuItem("Lyf/重置数据/加载所有默认数据")]
     public static void LoadDefaultData()
     {
@@ -88,6 +77,7 @@ public class Global : Architecture<Global>, ISaveWithJson
     }
     
     public string SAVE_FILE_NAME => "Global";
+
     private class SaveDataCollection    // 需要保存的数据
     {
         public int Days;

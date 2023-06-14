@@ -10,6 +10,7 @@ namespace System.SoilSys
     {
         EasyGrid<SoilData> SoilGrid { get; }
         void ResetDefaultData();
+        void ResetSoil(int width, int height);
     }
 
     public class SoilSystem : AbstractSystem, ISoilSystem
@@ -19,6 +20,14 @@ namespace System.SoilSys
         protected override void OnInit()
         {
             SaveManager.Instance.Register(this, SaveType.Json);
+        }
+
+        [Tooltip("重置SoilGrid,同时重置PlantGrid")]
+        public void ResetSoil(int width, int height)
+        {
+            SoilGrid.Resize(width, height, (_, _) => null);
+            PlantController.Instance.PlantGrid.Resize(width, height, (_, _) => null);
+            Global.GridController.Show();
         }
 
         #region 存储相关

@@ -28,7 +28,8 @@ namespace Game.UI
 						{
 							tmp.OnUnlock();
 						});
-						self.Button.GetComponentInChildren<Text>().text = powerUp.Description;
+						self.Button.GetComponentInChildren<Text>().text = $"强化(${tmp.Price})";
+						self.Description.text = tmp.Description;
 						SetBtnShowCondition(Global.Money, self.gameObject, tmp.ShowCondition);// 设置按钮显示条件
 					});
 			}

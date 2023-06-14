@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.SoilSys;
 using Game;
 using Lyf.SaveSystem;
 using QFramework;
@@ -28,70 +29,102 @@ namespace System.PowerUpSys
         protected override void OnInit()
         {
             SaveManager.Instance.Register(this, SaveType.Json);
-            
-            #region 强化项具体内容
+            ToolPowerUp();   
+            SoilPowerUp(5, 200, 5);
+            SoilPowerUp(6,500,10);
+            SoilPowerUp(7,1000,20);
+            SoilPowerUp(8,2000,40);
+        }
+
+        // 做一个简单封装,使得可以链式调用
+        private IPowerUp Add(IPowerUp up)
+        {
+            PowerUps.Add(up);
+            return up;
+        }
+        
+        // 工具升级
+        private void ToolPowerUp()
+        {
             // 花洒强化
-            PowerUps.Add(new PowerUp().WithKey("1")
+            Add(new PowerUp().WithKey("1")
                 .WithPrice(10)
-                .WithTitle("花洒范围+1")
-                .WithDescription("强化($10)")
+                .WithTitle("花洒强化")
+                .WithDescription("花洒使用范围+1")
                 .SetOnUnlock(up =>
                 {
                     IsPowerUpUnlocked[ItemNameCollections.WateringCan] = true;
                     Global.Money.Value -= up.Price;
                     AudioController.Instance.Sfx_Trade.Play();
                 })
-                .SetCondition(up => !IsPowerUpUnlocked[ItemNameCollections.WateringCan] && Global.Money.Value >= up.Price)
+                .SetCondition(up => !up.UnLocked && Global.Money.Value >= up.Price)
             );
             
             // 铲子强化
-            PowerUps.Add(new PowerUp().WithKey("2")
+            Add(new PowerUp().WithKey("2")
                 .WithPrice(20)
-                .WithTitle("锄头范围+1")
-                .WithDescription("强化($20)")
+                .WithTitle("锄头强化")
+                .WithDescription("锄头使用范围+1")
                 .SetOnUnlock(up =>
                 {
                     IsPowerUpUnlocked[ItemNameCollections.Shovel] = true;
                     Global.Money.Value -= up.Price;
                     AudioController.Instance.Sfx_Trade.Play();
                 })
-                .SetCondition(up => !IsPowerUpUnlocked[ItemNameCollections.Shovel] && Global.Money.Value >= up.Price)
+                .SetCondition(up => !up.UnLocked && Global.Money.Value >= up.Price)
             );
             
             // 手强化
-            PowerUps.Add(new PowerUp().WithKey("3")
+            Add(new PowerUp().WithKey("3")
                 .WithPrice(30)
-                .WithTitle("手范围+1")
-                .WithDescription("强化($30)")
+                .WithTitle("手强化")
+                .WithDescription("手使用范围+1")
                 .SetOnUnlock(up =>
                 {
                     IsPowerUpUnlocked[ItemNameCollections.Hand] = true;
                     Global.Money.Value -= up.Price;
                     AudioController.Instance.Sfx_Trade.Play();
                 })
-                .SetCondition(up => !IsPowerUpUnlocked[ItemNameCollections.Hand] && Global.Money.Value >= up.Price)
+                .SetCondition(up => !up.UnLocked && Global.Money.Value >= up.Price)
             );
             
             // 种子强化
-            PowerUps.Add(new PowerUp().WithKey("4")
+            Add(new PowerUp().WithKey("4")
                 .WithPrice(40)
-                .WithTitle("种子范围+1")
-                .WithDescription("强化($40)")
+                .WithTitle("种子强化")
+                .WithDescription("种子使用范围+1")
                 .SetOnUnlock(up =>
                 {
                     IsPowerUpUnlocked[ItemNameCollections.Seed] = true;
                     Global.Money.Value -= up.Price;
                     AudioController.Instance.Sfx_Trade.Play();
                 })
-                .SetCondition(up => !IsPowerUpUnlocked[ItemNameCollections.Seed] && Global.Money.Value >= up.Price)
+                .SetCondition(up => !up.UnLocked && Global.Money.Value >= up.Price)
             );
-            
-            #endregion
+        }
+
+        // 土地升级
+        private void SoilPowerUp(int size,int powerUpCost, int addDailyCost)
+        {
+            Add(new PowerUp().WithKey("soil")
+                .WithPrice(powerUpCost)
+                .WithTitle($"土地{size}x{size}")
+                .WithDescription($"土地扩展为{size}x{size}\n每日金币消耗+{addDailyCost}")
+                .SetOnUnlock(up =>
+                {
+                    Global.Money.Value -= up.Price;
+                    AudioController.Instance.Sfx_Trade.Play();
+                    Global.DailyCost += addDailyCost;
+                    Global.Interface.GetSystem<ISoilSystem>().ResetSoil(size, size);
+                })
+                .SetCondition(up => !up.UnLocked && Global.Money.Value >= up.Price)
+            );
         }
 
         #region 存储相关
         
         public string SAVE_FILE_NAME => "PowerUp";
+        
         private class SaveDataCollection
         {
             public Dictionary<string, bool> IsPowerUpUnlocked;
