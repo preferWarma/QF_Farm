@@ -21,4 +21,22 @@ public static class ItemNameCollections
     public const string Tomato = "Tomato";
     public const string Bean = "Bean";
     public const string Computer = "Computer";
+    
+    // 土地强化类
+    public const string Soil5X5 = "Soil5X5";
+    public const string Soil6X6 = "Soil6X6";
+    public const string Soil7X7 = "Soil7X7";
+    public const string Soil8X8 = "Soil8X8";
+    
+    public static string GetSoilNameBySize(int size)
+    {
+        return size switch
+        {
+            5 => Soil5X5,
+            6 => Soil6X6,
+            7 => Soil7X7,
+            8 => Soil8X8,
+            _ => null
+        };
+    }
 }

@@ -27,15 +27,17 @@ namespace Game
 		private void Start()
 		{
 			Show();
-			
-			ShowGrid.ForEach((x, y, _) =>
-			{
-				BackGround.SetTile(new Vector3Int(x, y), canCultivateFieldPen);
-			});
 		}
 		
 		public void Show()
 		{
+			// 画背景
+			ShowGrid.ForEach((x, y, _) =>
+			{
+				BackGround.SetTile(new Vector3Int(x, y), canCultivateFieldPen);
+			});
+			
+			// 画土壤
 			ShowGrid.ForEach((x, y, soilData) =>
 			{
 				if (soilData == null)

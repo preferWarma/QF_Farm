@@ -41,12 +41,8 @@ namespace System.ChallengeSys
 
         protected override void OnInit()
         {
-            if (!_hasRegistered)
-            {
-                SaveManager.Instance.Register(this, SaveType.Json);
-                _hasRegistered = true;
-            }
-
+            SaveManager.Instance.Register(this, SaveType.Json);
+            
             InitChallengeList();
             RegisterOnDaysChange();
             RegisterOnChallengeFinish();
@@ -116,57 +112,6 @@ namespace System.ChallengeSys
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(challenge =>
                     challenge.StartDate != Global.Days.Value && HarvestBeanInCurrentDay.Value >= 1)
-                .OnFinish(challenge =>
-                {
-                    UIMessageQueue.Push($"完成挑战:{challenge.Name}, <color=yellow>金币+100</color>");
-                    Global.Money.Value += 100;
-                }));
-
-            Challenges.Add(new GenericChallenge().SetName("累计收获10个果实")
-                .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
-                .CheckFinish(challenge =>
-                    challenge.StartDate != Global.Days.Value && TotalFruitCount.Value >= 10)
-                .OnFinish(challenge =>
-                {
-                    UIMessageQueue.Push($"完成挑战:{challenge.Name}, <color=yellow>金币+100</color>");
-                    Global.Money.Value += 100;
-                }));
-
-            Challenges.Add(new GenericChallenge().SetName("当前拥有十个以上的果实")
-                .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
-                .CheckFinish(challenge =>
-                    challenge.StartDate != Global.Days.Value && TotalFruitCount.Value >= 10)
-                .OnFinish(challenge =>
-                {
-                    UIMessageQueue.Push($"完成挑战:{challenge.Name}, <color=yellow>金币+100</color>");
-                    Global.Money.Value += 100;
-                }));
-
-            Challenges.Add(new GenericChallenge().SetName("一天成熟并收获两个果实")
-                .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
-                .CheckFinish(challenge =>
-                    challenge.StartDate != Global.Days.Value && RipeAndHarvestCountInCurrentDay.Value >= 2)
-                .OnFinish(challenge =>
-                {
-                    UIMessageQueue.Push($"完成挑战:{challenge.Name}, <color=yellow>金币+100</color>");
-                    Global.Money.Value += 100;
-                }));
-
-            Challenges.Add(new GenericChallenge().SetName("一天成熟并收获五个果实")
-                .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
-                .CheckFinish(challenge =>
-                    challenge.StartDate != Global.Days.Value && RipeAndHarvestCountInCurrentDay.Value >= 5)
-                .OnFinish(challenge =>
-                {
-                    UIMessageQueue.Push($"完成挑战:{challenge.Name}, <color=yellow>金币+100</color>");
-                    Global.Money.Value += 100;
-                }));
-
-
-            Challenges.Add(new GenericChallenge().SetName("当前拥有100金币")
-                .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
-                .CheckFinish(challenge =>
-                    challenge.StartDate != Global.Days.Value && Global.Money.Value >= 100)
                 .OnFinish(challenge =>
                 {
                     UIMessageQueue.Push($"完成挑战:{challenge.Name}, <color=yellow>金币+100</color>");
@@ -251,9 +196,6 @@ namespace System.ChallengeSys
         #endregion
 
         #region 存储相关
-
-        private static bool _hasRegistered;
-        
         public string SAVE_FILE_NAME => "Challenge";
 
         private class SaveDataCollection

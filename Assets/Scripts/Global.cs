@@ -42,7 +42,6 @@ public class Global : Architecture<Global>, ISaveWithJson
     public static MouseController Mouse = null;
     public static readonly ToolFruit ToolFruit = new ();
     public static GridController GridController = null;
-    public static readonly IPowerUpSystem RefPowUpSystem = Global.Interface.GetSystem<IPowerUpSystem>();
     public static GameObject PlantsRoot => GameObject.Find("PlantsRoot") ?? new GameObject("PlantsRoot");
     public static GameObject WaterRoot => GameObject.Find("WaterRoot") ?? new GameObject("WaterRoot");
 
@@ -52,12 +51,8 @@ public class Global : Architecture<Global>, ISaveWithJson
         RegisterSystem<ISoilSystem>(new SoilSystem());
         RegisterSystem<IChallengeSystem>(new ChallengeSystem());
         RegisterSystem<IPowerUpSystem>(new PowerUpSystem());
-
-        if (!_hasRegistered)
-        {
-            SaveManager.Instance.Register(this, SaveType.Json);
-            _hasRegistered = true;
-        }
+        
+        SaveManager.Instance.Register(this, SaveType.Json);
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]   // 在start之前执行
@@ -68,8 +63,6 @@ public class Global : Architecture<Global>, ISaveWithJson
     
     #region 存储相关
     
-    private static bool _hasRegistered;
-
     [MenuItem("Lyf/重置数据/加载所有默认数据")]
     public static void LoadDefaultData()
     {

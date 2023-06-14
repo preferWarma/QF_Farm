@@ -43,17 +43,11 @@ namespace System.ToolBarSys
         
         protected override void OnInit()
         {
-            if (!_hasRegistered)
-            {
-                SaveManager.Instance.Register(this, SaveType.Json);
-                _hasRegistered = true;
-            }
+            SaveManager.Instance.Register(this, SaveType.Json);
         }
         
-        #region 存储相关
-
-        private static bool _hasRegistered;
         
+        #region 存储相关
         public string SAVE_FILE_NAME => "ToolBarData";
         
         [Serializable]

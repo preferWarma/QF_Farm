@@ -21,10 +21,14 @@ namespace System.PowerUpSys
             {ItemNameCollections.Shovel, false},
             {ItemNameCollections.Hand, false},
             {ItemNameCollections.Seed, false},
+            {ItemNameCollections.Soil5X5, false},
+            {ItemNameCollections.Soil6X6, false},
+            {ItemNameCollections.Soil7X7, false},
+            {ItemNameCollections.Soil8X8, false},
         };
         [Tooltip("今天是否已经强化过, 控制强化流程，每天只能强化一次")]
         public static readonly BindableProperty<bool> IntensifiedToday = new();
-        public List<IPowerUp> PowerUps { get; set; } = new();
+        public List<IPowerUp> PowerUps { get; } = new();
         
         protected override void OnInit()
         {
@@ -33,12 +37,8 @@ namespace System.PowerUpSys
             SoilPowerUp(6,500,10);
             SoilPowerUp(7,1000,20);
             SoilPowerUp(8,2000,40);
-            
-            if (!_hasRegistered)
-            {
-                SaveManager.Instance.Register(this, SaveType.Json);
-                _hasRegistered = true;
-            }
+
+            SaveManager.Instance.Register(this, SaveType.Json);
         }
 
         // 做一个简单封装,使得可以链式调用
@@ -62,7 +62,7 @@ namespace System.PowerUpSys
                     Global.Money.Value -= up.Price;
                     AudioController.Instance.Sfx_Trade.Play();
                 })
-                .SetCondition(up => !up.UnLocked && Global.Money.Value >= up.Price)
+                .SetCondition(up => !IsPowerUpUnlocked[ItemNameCollections.WateringCan] && Global.Money.Value >= up.Price)
             );
             
             // 铲子强化
@@ -76,7 +76,7 @@ namespace System.PowerUpSys
                     Global.Money.Value -= up.Price;
                     AudioController.Instance.Sfx_Trade.Play();
                 })
-                .SetCondition(up => !up.UnLocked && Global.Money.Value >= up.Price)
+                .SetCondition(up => !IsPowerUpUnlocked[ItemNameCollections.Shovel] && Global.Money.Value >= up.Price)
             );
             
             // 手强化
@@ -90,7 +90,7 @@ namespace System.PowerUpSys
                     Global.Money.Value -= up.Price;
                     AudioController.Instance.Sfx_Trade.Play();
                 })
-                .SetCondition(up => !up.UnLocked && Global.Money.Value >= up.Price)
+                .SetCondition(up => !IsPowerUpUnlocked[ItemNameCollections.Hand] && Global.Money.Value >= up.Price)
             );
             
             // 种子强化
@@ -104,7 +104,7 @@ namespace System.PowerUpSys
                     Global.Money.Value -= up.Price;
                     AudioController.Instance.Sfx_Trade.Play();
                 })
-                .SetCondition(up => !up.UnLocked && Global.Money.Value >= up.Price)
+                .SetCondition(up => !IsPowerUpUnlocked[ItemNameCollections.Seed] && Global.Money.Value >= up.Price)
             );
         }
 
@@ -121,15 +121,24 @@ namespace System.PowerUpSys
                     AudioController.Instance.Sfx_Trade.Play();
                     Global.DailyCost += addDailyCost;
                     Global.Interface.GetSystem<ISoilSystem>().ResetSoil(size, size);
+                    IsPowerUpUnlocked[ItemNameCollections.GetSoilNameBySize(size)] = true;
                 })
-                .SetCondition(up => !up.UnLocked && Global.Money.Value >= up.Price)
+                .SetCondition(up =>
+                {
+                    // 解锁小土地后才能解锁大土地
+                    for (var i = 5; i < size; i++)
+                    {
+                        if (!IsPowerUpUnlocked[ItemNameCollections.GetSoilNameBySize(i)])
+                            return false;
+                    }
+
+                    return !IsPowerUpUnlocked[ItemNameCollections.GetSoilNameBySize(size)] &&
+                           Global.Money.Value >= up.Price;
+                })
             );
         }
 
         #region 存储相关
-        
-        private static bool _hasRegistered;
-        
         public string SAVE_FILE_NAME => "PowerUp";
         
         private class SaveDataCollection
@@ -161,6 +170,10 @@ namespace System.PowerUpSys
                 {ItemNameCollections.Shovel, false},
                 {ItemNameCollections.Hand, false},
                 {ItemNameCollections.Seed, false},
+                {ItemNameCollections.Soil5X5, false},
+                {ItemNameCollections.Soil6X6, false},
+                {ItemNameCollections.Soil7X7, false},
+                {ItemNameCollections.Soil8X8, false},
             };
         }
         
