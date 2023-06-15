@@ -1,5 +1,4 @@
-﻿using System.PowerUpSys;
-using System.ToolBarSys;
+﻿using System.ToolBarSys;
 using Game.Inventory;
 using Game.Plants;
 using QFramework;
@@ -10,10 +9,10 @@ namespace Game.Tools
     public class ToolSeed : ITool, IController
     {
         public string Name => ItemNameCollections.Seed;
-        public float CostHours => Global.ToolSeedCostTime;
-        public float CdTime { get; set; } = Config.CdToolSeed;
-        public float InitCdTime => Config.CdToolSeed;
-        public int ToolScope => Global.Level;
+        public float CostHours => Config.LvDict[Global.ToolCostLevel].ToolSeedCostTime;
+        public float CdTime { get; set; } = Config.LvDict[1].ToolSeedCdTime;
+        public float InitCdTime => Config.LvDict[Global.ToolCdLevel].ToolSeedCdTime;
+        public int ToolScope => Global.ToolCostLevel;
         public Item Item { get; set; }  // 与背包中的物品对应
         
 

@@ -6,8 +6,8 @@
         public string Name => "Fruit";
         public int ToolScope => 1;
         public float CostHours => 0f;
-        public float CdTime { get; set; } = Config.CdToolFruit;
-        public float InitCdTime => Config.CdToolFruit;
+        public float CdTime { get; set; } = 0f;
+        public float InitCdTime => 0f;
 
         public bool Selected()
         {

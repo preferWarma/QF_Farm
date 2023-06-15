@@ -21,13 +21,6 @@ public static class Config
     public const int InitPotatoSeedCount = 5;
     public const int InitTomatoSeedCount = 5;
     public const int InitBeanSeedCount = 5;
-    
-    // 工具配置
-    public const float CdToolSeed = 0.3f;
-    public const float CdToolShovel = 0.6f;
-    public const float CdToolWateringCan = 0.5f;
-    public const float CdToolHand = 0.3f;
-    public const float CdToolFruit = 0.0f;
 
     public static List<Item> Items => Global.Interface.GetSystem<IToolBarSystem>().Items;
 
@@ -192,6 +185,11 @@ public static class Config
         public float ToolWateringCanCostTime { get; }
         public float ToolHandCostTime { get; }
         
+        public float ToolSeedCdTime { get; }
+        public float ToolShovelCdTime { get; }
+        public float ToolWateringCanCdTime { get; }
+        public float ToolHandCdTime { get; }
+
     }
 
     public static readonly Dictionary<int, ILvBase> LvDict = new()
@@ -207,6 +205,11 @@ public static class Config
         public float ToolShovelCostTime => 0.5f;
         public float ToolWateringCanCostTime => 0.3f;
         public float ToolHandCostTime => 0.2f;
+        // CD
+        public float ToolSeedCdTime => 0.3f;
+        public float ToolShovelCdTime => 0.6f;
+        public float ToolWateringCanCdTime => 0.5f;
+        public float ToolHandCdTime => 0.3f;
     }
 
     private class Lv2 : ILvBase
@@ -215,6 +218,11 @@ public static class Config
         public float ToolShovelCostTime => 0.3f;
         public float ToolWateringCanCostTime => 0.2f;
         public float ToolHandCostTime => 0.1f;
+        // CD
+        public float ToolSeedCdTime => 0.2f;
+        public float ToolShovelCdTime => 0.4f;
+        public float ToolWateringCanCdTime => 0.3f;
+        public float ToolHandCdTime => 0.2f;
     }
 
     private class Lv3 : ILvBase
@@ -223,6 +231,11 @@ public static class Config
         public float ToolShovelCostTime => 0.15f;
         public float ToolWateringCanCostTime => 0.1f;
         public float ToolHandCostTime => 0.05f;
+        // CD
+        public float ToolSeedCdTime => 0.1f;
+        public float ToolShovelCdTime => 0.2f;
+        public float ToolWateringCanCdTime => 0.15f;
+        public float ToolHandCdTime => 0.1f;
     }
     
     #endregion

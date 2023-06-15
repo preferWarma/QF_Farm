@@ -29,7 +29,8 @@ namespace System.PowerUpSys
         
         protected override void OnInit()
         {
-            ToolPowerUp();
+            ToolRangeAndCostPowerUp();
+            ToolCdPowerUp();
             SoilPowerUp(5, 200, 5);
             SoilPowerUp(6,500,10);
             SoilPowerUp(7,1000,20);
@@ -46,7 +47,7 @@ namespace System.PowerUpSys
         }
         
         // 工具范围升级
-        private void ToolPowerUp()
+        private void ToolRangeAndCostPowerUp()
         {
             Add(new PowerUp().WithKey("Tool_lv2")
                 .WithPrice(1000)
@@ -54,12 +55,12 @@ namespace System.PowerUpSys
                 .WithDescription("工具消耗减少,使用范围+1")
                 .SetOnUnlock(up =>
                 {
-                    Global.Level = 2;
+                    Global.ToolCostLevel = 2;
                     Global.Money.Value -= up.Price;
                     AudioController.Instance.Sfx_Trade.Play();
                     UIMessageQueue.Push("操作升级到lv2");
                 })
-                .SetCondition(up => Global.Level == 1 && Global.Money.Value >= up.Price)
+                .SetCondition(up => Global.ToolCostLevel == 1 && Global.Money.Value >= up.Price)
             );
             
             Add(new PowerUp().WithKey("Tool_lv3")
@@ -68,14 +69,45 @@ namespace System.PowerUpSys
                 .WithDescription("工具消耗大幅减少,使用范围+1")
                 .SetOnUnlock(up =>
                 {
-                    Global.Level = 3;
+                    Global.ToolCostLevel = 3;
                     Global.Money.Value -= up.Price;
                     AudioController.Instance.Sfx_Trade.Play();
                     UIMessageQueue.Push("操作升级到lv3");
                 })
-                .SetCondition(up => Global.Level == 2 && Global.Money.Value >= up.Price)
+                .SetCondition(up => Global.ToolCostLevel == 2 && Global.Money.Value >= up.Price)
             );
 
+        }
+
+        private void ToolCdPowerUp()
+        {
+            Add(new PowerUp().WithKey("CD_lv2")
+                .WithPrice(1000)
+                .WithTitle("冷却lv2")
+                .WithDescription("工具CD减少")
+                .SetOnUnlock(up =>
+                {
+                    Global.ToolCdLevel = 2;
+                    Global.Money.Value -= up.Price;
+                    AudioController.Instance.Sfx_Trade.Play();
+                    UIMessageQueue.Push("CD冷却升级到lv2");
+                })
+                .SetCondition(up => Global.ToolCdLevel == 1 && Global.Money.Value >= up.Price)
+            );
+
+            Add(new PowerUp().WithKey("CD_lv3")
+                .WithPrice(2000)
+                .WithTitle("冷却lv3")
+                .WithDescription("工具CD大幅减少")
+                .SetOnUnlock(up =>
+                {
+                    Global.ToolCdLevel = 3;
+                    Global.Money.Value -= up.Price;
+                    AudioController.Instance.Sfx_Trade.Play();
+                    UIMessageQueue.Push("CD冷却升级到lv3");
+                })
+                .SetCondition(up => Global.ToolCdLevel == 2 && Global.Money.Value >= up.Price)
+            );
         }
 
         // 土地升级

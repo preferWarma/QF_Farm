@@ -1,5 +1,4 @@
-﻿using System.PowerUpSys;
-using System.SoilSys;
+﻿using System.SoilSys;
 using QFramework;
 
 namespace Game.Tools
@@ -8,10 +7,10 @@ namespace Game.Tools
     public class ToolShovel : ITool
     {
         public string Name => ItemNameCollections.Shovel;
-        public float CostHours => Global.ToolShovelCostTime;
-        public float CdTime { get; set; } = Config.CdToolShovel;
-        public float InitCdTime => Config.CdToolShovel;
-        public int ToolScope => Global.Level;
+        public float CostHours => Config.LvDict[Global.ToolCostLevel].ToolShovelCostTime;
+        public float CdTime { get; set; } = Config.LvDict[1].ToolShovelCdTime;
+        public float InitCdTime => Config.LvDict[Global.ToolCdLevel].ToolShovelCdTime;
+        public int ToolScope => Global.ToolCostLevel;
 
         public bool Selected()
         {

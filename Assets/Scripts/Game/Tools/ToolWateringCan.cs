@@ -1,5 +1,4 @@
-﻿using System.PowerUpSys;
-using QFramework;
+﻿using QFramework;
 using UnityEngine;
 
 namespace Game.Tools
@@ -7,10 +6,10 @@ namespace Game.Tools
     public class ToolWateringCan : ITool
     {
         public string Name => ItemNameCollections.WateringCan;
-        public float CostHours => Global.ToolWateringCanCostTime;
-        public float CdTime { get; set; } = Config.CdToolWateringCan;
-        public float InitCdTime => Config.CdToolWateringCan;
-        public int ToolScope => Global.Level;
+        public float CostHours => Config.LvDict[Global.ToolCostLevel].ToolWateringCanCostTime;
+        public float CdTime { get; set; } = Config.LvDict[1].ToolWateringCanCdTime;
+        public float InitCdTime => Config.LvDict[Global.ToolCdLevel].ToolWateringCanCdTime;
+        public int ToolScope => Global.ToolCostLevel;
         public bool Selected()
         {
             return Global.CurrentTool.Value.Name == Name;

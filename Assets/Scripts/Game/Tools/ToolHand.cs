@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.PowerUpSys;
 using DG.Tweening;
 using Game.UI;
 using QFramework;
@@ -11,10 +10,10 @@ namespace Game.Tools
     public class ToolHand : ITool
     {
         public string Name => ItemNameCollections.Hand;
-        public float CostHours => Global.ToolHandCostTime;
-        public float CdTime { get; set; } = Config.CdToolHand;
-        public float InitCdTime => Config.CdToolHand;
-        public int ToolScope => Global.Level;
+        public float CostHours => Config.LvDict[Global.ToolCostLevel].ToolHandCostTime;
+        public float CdTime { get; set; } = Config.LvDict[1].ToolHandCdTime;
+        public float InitCdTime => Config.LvDict[Global.ToolCdLevel].ToolHandCdTime;
+        public int ToolScope => Global.ToolCostLevel;
         
         public bool Selected()
         {

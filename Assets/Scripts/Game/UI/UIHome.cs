@@ -33,7 +33,7 @@ namespace Game.UI
 			Global.Days.Register(_ =>
 			{
 				var cost = Random.Range(Global.DailyCost, Global.DailyCost + 6);
-				Global.Money.Value -= cost;	// 每天扣5块钱
+				Global.Money.Value -= cost;
 				UIMessageQueue.Push($"昨日消耗$-${cost}");
 			
 				if (_isFinished1)
