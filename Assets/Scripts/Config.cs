@@ -178,8 +178,52 @@ public static class Config
             },
             
             #endregion
-                
+            
             _ => null
         };
     }
+
+    #region 升级相关
+
+    public interface ILvBase
+    {
+        public float ToolSeedCostTime { get; }
+        public float ToolShovelCostTime { get; }
+        public float ToolWateringCanCostTime { get; }
+        public float ToolHandCostTime { get; }
+        
+    }
+
+    public static readonly Dictionary<int, ILvBase> LvDict = new()
+    {
+        {1, new Lv1()},
+        {2, new Lv2()},
+        {3, new Lv3()},
+    };
+
+    private class Lv1 : ILvBase
+    {
+        public float ToolSeedCostTime => 0.2f;
+        public float ToolShovelCostTime => 0.5f;
+        public float ToolWateringCanCostTime => 0.3f;
+        public float ToolHandCostTime => 0.2f;
+    }
+
+    private class Lv2 : ILvBase
+    {
+        public float ToolSeedCostTime => 0.1f;
+        public float ToolShovelCostTime => 0.3f;
+        public float ToolWateringCanCostTime => 0.2f;
+        public float ToolHandCostTime => 0.1f;
+    }
+
+    private class Lv3 : ILvBase
+    {
+        public float ToolSeedCostTime => 0.05f;
+        public float ToolShovelCostTime => 0.15f;
+        public float ToolWateringCanCostTime => 0.1f;
+        public float ToolHandCostTime => 0.05f;
+    }
+    
+    #endregion
 }

@@ -7,11 +7,11 @@ namespace Game.Tools
     // 锄头工具
     public class ToolShovel : ITool
     {
-        public string Name => "Shovel";
-        public float CostHours => 0.5f;
+        public string Name => ItemNameCollections.Shovel;
+        public float CostHours => Global.ToolShovelCostTime;
         public float CdTime { get; set; } = Config.CdToolShovel;
         public float InitCdTime => Config.CdToolShovel;
-        public int ToolScope => PowerUpSystem.IsPowerUpUnlocked[ItemNameCollections.Shovel] ? 2 : 1;
+        public int ToolScope => Global.Level;
 
         public bool Selected()
         {

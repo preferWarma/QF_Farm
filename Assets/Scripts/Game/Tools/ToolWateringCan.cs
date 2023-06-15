@@ -6,11 +6,11 @@ namespace Game.Tools
 {
     public class ToolWateringCan : ITool
     {
-        public string Name => "WateringCan";
-        public float CostHours => 0.2f;
+        public string Name => ItemNameCollections.WateringCan;
+        public float CostHours => Global.ToolWateringCanCostTime;
         public float CdTime { get; set; } = Config.CdToolWateringCan;
         public float InitCdTime => Config.CdToolWateringCan;
-        public int ToolScope => PowerUpSystem.IsPowerUpUnlocked[ItemNameCollections.WateringCan] ? 2 : 1;
+        public int ToolScope => Global.Level;
         public bool Selected()
         {
             return Global.CurrentTool.Value.Name == Name;

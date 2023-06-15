@@ -9,11 +9,11 @@ namespace Game.Tools
 {
     public class ToolSeed : ITool, IController
     {
-        public string Name => "Seed";
-        public float CostHours => 0.2f;
+        public string Name => ItemNameCollections.Seed;
+        public float CostHours => Global.ToolSeedCostTime;
         public float CdTime { get; set; } = Config.CdToolSeed;
         public float InitCdTime => Config.CdToolSeed;
-        public int ToolScope => PowerUpSystem.IsPowerUpUnlocked[ItemNameCollections.Seed] ? 2 : 1;
+        public int ToolScope => Global.Level;
         public Item Item { get; set; }  // 与背包中的物品对应
         
 

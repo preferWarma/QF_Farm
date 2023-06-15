@@ -31,8 +31,8 @@
         public void OnUnlock()
         {
             UnLocked = true;
-            PowerUpSystem.IntensifiedToday.Value = true;
             _onUnlock?.Invoke(this);
+            PowerUpSystem.IntensifiedToday.Value = true;
         }
 
         #region 链式封装

@@ -33,6 +33,13 @@ public class Global : Architecture<Global>, ISaveWithJson
     public static bool HasComputer;    // 是否拥有电脑
     public static int DailyCost = Config.InitDailyCost; // 每日花费
     
+    public static int Level = 1; // 工具强化等级
+
+    public static float ToolHandCostTime => Config.LvDict[Level].ToolHandCostTime; // 工具手操作时间
+    public static float ToolShovelCostTime => Config.LvDict[Level].ToolShovelCostTime; // 工具铲子操作时间
+    public static float ToolWateringCanCostTime => Config.LvDict[Level].ToolWateringCanCostTime; // 工具水壶操作时间
+    public static float ToolSeedCostTime => Config.LvDict[Level].ToolSeedCostTime; // 工具种子操作时间
+    
     [Header("事件相关")]
     public static readonly EasyEvent<IPlant> OnPlantHarvest = new(); // 采摘植物事件
     public static readonly EasyEvent<Challenge> OnChallengeFinish = new(); // 挑战完成事件
@@ -88,11 +95,11 @@ public class Global : Architecture<Global>, ISaveWithJson
         public int BeanCount;
         public int Money;
         public bool HasComputer;
+        public int Level;
         public bool CanShowRadishSeed;
         public bool CanShowPotatoSeed;
         public bool CanShowTomatoSeed;
         public bool CanShowBeanSeed;
-        
     }
     
     public void SaveWithJson()
@@ -108,10 +115,11 @@ public class Global : Architecture<Global>, ISaveWithJson
             BeanCount = BeanCount.Value,
             Money = Money.Value,
             HasComputer = HasComputer,
-            CanShowRadishSeed = UIShop.CanShowRadishSeed,
-            CanShowPotatoSeed = UIShop.CanShowPotatoSeed,
-            CanShowTomatoSeed = UIShop.CanShowTomatoSeed,
-            CanShowBeanSeed = UIShop.CanShowBeanSeed,
+            Level = Level,
+            CanShowRadishSeed = UIShop.CanShowRadishSeed.Value,
+            CanShowPotatoSeed = UIShop.CanShowPotatoSeed.Value,
+            CanShowTomatoSeed = UIShop.CanShowTomatoSeed.Value,
+            CanShowBeanSeed = UIShop.CanShowBeanSeed.Value,
         };
         SaveManager.SaveWithJson(SAVE_FILE_NAME, saveData);
     }
@@ -129,6 +137,7 @@ public class Global : Architecture<Global>, ISaveWithJson
         BeanCount.Value = saveData.BeanCount;
         Money.SetValueWithoutEvent(saveData.Money);
         HasComputer = saveData.HasComputer;
+        Level = saveData.Level;
         UIShop.CanShowRadishSeed.Value = saveData.CanShowRadishSeed;
         UIShop.CanShowPotatoSeed.Value = saveData.CanShowPotatoSeed;
         UIShop.CanShowTomatoSeed.Value = saveData.CanShowTomatoSeed;
@@ -146,6 +155,7 @@ public class Global : Architecture<Global>, ISaveWithJson
         TomatoCount.Value = 0;
         BeanCount.Value = 0;
         HasComputer = false;
+        Level = 1;
         UIShop.CanShowRadishSeed.Value = false;
         UIShop.CanShowPotatoSeed.Value = false;
         UIShop.CanShowTomatoSeed.Value = false;

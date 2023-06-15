@@ -10,11 +10,11 @@ namespace Game.Tools
 {
     public class ToolHand : ITool
     {
-        public string Name => "Hand";
-        public float CostHours => 0.1f;
+        public string Name => ItemNameCollections.Hand;
+        public float CostHours => Global.ToolHandCostTime;
         public float CdTime { get; set; } = Config.CdToolHand;
         public float InitCdTime => Config.CdToolHand;
-        public int ToolScope => PowerUpSystem.IsPowerUpUnlocked[ItemNameCollections.Hand] ? 2 : 1;
+        public int ToolScope => Global.Level;
         
         public bool Selected()
         {

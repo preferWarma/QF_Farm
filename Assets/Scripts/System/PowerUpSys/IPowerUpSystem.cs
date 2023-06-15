@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.SoilSys;
 using Game;
+using Game.UI;
 using Lyf.SaveSystem;
 using QFramework;
 using UnityEngine;
@@ -15,12 +16,8 @@ namespace System.PowerUpSys
     
     public class PowerUpSystem : AbstractSystem, IPowerUpSystem
     {
-        public static Dictionary<string, bool> IsPowerUpUnlocked = new() // 强化项是否解锁
+        private static Dictionary<string, bool> _isPowerUpUnlocked = new() // 强化项是否解锁
         {
-            {ItemNameCollections.WateringCan, false},
-            {ItemNameCollections.Shovel, false},
-            {ItemNameCollections.Hand, false},
-            {ItemNameCollections.Seed, false},
             {ItemNameCollections.Soil5X5, false},
             {ItemNameCollections.Soil6X6, false},
             {ItemNameCollections.Soil7X7, false},
@@ -48,64 +45,37 @@ namespace System.PowerUpSys
             return up;
         }
         
-        // 工具升级
+        // 工具范围升级
         private void ToolPowerUp()
         {
-            // 花洒强化
-            Add(new PowerUp().WithKey("1")
-                .WithPrice(10)
-                .WithTitle("花洒强化")
-                .WithDescription("花洒使用范围+1")
+            Add(new PowerUp().WithKey("Tool_lv2")
+                .WithPrice(1000)
+                .WithTitle("工具lv2")
+                .WithDescription("工具消耗减少,使用范围+1")
                 .SetOnUnlock(up =>
                 {
-                    IsPowerUpUnlocked[ItemNameCollections.WateringCan] = true;
+                    Global.Level = 2;
                     Global.Money.Value -= up.Price;
                     AudioController.Instance.Sfx_Trade.Play();
+                    UIMessageQueue.Push("操作升级到lv2");
                 })
-                .SetCondition(up => !IsPowerUpUnlocked[ItemNameCollections.WateringCan] && Global.Money.Value >= up.Price)
+                .SetCondition(up => Global.Level == 1 && Global.Money.Value >= up.Price)
             );
             
-            // 铲子强化
-            Add(new PowerUp().WithKey("2")
-                .WithPrice(20)
-                .WithTitle("锄头强化")
-                .WithDescription("锄头使用范围+1")
+            Add(new PowerUp().WithKey("Tool_lv3")
+                .WithPrice(2000)
+                .WithTitle("工具lv3")
+                .WithDescription("工具消耗大幅减少,使用范围+1")
                 .SetOnUnlock(up =>
                 {
-                    IsPowerUpUnlocked[ItemNameCollections.Shovel] = true;
+                    Global.Level = 3;
                     Global.Money.Value -= up.Price;
                     AudioController.Instance.Sfx_Trade.Play();
+                    UIMessageQueue.Push("操作升级到lv3");
                 })
-                .SetCondition(up => !IsPowerUpUnlocked[ItemNameCollections.Shovel] && Global.Money.Value >= up.Price)
+                .SetCondition(up => Global.Level == 2 && Global.Money.Value >= up.Price)
             );
-            
-            // 手强化
-            Add(new PowerUp().WithKey("3")
-                .WithPrice(30)
-                .WithTitle("手强化")
-                .WithDescription("手使用范围+1")
-                .SetOnUnlock(up =>
-                {
-                    IsPowerUpUnlocked[ItemNameCollections.Hand] = true;
-                    Global.Money.Value -= up.Price;
-                    AudioController.Instance.Sfx_Trade.Play();
-                })
-                .SetCondition(up => !IsPowerUpUnlocked[ItemNameCollections.Hand] && Global.Money.Value >= up.Price)
-            );
-            
-            // 种子强化
-            Add(new PowerUp().WithKey("4")
-                .WithPrice(40)
-                .WithTitle("种子强化")
-                .WithDescription("种子使用范围+1")
-                .SetOnUnlock(up =>
-                {
-                    IsPowerUpUnlocked[ItemNameCollections.Seed] = true;
-                    Global.Money.Value -= up.Price;
-                    AudioController.Instance.Sfx_Trade.Play();
-                })
-                .SetCondition(up => !IsPowerUpUnlocked[ItemNameCollections.Seed] && Global.Money.Value >= up.Price)
-            );
+
         }
 
         // 土地升级
@@ -121,18 +91,18 @@ namespace System.PowerUpSys
                     AudioController.Instance.Sfx_Trade.Play();
                     Global.DailyCost += addDailyCost;
                     Global.Interface.GetSystem<ISoilSystem>().ResetSoil(size, size);
-                    IsPowerUpUnlocked[ItemNameCollections.GetSoilNameBySize(size)] = true;
+                    _isPowerUpUnlocked[ItemNameCollections.GetSoilNameBySize(size)] = true;
                 })
                 .SetCondition(up =>
                 {
                     // 解锁小土地后才能解锁大土地
                     for (var i = 5; i < size; i++)
                     {
-                        if (!IsPowerUpUnlocked[ItemNameCollections.GetSoilNameBySize(i)])
+                        if (!_isPowerUpUnlocked[ItemNameCollections.GetSoilNameBySize(i)])
                             return false;
                     }
 
-                    return !IsPowerUpUnlocked[ItemNameCollections.GetSoilNameBySize(size)] &&
+                    return !_isPowerUpUnlocked[ItemNameCollections.GetSoilNameBySize(size)] &&
                            Global.Money.Value >= up.Price;
                 })
             );
@@ -150,7 +120,7 @@ namespace System.PowerUpSys
         {
             var saveData = new SaveDataCollection
             {
-                IsPowerUpUnlocked = IsPowerUpUnlocked
+                IsPowerUpUnlocked = _isPowerUpUnlocked
             };
             SaveManager.SaveWithJson(SAVE_FILE_NAME, saveData);
         }
@@ -159,17 +129,13 @@ namespace System.PowerUpSys
         {
             var saveData = SaveManager.LoadWithJson<SaveDataCollection>(SAVE_FILE_NAME);
             if (saveData == null) return;
-            IsPowerUpUnlocked = saveData.IsPowerUpUnlocked;
+            _isPowerUpUnlocked = saveData.IsPowerUpUnlocked;
         }
 
         public void ResetDefaultData()
         {
-            IsPowerUpUnlocked = new Dictionary<string, bool>
+            _isPowerUpUnlocked = new Dictionary<string, bool>
             {
-                {ItemNameCollections.WateringCan, false},
-                {ItemNameCollections.Shovel, false},
-                {ItemNameCollections.Hand, false},
-                {ItemNameCollections.Seed, false},
                 {ItemNameCollections.Soil5X5, false},
                 {ItemNameCollections.Soil6X6, false},
                 {ItemNameCollections.Soil7X7, false},
