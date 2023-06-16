@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.SoilSys;
 using DG.Tweening;
 using QFramework;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Game.Plants
 {
@@ -18,10 +20,13 @@ namespace Game.Plants
 			get => mSoilSystem.SoilGrid[X, Y].PlantSate;
 			private set => mSoilSystem.SoilGrid[X, Y].PlantSate = value;
 		}
-
-		public string PlantName => plantName;
+		
+		[Range(0,1)] public float aliveRate = 1;	// 存活率
 		[SerializeField] public string plantName = "未知植物";	// 供外部设置
-		public List<PlantStateInfo> stateInfos = new ();
+		public string PlantName => plantName;
+		public List<PlantStateInfo> stateInfos = new ();	// 植物各阶段生长状态
+		public RipeCountWeight ripeCountWeight = new RipeCountWeight(1,1);	// 成熟数量
+		public SoilData SoilData => mSoilSystem.SoilGrid[X, Y];	// 对应的土壤数据
 
 		private int mCurrentStateDay	// 当前阶段已经生长的天数
 		{
@@ -70,9 +75,13 @@ namespace Game.Plants
 				var curIdx = stateInfos.IndexOf(currentStateInfo);
 				SetState(stateInfos[curIdx + 1].sate);
 				mCurrentStateDay = 0;	// 重置生长天数
-				if (stateInfos[curIdx + 1].sate == PlantSates.Ripe)	// 纪录成熟的日期
+				
+				if (stateInfos[curIdx + 1].sate == PlantSates.Ripe)	// 成熟的时候需要做更多的事情
 				{
 					RipeDay = Global.Days.Value;
+					var weight = Random.Range(ripeCountWeight.minCount, ripeCountWeight.maxCount + 1);
+					soilData.RipeCount = weight;
+					Debug.Log($"{name}成熟了, 有" + weight + "个");
 				}
 			}
 		}
@@ -101,6 +110,19 @@ namespace Game.Plants
 			mSpriteRenderer = null;
 			mGridController = null;
 			mSoilSystem = null;
+		}
+	}
+
+	[Serializable]
+	public class RipeCountWeight
+	{
+		public int minCount;
+		public int maxCount;
+
+		public RipeCountWeight(int minCount, int maxCount)
+		{
+			this.minCount = minCount;
+			this.maxCount = maxCount;
 		}
 	}
 }

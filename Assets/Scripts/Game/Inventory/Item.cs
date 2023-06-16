@@ -15,6 +15,9 @@ namespace Game.Inventory
         public BindableProperty<int> Count; // 数量
         public bool canStack; // 是否可堆叠
 
+        [Tooltip("该物品对应的背包槽")]
+        public UISlot slot;
+        
         [Header("工具属性")]
         public ITool Tool; // 该物品对应的工具
         public bool isPlant; // 是否是植物

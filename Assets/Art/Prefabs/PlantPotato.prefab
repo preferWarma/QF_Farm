@@ -103,6 +103,7 @@ MonoBehaviour:
   ScriptsFolder: Assets/Scripts/Game
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
+  aliveRate: 1
   plantName: Potato
   stateInfos:
   - sate: 0
@@ -125,6 +126,9 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: b3c6b2adff7e63a4ea98a67e603e5b66, type: 3}
     growDay: 0
     showSoilDig: 0
+  ripeCountWeight:
+    minCount: 1
+    maxCount: 2
 --- !u!61 &-3198009228430771475
 BoxCollider2D:
   m_ObjectHideFlags: 0

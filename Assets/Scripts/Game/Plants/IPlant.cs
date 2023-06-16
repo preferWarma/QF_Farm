@@ -12,6 +12,8 @@ namespace Game.Plants
         PlantSates Sate { get; }
         int RipeDay { get; }
         string PlantName { get; }
+        SoilData SoilData { get; }
+        
         void SetState(PlantSates newSate);
         void Grow(SoilData soilData);
     }

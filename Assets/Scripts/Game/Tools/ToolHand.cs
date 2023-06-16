@@ -50,6 +50,8 @@ namespace Game.Tools
             CameraController.Shake(ShakeType.Middle);
         }
 
+        #region 收割动画相关
+        
         private void HarvestAnimation(ToolNeedData toolNeedData, string plantName) // 收割动画
         {
             var toolBar = Object.FindObjectOfType<UIToolBar>();
@@ -89,5 +91,7 @@ namespace Game.Tools
                 .Append(self.transform.DOMove(pos1, 0.3f).SetEase(Ease.OutCubic))
                 .Append(self.transform.DOMove(targetPos, 0.2f).SetEase(Ease.InCubic).OnComplete(self.DestroyGameObj));
         }
+        
+        #endregion
     }
 }

@@ -50,13 +50,15 @@ namespace Game.Inventory
             else
             {
                 ItemData = newItemData;
+                newItemData.slot = this; //将背包槽和背包数据相互引用, 用于修复物品数量显示的bug
+                
                 icon.sprite = SpriteLoader?.Invoke(newItemData.iconName);
                 shotCut.text = newShotCut;
 
                 if (newItemData.canStack)
                 {
                     // 注册数量显示, 使物品数量发生变化时, UI也会发生变化
-                    newItemData.Count.RegisterWithInitValue(cnt => { count.text = cnt.ToString(); })
+                    newItemData.Count.RegisterWithInitValue(cnt => { newItemData.slot.count.text = cnt.ToString(); })
                         .UnRegisterWhenGameObjectDestroyed(this);
                 }
             }
@@ -98,8 +100,8 @@ namespace Game.Inventory
                     if (slot == this) return;   // 如果拖拽到了自己身上, 则不做任何操作
                     // 交换两个背包槽的数据
                     var temp = slot.ItemData;
-                    slot.SetSlotData(ItemData, slot.shotCut.text);
-                    SetSlotData(temp, shotCut.text);
+                    slot.SetSlotData(ItemData, shotCut.text);
+                    SetSlotData(temp, slot.shotCut.text);
                     
                     slot.select.Show(); // 交换后, 选中交换到的背包槽
                     select.Hide();  // 同时隐藏当前开始的选中框

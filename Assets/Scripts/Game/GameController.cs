@@ -97,24 +97,24 @@ namespace Game
                     case ItemNameCollections.Radish:
                         ChallengeSystem.HarvestRadishCountInCurrentDay.Value++;
                         ChallengeSystem.TotalRadishCount.Value++;
-                        this.SendCommand(new AddItemCountCommand(ItemNameCollections.Radish, 1));
+                        this.SendCommand(new AddItemCountCommand(ItemNameCollections.Radish, plant.SoilData.RipeCount));
                         break;
                     case ItemNameCollections.Pumpkin:
                         ChallengeSystem.TotalPumpkinCount.Value++;
                         ChallengeSystem.HarvestPumpkinCountInCurrentDay.Value++;
-                        this.SendCommand(new AddItemCountCommand(ItemNameCollections.Pumpkin, 1));
+                        this.SendCommand(new AddItemCountCommand(ItemNameCollections.Pumpkin, plant.SoilData.RipeCount));
                         break;
                     case ItemNameCollections.Potato:
                         ChallengeSystem.HarvestPotatoCountInCurrentDay.Value++;
-                        this.SendCommand(new AddItemCountCommand(ItemNameCollections.Potato, 1));
+                        this.SendCommand(new AddItemCountCommand(ItemNameCollections.Potato, plant.SoilData.RipeCount));
                         break;
                     case ItemNameCollections.Tomato:
                         ChallengeSystem.HarvestTomatoInCurrentDay.Value++;
-                        this.SendCommand(new AddItemCountCommand(ItemNameCollections.Tomato, 1));
+                        this.SendCommand(new AddItemCountCommand(ItemNameCollections.Tomato, plant.SoilData.RipeCount));
                         break;
                     case ItemNameCollections.Bean:
                         ChallengeSystem.HarvestBeanInCurrentDay.Value++;
-                        this.SendCommand(new AddItemCountCommand(ItemNameCollections.Bean, 1));
+                        this.SendCommand(new AddItemCountCommand(ItemNameCollections.Bean, plant.SoilData.RipeCount));
                         break;
                 }
 
