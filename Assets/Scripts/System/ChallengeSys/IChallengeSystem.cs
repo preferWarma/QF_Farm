@@ -20,8 +20,6 @@ namespace System.ChallengeSys
     public class ChallengeSystem : AbstractSystem, IChallengeSystem
     {
         [Tooltip("挑战要求相关")] [Header("和当日有关")]
-        public static readonly BindableProperty<int> RipeAndHarvestCountInCurrentDay = new(); // 当天成熟并采摘的植物数量
-
         public static readonly BindableProperty<int> HarvestCountInCurrentDay = new(); // 当天采摘的植物数量
         public static readonly BindableProperty<int> HarvestPumpkinCountInCurrentDay = new(); // 当天采摘的果实数量
         public static readonly BindableProperty<int> HarvestRadishCountInCurrentDay = new(); // 当天采摘的萝卜数量
@@ -31,11 +29,13 @@ namespace System.ChallengeSys
 
         [Header("和累计有关")]
         public static readonly BindableProperty<int> TotalFruitCount = new(); // 累计采摘的果实数量
+        public static readonly BindableProperty<int> TotalPumpkinCount = new();
+        public static readonly BindableProperty<int> TotalRadishCount = new(); 
+        public static readonly BindableProperty<int> TotalPotatoCount = new(); 
+        public static readonly BindableProperty<int> TotalTomatoCount = new(); 
+        public static readonly BindableProperty<int> TotalBeanCount = new();
 
-        public static readonly BindableProperty<int> TotalPumpkinCount = new(); // 累计采摘的南瓜数量
-        public static readonly BindableProperty<int> TotalRadishCount = new(); // 累计采摘的胡萝卜数量
-
-        [Tooltip("挑战相关")] public List<Challenge> Challenges { get; } = new(); // 挑战列表
+        [Tooltip("挑战列表")] public List<Challenge> Challenges { get; } = new(); // 挑战列表
         public List<Challenge> ActiveChallenges { get; } = new(); // 激活的挑战列表
         public List<Challenge> FinishedChallenges { get; } = new(); // 完成的挑战列表
 
@@ -184,7 +184,6 @@ namespace System.ChallengeSys
         {
             Global.Days.Register(_ =>
             {
-                RipeAndHarvestCountInCurrentDay.Value = 0; // 每天开始时，重置当天成熟且采摘的水果数量
                 HarvestCountInCurrentDay.Value = 0; // 每天开始时，重置当天采摘的水果数量
                 HarvestRadishCountInCurrentDay.Value = 0; // 每天开始时，重置当天采摘的萝卜数量
                 HarvestPotatoCountInCurrentDay.Value = 0; // 每天开始时，重置当天采摘的土豆数量
@@ -204,6 +203,9 @@ namespace System.ChallengeSys
             public int TotalFruitCount;
             public int TotalPumpkinCount;
             public int TotalRadishCount;
+            public int TotalPotatoCount;
+            public int TotalTomatoCount;
+            public int TotalBeanCount;
         }
         
         public void SaveWithJson()
@@ -214,6 +216,9 @@ namespace System.ChallengeSys
                 TotalFruitCount = TotalFruitCount.Value,
                 TotalPumpkinCount = TotalPumpkinCount.Value,
                 TotalRadishCount = TotalRadishCount.Value,
+                TotalPotatoCount = TotalPotatoCount.Value,
+                TotalTomatoCount = TotalTomatoCount.Value,
+                TotalBeanCount = TotalBeanCount.Value,
             };
             foreach (var challenge in Challenges)
             {
@@ -235,6 +240,8 @@ namespace System.ChallengeSys
             TotalFruitCount.SetValueWithoutEvent(saveData.TotalFruitCount);
             TotalPumpkinCount.SetValueWithoutEvent(saveData.TotalPumpkinCount);
             TotalRadishCount.SetValueWithoutEvent(saveData.TotalRadishCount);
+            TotalPotatoCount.SetValueWithoutEvent(saveData.TotalPotatoCount);
+            TotalTomatoCount.SetValueWithoutEvent(saveData.TotalTomatoCount);
 
             foreach (var challenge in Challenges)
             {
@@ -261,6 +268,9 @@ namespace System.ChallengeSys
             TotalFruitCount.SetValueWithoutEvent(0);
             TotalPumpkinCount.SetValueWithoutEvent(0);
             TotalRadishCount.SetValueWithoutEvent(0);
+            TotalPotatoCount.SetValueWithoutEvent(0);
+            TotalTomatoCount.SetValueWithoutEvent(0);
+            TotalBeanCount.SetValueWithoutEvent(0);
         }
 
         #endregion

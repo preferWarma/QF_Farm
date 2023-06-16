@@ -103,7 +103,7 @@ MonoBehaviour:
   ScriptsFolder: Assets/Scripts/Game
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
-  aliveRate: 1
+  aliveRate: 0.5
   plantName: Bean
   stateInfos:
   - sate: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
     showSoilDig: 0
   ripeCountWeight:
     minCount: 1
-    maxCount: 2
+    maxCount: 3
 --- !u!61 &-1467263925569491127
 BoxCollider2D:
   m_ObjectHideFlags: 0

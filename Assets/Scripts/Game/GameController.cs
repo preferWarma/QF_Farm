@@ -106,21 +106,19 @@ namespace Game
                         break;
                     case ItemNameCollections.Potato:
                         ChallengeSystem.HarvestPotatoCountInCurrentDay.Value++;
+                        ChallengeSystem.TotalPotatoCount.Value++;
                         this.SendCommand(new AddItemCountCommand(ItemNameCollections.Potato, plant.SoilData.RipeCount));
                         break;
                     case ItemNameCollections.Tomato:
                         ChallengeSystem.HarvestTomatoInCurrentDay.Value++;
+                        ChallengeSystem.TotalTomatoCount.Value++; 
                         this.SendCommand(new AddItemCountCommand(ItemNameCollections.Tomato, plant.SoilData.RipeCount));
                         break;
                     case ItemNameCollections.Bean:
                         ChallengeSystem.HarvestBeanInCurrentDay.Value++;
+                        ChallengeSystem.TotalBeanCount.Value++;
                         this.SendCommand(new AddItemCountCommand(ItemNameCollections.Bean, plant.SoilData.RipeCount));
                         break;
-                }
-
-                if (plant.RipeDay == Global.Days.Value) // 如果是当天成熟的植物被采摘
-                {
-                    ChallengeSystem.RipeAndHarvestCountInCurrentDay.Value++;
                 }
             }).UnRegisterWhenGameObjectDestroyed(this);
         }

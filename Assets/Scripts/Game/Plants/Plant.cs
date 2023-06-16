@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.SoilSys;
 using DG.Tweening;
+using Game.UI;
 using QFramework;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -79,9 +80,16 @@ namespace Game.Plants
 				if (stateInfos[curIdx + 1].sate == PlantSates.Ripe)	// 成熟的时候需要做更多的事情
 				{
 					RipeDay = Global.Days.Value;
-					var weight = Random.Range(ripeCountWeight.minCount, ripeCountWeight.maxCount + 1);
-					soilData.RipeCount = weight;
-					Debug.Log($"{name}成熟了, 有" + weight + "个");
+
+					if (Random.Range(0f, 1.0f) > aliveRate)	// 意外死亡
+					{
+						UIMessageQueue.Push(GetComponent<SpriteRenderer>().sprite, "植物意外死亡");
+						RemoveSelf();
+						return;
+					}
+					
+					var ripeCount = Random.Range(ripeCountWeight.minCount, ripeCountWeight.maxCount + 1);
+					soilData.RipeCount = ripeCount;
 				}
 			}
 		}
@@ -98,6 +106,14 @@ namespace Game.Plants
 				this.ClearSoilDigState(mGridController);
 			}
 			mSpriteRenderer.sprite = newStateInfo.sprite;
+		}
+
+		public void RemoveSelf()
+		{
+			Global.GridController.ShowGrid[X, Y] = null;
+			Destroy(gameObject);
+			Global.GridController.Watering.SetTile(new Vector3Int(X, Y), null);
+			PlantController.Instance.PlantGrid[X, Y] = null;
 		}
 
 		public IArchitecture GetArchitecture()

@@ -103,7 +103,7 @@ MonoBehaviour:
   ScriptsFolder: Assets/Scripts/Game
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
-  aliveRate: 1
+  aliveRate: 0.6
   plantName: Tomato
   stateInfos:
   - sate: 0
