@@ -95,28 +95,28 @@ namespace Game
                 {
                     // 根据植物类型增加不同的水果数量, 以及完成对应的挑战
                     case ItemNameCollections.Radish:
-                        ChallengeSystem.HarvestRadishCountInCurrentDay.Value++;
-                        ChallengeSystem.TotalRadishCount.Value++;
+                        ChallengeSystem.HarvestRadishCountInCurrentDay.Value += plant.SoilData.RipeCount;
+                        ChallengeSystem.TotalRadishCount.Value += plant.SoilData.RipeCount;
                         this.SendCommand(new AddItemCountCommand(ItemNameCollections.Radish, plant.SoilData.RipeCount));
                         break;
                     case ItemNameCollections.Pumpkin:
-                        ChallengeSystem.TotalPumpkinCount.Value++;
-                        ChallengeSystem.HarvestPumpkinCountInCurrentDay.Value++;
+                        ChallengeSystem.TotalPumpkinCount.Value += plant.SoilData.RipeCount;
+                        ChallengeSystem.HarvestPumpkinCountInCurrentDay.Value += plant.SoilData.RipeCount;
                         this.SendCommand(new AddItemCountCommand(ItemNameCollections.Pumpkin, plant.SoilData.RipeCount));
                         break;
                     case ItemNameCollections.Potato:
-                        ChallengeSystem.HarvestPotatoCountInCurrentDay.Value++;
-                        ChallengeSystem.TotalPotatoCount.Value++;
+                        ChallengeSystem.HarvestPotatoCountInCurrentDay.Value += plant.SoilData.RipeCount;
+                        ChallengeSystem.TotalPotatoCount.Value += plant.SoilData.RipeCount;
                         this.SendCommand(new AddItemCountCommand(ItemNameCollections.Potato, plant.SoilData.RipeCount));
                         break;
                     case ItemNameCollections.Tomato:
-                        ChallengeSystem.HarvestTomatoInCurrentDay.Value++;
-                        ChallengeSystem.TotalTomatoCount.Value++; 
+                        ChallengeSystem.HarvestTomatoInCurrentDay.Value += plant.SoilData.RipeCount;
+                        ChallengeSystem.TotalTomatoCount.Value += plant.SoilData.RipeCount;
                         this.SendCommand(new AddItemCountCommand(ItemNameCollections.Tomato, plant.SoilData.RipeCount));
                         break;
                     case ItemNameCollections.Bean:
-                        ChallengeSystem.HarvestBeanInCurrentDay.Value++;
-                        ChallengeSystem.TotalBeanCount.Value++;
+                        ChallengeSystem.HarvestBeanInCurrentDay.Value += plant.SoilData.RipeCount;
+                        ChallengeSystem.TotalBeanCount.Value += plant.SoilData.RipeCount;
                         this.SendCommand(new AddItemCountCommand(ItemNameCollections.Bean, plant.SoilData.RipeCount));
                         break;
                 }

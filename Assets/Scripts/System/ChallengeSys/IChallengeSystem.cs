@@ -59,10 +59,51 @@ namespace System.ChallengeSys
 
             #region 挑战列表添加
 
-            Challenges.Add(new GenericChallenge().SetName("收获一个南瓜")
+            #region 南瓜
+            Challenges.Add(new GenericChallenge().SetName("收获1个南瓜")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(challenge =>
-                    challenge.StartDate != Global.Days.Value && HarvestPumpkinCountInCurrentDay.Value >= 1)
+                    challenge.StartDate != Global.Days.Value && Global.PumpkinCount.Value >= 1)
+                .OnFinish(challenge =>
+                {
+                    UIMessageQueue.Push($"完成挑战:{challenge.Name}, <color=yellow>金币+100</color>");
+                    Global.Money.Value += 100;
+                }));
+            
+            Challenges.Add(new GenericChallenge().SetName("收获10个南瓜")
+                .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
+                .CheckFinish(challenge =>
+                    challenge.StartDate != Global.Days.Value && Global.PumpkinCount.Value >= 10)
+                .OnFinish(challenge =>
+                {
+                    UIMessageQueue.Push($"完成挑战:{challenge.Name}, <color=yellow>金币+100</color>");
+                    Global.Money.Value += 100;
+                }));
+            
+            Challenges.Add(new GenericChallenge().SetName("收获20个南瓜")
+                .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
+                .CheckFinish(challenge =>
+                    challenge.StartDate != Global.Days.Value && Global.PumpkinCount.Value >= 20)
+                .OnFinish(challenge =>
+                {
+                    UIMessageQueue.Push($"完成挑战:{challenge.Name}, <color=yellow>金币+100</color>");
+                    Global.Money.Value += 100;
+                }));
+            
+            Challenges.Add(new GenericChallenge().SetName("收获30个南瓜")
+                .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
+                .CheckFinish(challenge =>
+                    challenge.StartDate != Global.Days.Value && Global.PumpkinCount.Value >= 30)
+                .OnFinish(challenge =>
+                {
+                    UIMessageQueue.Push($"完成挑战:{challenge.Name}, <color=yellow>金币+100</color>");
+                    Global.Money.Value += 100;
+                }));
+            
+            Challenges.Add(new GenericChallenge().SetName("收获50个南瓜")
+                .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
+                .CheckFinish(challenge =>
+                    challenge.StartDate != Global.Days.Value && Global.PumpkinCount.Value >= 50)
                 .OnFinish(challenge =>
                 {
                     UIShop.CanShowRadishSeed.Value = true;
@@ -71,6 +112,8 @@ namespace System.ChallengeSys
                     UIMessageQueue.Push("已解锁<color=orange>胡萝卜种子</color>, 请前往商店查看");
                 }));
 
+            #endregion
+            
             Challenges.Add(new GenericChallenge().SetName("收获一个萝卜")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(challenge =>
@@ -242,6 +285,7 @@ namespace System.ChallengeSys
             TotalRadishCount.SetValueWithoutEvent(saveData.TotalRadishCount);
             TotalPotatoCount.SetValueWithoutEvent(saveData.TotalPotatoCount);
             TotalTomatoCount.SetValueWithoutEvent(saveData.TotalTomatoCount);
+            TotalBeanCount.SetValueWithoutEvent(saveData.TotalBeanCount);
 
             foreach (var challenge in Challenges)
             {

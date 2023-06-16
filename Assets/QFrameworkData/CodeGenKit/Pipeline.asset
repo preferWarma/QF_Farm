@@ -19,25 +19,59 @@ MonoBehaviour:
     From: 0
     NameToFullName: []
     BindInfos:
-    - TypeName: UnityEngine.UI.Text
-      PathToRoot: TextName
-      MemberName: TextName
-    - TypeName: UnityEngine.UI.Text
-      PathToRoot: Price
-      MemberName: Price
-    - TypeName: UnityEngine.UI.Text
-      PathToRoot: Description
-      MemberName: Description
+    - TypeName: RectTransform
+      PathToRoot: Scroll View/Viewport/BtnRoot
+      MemberName: BtnRoot
+    - TypeName: Game.Shop.ShopItem
+      PathToRoot: Scroll View/Viewport/BtnRoot/ShopItemTemplate
+      MemberName: ShopItemTemplate
     - TypeName: UnityEngine.UI.Button
-      PathToRoot: Button
-      MemberName: Button
-    ScriptsFolder: Assets/Scripts/System/PowerUpSys
-    ClassName: PowerUpItem
-    Namespace: System.PowerUpSys
-    MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace System.PowerUpSys\r\n{\r\n\tpublic
-      partial class PowerUpItem : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      PathToRoot: Scroll View/Viewport/BtnRoot/ShopItem_Computer/BtnBuyComputer
+      MemberName: BtnBuyComputer
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: Scroll View/Viewport/BtnRoot/ShopItem_PumpkinSeed/BtnBuyPumpkinSeed
+      MemberName: BtnBuyPumpkinSeed
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: Scroll View/Viewport/BtnRoot/ShopItem_RadishSeed/BtnBuyRadishSeed
+      MemberName: BtnBuyRadishSeed
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: Scroll View/Viewport/BtnRoot/ShopItem_PotatoSeed/BtnBuyPotatoSeed
+      MemberName: BtnBuyPotatoSeed
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: Scroll View/Viewport/BtnRoot/ShopItem_TomatoSeed/BtnBuyTomatoSeed
+      MemberName: BtnBuyTomatoSeed
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: Scroll View/Viewport/BtnRoot/ShopItem_BeanSeed/BtnBuyBeanSeed
+      MemberName: BtnBuyBeanSeed
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: Scroll View/Viewport/BtnRoot/ShopItem_Pumpkin/BtnSellPumpkin
+      MemberName: BtnSellPumpkin
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: Scroll View/Viewport/BtnRoot/ShopItem_Radish/BtnSellRadish
+      MemberName: BtnSellRadish
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: Scroll View/Viewport/BtnRoot/ShopItem_Potato/BtnSellPotato
+      MemberName: BtnSellPotato
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: Scroll View/Viewport/BtnRoot/ShopItem_Tomato/BtnSellTomato
+      MemberName: BtnSellTomato
+    - TypeName: UnityEngine.UI.Button
+      PathToRoot: Scroll View/Viewport/BtnRoot/ShopItem_Bean/BtnSellBean
+      MemberName: BtnSellBean
+    ScriptsFolder: Assets/Scripts/Game/UI
+    ClassName: UIShop
+    Namespace: Game.UI
+    MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game.UI\r\n{\r\n\tpublic
+      partial class UIShop : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:973879c6-542d-478c-ac7e-4a6e1798f745\r\nusing UnityEngine;\r\n\r\nnamespace
-      System.PowerUpSys\r\n{\r\n\tpublic partial class PowerUpItem\r\n\t{\r\n\r\n\t\tpublic
-      UnityEngine.UI.Text TextName;\r\n\r\n\t\tpublic UnityEngine.UI.Text Price;\r\n\r\n\t\tpublic
-      UnityEngine.UI.Text Description;\r\n\r\n\t\tpublic UnityEngine.UI.Button Button;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:017159b0-2c1e-40a6-b7e9-832fc545c33f\r\nusing UnityEngine;\r\n\r\nnamespace
+      Game.UI\r\n{\r\n\tpublic partial class UIShop\r\n\t{\r\n\r\n\t\tpublic RectTransform
+      BtnRoot;\r\n\r\n\t\tpublic Game.Shop.ShopItem ShopItemTemplate;\r\n\r\n\t\tpublic
+      UnityEngine.UI.Button BtnBuyComputer;\r\n\r\n\t\tpublic UnityEngine.UI.Button
+      BtnBuyPumpkinSeed;\r\n\r\n\t\tpublic UnityEngine.UI.Button BtnBuyRadishSeed;\r\n\r\n\t\tpublic
+      UnityEngine.UI.Button BtnBuyPotatoSeed;\r\n\r\n\t\tpublic UnityEngine.UI.Button
+      BtnBuyTomatoSeed;\r\n\r\n\t\tpublic UnityEngine.UI.Button BtnBuyBeanSeed;\r\n\r\n\t\tpublic
+      UnityEngine.UI.Button BtnSellPumpkin;\r\n\r\n\t\tpublic UnityEngine.UI.Button
+      BtnSellRadish;\r\n\r\n\t\tpublic UnityEngine.UI.Button BtnSellPotato;\r\n\r\n\t\tpublic
+      UnityEngine.UI.Button BtnSellTomato;\r\n\r\n\t\tpublic UnityEngine.UI.Button
+      BtnSellBean;\r\n\r\n\t}\r\n}\r\n"

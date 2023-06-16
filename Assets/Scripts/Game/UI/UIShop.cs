@@ -20,39 +20,69 @@ namespace Game.UI
 
 		private void Start()
 		{
-			// 注册购买植物种子按钮的方法
-			RegisterBuy(BtnBuyPumpkinSeed, Global.Money,ItemNameCollections.SeedPumpkin , 1);
-			RegisterBuy(BtnBuyRadishSeed, Global.Money, ItemNameCollections.SeedRadish, 2);
-			RegisterBuy(BtnBuyPotatoSeed, Global.Money, ItemNameCollections.SeedPotato, 3);
-			RegisterBuy(BtnBuyTomatoSeed, Global.Money, ItemNameCollections.SeedTomato, 4);
-			RegisterBuy(BtnBuyBeanSeed, Global.Money, ItemNameCollections.SeedBean, 5);
+			// 固定物品
 			RegisterBuy(BtnBuyComputer, Global.Money, ItemNameCollections.Computer, 500);
-			
-			// 注册出售植物按钮的方法
-			RegisterSell(BtnSellPumpkin, ItemNameCollections.Pumpkin, Global.Money, 2);
-			RegisterSell(BtnSellRadish, ItemNameCollections.Radish, Global.Money, 4);
-			RegisterSell(BtnSellPotato, ItemNameCollections.Potato, Global.Money, 6);
-			RegisterSell(BtnSellTomato, ItemNameCollections.Tomato, Global.Money, 8);
-			RegisterSell(BtnSellBean, ItemNameCollections.Bean, Global.Money, 10);
-			
-			// 买按钮的显示条件
-			SetBtnShowCondition(Global.Money, BtnBuyPumpkinSeed, money => money >= 1, CanShowPumpkinSeed);
-			SetBtnShowCondition(Global.Money, BtnBuyRadishSeed, money => money >= 2, CanShowRadishSeed);
-			SetBtnShowCondition(Global.Money, BtnBuyPotatoSeed, money => money >= 3, CanShowPotatoSeed);
-			SetBtnShowCondition(Global.Money, BtnBuyTomatoSeed, money => money >= 4, CanShowTomatoSeed);
-			SetBtnShowCondition(Global.Money, BtnBuyBeanSeed, money => money >= 5, CanShowBeanSeed);
 			SetBtnShowCondition(Global.Money, BtnBuyComputer, money => money >= 500,CanShowComputer);
 			
-			// 卖按钮的显示条件
-			SetBtnShowCondition(Global.PumpkinCount, BtnSellPumpkin, count => count > 0);
-			SetBtnShowCondition(Global.RadishCount, BtnSellRadish, count => count > 0);
-			SetBtnShowCondition(Global.PotatoCount, BtnSellPotato, count => count > 0);
-			SetBtnShowCondition(Global.TomatoCount, BtnSellTomato, count => count > 0);
-			SetBtnShowCondition(Global.BeanCount, BtnSellBean, count => count > 0);
+			// 购买型物品
+			CreateBuyItem("南瓜种子", ItemNameCollections.SeedPumpkin, 
+				6, "存活率90%,成熟时间4天\n成熟果实售价10元/个", CanShowPumpkinSeed);
+			CreateBuyItem("胡萝卜种子", ItemNameCollections.SeedRadish,
+				8, "存活率80%,成熟时间5天\n成熟果实售价12元/个", CanShowRadishSeed);
+			CreateBuyItem("土豆种子", ItemNameCollections.SeedPotato,
+				15, "存活率75%,成熟时间5天\n成熟果实售价30元/个", CanShowPotatoSeed);
+			CreateBuyItem("番茄种子", ItemNameCollections.SeedTomato,
+				20, "存活率60%,成熟时间5天\n成熟果实售价50元/个", CanShowTomatoSeed);
+			CreateBuyItem("豆荚种子", ItemNameCollections.SeedBean,
+				25, "存活率50%,成熟时间7天\n成熟果实售价100元/个", CanShowBeanSeed);
+			
+			// 出售型物品
+			CreateSellItem("南瓜", ItemNameCollections.Pumpkin, 10, "成熟果实售价10元/个", Global.PumpkinCount);
+			CreateSellItem("胡萝卜", ItemNameCollections.Radish, 12, "成熟果实售价12元/个", Global.RadishCount);
+			CreateSellItem("土豆", ItemNameCollections.Potato, 30, "成熟果实售价30元/个", Global.PotatoCount);
+			CreateSellItem("番茄", ItemNameCollections.Tomato, 50, "成熟果实售价50元/个", Global.TomatoCount);
+			CreateSellItem("豆荚", ItemNameCollections.Bean, 100, "成熟果实售价100元/个", Global.BeanCount);
 		}
 
-		#region 按钮逻辑注册
-
+		
+		/// <summary>
+		/// 创建购买型物品
+		/// </summary>
+		/// <param name="uiShowName">在UI上显示的名字</param>
+		/// <param name="itemName">物品名</param>
+		/// <param name="price">价格</param>
+		/// <param name="description">描述</param>
+		/// <param name="seedCanShow">是否可见</param>
+		private void CreateBuyItem(string uiShowName, string itemName, int price, string description, BindableProperty<bool> seedCanShow)
+		{
+			var item = ShopItemTemplate.InstantiateWithParent(BtnRoot.transform);
+			item.Icon.sprite = ResController.Instance.LoadSprite(itemName);
+			item.Name.text = uiShowName;
+			item.Description.text = description;
+			item.Button.GetComponentInChildren<Text>().text = $"购买(${price})";
+			SetBtnShowCondition(Global.Money, item.Button, money => money >= price, seedCanShow);
+			RegisterBuy(item.Button, Global.Money, itemName, price);
+		}
+		
+		/// <summary>
+		/// 创建出售型物品
+		/// </summary>
+		/// <param name="uiShowName">在UI上显示的名字</param>
+		/// <param name="itemName">物品名</param>
+		/// <param name="price">价格</param>
+		/// <param name="description">描述</param>
+		/// <param name="fruitCount">数量</param>
+		private void CreateSellItem(string uiShowName, string itemName, int price, string description, BindableProperty<int> fruitCount)
+		{
+			var item = ShopItemTemplate.InstantiateWithParent(BtnRoot.transform);
+			item.Icon.sprite = ResController.Instance.LoadSprite(itemName);
+			item.Name.text = uiShowName;
+			item.Description.text = description;
+			item.Button.GetComponentInChildren<Text>().text = $"出售(${price})";
+			SetBtnShowCondition(fruitCount, item.Button, count => count > 0);
+			RegisterSell(item.Button, itemName, Global.Money, price);
+		}
+		
 		/// <summary>
 		/// 设置按钮显示条件
 		/// </summary>
@@ -129,8 +159,6 @@ namespace Game.UI
 				AudioController.Instance.Sfx_Trade.Play();
 			});
 		}
-
-		#endregion
 
 		public IArchitecture GetArchitecture()
 		{
