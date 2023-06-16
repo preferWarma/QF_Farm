@@ -83,13 +83,14 @@ namespace Game.Plants
 
 					if (Random.Range(0f, 1.0f) > aliveRate)	// 意外死亡
 					{
-						UIMessageQueue.Push(GetComponent<SpriteRenderer>().sprite, "植物意外死亡");
+						UIMessageQueue.Push(GetComponent<SpriteRenderer>().sprite, "死亡");
 						RemoveSelf();
 						return;
 					}
 					
 					var ripeCount = Random.Range(ripeCountWeight.minCount, ripeCountWeight.maxCount + 1);
 					soilData.RipeCount = ripeCount;
+					UIMessageQueue.Push(GetComponent<SpriteRenderer>().sprite, $"+{ripeCount}");
 				}
 			}
 		}
