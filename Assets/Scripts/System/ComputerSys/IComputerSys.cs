@@ -7,12 +7,13 @@ namespace System.ComputerSys
 {
     public interface IComputerSystem : ISystem, ISaveWithJson
     {
+        List<ComputerItem> ComputerItems { get; }
         void ResetDefaultData();
     }
 
     public class ComputerSystem : IComputerSystem
     {
-        public List<ComputerItem> ComputerItems = new();
+        public List<ComputerItem> ComputerItems { get; private set; } = new();
 
 
         public void Init()
@@ -27,11 +28,22 @@ namespace System.ComputerSys
         {
             var item1 = Add(new ComputerItem()
                 .WithName("制作虚拟猫猫")
-                .WithTotalHours(100f)
+                .WithTotalHours(10f)
                 .WithOnFinish(() =>
                 {
                     UIComputer.FirstComputerItemIsFinished.Value = true;
-                }).WithShowCondition(_ => Global.HasComputer)
+                })
+                .WithShowCondition(_ => Global.HasComputer)
+                .Self(item =>
+                {
+                    item.IsFinished.Register(value =>
+                    {
+                        if (value)
+                        {
+                            item.OnFinish();
+                        }
+                    });
+                })
             );
             
             var item2 = Add(new ComputerItem()
@@ -41,6 +53,16 @@ namespace System.ComputerSys
                 {
                     UIComputer.SecondComputerItemIsFinished.Value = true;
                 }).WithShowCondition(_ => item1.IsFinished)
+                .Self(item =>
+                {
+                    item.IsFinished.Register(value =>
+                    {
+                        if (value)
+                        {
+                            item.OnFinish();
+                        }
+                    });
+                })
             );
         }
 

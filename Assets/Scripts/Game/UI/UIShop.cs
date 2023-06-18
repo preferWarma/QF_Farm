@@ -21,7 +21,7 @@ namespace Game.UI
 		private void Start()
 		{
 			// 固定物品
-			RegisterBuy(BtnBuyComputer, Global.Money, ItemNameCollections.Computer, 500);
+			RegisterBuyWithNoItem(BtnBuyComputer, Global.Money, ItemNameCollections.Computer, 500);
 			SetBtnShowCondition(Global.Money, BtnBuyComputer, money => money >= 500,CanShowComputer);
 			
 			// 购买型物品
@@ -137,6 +137,16 @@ namespace Game.UI
 			{
 				money.Value -= buyPrice;
 				this.SendCommand(new AddItemCountCommand(itemName, 1));
+				UIMessageQueue.Push(ResController.Instance.LoadSprite(itemName), $"+1\t金币-{buyPrice}");
+				AudioController.Instance.Sfx_Trade.Play();
+			});
+		}
+
+		private void RegisterBuyWithNoItem(Button btnBuy, BindableProperty<int> money, string itemName, int buyPrice)
+		{
+			btnBuy.onClick.AddListener(() =>
+			{
+				money.Value -= buyPrice;
 				UIMessageQueue.Push(ResController.Instance.LoadSprite(itemName), $"+1\t金币-{buyPrice}");
 				AudioController.Instance.Sfx_Trade.Play();
 			});

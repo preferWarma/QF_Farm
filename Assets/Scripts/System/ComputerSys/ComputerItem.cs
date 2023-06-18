@@ -1,4 +1,5 @@
 ﻿using QFramework;
+using UnityEngine;
 
 namespace System.ComputerSys
 {
@@ -6,16 +7,18 @@ namespace System.ComputerSys
     {
         public string Name;
         public float TotalHours;
-        public BindableProperty<float> RestHours;
-        public bool IsFinished;
-        
+        public float RestHours;
+        public readonly BindableProperty<bool> IsFinished = new();
+        public GameObject ItemObj;
+        [Tooltip("完成该项目后每日收益")] public float Price;
+
         private Action _onFinish;
         private Func<ComputerItem, bool> _showCondition;
 
 
         public bool ShowCondition()
         {
-            return _showCondition?.Invoke(this) ?? true;
+            return _showCondition?.Invoke(this) ?? !IsFinished.Value;
         }
         
 
@@ -35,6 +38,7 @@ namespace System.ComputerSys
         public ComputerItem WithTotalHours(float totalHours)
         {
             TotalHours = totalHours;
+            RestHours = totalHours;
             return this;
         }
 
