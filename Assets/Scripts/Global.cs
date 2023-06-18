@@ -1,4 +1,5 @@
 using System.ChallengeSys;
+using System.ComputerSys;
 using System.PowerUpSys;
 using System.SoilSys;
 using System.ToolBarSys;
@@ -53,6 +54,7 @@ public class Global : Architecture<Global>, ISaveWithJson
         RegisterSystem<ISoilSystem>(new SoilSystem());
         RegisterSystem<IChallengeSystem>(new ChallengeSystem());
         RegisterSystem<IPowerUpSystem>(new PowerUpSystem());
+        RegisterSystem<IComputerSystem>(new ComputerSystem());
         
         SaveManager.Instance.Register(this, SaveType.Json);
     }
