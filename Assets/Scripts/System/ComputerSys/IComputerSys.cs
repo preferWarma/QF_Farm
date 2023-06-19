@@ -13,7 +13,7 @@ namespace System.ComputerSys
 
     public class ComputerSystem : IComputerSystem
     {
-        public List<ComputerItem> ComputerItems { get; private set; } = new();
+        public List<ComputerItem> ComputerItems { get; } = new();
 
 
         public void Init()
@@ -26,12 +26,13 @@ namespace System.ComputerSys
 
         private void InitComputerItems()
         {
+            ComputerItems.Clear();
+            
             var item1 = Add(new ComputerItem()
                 .WithName("制作虚拟猫猫")
                 .WithTotalHours(10f)
                 .WithOnFinish(() =>
                 {
-                    UIComputer.FirstComputerItemIsFinished.Value = true;
                 })
                 .WithShowCondition(_ => Global.HasComputer)
                 .Self(item =>
@@ -51,7 +52,6 @@ namespace System.ComputerSys
                 .WithTotalHours(100f)
                 .WithOnFinish(() =>
                 {
-                    UIComputer.SecondComputerItemIsFinished.Value = true;
                 }).WithShowCondition(_ => item1.IsFinished)
                 .Self(item =>
                 {
@@ -76,6 +76,8 @@ namespace System.ComputerSys
 
         private class SaveDataCollection
         {
+            public List<bool> IsFinishedList = new();
+            public List<float> RestHoursList = new();
             
         }
 
@@ -84,8 +86,10 @@ namespace System.ComputerSys
         {
             var saveData = new SaveDataCollection
             {
-
+                IsFinishedList = ComputerItems.ConvertAll(item => item.IsFinished.Value),
+                RestHoursList = ComputerItems.ConvertAll(item => item.CurrentHours.Value)
             };
+            
             SaveManager.SaveWithJson(SAVE_FILE_NAME, saveData);
         }
 
@@ -93,12 +97,16 @@ namespace System.ComputerSys
         {
             var saveData = SaveManager.LoadWithJson<SaveDataCollection>(SAVE_FILE_NAME);
             if (saveData == null) return;
+            for (var i = 0; i < saveData.IsFinishedList.Count; i++)
+            {
+                ComputerItems[i].IsFinished.Value = saveData.IsFinishedList[i];
+                ComputerItems[i].CurrentHours.Value = saveData.RestHoursList[i];
+            }
             
         }
 
         public void ResetDefaultData()
         {
-            ComputerItems = new List<ComputerItem>();
             InitComputerItems();
         }
 

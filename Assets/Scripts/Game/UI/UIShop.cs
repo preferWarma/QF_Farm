@@ -1,4 +1,5 @@
 using System;
+using System.ComputerSys;
 using System.ToolBarSys;
 using QFramework;
 using UnityEngine;
@@ -21,8 +22,8 @@ namespace Game.UI
 		private void Start()
 		{
 			// 固定物品
-			RegisterBuyWithNoItem(BtnBuyComputer, Global.Money, ItemNameCollections.Computer, 500);
-			SetBtnShowCondition(Global.Money, BtnBuyComputer, money => money >= 500,CanShowComputer);
+			RegisterBuyComputer(BtnBuyComputer, Global.Money, ItemNameCollections.Computer, 500);
+			SetBtnShowCondition(Global.Money, BtnBuyComputer, money => money >= 500 && !Global.HasComputer,CanShowComputer);
 			
 			// 购买型物品
 			CreateBuyItem("南瓜种子", ItemNameCollections.SeedPumpkin, 
@@ -142,12 +143,13 @@ namespace Game.UI
 			});
 		}
 
-		private void RegisterBuyWithNoItem(Button btnBuy, BindableProperty<int> money, string itemName, int buyPrice)
+		private void RegisterBuyComputer(Button btnBuy, BindableProperty<int> money, string itemName, int buyPrice)
 		{
 			btnBuy.onClick.AddListener(() =>
 			{
+				Global.HasComputer = true;
 				money.Value -= buyPrice;
-				UIMessageQueue.Push(ResController.Instance.LoadSprite(itemName), $"+1\t金币-{buyPrice}");
+				UIMessageQueue.Push(ResController.Instance.LoadSprite(itemName), $"已解锁,请回家查看\t金币-{buyPrice}");
 				AudioController.Instance.Sfx_Trade.Play();
 			});
 		}

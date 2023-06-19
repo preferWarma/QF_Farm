@@ -296,13 +296,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 20414907}
-  - {fileID: 549253961}
   - {fileID: 983983377}
   - {fileID: 654601169}
   - {fileID: 1206061760}
   - {fileID: 1887861472}
   - {fileID: 1746030037}
   - {fileID: 84128962}
+  - {fileID: 549253961}
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -861,7 +861,7 @@ RectTransform:
   m_Children:
   - {fileID: 2122494423}
   m_Father: {fileID: 702568}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10353,6 +10353,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 90f28a1f4feb8b84aaad69c154f1de1a, type: 3}
   - {fileID: 21300000, guid: 51ace3cc55973154f9395ca35965c209, type: 3}
   - {fileID: 21300000, guid: e3c253febc2e0b84da141aa7a2aed22f, type: 3}
+  - {fileID: 21300000, guid: d2020ffc5b8beec49b6524be8d464632, type: 3}
   - {fileID: 21300000, guid: 033ebfcef83bc114ea162b4d4d4c97ec, type: 3}
   plantPrefabs:
   - {fileID: 6963620104033150102, guid: 8e91e62b415586b4c9ab1227407c668d, type: 3}
@@ -12949,7 +12950,7 @@ RectTransform:
   m_Children:
   - {fileID: 1099942478}
   m_Father: {fileID: 702568}
-  m_RootOrder: 1
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -14851,7 +14852,7 @@ RectTransform:
   - {fileID: 761949938}
   - {fileID: 1911085792}
   m_Father: {fileID: 702568}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -21885,7 +21886,7 @@ RectTransform:
   - {fileID: 297973072}
   - {fileID: 881661229}
   m_Father: {fileID: 702568}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -23606,7 +23607,7 @@ Tilemap:
       m_AnimatedSprites:
       - {fileID: 21300000, guid: 4bb516165d9f40e4da923182fe0c8f20, type: 2}
       - {fileID: 21300000, guid: 1503da1fc59db2d4a90b9d8c4547bafc, type: 2}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 15, y: -8, z: 0}
@@ -24150,7 +24151,7 @@ RectTransform:
   - {fileID: 1772456942}
   - {fileID: 2091474801}
   m_Father: {fileID: 702568}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -57571,7 +57572,7 @@ RectTransform:
   m_Children:
   - {fileID: 466240161}
   m_Father: {fileID: 702568}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -59763,7 +59764,7 @@ RectTransform:
   - {fileID: 1007093207}
   - {fileID: 1416506309}
   m_Father: {fileID: 702568}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}

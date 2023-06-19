@@ -7,7 +7,7 @@ namespace System.ComputerSys
     {
         public string Name;
         public float TotalHours;
-        public float RestHours;
+        public BindableProperty<float> CurrentHours = new();
         public readonly BindableProperty<bool> IsFinished = new();
         public GameObject ItemObj;
         [Tooltip("完成该项目后每日收益")] public float Price;
@@ -38,7 +38,6 @@ namespace System.ComputerSys
         public ComputerItem WithTotalHours(float totalHours)
         {
             TotalHours = totalHours;
-            RestHours = totalHours;
             return this;
         }
 

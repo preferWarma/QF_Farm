@@ -76,6 +76,7 @@ public class Global : Architecture<Global>, ISaveWithJson
         Interface.GetSystem<IChallengeSystem>().ResetDefaultData();
         Interface.GetSystem<IToolBarSystem>().ResetDefaultData();
         Interface.GetSystem<IPowerUpSystem>().ResetDefaultData();
+        Interface.GetSystem<IComputerSystem>().ResetDefaultData();
         SaveManager.Instance.SaveAllRegister(SaveType.Json);
     }
     
