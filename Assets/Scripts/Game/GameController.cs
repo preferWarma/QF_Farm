@@ -7,6 +7,7 @@ using Lyf.SaveSystem;
 using QFramework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Game
@@ -20,6 +21,7 @@ namespace Game
             RegisterOnDaysChange();
             RegisterOnPlantHarvest();
             RegisterOnItemCountChange();
+            RegisterOnHasComputer();
         }
 
         private void Update()
@@ -146,6 +148,18 @@ namespace Game
                 else if (item.name == ItemNameCollections.Bean)
                 {
                     Global.BeanCount.Value = count;
+                }
+            }).UnRegisterWhenGameObjectDestroyed(this);
+        }
+
+        private void RegisterOnHasComputer()
+        {
+            Global.HasComputer.RegisterWithInitValue(value =>
+            {
+                if (value)
+                {
+                    var btn = FindObjectOfType<UIShop>().BtnRoot.Find("ShopItemComputer").Find("BtnBuyComputer");
+                    btn.GetComponentInChildren<Text>().text = "已购买";
                 }
             }).UnRegisterWhenGameObjectDestroyed(this);
         }

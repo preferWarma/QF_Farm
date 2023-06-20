@@ -31,7 +31,7 @@ public class Global : Architecture<Global>, ISaveWithJson
     public static readonly BindableProperty<int> Money = new(Config.InitMoney); // 当前拥有的金钱
     
     [Header("升级相关")]
-    public static bool HasComputer;    // 是否拥有电脑
+    public static readonly BindableProperty<bool> HasComputer = new();    // 是否拥有电脑
     public static int DailyCost = Config.InitDailyCost; // 每日花费
     public static int ToolCostLevel = 1; // 工具强化等级(消耗&范围)
     public static int ToolCdLevel = 1; // 工具强化等级(冷却)
@@ -45,6 +45,7 @@ public class Global : Architecture<Global>, ISaveWithJson
     public static MouseController Mouse = null;
     public static readonly ToolFruit ToolFruit = new ();
     public static GridController GridController = null;
+    // 防止编辑器窗口过于杂乱
     public static GameObject PlantsRoot => GameObject.Find("PlantsRoot") ?? new GameObject("PlantsRoot");
     public static GameObject WaterRoot => GameObject.Find("WaterRoot") ?? new GameObject("WaterRoot");
 
@@ -68,7 +69,7 @@ public class Global : Architecture<Global>, ISaveWithJson
     #region 存储相关
     
     [MenuItem("Lyf/重置数据/加载所有默认数据")]
-    public static void LoadDefaultData()
+    public static void LoadAllDefaultData()
     {
         ResetDefaultData();
         Interface.GetSystem<ISoilSystem>().ResetDefaultData();
@@ -138,7 +139,7 @@ public class Global : Architecture<Global>, ISaveWithJson
         TomatoCount.Value = saveData.TomatoCount;
         BeanCount.Value = saveData.BeanCount;
         Money.SetValueWithoutEvent(saveData.Money);
-        HasComputer = saveData.HasComputer;
+        HasComputer.Value = saveData.HasComputer;
         DailyCost = saveData.DailyCost;
         ToolCostLevel = saveData.ToolCostLevel;
         ToolCdLevel = saveData.ToolCdLevel;
@@ -158,7 +159,7 @@ public class Global : Architecture<Global>, ISaveWithJson
         PotatoCount.Value = 0;
         TomatoCount.Value = 0;
         BeanCount.Value = 0;
-        HasComputer = false;
+        HasComputer.Value = false;
         DailyCost = Config.InitDailyCost;
         ToolCostLevel = 1;
         ToolCdLevel = 1;

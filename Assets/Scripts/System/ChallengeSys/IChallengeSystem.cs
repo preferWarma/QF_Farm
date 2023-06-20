@@ -183,7 +183,10 @@ namespace System.ChallengeSys
                 .CheckFinish(_ => Global.RadishCount.Value >= 30)
                 .OnFinish(challenge =>
                 {
+                    UIShop.CanShowPotatoSeed.Value = true;
+                    UIMessageQueue.Push("已解锁<color=orange>土豆种子</color>, 请前往商店查看");
                     ShowMessageWhenFinished(challenge.Name, 100);
+                    
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有50个萝卜")
@@ -191,9 +194,7 @@ namespace System.ChallengeSys
                 .CheckFinish(_ => Global.RadishCount.Value >= 50)
                 .OnFinish(challenge =>
                 {
-                    UIShop.CanShowPotatoSeed.Value = true;
                     ShowMessageWhenFinished(challenge.Name, 100);
-                    UIMessageQueue.Push("已解锁<color=orange>土豆种子</color>, 请前往商店查看");
                 }));
             
         }
@@ -221,6 +222,8 @@ namespace System.ChallengeSys
                 .CheckFinish(_ => Global.PotatoCount.Value >= 20)
                 .OnFinish(challenge =>
                 {
+                    UIShop.CanShowPotatoSeed.Value = true;
+                    UIMessageQueue.Push("已解锁<color=red>番茄种子</color>, 请前往商店查看");
                     ShowMessageWhenFinished(challenge.Name, 150);
                 }));
             
@@ -237,9 +240,7 @@ namespace System.ChallengeSys
                 .CheckFinish(_ => Global.PotatoCount.Value >= 50)
                 .OnFinish(challenge =>
                 {
-                    UIShop.CanShowPotatoSeed.Value = true;
                     ShowMessageWhenFinished(challenge.Name, 150);
-                    UIMessageQueue.Push("已解锁<color=red>番茄种子</color>, 请前往商店查看");
                 }));
         }
         
@@ -258,6 +259,8 @@ namespace System.ChallengeSys
                 .CheckFinish(_ => Global.TomatoCount.Value >= 10)
                 .OnFinish(challenge =>
                 {
+                    UIShop.CanShowBeanSeed.Value = true;
+                    UIMessageQueue.Push("已解锁<color=green>豆荚种子</color>, 请前往商店查看");
                     ShowMessageWhenFinished(challenge.Name, 150);
                 }));
             
@@ -282,9 +285,7 @@ namespace System.ChallengeSys
                 .CheckFinish(_ => Global.TomatoCount.Value >= 50)
                 .OnFinish(challenge =>
                 {
-                    UIShop.CanShowBeanSeed.Value = true;
                     ShowMessageWhenFinished(challenge.Name, 150);
-                    UIMessageQueue.Push("已解锁<color=green>豆荚种子</color>, 请前往商店查看");
                 })); 
         }
         
@@ -296,7 +297,39 @@ namespace System.ChallengeSys
                     challenge.StartDate != Global.Days.Value && HarvestBeanInCurrentDay.Value >= 1)
                 .OnFinish(challenge =>
                 {
-                    ShowMessageWhenFinished(challenge.Name, 100);
+                    ShowMessageWhenFinished(challenge.Name, 200);
+                }));
+            
+            Challenges.Add(new GenericChallenge().SetName("拥有10个豆荚")
+                .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
+                .CheckFinish(challenge =>
+                    challenge.StartDate != Global.Days.Value && Global.BeanCount.Value >= 10)
+                .OnFinish(challenge =>
+                {
+                    ShowMessageWhenFinished(challenge.Name, 200);
+                }));
+            
+            Challenges.Add(new GenericChallenge().SetName("拥有30个豆荚")
+                .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
+                .CheckFinish(challenge =>
+                    challenge.StartDate != Global.Days.Value && Global.BeanCount.Value >= 30)
+                .OnFinish(challenge =>
+                {
+                    if (!Global.HasComputer)
+                    {
+                        Global.HasComputer.Value = true;
+                        UIMessageQueue.Push("已解锁<color=blue>电脑</color>, 请前往商店查看");
+                    }
+                    ShowMessageWhenFinished(challenge.Name, 200);
+                }));
+            
+            Challenges.Add(new GenericChallenge().SetName("拥有50个豆荚")
+                .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
+                .CheckFinish(challenge =>
+                    challenge.StartDate != Global.Days.Value && Global.BeanCount.Value >= 50)
+                .OnFinish(challenge =>
+                {
+                    ShowMessageWhenFinished(challenge.Name, 200);
                 }));
         }
 

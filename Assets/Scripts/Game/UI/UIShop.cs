@@ -44,7 +44,6 @@ namespace Game.UI
 			CreateSellItem("豆荚", ItemNameCollections.Bean, 100, "成熟果实售价100元/个", Global.BeanCount);
 		}
 
-		
 		/// <summary>
 		/// 创建购买型物品
 		/// </summary>
@@ -84,7 +83,7 @@ namespace Game.UI
 		}
 		
 		/// <summary>
-		/// 设置按钮显示条件
+		/// 设置按钮显示条件(仅提供隐藏和显示)
 		/// </summary>
 		/// <param name="item"> 显示条件对象 </param>
 		/// <param name="btn"> 当前设置的按钮 </param>
@@ -98,7 +97,7 @@ namespace Game.UI
 		}
 
 		/// <summary>
-		/// 设置按钮显示条件
+		/// 设置按钮显示条件(隐藏和显示,并且设置按钮是否可用,可用时设置按钮颜色)
 		/// </summary>
 		/// <param name="item"> 显示条件对象 </param>
 		/// <param name="btn"> 当前设置的按钮 </param>
@@ -142,11 +141,12 @@ namespace Game.UI
 			});
 		}
 
+		/// Computer注册比较特殊,单独方法
 		private void RegisterBuyComputer(Button btnBuy, BindableProperty<int> money, string itemName, int buyPrice)
 		{
 			btnBuy.onClick.AddListener(() =>
 			{
-				Global.HasComputer = true;
+				Global.HasComputer.Value = true;
 				money.Value -= buyPrice;
 				UIMessageQueue.Push(ResController.Instance.LoadSprite(itemName), $"已解锁,请回家查看\t金币-{buyPrice}");
 				AudioController.Instance.Sfx_Trade.Play();
