@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.SoilSys;
 using Game.Plants;
+using Game.UI;
 using UnityEngine;
 using QFramework;
 using UnityEngine.Tilemaps;
@@ -13,10 +16,19 @@ namespace Game
 		[Header("笔刷")]
 		public TileBase pen;	// 地形笔刷
 		public TileBase canCultivateFieldPen;	// 可开垦区域笔刷笔刷
+		public EasyGrid<SoilData> ShowGrid => mSoilSystem?.SoilGrid;
+		
+		[Tooltip("用于合并成熟消息")]
+		public readonly Dictionary<string, int> RipeCountToday = new()
+		{
+			{ItemNameCollections.Pumpkin, 0},
+			{ItemNameCollections.Radish, 0},
+			{ItemNameCollections.Tomato, 0},
+			{ItemNameCollections.Potato, 0},
+			{ItemNameCollections.Bean, 0},
+		};
 
 		private ISoilSystem mSoilSystem;
-
-		public EasyGrid<SoilData> ShowGrid => mSoilSystem?.SoilGrid;
 
 		private void Awake()
 		{
@@ -27,6 +39,18 @@ namespace Game
 		private void Start()
 		{
 			Show();
+			Global.Days.Register(_ =>
+			{
+				foreach (var keyValuePair in RipeCountToday.Where(keyValuePair => keyValuePair.Value != 0))
+				{
+					UIMessageQueue.Push(ResController.Instance.LoadSprite(keyValuePair.Key), $"成熟 + {keyValuePair.Value}");
+				}
+				// 将今天的成熟的数量清零
+				foreach (var key in RipeCountToday.Keys.ToList())
+				{
+					RipeCountToday[key] = 0;
+				}
+			}).UnRegisterWhenGameObjectDestroyed(this);
 		}
 		
 		public void Show()

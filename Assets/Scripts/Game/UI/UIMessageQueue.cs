@@ -12,7 +12,6 @@ namespace Game.UI
 			mInstance.UIMessageTemplate.InstantiateWithParent(mInstance.MessageRoot)
 				.Self(self =>
 				{
-					
 					self.Icon.Hide();
 					self.Icon.sprite = icon;
 					self.TextWithIcon.text = message;
