@@ -1,5 +1,4 @@
 using System.ChallengeSys;
-using System.Linq;
 using System.PowerUpSys;
 using System.SoilSys;
 using System.ToolBarSys;
@@ -86,10 +85,10 @@ namespace Game
             // 监听植物采摘
             Global.OnPlantHarvest.Register(plant =>
             {
-                ChallengeSystem.HarvestCountInCurrentDay.Value++;
-                ChallengeSystem.TotalFruitCount.Value++;
+                ChallengeSystem.HarvestCountInCurrentDay.Value += plant.SoilData.RipeCount;
+                ChallengeSystem.TotalFruitCount.Value += plant.SoilData.RipeCount;
 
-                UIMessageQueue.Push(ResController.Instance.LoadSprite(plant.PlantName), "+1");
+                UIMessageQueue.Push(ResController.Instance.LoadSprite(plant.PlantName), $"+{plant.SoilData.RipeCount}");
 
                 switch (plant.PlantName)
                 {

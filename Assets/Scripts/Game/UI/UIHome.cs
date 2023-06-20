@@ -1,4 +1,6 @@
 using System;
+using System.ComputerSys;
+using System.Linq;
 using QFramework;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -19,8 +21,15 @@ namespace Game.UI
 			Global.Days.Register(_ =>
 			{
 				var cost = Random.Range(Global.DailyCost, Global.DailyCost + 6);
+				if (Global.HasComputer)
+				{
+					cost += Global.Interface.GetSystem<IComputerSystem>().ComputerItems
+						.FindAll(item => item.IsFinished.Value)
+						.Sum(item => item.Price);
+				}
+				
 				Global.Money.Value -= cost;
-				UIMessageQueue.Push($"昨日消耗$-${cost}");
+				UIMessageQueue.Push(cost >= 0 ? $"昨日消耗$-${cost}" : $"昨日收益$${cost}");
 			}).UnRegisterWhenGameObjectDestroyed(this);
 		}
 

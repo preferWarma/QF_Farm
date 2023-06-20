@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Game.UI;
 using Lyf.SaveSystem;
 using QFramework;
 
@@ -31,13 +30,14 @@ namespace System.ComputerSys
             var item1 = Add(new ComputerItem()
                 .WithName("制作虚拟猫猫")
                 .WithTotalHours(10f)
+                .WithPrice(15)
                 .WithOnFinish(() =>
                 {
                 })
                 .WithShowCondition(_ => Global.HasComputer)
                 .Self(item =>
                 {
-                    item.IsFinished.Register(value =>
+                    item.IsFinished.RegisterWithInitValue(value =>
                     {
                         if (value)
                         {
@@ -50,12 +50,13 @@ namespace System.ComputerSys
             var item2 = Add(new ComputerItem()
                 .WithName("制作虚拟偶像")
                 .WithTotalHours(100f)
+                .WithPrice(150)
                 .WithOnFinish(() =>
                 {
                 }).WithShowCondition(_ => item1.IsFinished)
                 .Self(item =>
                 {
-                    item.IsFinished.Register(value =>
+                    item.IsFinished.RegisterWithInitValue(value =>
                     {
                         if (value)
                         {
@@ -77,7 +78,7 @@ namespace System.ComputerSys
         private class SaveDataCollection
         {
             public List<bool> IsFinishedList = new();
-            public List<float> RestHoursList = new();
+            public List<float> CurrentHoursList = new();
             
         }
 
@@ -87,7 +88,7 @@ namespace System.ComputerSys
             var saveData = new SaveDataCollection
             {
                 IsFinishedList = ComputerItems.ConvertAll(item => item.IsFinished.Value),
-                RestHoursList = ComputerItems.ConvertAll(item => item.CurrentHours.Value)
+                CurrentHoursList = ComputerItems.ConvertAll(item => item.CurrentHours.Value)
             };
             
             SaveManager.SaveWithJson(SAVE_FILE_NAME, saveData);
@@ -100,7 +101,7 @@ namespace System.ComputerSys
             for (var i = 0; i < saveData.IsFinishedList.Count; i++)
             {
                 ComputerItems[i].IsFinished.Value = saveData.IsFinishedList[i];
-                ComputerItems[i].CurrentHours.Value = saveData.RestHoursList[i];
+                ComputerItems[i].CurrentHours.Value = saveData.CurrentHoursList[i];
             }
             
         }

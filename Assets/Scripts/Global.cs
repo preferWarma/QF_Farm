@@ -34,7 +34,7 @@ public class Global : Architecture<Global>, ISaveWithJson
     public static bool HasComputer;    // 是否拥有电脑
     public static int DailyCost = Config.InitDailyCost; // 每日花费
     public static int ToolCostLevel = 1; // 工具强化等级(消耗&范围)
-    public static int ToolCdLevel = 1; // 工具强化等级(冷却) //TODO 存储
+    public static int ToolCdLevel = 1; // 工具强化等级(冷却)
 
     [Header("事件相关")]
     public static readonly EasyEvent<IPlant> OnPlantHarvest = new(); // 采摘植物事件

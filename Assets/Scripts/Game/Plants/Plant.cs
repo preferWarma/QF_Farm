@@ -90,7 +90,7 @@ namespace Game.Plants
 					
 					var ripeCount = Random.Range(ripeCountWeight.minCount, ripeCountWeight.maxCount + 1);
 					soilData.RipeCount = ripeCount;
-					UIMessageQueue.Push(GetComponent<SpriteRenderer>().sprite, $"+{ripeCount}");
+					UIMessageQueue.Push(GetComponent<SpriteRenderer>().sprite, $"成熟+{ripeCount}");
 				}
 			}
 		}

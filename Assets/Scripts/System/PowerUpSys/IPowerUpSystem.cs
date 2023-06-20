@@ -29,6 +29,7 @@ namespace System.PowerUpSys
         
         protected override void OnInit()
         {
+            // 添加强化项
             ToolRangeAndCostPowerUp();
             ToolCdPowerUp();
             SoilPowerUp(5, 200, 5);
@@ -39,7 +40,7 @@ namespace System.PowerUpSys
             SaveManager.Instance.Register(this, SaveType.Json);
         }
 
-        // 做一个简单封装,使得可以链式调用
+        // 简单链式封装
         private IPowerUp Add(IPowerUp up)
         {
             PowerUps.Add(up);
