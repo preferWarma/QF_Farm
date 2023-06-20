@@ -27,7 +27,9 @@ public static class ItemNameCollections
     public const string Soil6X6 = "Soil6X6";
     public const string Soil7X7 = "Soil7X7";
     public const string Soil8X8 = "Soil8X8";
-    
+    public const string Soil9X9 = "Soil9X9";
+    public const string Soil10X10 = "Soil10X10";
+
     public static string GetSoilNameBySize(int size)
     {
         return size switch
@@ -36,6 +38,8 @@ public static class ItemNameCollections
             6 => Soil6X6,
             7 => Soil7X7,
             8 => Soil8X8,
+            9 => Soil9X9,
+            10 => Soil10X10,
             _ => null
         };
     }

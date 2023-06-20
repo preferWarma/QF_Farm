@@ -1,4 +1,7 @@
-﻿namespace System.PowerUpSys
+﻿using HutongGames.PlayMaker;
+using QFramework;
+
+namespace System.PowerUpSys
 {
     public interface IPowerUp
     {
@@ -6,8 +9,8 @@
         string Title { get; set; }  // 标题
         string Description { get; set; }    // 描述
         bool UnLocked { get; set; } // 是否解锁
-        int Price { get; set; } // 解锁价格
-        
+        int Price { get; } // 解锁价格
+
         bool ShowCondition();   // 显示条件
         void OnUnlock();  // 解锁
     }
@@ -19,6 +22,7 @@
         public string Description { get; set; }
         public bool UnLocked { get; set; }
         public int Price { get; set; }
+        public BindableProperty<bool> Sequence { get; } = new();
 
         private Func<PowerUp, bool> _condition;  // 显示条件
         private Action<PowerUp> _onUnlock;   // 解锁回调
@@ -70,6 +74,12 @@
         public PowerUp SetOnUnlock(Action<PowerUp> onUnlock)
         {
             _onUnlock = onUnlock;
+            return this;
+        }
+        
+        public PowerUp SetSequence(bool sequence)
+        {
+            Sequence.Value = sequence;
             return this;
         }
         

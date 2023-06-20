@@ -87,8 +87,9 @@ namespace Game.Plants
 						RemoveSelf();
 						return;
 					}
-					
-					var ripeCount = Random.Range(ripeCountWeight.minCount, ripeCountWeight.maxCount + 1);
+
+					var ripeCount = Random.Range(ripeCountWeight.minCount, ripeCountWeight.maxCount + 1) +
+					                + Config.LvDict[Global.HarvestLevel].AnotherRipeCount;
 					soilData.RipeCount = ripeCount;
 					UIMessageQueue.Push(GetComponent<SpriteRenderer>().sprite, $"成熟+{ripeCount}");
 				}

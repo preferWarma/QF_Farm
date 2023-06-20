@@ -35,6 +35,7 @@ public class Global : Architecture<Global>, ISaveWithJson
     public static int DailyCost = Config.InitDailyCost; // 每日花费
     public static int ToolCostLevel = 1; // 工具强化等级(消耗&范围)
     public static int ToolCdLevel = 1; // 工具强化等级(冷却)
+    public static int HarvestLevel = 1; // 收获强化等级
 
     [Header("事件相关")]
     public static readonly EasyEvent<IPlant> OnPlantHarvest = new(); // 采摘植物事件
@@ -97,6 +98,7 @@ public class Global : Architecture<Global>, ISaveWithJson
         public int DailyCost;
         public int ToolCostLevel;
         public int ToolCdLevel;
+        public int HarvestLevel;
         public bool CanShowRadishSeed;
         public bool CanShowPotatoSeed;
         public bool CanShowTomatoSeed;
@@ -119,6 +121,7 @@ public class Global : Architecture<Global>, ISaveWithJson
             DailyCost = DailyCost,
             ToolCostLevel = ToolCostLevel,
             ToolCdLevel = ToolCdLevel,
+            HarvestLevel = HarvestLevel,
             CanShowRadishSeed = UIShop.CanShowRadishSeed.Value,
             CanShowPotatoSeed = UIShop.CanShowPotatoSeed.Value,
             CanShowTomatoSeed = UIShop.CanShowTomatoSeed.Value,
@@ -143,6 +146,7 @@ public class Global : Architecture<Global>, ISaveWithJson
         DailyCost = saveData.DailyCost;
         ToolCostLevel = saveData.ToolCostLevel;
         ToolCdLevel = saveData.ToolCdLevel;
+        HarvestLevel = saveData.HarvestLevel;
         UIShop.CanShowRadishSeed.Value = saveData.CanShowRadishSeed;
         UIShop.CanShowPotatoSeed.Value = saveData.CanShowPotatoSeed;
         UIShop.CanShowTomatoSeed.Value = saveData.CanShowTomatoSeed;
@@ -163,6 +167,7 @@ public class Global : Architecture<Global>, ISaveWithJson
         DailyCost = Config.InitDailyCost;
         ToolCostLevel = 1;
         ToolCdLevel = 1;
+        HarvestLevel = 1;
         UIShop.CanShowRadishSeed.Value = false;
         UIShop.CanShowPotatoSeed.Value = false;
         UIShop.CanShowTomatoSeed.Value = false;

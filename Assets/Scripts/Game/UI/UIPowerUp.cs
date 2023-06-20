@@ -54,6 +54,25 @@ namespace Game.UI
 				obj.SetActive(showCondition());
 			}).UnRegisterWhenGameObjectDestroyed(this);
 		}
+		
+		private void SetBtnShowCondition(BindableProperty<int> money, Button btn, Func<bool> showCondition, BindableProperty<bool> isCreated)
+		{
+			isCreated.RegisterWithInitValue(v => btn.transform.parent.gameObject.SetActive(v));
+			
+			money.RegisterWithInitValue(_ =>
+			{
+				if (showCondition())
+				{
+					btn.GetComponentInChildren<Text>().color = new Color(0.2f, 0.2f, 0.2f);
+					btn.interactable = true;
+				}
+				else
+				{
+					btn.GetComponentInChildren<Text>().color = Color.gray;
+					btn.interactable = false;
+				}
+			}).UnRegisterWhenGameObjectDestroyed(this);
+		}
 
 		public IArchitecture GetArchitecture()
 		{

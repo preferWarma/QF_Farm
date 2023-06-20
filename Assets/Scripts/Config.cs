@@ -190,6 +190,8 @@ public static class Config
         public float ToolWateringCanCdTime { get; }
         public float ToolHandCdTime { get; }
 
+        public int AnotherRipeCount { get; }
+
     }
 
     public static readonly Dictionary<int, ILvBase> LvDict = new()
@@ -210,6 +212,7 @@ public static class Config
         public float ToolShovelCdTime => 0.6f;
         public float ToolWateringCanCdTime => 0.5f;
         public float ToolHandCdTime => 0.3f;
+        public int AnotherRipeCount => 0;
     }
 
     private class Lv2 : ILvBase
@@ -223,6 +226,8 @@ public static class Config
         public float ToolShovelCdTime => 0.4f;
         public float ToolWateringCanCdTime => 0.3f;
         public float ToolHandCdTime => 0.2f;
+        // 额外成熟
+        public int AnotherRipeCount => 1;
     }
 
     private class Lv3 : ILvBase
@@ -236,6 +241,7 @@ public static class Config
         public float ToolShovelCdTime => 0.2f;
         public float ToolWateringCanCdTime => 0.15f;
         public float ToolHandCdTime => 0.1f;
+        public int AnotherRipeCount => 2;
     }
     
     #endregion
