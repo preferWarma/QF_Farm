@@ -1,5 +1,4 @@
-﻿using HutongGames.PlayMaker;
-using QFramework;
+﻿using QFramework;
 
 namespace System.PowerUpSys
 {
@@ -10,8 +9,9 @@ namespace System.PowerUpSys
         string Description { get; set; }    // 描述
         bool UnLocked { get; set; } // 是否解锁
         int Price { get; } // 解锁价格
-
-        bool ShowCondition();   // 显示条件
+        
+        bool ShowObjCondition();   // 显示条件(是否可见)
+        bool ShowBtnCondition();    // 按钮显示条件
         void OnUnlock();  // 解锁
     }
     
@@ -27,16 +27,21 @@ namespace System.PowerUpSys
         private Func<PowerUp, bool> _condition;  // 显示条件
         private Action<PowerUp> _onUnlock;   // 解锁回调
 
-        public bool ShowCondition()
+        public bool ShowObjCondition()
         {
             return !UnLocked && (_condition == null || _condition.Invoke(this));
+        }
+
+        public bool ShowBtnCondition()
+        {
+            return Global.Money.Value >= Price;
         }
 
         public void OnUnlock()
         {
             UnLocked = true;
-            _onUnlock?.Invoke(this);
             PowerUpSystem.IntensifiedToday.Value = true;
+            _onUnlock?.Invoke(this);
         }
 
         #region 链式封装
@@ -65,7 +70,7 @@ namespace System.PowerUpSys
             return this;
         }
         
-        public PowerUp SetCondition(Func<PowerUp, bool> condition)
+        public PowerUp SetObjShowCondition(Func<PowerUp, bool> condition)
         {
             _condition = condition;
             return this;
@@ -76,13 +81,7 @@ namespace System.PowerUpSys
             _onUnlock = onUnlock;
             return this;
         }
-        
-        public PowerUp SetSequence(bool sequence)
-        {
-            Sequence.Value = sequence;
-            return this;
-        }
-        
+
         #endregion
         
     }

@@ -1,6 +1,7 @@
 using System;
 using System.ComputerSys;
 using System.Linq;
+using System.PowerUpSys;
 using QFramework;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -20,6 +21,8 @@ namespace Game.UI
 		{
 			Global.Days.Register(_ =>
 			{
+				PowerUpSystem.IntensifiedToday.Value = false;
+				
 				var cost = Random.Range(Global.DailyCost, Global.DailyCost + 6);
 				if (Global.HasComputer)
 				{
