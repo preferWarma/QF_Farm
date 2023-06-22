@@ -14,9 +14,16 @@
         public States State = States.NotStart;  // 当前挑战状态
         public int StartDate;    // 挑战开始的日期
         
+        public Func<string> DisplayNameFunc;    // 挑战显示名称
+
         public abstract void OnStart(); // 挑战开始时候要做的事情
         public abstract bool CheckFinish();
         public abstract void OnFinish();    // 挑战完成时候要做的事情
+        
+        public string GetDisplayName()
+        {
+            return DisplayNameFunc?.Invoke() ?? Name;
+        }
     }
     
     // 通用挑战
@@ -64,6 +71,12 @@
         public GenericChallenge SetName(string name)
         {
             mName = name;
+            return this;
+        }
+        
+        public GenericChallenge SetDisplayNameFunc(Func<string> displayNameFunc)
+        {
+            DisplayNameFunc = displayNameFunc;
             return this;
         }
         

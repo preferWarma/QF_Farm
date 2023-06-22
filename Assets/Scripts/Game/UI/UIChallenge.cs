@@ -30,7 +30,7 @@ namespace Game.UI
 				challengeItemPrefab.InstantiateWithParent(UIChallengeContentRoot)
 					.Self(self =>
 					{
-						self.text = $"<color=yellow>[进行中]</color> {activeChallenge.Name}";
+						self.text = $"<color=yellow>[进行中]</color> {activeChallenge.GetDisplayName()}";
 					}).Show();
 			}
 			

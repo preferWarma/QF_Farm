@@ -19,19 +19,29 @@ MonoBehaviour:
     From: 0
     NameToFullName: []
     BindInfos:
+    - TypeName: RectTransform
+      PathToRoot: SettingsRoot
+      MemberName: SettingsRoot
+    - TypeName: UnityEngine.UI.Slider
+      PathToRoot: SettingsRoot/SoundSettingRoot/SoundSlider
+      MemberName: SoundSlider
+    - TypeName: UnityEngine.UI.Toggle
+      PathToRoot: SettingsRoot/ToggleShowChallenge
+      MemberName: ToggleShowChallenge
     - TypeName: UnityEngine.UI.Button
-      PathToRoot: ComputerItemTemplate
-      MemberName: ComputerItemTemplate
+      PathToRoot: SettingsRoot/ExitGameRoot/BtnQuit
+      MemberName: BtnQuit
     - TypeName: UnityEngine.UI.Button
-      PathToRoot: BtnCreateSecond
-      MemberName: BtnCreateSecond
+      PathToRoot: SettingsRoot/BtnHide
+      MemberName: BtnHide
     ScriptsFolder: Assets/Scripts/Game/UI
-    ClassName: UIComputer
+    ClassName: UISetting
     Namespace: Game.UI
     MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace Game.UI\r\n{\r\n\tpublic
-      partial class UIComputer : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+      partial class UISetting : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:2e9eeac6-df48-4178-823f-78e458baf847\r\nusing UnityEngine;\r\n\r\nnamespace
-      Game.UI\r\n{\r\n\tpublic partial class UIComputer\r\n\t{\r\n\r\n\t\tpublic
-      UnityEngine.UI.Button ComputerItemTemplate;\r\n\r\n\t\tpublic UnityEngine.UI.Button
-      BtnCreateSecond;\r\n\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:e9f79c35-454e-4b70-9566-47139bd618fc\r\nusing UnityEngine;\r\n\r\nnamespace
+      Game.UI\r\n{\r\n\tpublic partial class UISetting\r\n\t{\r\n\r\n\t\tpublic RectTransform
+      SettingsRoot;\r\n\r\n\t\tpublic UnityEngine.UI.Slider SoundSlider;\r\n\r\n\t\tpublic
+      UnityEngine.UI.Toggle ToggleShowChallenge;\r\n\r\n\t\tpublic UnityEngine.UI.Button
+      BtnQuit;\r\n\r\n\t\tpublic UnityEngine.UI.Button BtnHide;\r\n\r\n\t}\r\n}\r\n"

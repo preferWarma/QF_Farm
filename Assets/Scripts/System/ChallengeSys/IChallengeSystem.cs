@@ -38,7 +38,7 @@ namespace System.ChallengeSys
         [Tooltip("挑战列表")] public List<Challenge> Challenges { get; } = new(); // 挑战列表
         public List<Challenge> ActiveChallenges { get; } = new(); // 激活的挑战列表
         public List<Challenge> FinishedChallenges { get; } = new(); // 完成的挑战列表
-
+        
         protected override void OnInit()
         {
             SaveManager.Instance.Register(this, SaveType.Json);
@@ -95,12 +95,12 @@ namespace System.ChallengeSys
             {
                 ActiveChallenges.RemoveAll(challenge => challenge.State == Challenge.States.Finished);
             }
-
+            
             if (ActiveChallenges.Count == 0 && FinishedChallenges.Count != Challenges.Count)
             {
                 var randomItem = Challenges.Where(challenge1 => challenge1.State == Challenge.States.NotStart)
                     .ToList()
-                    .First();
+                    .FirstOrDefault();
                 ActiveChallenges.Add(randomItem); // 完成挑战时再随机添加一个未开始的挑战
             }
         }
@@ -110,6 +110,7 @@ namespace System.ChallengeSys
         private void AddPumpkinChallenges()
         {
             Challenges.Add(new GenericChallenge().SetName("采摘1个南瓜")
+                .SetDisplayNameFunc(() => $"采摘{HarvestPumpkinCountInCurrentDay.Value}/1个南瓜")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => HarvestPumpkinCountInCurrentDay.Value >= 1)
                 .OnFinish(challenge =>
@@ -118,6 +119,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有10个南瓜")
+                .SetDisplayNameFunc(() => $"拥有{Global.PumpkinCount.Value}/10个南瓜")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ =>  Global.PumpkinCount.Value >= 10)
                 .OnFinish(challenge =>
@@ -126,6 +128,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有20个南瓜")
+                .SetDisplayNameFunc(() => $"拥有{Global.PumpkinCount.Value}/20个南瓜")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => Global.PumpkinCount.Value >= 20)
                 .OnFinish(challenge =>
@@ -134,6 +137,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有30个南瓜")
+                .SetDisplayNameFunc(() => $"拥有{Global.PumpkinCount.Value}/30个南瓜")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => Global.PumpkinCount.Value >= 30)
                 .OnFinish(challenge =>
@@ -142,6 +146,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有50个南瓜")
+                .SetDisplayNameFunc(() => $"拥有{Global.PumpkinCount.Value}/50个南瓜")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => Global.PumpkinCount.Value >= 50)
                 .OnFinish(challenge =>
@@ -155,6 +160,7 @@ namespace System.ChallengeSys
         private void AddRadishChallenges()
         {
             Challenges.Add(new GenericChallenge().SetName("采摘一个萝卜")
+                .SetDisplayNameFunc(() => $"采摘{HarvestRadishCountInCurrentDay.Value}/1个萝卜")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => HarvestRadishCountInCurrentDay.Value >= 1)
                 .OnFinish(challenge =>
@@ -163,6 +169,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有10个萝卜")
+                .SetDisplayNameFunc(() => $"拥有{Global.RadishCount.Value}/10个萝卜")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => Global.RadishCount.Value >= 10)
                 .OnFinish(challenge =>
@@ -171,6 +178,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有20个萝卜")
+                .SetDisplayNameFunc(() => $"拥有{Global.RadishCount.Value}/20个萝卜")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => Global.RadishCount.Value >= 20)
                 .OnFinish(challenge =>
@@ -179,6 +187,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有30个萝卜")
+                .SetDisplayNameFunc(() => $"拥有{Global.RadishCount.Value}/30个萝卜")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => Global.RadishCount.Value >= 30)
                 .OnFinish(challenge =>
@@ -190,6 +199,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有50个萝卜")
+                .SetDisplayNameFunc(() => $"拥有{Global.RadishCount.Value}/50个萝卜")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => Global.RadishCount.Value >= 50)
                 .OnFinish(challenge =>
@@ -202,6 +212,7 @@ namespace System.ChallengeSys
         private void AddPotatoChallenges()
         {
             Challenges.Add(new GenericChallenge().SetName("收获一个土豆")
+                .SetDisplayNameFunc(() => $"收获{HarvestPotatoCountInCurrentDay.Value}/1个土豆")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => HarvestPotatoCountInCurrentDay.Value >= 1)
                 .OnFinish(challenge =>
@@ -210,6 +221,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有10个土豆")
+                .SetDisplayNameFunc(() => $"拥有{Global.PotatoCount.Value}/10个土豆")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => Global.PotatoCount.Value >= 10)
                 .OnFinish(challenge =>
@@ -218,6 +230,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有20个土豆")
+                .SetDisplayNameFunc(() => $"拥有{Global.PotatoCount.Value}/20个土豆")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => Global.PotatoCount.Value >= 20)
                 .OnFinish(challenge =>
@@ -228,6 +241,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有30个土豆")
+                .SetDisplayNameFunc(() => $"拥有{Global.PotatoCount.Value}/30个土豆")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => Global.PotatoCount.Value >= 30)
                 .OnFinish(challenge =>
@@ -236,6 +250,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有50个土豆")
+                .SetDisplayNameFunc(() => $"拥有{Global.PotatoCount.Value}/50个土豆")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => Global.PotatoCount.Value >= 50)
                 .OnFinish(challenge =>
@@ -247,6 +262,7 @@ namespace System.ChallengeSys
         private void AddTomatoChallenges()
         {
             Challenges.Add(new GenericChallenge().SetName("采摘一个番茄")
+                .SetDisplayNameFunc(() => $"采摘{HarvestTomatoInCurrentDay.Value}/1个番茄")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => HarvestTomatoInCurrentDay.Value >= 1)
                 .OnFinish(challenge =>
@@ -255,6 +271,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有10个番茄")
+                .SetDisplayNameFunc(() => $"拥有{Global.TomatoCount.Value}/10个番茄")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => Global.TomatoCount.Value >= 10)
                 .OnFinish(challenge =>
@@ -265,6 +282,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有20个番茄")
+                .SetDisplayNameFunc(() => $"拥有{Global.TomatoCount.Value}/20个番茄")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => Global.TomatoCount.Value >= 20)
                 .OnFinish(challenge =>
@@ -273,6 +291,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有30个番茄")
+                .SetDisplayNameFunc(() => $"拥有{Global.TomatoCount.Value}/30个番茄")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => Global.TomatoCount.Value >= 30)
                 .OnFinish(challenge =>
@@ -281,6 +300,7 @@ namespace System.ChallengeSys
                 }));
             
              Challenges.Add(new GenericChallenge().SetName("拥有50个番茄")
+                 .SetDisplayNameFunc(() => $"拥有{Global.TomatoCount.Value}/50个番茄")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(_ => Global.TomatoCount.Value >= 50)
                 .OnFinish(challenge =>
@@ -292,6 +312,7 @@ namespace System.ChallengeSys
         private void AddBeanChallenges()
         {
             Challenges.Add(new GenericChallenge().SetName("采摘一个豆荚")
+                .SetDisplayNameFunc(() => $"采摘{HarvestBeanInCurrentDay.Value}/1个豆荚")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(challenge =>
                     challenge.StartDate != Global.Days.Value && HarvestBeanInCurrentDay.Value >= 1)
@@ -301,6 +322,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有10个豆荚")
+                .SetDisplayNameFunc(() => $"拥有{Global.BeanCount.Value}/10个豆荚")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(challenge =>
                     challenge.StartDate != Global.Days.Value && Global.BeanCount.Value >= 10)
@@ -310,6 +332,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有30个豆荚")
+                .SetDisplayNameFunc(() => $"拥有{Global.BeanCount.Value}/30个豆荚")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(challenge =>
                     challenge.StartDate != Global.Days.Value && Global.BeanCount.Value >= 30)
@@ -324,6 +347,7 @@ namespace System.ChallengeSys
                 }));
             
             Challenges.Add(new GenericChallenge().SetName("拥有50个豆荚")
+                .SetDisplayNameFunc(() => $"拥有{Global.BeanCount.Value}/50个豆荚")
                 .OnStart(challenge => { challenge.StartDate = Global.Days.Value; })
                 .CheckFinish(challenge =>
                     challenge.StartDate != Global.Days.Value && Global.BeanCount.Value >= 50)

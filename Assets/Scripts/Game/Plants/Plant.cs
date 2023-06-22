@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.SoilSys;
 using DG.Tweening;
+using Game.UI;
 using QFramework;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -83,13 +84,13 @@ namespace Game.Plants
 					if (Random.Range(0f, 1.0f) > aliveRate)	// 意外死亡
 					{
 						RemoveSelf();
+						UIMessageQueue.Push(mSpriteRenderer.sprite, "意外死亡");
 						return;
 					}
 
 					var ripeCount = Random.Range(ripeCountWeight.minCount, ripeCountWeight.maxCount + 1) +
 					                + Config.LvDict[Global.HarvestLevel].AnotherRipeCount;
 					soilData.RipeCount = ripeCount;
-					// UIMessageQueue.Push(GetComponent<SpriteRenderer>().sprite, $"成熟+{ripeCount}");
 					Global.GridController.RipeCountToday[PlantName] += ripeCount;
 				}
 			}

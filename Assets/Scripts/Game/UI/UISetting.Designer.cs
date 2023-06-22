@@ -1,4 +1,4 @@
-// Generate Id:1eaaadd4-0b86-42fe-92b0-a50770be5536
+// Generate Id:e9f79c35-454e-4b70-9566-47139bd618fc
 using UnityEngine;
 
 namespace Game.UI
@@ -10,7 +10,11 @@ namespace Game.UI
 
 		public UnityEngine.UI.Slider SoundSlider;
 
+		public UnityEngine.UI.Toggle ToggleShowChallenge;
+
 		public UnityEngine.UI.Button BtnQuit;
+
+		public UnityEngine.UI.Button BtnHide;
 
 	}
 }

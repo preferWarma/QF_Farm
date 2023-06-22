@@ -1,4 +1,4 @@
-// Generate Id:c7a9f629-a7be-4569-8a47-f3efbf92ad98
+// Generate Id:b5a87edf-5d42-414c-bf85-c6f63b5398cd
 using UnityEngine;
 
 namespace Game.UI
@@ -11,6 +11,6 @@ namespace Game.UI
 		public UnityEngine.UI.Text RestTimeText;
 
 		public UnityEngine.UI.Text Money;
-
+		
 	}
 }
