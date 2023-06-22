@@ -1,4 +1,3 @@
-using DG.Tweening;
 using QFramework;
 using UnityEngine;
 
@@ -13,6 +12,7 @@ namespace Game.UI
 		{
 			_uiChallenge = FindObjectOfType<UIChallenge>();
 			SoundSlider.value = 0.5f;
+			_isOpen = gameObject.activeSelf;
 		}
 
 		private void Start()
@@ -21,9 +21,9 @@ namespace Game.UI
 			BtnHide.onClick.AddListener(() =>
 			{
 				_isOpen = false;
-				DoCloseOrOpen(SettingsRoot.gameObject, _isOpen);
+				UIShowOrHideController.DoCloseOrOpen(SettingsRoot.gameObject, _isOpen);
 			});
-			ToggleShowChallenge.onValueChanged.AddListener(value => { DoCloseOrOpen(_uiChallenge.gameObject, value); });
+			ToggleShowChallenge.onValueChanged.AddListener(value => { UIShowOrHideController.DoCloseOrOpen(_uiChallenge.gameObject, value); });
 			SoundSlider.onValueChanged.AddListener(value => { AudioController.Instance.BackGround.volume = value; });
 		}
 
@@ -32,24 +32,7 @@ namespace Game.UI
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
 				_isOpen = !_isOpen;
-				DoCloseOrOpen(SettingsRoot.gameObject, _isOpen);
-			}
-		}
-
-		// 使用DoTween实现界面的打开和关闭动画
-		private static void DoCloseOrOpen(GameObject obj, bool isOpen)
-		{
-			if (isOpen)
-			{
-				obj.transform.DOScale(Vector3.one, 0.3f)
-					.SetEase(Ease.OutCubic)
-					.startValue = Vector3.zero;
-			}
-			else
-			{
-				obj.transform.DOScale(Vector3.zero, 0.3f)
-					.SetEase(Ease.InQuad)
-					.startValue = Vector3.one;
+				UIShowOrHideController.DoCloseOrOpen(SettingsRoot.gameObject, _isOpen);
 			}
 		}
 	}
