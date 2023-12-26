@@ -18,7 +18,7 @@ namespace HutongGames.PlayMaker.Actions
 
 		[RequiredField]
 		[Tooltip("The timeSource Value")]
-		[ObjectType(typeof(VideoTimeSource))]
+		[ObjectType(typeof(VideoTimeUpdateMode))]
 		public FsmEnum timeSource;
 
 		[Tooltip("Event sent if time can not be set")]
@@ -33,7 +33,7 @@ namespace HutongGames.PlayMaker.Actions
 		public override void Reset()
 		{
 			gameObject = null;
-			timeSource = VideoTimeSource.AudioDSPTimeSource;
+			timeSource = VideoTimeUpdateMode.DSPTime;
 			canNotSetTime = null;
 		}
 
@@ -57,7 +57,7 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			if (_vp != null && _vp.canSetTime)
 			{
-				_vp.timeSource = (VideoTimeSource)timeSource.Value;
+				_vp.timeUpdateMode = (VideoTimeUpdateMode)timeSource.Value;
 			}
 		}
 

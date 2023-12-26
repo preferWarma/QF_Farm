@@ -64,7 +64,7 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			if (_vp != null)
 			{
-				canSetTimeSource.Value = _vp.canSetTimeSource;
+				canSetTimeSource.Value = _vp.canSetTimeUpdateMode;
 				Fsm.Event(_vp.canSetTime?canSetTimeSourceEvent:canNotSetTimeSourceEvent);
 			}
 		}

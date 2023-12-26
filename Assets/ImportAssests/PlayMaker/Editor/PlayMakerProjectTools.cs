@@ -181,7 +181,7 @@ namespace HutongGames.PlayMakerEditor
         public static List<string> GetLoadedScenes()
         {
             var openScenes = new List<string>();
-            for (var i = 0; i < EditorSceneManager.loadedSceneCount; i++)
+            for (var i = 0; i < SceneManager.loadedSceneCount; i++)
             {
                 openScenes.Add(SceneManager.GetSceneAt(i).path);
             }
